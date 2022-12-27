@@ -143,7 +143,7 @@ public class Base {
 
 		TakesScreenshot ts = (TakesScreenshot) wd;
 		File start = ts.getScreenshotAs(OutputType.FILE);
-		File end = new File(System.getProperty("user.dir") + "screenShots");
+		File end = new File(System.getProperty("user.dir") + "\\screenShots\\failureTest.png");
 		FileHandler.copy(start, end);
 	}
 

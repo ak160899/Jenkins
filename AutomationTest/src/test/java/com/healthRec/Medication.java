@@ -167,9 +167,18 @@ public class Medication extends Base {
 			}
 
 		}
-		WebElement $addToEhr$ = driver.findElement(By.xpath("(//span[@title='Click to add this medication'])[2]"));
-		visbility(driver, $addToEhr$, 60);
-		javascriptclick($addToEhr$);
+		for (int i = 1; i <= 6; i++) {
+			try {
+				WebElement $addToEhr$ = driver
+						.findElement(By.xpath("(//span[@title='Click to add this medication'])[2]"));
+				if ($addToEhr$.isDisplayed()) {
+					click($addToEhr$);
+					break;
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
 
 		WebElement $clsoemed$ = driver
 				.findElement(By.xpath("(//span[text()='Past Ended Medication'])[1]//parent::div/span[1]"));

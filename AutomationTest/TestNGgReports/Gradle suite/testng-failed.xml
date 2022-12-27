@@ -3,12 +3,12 @@
 <suite verbose="0" name="Failed suite [Gradle suite]">
   <test name="Gradle test(failed)">
     <classes>
-      <class name="runner.Local_Host">
+      <class name="runner.Dr_userLogin">
         <methods>
           <include name="HomeModule"/>
           <include name="LaunchBrwoser"/>
         </methods>
-      </class> <!-- runner.Local_Host -->
+      </class> <!-- runner.Dr_userLogin -->
     </classes>
   </test> <!-- Gradle test(failed) -->
 </suite> <!-- Failed suite [Gradle suite] -->

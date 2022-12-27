@@ -18,16 +18,16 @@ public class Billing {
 	@FindBy(xpath = "(//button[@title='Add Item purchased or service offered'])[1]")
 	public WebElement addItem;
 	
-	@FindBy(xpath = "(//div[@id='form-pop-body-inner'])[2]/div[4]/div[2]/input")
+	@FindBy(xpath = "(//label[@id='itemServicelbl'])[2]//following::input[1]")
 	public WebElement enterTheItem;
 	
-	@FindBy(xpath = "(//div[@id='form-pop-body-inner'])[2]/div[4]//following::div[5]/input")
+	@FindBy(xpath = "(//label[@id='itemServicelbl'])[2]//following::input[2]")
 	public WebElement addPrice;
 	
-	@FindBy(xpath = "(//div[@id='form-pop-body-inner'])[2]/div[4]//following::div[6]/input")
+	@FindBy(xpath = "(//label[@id='itemServicelbl'])[2]//following::input[3]")
 	public WebElement addQuantity;
 	
-	@FindBy(xpath = "(//button[@title='Save item'])[3]")
+	@FindBy(xpath = "(//label[@id='itemServicelbl'])[2]//following::input[2]//following::button[2]")
 	public WebElement saveItem;
 	
 	@FindBy(xpath = "(//button[@id='cancel-btn'])[12]")

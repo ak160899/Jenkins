@@ -1,37 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="2" total="7" passed="5">
+<testng-results skipped="0" failed="1" ignored="6" total="8" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="157974" started-at="2022-12-27T07:24:27Z" finished-at="2022-12-27T07:27:05Z">
+  <suite name="Default suite" duration-ms="169956" started-at="2022-12-27T15:40:23Z" finished-at="2022-12-27T15:43:13Z">
     <groups>
+      <group name="patient">
+        <method signature="Local_Host.PatientModule()[pri:1, instance:runner.Local_Host@51e5fc98]" name="PatientModule" class="runner.Local_Host"/>
+      </group> <!-- patient -->
+      <group name="healthrec">
+        <method signature="Local_Host.HealthRec()[pri:2, instance:runner.Local_Host@51e5fc98]" name="HealthRec" class="runner.Local_Host"/>
+      </group> <!-- healthrec -->
     </groups>
-    <test name="Default test" duration-ms="157974" started-at="2022-12-27T07:24:27Z" finished-at="2022-12-27T07:27:05Z">
-      <class name="SubscriptionFeatures.Lite_package">
-        <test-method status="PASS" signature="LaunchBrwoser()[pri:0, instance:SubscriptionFeatures.Lite_package@6193932a]" name="LaunchBrwoser" is-config="true" duration-ms="30888" started-at="2022-12-27T12:54:27Z" finished-at="2022-12-27T12:54:58Z">
+    <test name="Default test" duration-ms="169956" started-at="2022-12-27T15:40:23Z" finished-at="2022-12-27T15:43:13Z">
+      <class name="runner.Local_Host">
+        <test-method status="PASS" signature="LaunchBrwoser()[pri:0, instance:runner.Local_Host@51e5fc98]" name="LaunchBrwoser" is-config="true" duration-ms="47330" started-at="2022-12-27T21:10:23Z" finished-at="2022-12-27T21:11:10Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- LaunchBrwoser -->
-        <test-method status="PASS" signature="patient_modules()[pri:2, instance:SubscriptionFeatures.Lite_package@6193932a]" name="patient_modules" duration-ms="13069" started-at="2022-12-27T12:54:58Z" finished-at="2022-12-27T12:55:11Z">
+        <test-method status="PASS" signature="PatientModule()[pri:1, instance:runner.Local_Host@51e5fc98]" name="PatientModule" duration-ms="51968" started-at="2022-12-27T21:11:10Z" finished-at="2022-12-27T21:12:02Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- patient_modules -->
-        <test-method status="PASS" signature="calendar_module()[pri:4, instance:SubscriptionFeatures.Lite_package@6193932a]" name="calendar_module" duration-ms="30842" started-at="2022-12-27T12:55:11Z" finished-at="2022-12-27T12:55:42Z">
+        </test-method> <!-- PatientModule -->
+        <test-method status="FAIL" signature="HealthRec()[pri:2, instance:runner.Local_Host@51e5fc98]" name="HealthRec" duration-ms="70603" started-at="2022-12-27T21:12:02Z" finished-at="2022-12-27T21:13:13Z">
+          <exception class="org.openqa.selenium.NoSuchWindowException">
+            <message>
+              <![CDATA[no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=108.0.5359.125)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'WORKPC', ip: '192.168.29.72', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_331'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 108.0.5359.125, chrome: {chromedriverVersion: 108.0.5359.71 (1e0e3868ee06..., userDataDir: C:\Users\Admin\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:51714}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: d5bc6ef330abf95f0a158dbf25df2fc8
+*** Element info: {Using=xpath, value=//div[text()='( Alcohol )']}]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchWindowException: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=108.0.5359.125)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'WORKPC', ip: '192.168.29.72', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_331'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 108.0.5359.125, chrome: {chromedriverVersion: 108.0.5359.71 (1e0e3868ee06..., userDataDir: C:\Users\Admin\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:51714}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: d5bc6ef330abf95f0a158dbf25df2fc8
+*** Element info: {Using=xpath, value=//div[text()='( Alcohol )']}
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+	at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+	at runner.Local_Host.HealthRec(Local_Host.java:905)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchWindowException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- calendar_module -->
-        <test-method status="PASS" signature="billing_module()[pri:5, instance:SubscriptionFeatures.Lite_package@6193932a]" name="billing_module" duration-ms="13790" started-at="2022-12-27T12:55:42Z" finished-at="2022-12-27T12:55:56Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- billing_module -->
-        <test-method status="PASS" signature="tele_doctor()[pri:6, instance:SubscriptionFeatures.Lite_package@6193932a]" name="tele_doctor" duration-ms="8134" started-at="2022-12-27T12:55:56Z" finished-at="2022-12-27T12:56:04Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tele_doctor -->
-        <test-method status="PASS" signature="settings_Module()[pri:7, instance:SubscriptionFeatures.Lite_package@6193932a]" name="settings_Module" duration-ms="61171" started-at="2022-12-27T12:56:04Z" finished-at="2022-12-27T12:57:05Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- settings_Module -->
-      </class> <!-- SubscriptionFeatures.Lite_package -->
+        </test-method> <!-- HealthRec -->
+      </class> <!-- runner.Local_Host -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

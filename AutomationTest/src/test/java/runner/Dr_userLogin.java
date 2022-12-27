@@ -1,12 +1,9 @@
 package runner;
 
 import java.io.IOException;
-
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.Launch.LaunchBrowser;
 import org.base.Base;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -16,9 +13,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -33,32 +27,103 @@ import com.healthRec.Vaccine;
 import com.healthRec.Vitals;
 import com.pageObjeman.PageObjMan;
 
-public class Local_Host extends Base {
+public class Dr_userLogin extends Base {
 
-	public PageObjMan pom;
-	public JavascriptExecutor j;
-	public WebDriverWait ww;
-	public WebDriver driver;
-	public String kpid;
-	public String ur;
+	public static WebDriver driver;
+	static PageObjMan pom;
+	static JavascriptExecutor j;
+	WebDriverWait ww;
+	String kpid;
+	String ur;
 	Calendars cal;
 	String $current;
 
-	@BeforeClass(groups = "before")
-	public void LaunchBrwoser() throws Exception {
+	@BeforeClass
+	public void LaunchBrwoser() throws InterruptedException, IOException {
 
-		Map<String, Object> getConnection = LaunchBrowser.openConnection();
+		driver = setUp("chrome");
+		pom = new PageObjMan(driver);
+		j = (JavascriptExecutor) driver;
+		ww = new WebDriverWait(driver, 20);
+		cal = new Calendars(driver, pom);
+		ur = ConfigManager.getconfigManager().getInstanceConfigReader().getUrl();
 
-		pom = (PageObjMan) getConnection.get("pom");
-		j = (JavascriptExecutor) getConnection.get("j");
-		ww = (WebDriverWait) getConnection.get("ww");
-		cal = (Calendars) getConnection.get("cal");
-		ur = (String) getConnection.get("url");
-		driver = (WebDriver) getConnection.get("driver");
+		while (true) {
+			if (ur.equals("https://localhost:8443/")) {
+
+				driver.get(ConfigManager.getconfigManager().getInstanceConfigReader().getUrl());
+				sleep(3000);
+				driver.findElement(By.id("details-button")).click();
+				sleep(3000);
+
+				driver.findElement(By.id("proceed-link")).click();
+				sleep(4000);
+				implicitWait(60, TimeUnit.SECONDS);
+
+				break;
+			} else if (ur.equals("https://www.75health.com/login.jsp")) {
+				driver.get("https://www.75health.com/login.jsp");
+
+				break;
+			} else if (ur.equals("https://www.test.75health.com/")) {
+				driver.get(ConfigManager.getconfigManager().getInstanceConfigReader().getUrl());
+				break;
+			}
+
+		}
+
+		while (true) {
+			try {
+				click(pom.getInstanceLoginPage().sigIn);
+				break;
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+
+		sleep(2000);
+
+		while (true) {
+			try {
+				sendkeys(pom.getInstanceLoginPage().email,
+						ConfigManager.getconfigManager().getInstanceConfigReader().getEmail());
+				sendkeys(pom.getInstanceLoginPage().pass,
+						ConfigManager.getconfigManager().getInstanceConfigReader().getpass());
+				click(pom.getInstanceLoginPage().login);
+				break;
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+
+		while (true) {
+			if (driver.getCurrentUrl().equals("https://localhost:8443/health/#home")) {
+				break;
+			} else if (driver.getCurrentUrl().equals("https://www.test.75health.com/health/#home")) {
+				break;
+			}
+		}
+		// driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+
+		/*
+		 * while (true) { if
+		 * (!driver.getCurrentUrl().equals("https://localhost:8443/health/#home")) {
+		 * click(pom.getInstanceLoginPage().login); break; } else { break; } }
+		 */
+		sleep(3000);
+
+		try {
+			sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		implicitWait(70, TimeUnit.SECONDS);
 
 	}
 
-	@Test(priority = 0, groups = "home", enabled = false)
+	@Test(priority = 0, enabled = false)
 	public void HomeModule() throws Exception {
 
 		while (true) {
@@ -77,7 +142,7 @@ public class Local_Host extends Base {
 		click(pom.getInstanceNewPatient().clickGenderIcon);
 
 		List<WebElement> genders = driver.findElements(By.xpath("(//ul[@id='genderDropdown'])[1]/li"));
-
+		System.out.println("NEXT LINE");
 		for (WebElement opt : genders) {
 
 			if (opt.getText().equals("Male")) {
@@ -112,31 +177,29 @@ public class Local_Host extends Base {
 
 	}
 
-	@Test(priority = 1, groups = "patient")
+	@Test(priority = 1)
 	public void PatientModule() throws InterruptedException {
-
-		for (int i = 1; i <= 5; i++) {
+		while (true) {
 			try {
 
-				if (pom.getInstanceNewPatient().$patienmod.isDisplayed()) {
-					click(pom.getInstanceNewPatient().$patienmod);
-					break;
-				}
+				WebElement pit = driver.findElement(By.xpath("//td[text()='Patient']"));
 
+				visbility(driver, pit, 60);
+				j.executeScript("arguments[0].click();", pit);
+				break;
 			} catch (Exception e) {
-
-				System.out.println(e);
+				// TODO: handle exception
 			}
 		}
-
 		implicitWait(60, TimeUnit.SECONDS);
 		while (true) {
 			try {
-				visbility(driver, pom.getInstanceNewPatient().addNewPatient, 60);
-				j.executeScript("arguments[0].click();", pom.getInstanceNewPatient().addNewPatient);
+				WebElement ata = driver.findElement(By.xpath("(//button[@title='Add new Patient'])[1]"));
+				visbility(driver, ata, 60);
+				j.executeScript("arguments[0].click();", ata);
 				break;
 			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
 			}
 		}
 		visbility(driver, pom.getInstanceNewPatient().firstName, 60);
@@ -146,15 +209,15 @@ public class Local_Host extends Base {
 		visbility(driver, pom.getInstanceNewPatient().clickGenderIcon, 60);
 		click(pom.getInstanceNewPatient().clickGenderIcon);
 
-		for (WebElement opt : pom.getInstanceNewPatient().genderDrop) {
+		List<WebElement> genders = driver.findElements(By.xpath("(//ul[@id='genderDropdown'])[1]/li"));
+		for (WebElement opt : genders) {
 
 			if (opt.getText().equals("Male")) {
 
-				click(opt);
-				break;
+				driver.findElement(By.xpath("(//ul[@id='genderDropdown'])[1]/li")).click();
 
 			}
-
+			break;
 		}
 
 		// Acc gets Created..
@@ -168,19 +231,19 @@ public class Local_Host extends Base {
 				kpid = es.getText();
 				break;
 			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
 			}
 		}
 
 		while (true) {
 			try {
-				if (pom.getInstanceNewPatient().$patienmod.isDisplayed()) {
+				WebElement abcd = driver.findElement(By.xpath("//td[text()='Patient']"));
 
-					click(pom.getInstanceNewPatient().$patienmod);
-					break;
-				}
+				visbility(driver, abcd, 60);
+				abcd.click();
+				break;
 			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
 			}
 		}
 
@@ -191,20 +254,18 @@ public class Local_Host extends Base {
 				s.sendKeys(kpid);
 				break;
 			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
 			}
 		}
 
 		while (true) {
 			try {
-				WebElement kp = driver.findElement(By.xpath("//div[text()=" + "'" + kpid + "']"));
-				if (kp.isDisplayed()) {
-					click(kp);
-					break;
-				}
-
+				WebElement ki = driver.findElement(By.xpath("//div[text()=" + "'" + kpid + "']"));
+				visbility(driver, ki, 60);
+				javascriptclick(ki);
+				break;
 			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
 			}
 		}
 
@@ -261,138 +322,140 @@ public class Local_Host extends Base {
 		while (true) {
 			try {
 
-				visbility(driver, pom.getInstanceNewPatient().addContactIcon, 50);
-				click(pom.getInstanceNewPatient().addContactIcon);
+				WebElement cnin = driver.findElement(
+						By.xpath("//div[@id='p-address-phone']/div/div/div[1]/div[1]//following::div[1]/div[1]/div"));
+				visbility(driver, cnin, 60);
+				click(cnin);
 				break;
 			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
 			}
 		}
 
-		visbility(driver, pom.getInstanceNewPatient().Addressline1, 40);
-		sendkeys(pom.getInstanceNewPatient().Addressline1, "no.224 watson");
-		visbility(driver, pom.getInstanceNewPatient().Addressline2, 30);
-		sendkeys(pom.getInstanceNewPatient().Addressline2, "Arizona");
-		visbility(driver, pom.getInstanceNewPatient().City, 30);
-		sendkeys(pom.getInstanceNewPatient().City, "WWF");
+		WebElement roy = driver
+				.findElement(By.xpath("//div[@id='p-address-phone']/div/div/div[2]/div/div[1]/div[2]/input[4]"));
+		visbility(driver, roy, 60);
+		roy.sendKeys("no 224 washington");
+		WebElement r1 = driver
+				.findElement(By.xpath("//div[@id='p-address-phone']/div/div/div[2]/div/div[1]/div[2]/input[5]"));
+		visbility(driver, r1, 60);
+		r1.sendKeys("arizona");
+		WebElement sr = driver
+				.findElement(By.xpath("//div[@id='p-address-phone']/div/div/div[2]/div/div[1]/div[2]/input[6]"));
+		visbility(driver, sr, 60);
+		sr.sendKeys("los");
 
 		while (true) {
 			try {
-
-				visbility(driver, pom.getInstanceNewPatient().selectCountry, 40);
-				dropDown("index", pom.getInstanceNewPatient().selectCountry, "03");
+				WebElement selcntry = driver.findElement(By.xpath("//select[@class='edit-select country']"));
+				visbility(driver, selcntry, 60);
+				dropDown("index", selcntry, "03");
 				break;
 			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
 			}
 		}
 		while (true) {
 			try {
-
-				visbility(driver, pom.getInstanceNewPatient().selectState, 40);
-				dropDown("index", pom.getInstanceNewPatient().selectState, "05");
+				WebElement asd = driver.findElement(
+						By.xpath("//select[@class='edit-select country']//following::label[1]//following::select[1]"));
+				visbility(driver, asd, 60);
+				dropDown("index", asd, "05");
 				break;
 			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
 			}
 		}
 
-		visbility(driver, pom.getInstanceNewPatient().zipCode, 40);
+		WebElement r2 = driver
+				.findElement(By.xpath("//div[@id='p-address-phone']/div/div/div[2]/div/div[1]/div[2]/input[7]"));
+		visbility(driver, r2, 60);
 
-		sendkeys(pom.getInstanceNewPatient().zipCode, "600110");
+		r2.sendKeys("200786");
 
-		visbility(driver, pom.getInstanceNewPatient().saveContactInfo, 40);
+		WebElement savecon = driver.findElement(
+				By.xpath("//div[@id='p-address-phone']/div/div/div[2]/div/div[2]/div[1]/div[1]/button[2]"));
+		visbility(driver, savecon, 60);
 
-		javascriptclick(pom.getInstanceNewPatient().saveContactInfo);
+		javascriptclick(savecon);
 
 		// alternate contact info...
 
 		while (true) {
 			try {
 
-				if (pom.getInstanceNewPatient().AlternateContactIcon.isDisplayed()) {
-					click(pom.getInstanceNewPatient().AlternateContactIcon);
-					break;
-				}
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		}
-
-		while (true) {
-			try {
-				if (pom.getInstanceNewPatient().alternateContactFullName.isDisplayed()) {
-					sendkeys(pom.getInstanceNewPatient().alternateContactFullName, "Kaaspro");
-					break;
-				}
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		}
-
-		while (true) {
-			try {
-				if (pom.getInstanceNewPatient().selectFlag.isDisplayed()) {
-					click(pom.getInstanceNewPatient().selectFlag);
-					break;
-				}
-			} catch (Exception e) {
-
-			}
-		}
-
-		for (WebElement w : pom.getInstanceNewPatient().$countrycode) {
-
-			if (w.getText().equals("+91")) {
-				click(w);
+				WebElement ad = driver.findElement(By.xpath(
+						"(//div[@id='family-health-patient']/div/div/div[1]/div[1]//following::div[1]/div[1])[1]"));
+				visbility(driver, ad, 60);
+				javascriptclick(ad);
 				break;
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
-
 		}
-		visbility(driver, pom.getInstanceNewPatient().alternateContactPhNumber, 0);
-		sendkeys(pom.getInstanceNewPatient().alternateContactPhNumber, "9098674534");
+
 		while (true) {
 			try {
-				if (pom.getInstanceNewPatient().alternatecontactSaveicon.isDisplayed()) {
-					click(pom.getInstanceNewPatient().alternatecontactSaveicon);
-					break;
-				}
+				WebElement r3 = driver
+						.findElement(By.xpath("(//span[text()='Alternate Contact'])[2]//following::input[1]"));
+				visbility(driver, r3, 60);
+				r3.sendKeys("Hope");
+				break;
 			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
+			}
+		}
+		WebElement r4 = driver.findElement(By.xpath("(//span[text()='Alternate Contact'])[2]//following::input[2]"));
+		visbility(driver, r4, 60);
+		r4.sendKeys("2013550367");
+		while (true) {
+			try {
+				WebElement sa = driver
+						.findElement(By.xpath("(//span[text()='Alternate Contact'])[2]//following::div[1]/img[1]"));
+				visbility(driver, sa, 60);
+				actions("click", sa);
+				break;
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
 		}
 		sleep(2000);
+		// care tream member..
+
+		// WebElement crm =
+		// driver.findElement(By.xpath("//div[@id='p-care-team-member']/div/div/div[1]/div/div[2]/div"));
+		// javascriptclick(crm);
 
 		// patient info..
 		while (true) {
 			try {
-				if (pom.getInstanceNewPatient().addPatientInfoIcon.isDisplayed()) {
-					click(pom.getInstanceNewPatient().addPatientInfoIcon);
-					break;
-				}
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		}
-		while (true) {
-			try {
-
-				visbility(driver, pom.getInstanceNewPatient().addOccupation, 30);
-				sendkeys(pom.getInstanceNewPatient().addOccupation, "Software tester");
+				WebElement ptin = driver.findElement(By.xpath("//div[@id='patientInfo']/div[1]/span[2]"));
+				visbility(driver, ptin, 60);
+				javascriptclick(ptin);
 				break;
 			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
 			}
 		}
 		while (true) {
 			try {
-
-				if (pom.getInstanceNewPatient().savePatientinfo.isDisplayed()) {
-					click(pom.getInstanceNewPatient().savePatientinfo);
-					break;
-				}
+				WebElement r6 = driver.findElement(By.xpath("//label[text()='Occupation']//following::div[1]/input"));
+				visbility(driver, r6, 60);
+				sendkeys(r6, "tester");
+				break;
 			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
+			}
+		}
+		while (true) {
+			try {
+				WebElement savepatinfo = driver
+						.findElement(By.xpath("(//span[text()='Patient Info '])//following::div[1]/img[1]"));
+				visbility(driver, savepatinfo, 60);
+				javascriptclick(savepatinfo);
+				break;
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
 		}
 
@@ -401,75 +464,36 @@ public class Local_Host extends Base {
 				javascriptclick(pom.getInstanceNewPatient().$patienmod);
 				break;
 			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
 			}
 		}
 		// driver.navigate().to("https://localhost:8443/health/#list_patient");
 		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
 		while (true) {
 			try {
-
-				if (pom.getInstanceNewPatient().patientmodReport.isDisplayed()) {
-					click(pom.getInstanceNewPatient().patientmodReport);
-					break;
-				}
+				WebElement u1 = driver.findElement(By.xpath("(//button[@id='advanceIcon'])[1]"));
+				visbility(driver, u1, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(u1));
+				j.executeScript("arguments[0].click();", u1);
+				break;
 			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
 			}
 		}
 		while (true) {
 			try {
-
-				visbility(driver, pom.getInstanceNewPatient().patientReportSerachNametxtBox, 40);
-				sendkeys(pom.getInstanceNewPatient().patientReportSerachNametxtBox, "Kaaspro");
+				WebElement u2 = driver.findElement(By.xpath("(//input[@id='patient-aname'])[1]"));
+				visbility(driver, u2, 60);
+				u2.sendKeys("Akash n");
 				break;
 			} catch (Exception e) {
-				System.out.println(e);
-			}
-		}
-
-		while (true) {
-			try {
-				if (pom.getInstanceNewPatient().ellipses.isDisplayed()) {
-					click(pom.getInstanceNewPatient().ellipses);
-					break;
-				}
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		}
-
-		for (WebElement t : pom.getInstanceNewPatient().ellipsesOptions) {
-			if (t.getText().trim().equals("Import") && t.isDisplayed()) {
-				click(t);
-				break;
-			}
-
-		}
-		sleep(2000);
-
-		for (WebElement w : pom.getInstanceNewPatient().$ccdImport) {
-			if (w.getText().trim().equals("CCD Import") && w.isDisplayed()) {
-				click(w);
-				break;
-			}
-
-		}
-		while (true) {
-			try {
-
-				if (pom.getInstanceNewPatient().$closeCcdImport.isDisplayed()) {
-					click(pom.getInstanceNewPatient().$closeCcdImport);
-					break;
-				}
-			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
 			}
 		}
 
 	}
 
-	@Test(priority = 2, groups = "healthrec")
+	@Test(priority = 2)
 	public void HealthRec() throws Exception {
 
 		if (ur.equals("https://localhost:8443/")) {
@@ -3848,17 +3872,15 @@ public class Local_Host extends Base {
 		sleep(4000);
 	}
 
-	@Test(priority = 3, groups = "calendar", enabled = false)
+	@Test(priority = 3, enabled = false)
 
 	public void calendar() throws Exception {
-
 		cal.caledarModule();
 		$current = driver.getCurrentUrl();
 		cal.$calenderMod($current, kpid);
-
 	}
 
-	@Test(priority = 4, groups = "billing", enabled = false)
+	@Test(priority = 4, enabled = false)
 	public void BillingModule() throws InterruptedException {
 
 		while (true) {
@@ -3868,7 +3890,7 @@ public class Local_Host extends Base {
 				click(pom.getInstanceBilling().clickBill);
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 		driver.navigate().refresh();
@@ -3880,7 +3902,7 @@ public class Local_Host extends Base {
 				click(pom.getInstanceBilling().clickCreateNewBill);
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 		visbility(driver, pom.getInstanceBilling().addItem, 60);
@@ -3906,7 +3928,7 @@ public class Local_Host extends Base {
 				actions("click", r);
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 		while (true) {
@@ -3917,7 +3939,7 @@ public class Local_Host extends Base {
 				javascriptclick(addiconfav);
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 
@@ -3929,7 +3951,7 @@ public class Local_Host extends Base {
 				favdes.sendKeys("Kaaspro");
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 		WebElement ree = driver
@@ -3949,7 +3971,7 @@ public class Local_Host extends Base {
 						"(//span[text()='Kaaspro']//parent::div//parent::div[1]//parent::div[1]/div[1]/span[1])[1]"));
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 
@@ -3963,7 +3985,7 @@ public class Local_Host extends Base {
 				actions("click", edi);
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 		sleep(2000);
@@ -3976,279 +3998,19 @@ public class Local_Host extends Base {
 				actions("click", delfav);
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
+
 		sleep(2500);
 		while (true) {
-			try {
-				WebElement itser = driver.findElement(By.xpath("//div[@id='item-code-side']/div[1]/div"));
-				visbility(driver, itser, 60);
-
-				actions("click", itser);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-
-		while (true) {
-			try {
-				WebElement additser = driver.findElement(
-						By.xpath("//div[@id='item-code-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-				visbility(driver, additser, 60);
-
-				javascriptclick(additser);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		while (true) {
-			try {
-				WebElement wrr = driver
-						.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[3]/div/input"));
-				visbility(driver, wrr, 60);
-				sendkeys(wrr, "product001");// .sendKeys("product001");
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		WebElement err = driver
-				.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[4]/div/textarea"));
-		visbility(driver, err, 60);
-		sendkeys(err, "sr");// .sendKeys("sr");
-		WebElement weq = driver
-				.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[5]/div/input"));
-		visbility(driver, weq, 60);
-		sendkeys(weq, "5");// .sendKeys("5");
-		while (true) {
-			try {
-				WebElement itersav = driver
-						.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[7]/div/button"));
-				visbility(driver, itersav, 60);
-				javascriptclick(itersav);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		sleep(2000);
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement ft = driver.findElement(
-						By.xpath("//div[text()='PRODUCT001']//parent::div[1]//parent::div[1]/div[1]/span"));
-				visbility(driver, ft, 60);
-
-				javascriptclick(ft);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		sleep(2000);
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement edititser = driver.findElement(By.xpath("//div[text()='PRODUCT001']"));
-				visbility(driver, edititser, 60);
-
-				actions("click", edititser);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement delitser = driver
-						.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[1]/div[2]/span[1]"));
-				visbility(driver, delitser, 60);
-
-				javascriptclick(delitser);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		sleep(2000);
-
-		// service/charge tax..
-		while (true) {
-			try {
-
-				WebElement sct = driver.findElement(By.xpath("//div[@id='tax-side']/div[1]/div/span[3]"));
-				visbility(driver, sct, 60);
-
-				actions("click", sct);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				WebElement sctadd = driver
-						.findElement(By.xpath("//div[@id='tax-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-				visbility(driver, sctadd, 60);
-
-				javascriptclick(sctadd);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		WebElement tre = driver.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[2]/div[3]/div/input"));
-		visbility(driver, tre, 60);
-		sendkeys(tre, "service charge<>"); // .sendKeys("service charge<>");
-		WebElement tp1 = driver.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[2]/div[4]/div/input"));
-		visbility(driver, tp1, 60);
-		sendkeys(tp1, "5");// .sendKeys("5");
-		WebElement sctsav = driver
-				.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[2]/div[6]/div/button"));
-		visbility(driver, sctsav, 60);
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				javascriptclick(sctsav);
-				WebElement adsct = driver.findElement(
-						By.xpath("//div[text()='service charge<>']//parent::div[1]//parent::div[1]/div/span"));
-				visbility(driver, adsct, 60);
-
-				actions("click", adsct);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		sleep(2000);
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				WebElement edsct = driver.findElement(By.xpath("//div[text()='service charge<>']"));
-				visbility(driver, edsct, 60);
-
-				actions("click", edsct);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				WebElement delsct = driver
-						.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[1]/div[2]/span[1]"));
-				visbility(driver, delsct, 60);
-				javascriptclick(delsct);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		sleep(2000);
-		// discount..
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				WebElement dis = driver.findElement(By.xpath("//div[@id='discount-side']/div[1]/div"));
-				visbility(driver, dis, 60);
-
-				actions("click", dis);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				WebElement addds = driver.findElement(
-						By.xpath("//div[@id='discount-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-				visbility(driver, addds, 60);
-
-				javascriptclick(addds);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		WebElement trp3 = driver
-				.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[3]/div/input"));
-		visbility(driver, trp3, 60);
-		sendkeys(trp3, "Discnt");// .sendKeys("Discnt");
-		WebElement cldrpdis = driver
-				.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[4]/div/button"));
-		visbility(driver, cldrpdis, 60);
-		javascriptclick(cldrpdis);
-		List<WebElement> dispercen = null;
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				dispercen = driver
-						.findElements(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[4]/div/ul/li/a"));
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		for (WebElement we : dispercen) {
-			if (we.getText().trim().equals("Percentage Discount")) {
-				visbility(driver, we, 60);
-				we.click();
-				break;
-			}
-
-		}
-		WebElement trp6 = driver
-				.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[5]/div/div/input"));
-		visbility(driver, trp6, 60);
-		sendkeys(trp6, "5");// .sendKeys("5");
-		WebElement dissav = driver
-				.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[8]/div/button"));
-		visbility(driver, dissav, 60);
-		javascriptclick(dissav);
-		WebElement adddiscc = driver
-				.findElement(By.xpath("//div[text()='Discnt']//parent::div[1]//parent::div/div/span"));
-		visbility(driver, adddiscc, 60);
-
-		actions("click", adddiscc);
-		sleep(2000);
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement editdis = driver.findElement(By.xpath("//div[text()='Discnt']"));
-				visbility(driver, editdis, 60);
-
-				actions("click", editdis);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement deldis = driver
-						.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[1]/div[2]/span[1]"));
-				visbility(driver, deldis, 60);
-				javascriptclick(deldis);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		sleep(2000);
-		for (int i = 1; i <= 5; i++) {
 			try {
 				WebElement ee = driver.findElement(By.xpath("(//button[@id='add-payment-btn'])[1]"));
 				visbility(driver, ee, 60);
 				javascriptclick(ee);
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 		// driver.findElement(By.xpath("(//button[@id='add-payment-btn'])[1]")).click();
@@ -4282,7 +4044,7 @@ public class Local_Host extends Base {
 				j.executeScript("arguments[0].click();", tet);
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 		sleep(2000);
@@ -4294,32 +4056,23 @@ public class Local_Host extends Base {
 				javascriptclick(fnls);
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 		sleep(2000);
 		WebElement dz = driver.findElement(By.xpath("(//button[@title='Finalize'])[1]"));
 		visbility(driver, dz, 60);
-
 		javascriptclick(dz);
 		sleep(2000);
-		WebElement trp7 = driver.findElement(By.xpath("//button[@id='finalize-bill']//following::button[2]"));// .click();
-		visbility(driver, trp7, 60);
-		javascriptclick(trp7);
-		sleep(2000);
-		WebElement delbil = driver.findElement(
-				By.xpath("//center[text()='Do you like to delete Invoice?']//following::div[1]/button[2]"));
-		visbility(driver, delbil, 60);
-		javascriptclick(delbil);
-		sleep(2000);
 		// driver.navigate().to("https://localhost:8443/health/#bill_report");
-		while (true) {
-			try {
-				click(pom.getInstanceBilling().clickBill);
-				break;
-			} catch (Exception e) {
+		if (ur.equals("https://www.test.75health.com/")) {
 
-			}
+			driver.navigate().to("https://www.test.75health.com/health/#bill_report");
+
+		} else if (ur.equals("https://localhost:8443/health/#bill_report")) {
+			driver.navigate().to("https://localhost:8443/health/#bill_report");
+		} else if (ur.equals("https://www.75health.com/login.jsp")) {
+			driver.navigate().to("https://www.75health.com/health/#bill_report");
 		}
 		driver.navigate().refresh();
 		WebElement trp9;
@@ -4331,7 +4084,7 @@ public class Local_Host extends Base {
 				visbility(driver, trp9, 60);
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 		sendkeys(trp9, kpid);
@@ -4344,7 +4097,7 @@ public class Local_Host extends Base {
 						"//div[@id='dmain']/div[4]/div[2]//following::div[2]//following::ul[3]/li/a/table/tbody/tr/td[2]"));
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 		for (WebElement we : billdrp) {
@@ -4383,7 +4136,7 @@ public class Local_Host extends Base {
 				System.out.println(inc);
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 
@@ -4396,8 +4149,6 @@ public class Local_Host extends Base {
 				break;
 			} else if (driver.getCurrentUrl().equals("https://www.test.75health.com/health/#bill_report")) {
 				break;
-			} else if (driver.getCurrentUrl().equals("https://www.75health.com/health/#bill_report")) {
-				break;
 			}
 		}
 
@@ -4409,7 +4160,7 @@ public class Local_Host extends Base {
 				actions("click", rqs);
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 		sleep(1000);
@@ -4420,7 +4171,7 @@ public class Local_Host extends Base {
 				javascriptclick(editit);
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
 		visbility(driver, pom.getInstanceBilling().enterTheItem, 60);
@@ -4440,7 +4191,7 @@ public class Local_Host extends Base {
 
 	}
 
-	@Test(priority = 5, groups = "teledoctor", enabled = false)
+	@Test(priority = 5, enabled = false)
 	public void TeleDoctor() throws InterruptedException {
 
 		while (true) {
@@ -4489,57 +4240,17 @@ public class Local_Host extends Base {
 		WebElement cp1 = driver.findElement(By.xpath("//div[@id='createPatient']"));
 		visbility(driver, cp1, 60);
 		javascriptclick(cp1);
-
-		implicitWait(30, TimeUnit.SECONDS);
-		ScriptExecutor(pom.getInstanceNewPatient().deletePatient);
-		click(pom.getInstanceNewPatient().deletePatient);
-
-		while (true) {
-			try {
-
-				WebElement $delpat$ = driver.findElement(By.xpath("//button[text()='Delete']"));
-				javascriptclick($delpat$);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-
-		implicitWait(60, TimeUnit.SECONDS);
-
-		while (true) {
-			WebElement $addne;
-			try {
-
-				$addne = driver.findElement(By.xpath("(//span[contains(text(),'New Pa')])[4]//parent::button"));
-
-				if ($addne.isDisplayed()) {
-					break;
-				}
-
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-
-		if (ur.equals("https://www.75health.com/login.jsp")) {
-			driver.navigate().to("https://www.75health.com/health/#call_history");
-		} else if (ur.equals("")) {
-
-		} else if (ur.equals("")) {
-
-		}
-
+		sleep(2000);
 		while (true) {
 			try {
 				visbility(driver, pom.getInstanceTeleDoctor().clickTeleDoctor, 60);
 				javascriptclick(pom.getInstanceTeleDoctor().clickTeleDoctor);
 				break;
 			} catch (Exception e) {
-
+				// TODO: handle exception
 			}
 		}
-		// System.out.println("done");
+
 		while (true) {
 			try {
 				visbility(driver, pom.getInstanceTeleDoctor().searchPatient, 60);
@@ -4577,7 +4288,7 @@ public class Local_Host extends Base {
 
 	}
 
-	@Test(priority = 6, groups = "message", enabled = false)
+	@Test(priority = 6, enabled = false)
 	public void Message() throws InterruptedException {
 
 		while (true) {
@@ -4750,21 +4461,19 @@ public class Local_Host extends Base {
 
 	}
 
-	@Test(priority = 7, groups = "settings", enabled = false)
+	@Test(priority = 7,enabled = false)
 	public void Settings() throws InterruptedException, IOException {
 
 		while (true) {
 
-			if (ur.equals("https://localhost:8443/")) {
+			if (driver.getCurrentUrl().equals("https://localhost:8443/health/#setting")) {
+				break;
+
+			} else if (driver.getCurrentUrl().equals("https://localhost:8443/health/#setting")) {
 				driver.navigate().to("https://localhost:8443/health/#setting");
 				driver.navigate().refresh();
 				break;
-
-			} else if (ur.equals("https://www.75health.com/login.jsp")) {
-				driver.navigate().to("https://www.75health.com/health/#setting");
-				driver.navigate().refresh();
-				break;
-			} else if (ur.equals("https://www.test.75health.com/")) {
+			} else if (!driver.getCurrentUrl().equals("https://www.test.75health.com/health/#setting")) {
 				javascriptclick(pom.getInstanceSetting().clickSettings);
 				driver.navigate().refresh();
 				break;
@@ -4788,147 +4497,31 @@ public class Local_Host extends Base {
 		visbility(driver, Basicinfo, 60);
 		javascriptclick(Basicinfo);
 
-		WebElement set1 = driver.findElement(By.id("hospitalName"));
+		WebElement set1 = driver.findElement(By.id("firstName"));
 		visbility(driver, set1, 60);
 		clear(set1);// .clear();
 		sleep(2000);
-		WebElement set2 = driver.findElement(By.id("hospitalName"));
+		sendkeys(set1, "hello doctor");
+		WebElement set2 = driver.findElement(By.id("lastName"));
 		visbility(driver, set2, 60);
-		sendkeys(set2, "75health organisation");// .sendKeys("75health organisation");
+		set2.clear();
+		sleep(2000);
+		sendkeys(set2, "health organisation");
 		sleep(3000);
-		WebElement set3 = driver.findElement(By.xpath("//button[@title='Administrator Title']"));// .click();
-		visbility(driver, set3, 60);
-		click(set3);
-		sleep(3000);
-		List<WebElement> titledrp = driver
-				.findElements(By.xpath("//button[@title='Administrator Title']//following::ul[1]/li"));
-		for (WebElement choose : titledrp) {
-			if (choose.getText().trim().equals("Dr")) {
-				visbility(driver, set3, 60);
-				choose.click();
-				break;
-			}
-
-		}
-		WebElement Firstnname = driver.findElement(By.id("firstName"));
-		visbility(driver, Firstnname, 60);
-		Firstnname.clear();
-
-		Firstnname.sendKeys("Automation Acc");
-
-		WebElement lastname = driver.findElement(By.id("lastName"));
-		visbility(driver, lastname, 60);
-		lastname.clear();
-		lastname.sendKeys("Account");
-		sleep(3000);
-		WebElement hospitalActive = driver.findElement(By.xpath("//button[@id='hospitalActiveId']"));
-		visbility(driver, hospitalActive, 60);
-		j.executeScript("arguments[0].click();", hospitalActive);
-		sleep(2000);
-		List<WebElement> Adminstatus = driver.findElements(By.xpath("(//ul[@id='advBillType_Dropdown'])[2]/li"));
-		for (WebElement Ch1 : Adminstatus) {
-			if (Ch1.getText().trim().equals("ACTIVE")) {
-				Ch1.click();
-				break;
-			}
-
-		}
-		sleep(2000);
-
-		WebElement em = driver.findElement(By.xpath("(//button[@id='smsP'])[1]"));
-		visbility(driver, em, 60);
-		j.executeScript("arguments[0].click();", em);
-
-		sleep(2000);
-		List<WebElement> smsnotification = driver.findElements(By.xpath("//ul[@id='Smsul']/li"));
-		for (WebElement web : smsnotification) {
-			if (web.getText().trim().equals("ON")) {
-				visbility(driver, web, 60);
-				web.click();
-				break;
-			}
-
-		}
-		sleep(2000);
-		WebElement fint = driver.findElement(By.xpath("(//button[@id='save-btn'])[3]"));
+		WebElement fint = driver.findElement(By.xpath("(//button[@id='save-btn'])[4]"));
 		visbility(driver, fint, 60);
 		j.executeScript("arguments[0].click();", fint);
 		sleep(3000);
-
-		// Contact info..
-		while (true) {
-			try {
-				WebElement contactinfoadd = driver
-						.findElement(By.xpath("(//span[text()='Contact'])[1]//following::div[1]"));
-				visbility(driver, contactinfoadd, 60);
-				actions("click", contactinfoadd);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-
-		WebElement add1 = driver.findElement(By.xpath("(//input[@id='address1'])[1]"));
-		visbility(driver, add1, 60);
-		add1.clear();
-		add1.sendKeys("no.224,Main avenue");
-		WebElement add2 = driver.findElement(By.xpath("(//input[@id='address2'])[1]"));
-		visbility(driver, add2, 60);
-		add2.clear();
-		add2.sendKeys("watson street usa");
-		sleep(2000);
-		WebElement city = driver.findElement(By.xpath("(//input[@id='city'])[1]"));
-		visbility(driver, city, 60);
-		city.clear();
-		city.sendKeys("usa");
-		sleep(2000);
-		WebElement set = driver.findElement(By.xpath("(//select[@id='countryGeoId'])[1]"));
-		visbility(driver, set, 60);
-		click(set);// .click();
-		sleep(2000);
-		WebElement selectcountry = driver.findElement(By.xpath("(//select[@id='countryGeoId'])[1]"));
-		visbility(driver, selectcountry, 60);
-		dropDown("text", selectcountry, "Germany");
-		sleep(2000);
-		WebElement selectstate = driver.findElement(By.xpath("(//select[@id='stateProvinceGeoId'])[1]"));
-		visbility(driver, selectstate, 60);
-		dropDown("text", selectstate, "Berlin");
-		sleep(2000);
-		WebElement trp6 = driver.findElement(By.xpath("(//input[@id='postalCode'])[1]"));// .sendKeys("2001143");
-		visbility(driver, trp6, 60);
-		sendkeys(trp6, "2001143");
-		WebElement savecontactinfo = driver.findElement(By.xpath("(//button[@id='save-btn'])[5]"));
-		visbility(driver, savecontactinfo, 60);
-		j.executeScript("arguments[0].click();", savecontactinfo);
-
-		// specailaity
-
-		/*
-		 * WebElement add = driver.findElement(By.xpath("(//div[@id='add-btn'])[3]"));
-		 * 
-		 * sleep(2000); js.executeScript("arguments[0].click();", add); WebElement rr =
-		 * driver.findElement(By.
-		 * xpath("(//input[@placeholder='Select or Enter Specialty'])[1]"));
-		 * sleep(2000); actions("click", rr); sleep(2000);
-		 * rr.sendKeys("abdominal surgery"); sleep(3000); WebElement splm =
-		 * driver.findElement(By.xpath("//span[text()='Abdominal Surgery']"));
-		 * actions("click", splm);
-		 * driver.findElement(By.xpath("(//button[@id='save-btn'])[7]")).click();
-		 * sleep(3000); WebElement splrem =
-		 * driver.findElement(By.xpath("//div[text()='Abdominal Surgery']"));
-		 * actions("click", splrem); sleep(3000); WebElement spldel =
-		 * driver.findElement(By.xpath("(//img[@id='del-btn'])[1]"));
-		 * j.executeScript("arguments[0].click();", spldel);
-		 * 
-		 */ sleep(2000);
 
 		// patient info
 		while (true) {
 			try {
 				WebElement patientinfoedit = driver.findElement(By.xpath("(//span[@id='edit-btn'])[1]"));
-				visbility(driver, patientinfoedit, 60);
-				actions("click", patientinfoedit);
-				break;
+				if (patientinfoedit.isDisplayed()) {
+					visbility(driver, patientinfoedit, 50);
+					actions("click", patientinfoedit);
+					break;
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -4947,18 +4540,21 @@ public class Local_Host extends Base {
 			}
 
 		}
-		WebElement education = driver.findElement(By.xpath("(//input[@id='educationform'])[1]"));
-		visbility(driver, education, 60);
-		education.clear();
-		education.sendKeys("B.tech");
-		sleep(2000);
-		WebElement license = driver.findElement(By.xpath("(//input[@id='licensenum'])[1]"));
-		visbility(driver, license, 60);
-		license.clear();
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().contentEquals("dr")) {
+			WebElement education = driver.findElement(By.xpath("(//input[@id='educationform'])[1]"));
+			visbility(driver, education, 60);
+			education.clear();
+			education.sendKeys("B.tech");
+			sleep(2000);
+			WebElement license = driver.findElement(By.xpath("(//input[@id='licensenum'])[1]"));
+			visbility(driver, license, 60);
+			license.clear();
 
-		license.sendKeys("trt43534");
+			license.sendKeys("trt43534");
+		}
+
 		sleep(2000);
-		WebElement saveadmininfo = driver.findElement(By.xpath("(//button[@id='save-btn'])[1]"));
+		WebElement saveadmininfo = driver.findElement(By.xpath("(//button[@id='save-btn'])[2]"));
 		visbility(driver, saveadmininfo, 60);
 		j.executeScript("arguments[0].click();", saveadmininfo);
 		while (true) {
@@ -4972,9 +4568,16 @@ public class Local_Host extends Base {
 			}
 		}
 
-		WebElement trp9 = driver.findElement(By.xpath("//button[@onclick='setting.changep()']"));
-		visbility(driver, trp9, 60);
-		click(trp9);// .click();
+		while (true) {
+			try {
+				WebElement trp9 = driver.findElement(By.xpath("//button[@onclick='setting.changep()']"));
+				visbility(driver, trp9, 60);
+				click(trp9);// .click();
+				break;
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
 		WebElement trp10 = driver.findElement(By.id("currentPassword"));
 		visbility(driver, trp10, 60);
 		sendkeys(trp10, ConfigManager.getconfigManager().getInstanceConfigReader().getpass());
@@ -4985,9 +4588,10 @@ public class Local_Host extends Base {
 		visbility(driver, trp12, 60);
 		sendkeys(trp12, ConfigManager.getconfigManager().getInstanceConfigReader().newpassword());
 
-		WebElement trp13 = driver.findElement(By.id("save-submitform"));
+		WebElement trp13 = driver.findElement(By.xpath("//button[@id='save-submitform']"));
 		visbility(driver, trp13, 60);
-		click(trp13);// .click();
+		javascriptclick(trp13);// .click();
+		sleep(3000);
 
 		while (true) {
 
@@ -4995,66 +4599,21 @@ public class Local_Host extends Base {
 				break;
 			} else if (driver.getCurrentUrl().equals("https://www.test.75health.com/health/#setting")) {
 				break;
-			} else if (driver.getCurrentUrl().equals("https://www.75health.com/health/#setting")) {
-				break;
 			}
 		}
 
-		// Manage users...
+		sleep(4000);
 		while (true) {
 			try {
-				WebElement manageuser = driver.findElement(By.xpath("//button[@onclick='setting.userList()']"));
-				visbility(driver, manageuser, 60);
-				click(manageuser);
+
+				WebElement frs = driver.findElement(By.xpath("//button[@id='auto-logout-time']"));
+				visbility(driver, frs, 60);
+				click(frs);// .click();
 				break;
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
 		}
-		sleep(2000);
-		WebElement adduser = driver.findElement(By.xpath("//button[@onclick='Health.user_new()']"));
-		visbility(driver, adduser, 60);
-		adduser.click();
-		sleep(2000);
-		WebElement trp14 = driver.findElement(By.xpath("//input[@id='Firstname']"));
-		visbility(driver, trp14, 60);
-		sendkeys(trp14, "Akash");// .sendKeys("Akash");
-		WebElement trp15 = driver.findElement(By.xpath("//input[@id='LastName']"));
-		visbility(driver, trp15, 60);
-		sendkeys(trp15, "N");// .sendKeys("N");
-		sleep(2000);
-		WebElement trp16 = driver.findElement(By.xpath("//input[@id='UserLoginId']"));
-		visbility(driver, trp16, 60);
-		sendkeys(trp16, "Akashn1212@gmail.com");// .sendKeys("Akashn1212@gmail.com");
-		sleep(2000);
-		WebElement trp17 = driver.findElement(By.xpath("//button[@id='user_dropdown']"));
-		visbility(driver, trp17, 60);
-		click(trp17);// .click();
-		List<WebElement> usserdrp = driver.findElements(By.xpath("//button[@id='user_dropdown']//following::ul[1]/li"));
-		for (WebElement web : usserdrp) {
-			if (web.getText().trim().equals("Standard User")) {
-				visbility(driver, web, 60);
-				web.click();
-				break;
-			}
-
-		}
-		sleep(2000);
-		WebElement phone = driver.findElement(By.xpath("//input[@id='PhonE']"));
-
-		phone.sendKeys("2013556237");
-		sleep(2000);
-		// WebElement createuser =
-		// driver.findElement(By.xpath("(//button[@id='createButton'])[2]"));
-		WebElement canceluser = driver.findElement(By.xpath("(//button[@onclick='window.history.back()'])[2]"));
-		visbility(driver, canceluser, 60);
-		canceluser.click(); // createuser.click(); sleep(3000);
-		click(pom.getInstanceSetting().clickSettings);
-		sleep(5000);
-
-		WebElement frs = driver.findElement(By.xpath("//button[@id='auto-logout-time']"));
-		visbility(driver, frs, 60);
-		click(frs);// .click();
 		sleep(2000);
 		List<WebElement> time = driver.findElements(By.xpath("//ul[@id='logoutt']/li"));
 		for (WebElement w : time) {
@@ -5067,57 +4626,34 @@ public class Local_Host extends Base {
 
 		}
 		sleep(2000);
-
-		WebElement s1 = driver.findElement(By.xpath("//button[@id='taxbutton']"));
-		visbility(driver, s1, 60);
-		click(s1);// .click();
-
-		WebElement cl = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[4]/div[1]/div[2]/div/table/tbody/tr/td[2]/div/div[6]/div[8]/div/div[1]/div[1]/div[6]/div[1]/div/div[3]/div[1]/ul/li/a"));
-		visbility(driver, cl, 60);
-		actions("click", cl);
-		sleep(3000);
-		WebElement s2 = driver.findElement(By.xpath("(//span[@id='plus-add'])[1]"));
-		visbility(driver, s2, 60);
-		click(s2);// .click();
-		sleep(4000);
-		WebElement s3 = driver.findElement(By.xpath("(//input[@id='description'])[2]"));
-		visbility(driver, s3, 60);
-		sendkeys(s3, "DK");// .sendKeys("DK");
-		WebElement s4 = driver.findElement(By.xpath("(//input[@id='percentage'])[2]"));
-		visbility(driver, s4, 60);
-		sendkeys(s4, "5");// .sendKeys("5");
-
-		WebElement s5 = driver.findElement(By.xpath("(//button[@id='save-btn'])[10]"));
-		visbility(driver, s5, 60);
-		click(s5);// .click();
-		sleep(3000);
-		WebElement mn = driver.findElement(By.xpath("//div[text()='DK']"));
-		visbility(driver, mn, 60);
-		actions("click", mn);
-		sleep(3000);
-		WebElement s6 = driver.findElement(By.xpath("(//span[@id='del-btn'])[2]"));
-		visbility(driver, s6, 60);
-		click(s6);// .click();
-		sleep(2000);
-		WebElement s7 = driver.findElement(By.xpath("(//span[@title='Cancel'])[2]"));
-		visbility(driver, s7, 60);
-		click(s7);// .click();
-		sleep(3000);
-
+		WebElement cdsclick;
 		// cds
-		WebElement cdsclick = driver.findElement(By.xpath("//button[contains(text(),'Clinical Decision')]"));
-		visbility(driver, cdsclick, 60);
-		click(cdsclick);
+		while (true) {
+			try {
+				cdsclick = driver.findElement(By.xpath("//button[contains(text(),'Clinical Decision')]"));
+				visbility(driver, cdsclick, 60);
+				click(cdsclick);
+				break;
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
 		sleep(2000);
 		WebElement newcds = driver.findElement(By.xpath("//span[contains(text(),'New Clinical')]"));
 		visbility(driver, newcds, 60);
 		click(newcds);
 
 		sleep(2000);
-		WebElement s8 = driver.findElement(By.xpath("(//input[@id='description'])[3]"));
-		visbility(driver, s8, 60);
-		sendkeys(s8, "Akash");// .sendKeys("Akash");
+		while (true) {
+			try {
+				WebElement s8 = driver.findElement(By.xpath("//input[@title='Enter CDS name.']"));
+				visbility(driver, s8, 60);
+				sendkeys(s8, "Akash");// .sendKeys("Akash");
+				break;
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
 		sleep(2000);
 		WebElement scrolltill = driver.findElement(By.xpath("//input[@id='weight_from']"));
 		ScriptExecutor(scrolltill);
@@ -5149,536 +4685,62 @@ public class Local_Host extends Base {
 
 		sleep(3000);
 
-		// Set Favorities..
-
-		driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
-		sleep(3000);
-		List<WebElement> setfav1 = driver.findElements(By.xpath("//ul[@id='setfavoritesul']/li"));
-		for (WebElement w : setfav1) {
-			if (w.getText().trim().equals("Item/service")) {
-				while (true) {
-					try {
-						visbility(driver, w, 60);
-						w.click();
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-
-				WebElement clickadditem = driver.findElement(By.xpath(
-						"//div[@id='referral']//following::div[1]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
-				visbility(driver, clickadditem, 60);
-				click(clickadditem);
-				WebElement sdf = driver.findElement(By.xpath(
-						"(//div[contains(text(),'Type or select item/service and price')])[2]//following::input[1]"));
-				visbility(driver, sdf, 60);
-				sendkeys(sdf, "test");
-				WebElement sdf2 = driver.findElement(By.xpath(
-						"(//div[contains(text(),'Type or select item/service and price')])[2]//following::input[2]"));
-				visbility(driver, sdf2, 60);
-				sendkeys(sdf2, "5");
-				WebElement saveitem = driver.findElement(By
-						.xpath("//div[@id='referral']//following::div[1]/div[3]/div/div/div[2]/div[6]/div/button[2]"));
-				visbility(driver, saveitem, 60);
-				javascriptclick(saveitem);
-
-				sleep(2000);
-				WebElement edititem = driver.findElement(By.xpath("//span[text()='test']"));
-				visbility(driver, edititem, 60);
-				actions("click", edititem);
-				while (true) {
-					try {
-						WebElement deleteitem = driver.findElement(By.xpath(
-								"//div[@id='referral']//following::div[1]/div[3]/div/div/div[2]//parent::div[1]/div[1]/div[2]/span[2]"));
-						if (deleteitem.isDisplayed()) {
-							click(deleteitem);
-							break;
-						}
-
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-
-				WebElement itemservicebackarrow = driver
-						.findElement(By.xpath("(//div[@id='invoiceAdd'])[1]/div[1]/div[1]/span[1]"));
-				visbility(driver, itemservicebackarrow, 60);
-				javascriptclick(itemservicebackarrow);
-				sleep(2500);
-				while (true) {
-					try {
-						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-
-			} else if (w.getText().trim().contentEquals("Message")) {
-				while (true) {
-					try {
-						visbility(driver, w, 60);
-						w.click();
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-
-				WebElement addnewfavmessage = driver
-						.findElement(By.xpath("(//div[@id='message'])[1]/div[1]/div//following::td[4]/span[2]"));
-				visbility(driver, addnewfavmessage, 60);
-				javascriptclick(addnewfavmessage);
-
-				WebElement msf = driver.findElement(By.xpath("//textarea[@id='message1']"));
-
-				visbility(driver, msf, 60);
-				sendkeys(msf, "hello");
-				WebElement savemesssage = driver
-						.findElement(By.xpath("//textarea[@id='message1']//following::button[2]"));
-				visbility(driver, savemesssage, 60);
-				javascriptclick(savemesssage);
-				sleep(2500);
-				WebElement editmessage = driver.findElement(By.xpath("//div[text()='hello']"));
-				actions("click", editmessage);
-				WebElement deletemessage = driver
-						.findElement(By.xpath("//div[@id='MessageKpop2']/div[1]/div[2]/span[1]"));
-				visbility(driver, deletemessage, 60);
-				javascriptclick(deletemessage);
-
-				sleep(3000);
-				WebElement gobackmessage = driver
-						.findElement(By.xpath("(//span[text()='Favorite Message'])[1]//following::div[1]/span"));
-				visbility(driver, gobackmessage, 60);
-				javascriptclick(gobackmessage);
-
-				sleep(3000);
-
-			}
-
-		}
-
-		// Hospital codes... // Item/service code...
-
-		driver.findElement(By.xpath("//button[@onclick='hospitalcodedropdown();']")).click();
-		List<WebElement> fh = driver.findElements(By.xpath("//ul[@id='hospitalcodeul']/li"));
-		for (WebElement w : fh) {
-			if (w.getText().trim().equals("Item/Service Code")) {
-				while (true) {
-					try {
-						visbility(driver, w, 60);
-						w.click();
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-
-				WebElement itemcodeadd = driver.findElement(
-						By.xpath("(//div[@id='item-code'])[1]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-				visbility(driver, itemcodeadd, 60);
-				javascriptclick(itemcodeadd);
-
-				WebElement itemdis = driver
-						.findElement(By.xpath("(//div[@id='item-code'])[1]/div[3]/div/div/div[2]/div[3]/input"));
-				visbility(driver, itemdis, 60);
-				sendkeys(itemdis, "160899");
-
-				WebElement code2 = driver
-						.findElement(By.xpath("(//div[@id='item-code'])[1]/div[3]/div/div/div[2]/div[4]/textarea"));
-				visbility(driver, code2, 60);
-				sendkeys(code2, "Birthday");
-
-				WebElement code3 = driver
-						.findElement(By.xpath("(//div[@id='item-code'])[1]/div[3]/div/div/div[2]/div[5]/input"));
-				visbility(driver, code3, 60);
-				sendkeys(code3, "5");
-
-				WebElement hg = driver.findElement(By
-						.xpath("(//div[@id='item-code'])[1]/div[3]/div/div/div[2]/div[5]/input//following::button[2]"));
-
-				visbility(driver, hg, 60);
-
-				javascriptclick(hg);
-
-				sleep(3000);
-				while (true) {
-					try {
-						WebElement cc = driver.findElement(By.xpath("//div[text()='160899']"));
-						actions("click", cc);
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-
-				for (int i = 1; i <= 5; i++) {
-					try {
-						WebElement vv = driver.findElement(By.xpath(
-								"(//div[@id='item-code'][1]/div[3]/div/div/div[2]/div[3]/input//parent::div[1]//parent::div[1][1]//parent::div[1])[1]/div[1]/div[2]/span[2]"));
-						if (vv.isDisplayed()) {
-							click(vv);
-							break;
-						}
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-
-				WebElement th = driver.findElement(
-						By.xpath("(//span[contains(text(),'Item/Service Code')])[1]//parent::div/span[1]"));
-				visbility(driver, th, 60);
-				javascriptclick(th);
-				sleep(2500);
-				for (int i = 1; i <= 5; i++) {
-					try {
-						driver.findElement(By.xpath("//button[@onclick='hospitalcodedropdown();']")).click();
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-
-			} else if (w.getText().trim().equals("Procedure Code")) {
-				while (true) {
-					try {
-						visbility(driver, w, 60);
-						w.click();
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-
-				WebElement addnewprocedurecode = driver.findElement(
-						By.xpath("(//div[@id='procedure-code'])[1]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-				visbility(driver, addnewprocedurecode, 60);
-				javascriptclick(addnewprocedurecode);
-
-				WebElement prcd2 = driver
-						.findElement(By.xpath("(//label[text()='Procedure Code*'])[2]//following::div[1]/input"));
-				visbility(driver, prcd2, 60);
-				sendkeys(prcd2, "Procedure12");
-
-				WebElement prcd3 = driver.findElement(
-						By.xpath("(//label[text()='Procedure Name/Description*'])[2]//following::div[1]/textarea"));
-				visbility(driver, prcd3, 60);
-				sendkeys(prcd3, "medicine");
-				WebElement prcd4 = driver
-						.findElement(By.xpath("(//input[contains(@title,'Enter amount value for the procedure')])[2]"));
-				visbility(driver, prcd4, 60);
-				sendkeys(prcd4, "2");
-				WebElement saveprocedure = driver.findElement(By.xpath(
-						"(//input[contains(@title,'Enter amount value for the procedure')])[2]//following::button[1]"));
-				visbility(driver, saveprocedure, 60);
-				javascriptclick(saveprocedure);
-
-				sleep(3000);
-				while (true) {
-					try {
-						WebElement editprocedure = driver.findElement(By.xpath("//div[text()='PROCEDURE12']"));
-						visbility(driver, editprocedure, 60);
-						actions("click", editprocedure);
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-				WebElement delprocd = driver
-						.findElement(By.xpath("(//div[@id='procedure-code'])[1]/div[3]/div/div/div[1]/div[2]/span[1]"));
-				visbility(driver, delprocd, 60);
-				javascriptclick(delprocd);
-
-				WebElement gobackproced = driver
-						.findElement(By.xpath("(//span[text()='Procedure Code'])[1]//parent::div/span[1]"));
-				visbility(driver, gobackproced, 60);
-				javascriptclick(gobackproced);
-				sleep(2500);
-				for (int i = 1; i <= 5; i++) {
-					try {
-						driver.findElement(By.xpath("//button[@onclick='hospitalcodedropdown();']")).click();
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-			} else if (w.getText().trim().equals("Medication Code")) {
-				while (true) {
-					try {
-						visbility(driver, w, 60);
-						w.click();
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-
-				WebElement clickaddmedd = driver.findElement(
-						By.xpath("(//div[@id='drug-code'])[1]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-				visbility(driver, clickaddmedd, 60);
-				j.executeScript("arguments[0].click();", clickaddmedd);
-				WebElement md2 = driver
-						.findElement(By.xpath("(//label[text()='Medication Code*'])[2]//following::div[1]/input"));
-				visbility(driver, md2, 60);
-				sendkeys(md2, "MED1");
-				WebElement med3 = driver
-						.findElement(By.xpath("(//input[contains(@title,'Enter name of the Medication')])[2]"));
-				visbility(driver, med3, 60);
-				sendkeys(med3, "medication med");
-				WebElement med4 = driver.findElement(
-						By.xpath("(//input[contains(@title,'Enter name of the Medication')])[2]//following::input[1]"));
-				visbility(driver, med4, 60);
-				sendkeys(med4, "powerful");
-				WebElement med5 = driver.findElement(
-						By.xpath("(//input[contains(@title,'Enter name of the Medication')])[2]//following::input[2]"));
-				visbility(driver, med5, 60);
-				sendkeys(med5, "kaaspro");
-				WebElement med6 = driver.findElement(
-						By.xpath("(//input[contains(@title,'Enter name of the Medication')])[2]//following::input[3]"));
-				visbility(driver, med6, 60);
-				sendkeys(med6, "3");
-				WebElement savemedication = driver.findElement(By.xpath(
-						"(//input[contains(@title,'Enter amount value for the Medication')])[2]//following::button[1]"));
-				visbility(driver, savemedication, 60);
-				javascriptclick(savemedication);
-				sleep(3000);
-				while (true) {
-					try {
-						WebElement editmedication = driver.findElement(By.xpath("(//div[text()='MED1'])[1]"));
-						visbility(driver, editmedication, 60);
-						actions("click", editmedication);
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-				sleep(3000);
-				WebElement delmed = driver
-						.findElement(By.xpath("(//div[@id='drug-code'])[1]/div[3]/div/div/div[1]/div[2]/span[1]"));
-				visbility(driver, delmed, 60);
-				javascriptclick(delmed);
-
-				WebElement gobackmed = driver
-						.findElement(By.xpath("(//span[text()='Medication Code'])[1]//parent::div/span[1]"));
-				visbility(driver, gobackmed, 60);
-				j.executeScript("arguments[0].click();", gobackmed);
-				sleep(3000);
-
-			}
-
-		}
-
-		// forms...
-
-		WebElement f1 = driver.findElement(By.xpath("//button[@id='form-script']"));
-		visbility(driver, f1, 60);
-		click(f1);// .click();
-		sleep(5000);
-
-		List<WebElement> numberofformspresent = driver
-				.findElements(By.xpath("//div[@id='FormsKpop2']/div[2]/div/div[1]/div[1]/span[2]"));
-
-		int ffs = numberofformspresent.size();
-		System.out.println(ffs);
-
-		for (WebElement web : numberofformspresent) {
-
-			if (web.getText().isEmpty()) {
-
-				continue;
-			}
-
-			else if (web.getText().trim().equals("form100")) {
-
-				System.out.println("condition met the form");
-
-				visbility(driver, web, 60);
-				web.click();
-				WebElement jsp = driver.findElement(By.xpath("(//span[@id='del-form'])[1]"));
-				visbility(driver, jsp, 60);
-				javascriptclick(jsp);
-				driver.navigate().refresh();
-				WebElement jspq = driver.findElement(By.xpath("//button[@id='form-script']"));
-				visbility(driver, jspq, 60);
-				javascriptclick(jspq);
-
+		// edit preference....
+		while (true) {
+			try {
+				WebElement s10 = driver.findElement(By.xpath("//button[@id='edit-print-preference']"));
+				visbility(driver, s10, 60);
+				click(s10);
 				break;
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
-
 		}
-
-		WebElement addfrm = driver.findElement(By.xpath("//div[@id='FormsKpop2']/div[1]/span"));
-		visbility(driver, addfrm, 60);
-		actions("click", addfrm);
-
-		sleep(4000);
-		WebElement f2 = driver.findElement(By.xpath("(//label[text()='Form Title*'])[1]//following::input[1]"));
-		visbility(driver, f2, 60);
-		sendkeys(f2, "form100");
-
-		List<WebElement> drk = driver.findElements(By.xpath("(//div[@id='build-wrap'])[1]/div[1]/div[2]/ul/li"));
-
-		for (WebElement web : drk) {
-
-			if (web.getText().trim().equals("Checkbox Group")) {
-
-				WebElement drop = driver.findElement(
-						By.xpath("(//div[contains(@data-content,'Drag a field from the right to this area')])[1]/ul"));
-
-				Actions ac = new Actions(driver);
-				ac.dragAndDrop(web, drop).build().perform();
-				WebElement f3 = driver.findElement(By.xpath("//label[text()='Label']//following::div[1]/input"));
-				visbility(driver, f3, 60);
-				clear(f3);
-				WebElement f4 = driver.findElement(By.xpath("//label[text()='Label']//following::div[1]/input"));
-				visbility(driver, f4, 60);
-				sendkeys(f4, "Kaaspro Enterprise");
-				WebElement f5 = driver.findElement(
-						By.xpath("(//div[@id='build-wrap'])[1]/div[1]/div[2]/ul//following::div[1]/button"));
-				visbility(driver, f5, 60);
-				click(f5);
-
-				sleep(3000);
-
-				break;
-			}
-
-		}
-
-		sleep(3000); // edit preference....
-
-		WebElement s10 = driver.findElement(By.xpath("//button[@id='edit-print-preference']"));
-		visbility(driver, s10, 60);
-		click(s10);
 		sleep(3000);
-		WebElement s11 = driver.findElement(By.xpath("(//button[@id='cancel-btn'])[18]"));
+		WebElement s11 = driver.findElement(By.xpath("//button[@title='Cancel Preferences']"));
 		visbility(driver, s11, 60);
 		click(s11);
 		sleep(3000);
 		WebElement s12 = driver.findElement(By.xpath("//button[@title='Reset All Your Setting']"));
 		visbility(driver, s12, 60);
-		click(s12);
+		click(s12);// .click();
 		sleep(2000);
-		WebElement df = driver.findElement(By.xpath("(//span[text()='Reset All Settings'])[1]//following::button[2]"));
-		visbility(driver, df, 60);
-		javascriptclick(df);
+		WebElement df = driver.findElement(By.xpath("(//button[@id='resetbtn'])[1]"));
+		for (int i = 1; i <= 7; i++) {
 
-		sleep(3000);
-
-		// notification
-
-		WebElement notify = driver.findElement(By.xpath("//button[@id='custom-notify']"));
-
-		boolean b = true;
-		while (b) {
-
-			if (!notify.isDisplayed()) {
-				WebElement uip = driver.findElement(By
-						.xpath("//span[text()='Edit Notification Messages']//parent::div//parent::div[1]/label/input"));
-
-				actions("click", uip);
-
-				javascriptclick(notify);
-				WebElement sd = driver.findElement(By.xpath("(//span[@class='slider1 round1'])[4]"));
-				ScriptExecutor(sd);
-				sleep(2000);
-				js.executeScript("window.scrollBy(0,0)");
-
-			}
-
-			b = false;
-		}
-		sleep(1500);
-		while (true) {
-			try {
-				if (pom.getInstanceSetting().clickSettings.isDisplayed()) {
-					click(pom.getInstanceSetting().clickSettings);
-					break;
-				}
-			} catch (Exception e) {
-
-			}
-		}
-
-		// notify ehr complte...
-		WebElement ntfyehr = driver.findElement(By
-
-				.xpath("//span[text()='Notify user when EHR is completed.']//parent::div//parent::div[1]/label/input"));
-		ScriptExecutor(ntfyehr);
-
-		actions("click", ntfyehr);
-
-		// set interval time for emial...
-
-		WebElement rr = driver.findElement(By
-				.xpath("//span[text()='Set interval for receiving emails.']//parent::div//parent::div[1]/label/input"));
-
-		actions("click", rr);
-
-		// Audit Report...
-
-		sleep(3000);
-		visbility(driver, pom.getInstanceSetting().clickSettings, 60);
-		click(pom.getInstanceSetting().clickSettings);
-		WebDriverWait wait = new WebDriverWait(driver, 60);
-		driver.navigate().refresh();
-		sleep(3000);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@onclick='setting.audit()']")));
-		WebElement rqqa = driver.findElement(By.xpath("//button[@onclick='setting.audit()']"));
-		ScriptExecutor(rqqa);
-		visbility(driver, rqqa, 60);
-		javascriptclick(rqqa);
-		sleep(3000);
-		WebElement s13 = driver.findElement(By.xpath("(//input[@id='patientPartyName'])[1]"));
-		visbility(driver, s13, 60);
-		sendkeys(s13, kpid);
-		sleep(3000);
-		List<WebElement> patdr = driver
-				.findElements(By.xpath("//div[@id='vvid']//following::ul[1]/li/a/table/tbody/tr[1]/td[2]"));
-		for (WebElement we : patdr) {
-
-			if (we.getText().contains(kpid)) {
-				visbility(driver, we, 60);
-				we.click();
+			if (df.isDisplayed()) {
+				click(df);
 				break;
 			}
-
 		}
 
 		sleep(3000);
+		while (true) {
+			try {
+				click(pom.getInstanceSetting().clickSettings);
+				break;
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
 
-		WebElement seldate = driver.findElement(By.xpath("//select[@id='byDate']"));
-		visbility(driver, seldate, 60);
-		dropDown("text", seldate, "All");
-		sleep(4000);
-		WebElement selmod = driver.findElement(By.xpath("//select[@id='auditEventModule']"));
-		visbility(driver, selmod, 60);
-		dropDown("text", selmod, "Allergy");
-		sleep(3000);
-		WebElement s14 = driver.findElement(By.xpath("//button[@id='advanceSearching']"));
-		visbility(driver, s14, 60);
-		click(s14);
+		// notification
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().contentEquals("dr")) {
 
-		sleep(3000);
-		click(pom.getInstanceSetting().clickSettings);
-		sleep(2000);
+			while (true) {
+				try {
 
-		ScriptExecutor(pom.getInstanceSetting().scrollTillTax);
-		sleep(2000);
-		ScriptExecutor(pom.getInstanceSetting().scrollTillHospitalCode);
-		sleep(2000);
-
-		ScriptExecutor(pom.getInstanceSetting().scrollTillSubscription);
-		sleep(2000); //
-		ScriptExecutor(pom.getInstanceSetting().scrollTillNotification);
-		sleep(2000); //
-		ScriptExecutor(pom.getInstanceSetting().scrollTillAuditReport);
-
-		js.executeScript("window.scroll(0,0)");
-		sleep(2000);
+					WebElement rr = driver.findElement(By.xpath(
+							"//span[text()='Set interval for receiving emails.']//parent::div//parent::div[1]/label/input"));
+					// visbility(driver, rr, 60);
+					actions("click", rr);
+					break;
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		}
 		driver.navigate().refresh();
-
 		// Dashboard
 		WebElement dsbrd;
 		while (true) {
@@ -5687,7 +4749,7 @@ public class Local_Host extends Base {
 				javascriptclick(dsbrd);
 				break;
 			} catch (Exception e) {
-				System.out.println(e);
+				// TODO: handle exception
 			}
 		}
 		List<WebElement> ths = driver
@@ -5699,17 +4761,17 @@ public class Local_Host extends Base {
 				if (st.getText().trim().equals("Home")) {
 					st.click();
 					sleep(1000);
-					actions("click", dsbrd);
+					javascriptclick(dsbrd);
 				} else if (st.getText().trim().equals("Dashboard")) {
 					st.click();
 					sleep(2000);
-					actions("click", dsbrd);
+					javascriptclick(dsbrd);
 				} else if (st.getText().trim().equals("Quick Tour")) {
 					st.click();
 					WebElement cncltr = driver.findElement(By.xpath("(//li[text()='NO, CANCEL TOUR'])[1]"));
 					javascriptclick(cncltr);
 					sleep(2000);
-					actions("click", dsbrd);
+					javascriptclick(dsbrd);
 				} else if (st.getText().trim().equals("Settings")) {
 					st.click();
 					sleep(2000);
@@ -5721,7 +4783,7 @@ public class Local_Host extends Base {
 					sleep(2000);
 					actions("click", clmgr);
 					sleep(2000);
-					actions("click", dsbrd);
+					javascriptclick(dsbrd);
 				} else if (st.getText().trim().equals("Sign out")) {
 					st.click();
 

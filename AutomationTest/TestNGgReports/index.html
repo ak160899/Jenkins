@@ -59,7 +59,7 @@
                 </li>
                 <li>
                   <a href="#" class="navigator-link " panel-name="group-Gradle_suite">
-                    <span>1 group</span>
+                    <span>0 groups</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -102,7 +102,7 @@
                     <div class="method-list-content failed suite-Gradle_suite">
                       <span>
                         <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Gradle_suite" title="runner.Local_Host" hash-for-method="HomeModule">HomeModule</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Gradle_suite" title="runner.Dr_userLogin" hash-for-method="HomeModule">HomeModule</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Gradle_suite -->
@@ -120,7 +120,7 @@
           <div class="suite-Gradle_suite-class-failed">
             <div class="main-panel-header rounded-window-top">
               <img src="failed.png"/>
-              <span class="class-name">runner.Local_Host</span>
+              <span class="class-name">runner.Dr_userLogin</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
@@ -128,32 +128,13 @@
                   <a name="HomeModule">
                   </a> <!-- HomeModule -->
                   <span class="method-name">HomeModule</span>
-                  <div class="stack-trace">org.openqa.selenium.WebDriverException: target frame detached
-  (failed to check if window was closed: disconnected: unable to connect to renderer)
-  (Session info: chrome=108.0.5359.125)
-Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
-System info: host: &apos;WORKPC&apos;, ip: &apos;192.168.29.72&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_331&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 108.0.5359.125, chrome: {chromedriverVersion: 108.0.5359.71 (1e0e3868ee06..., userDataDir: C:\Users\Admin\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:64995}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Session ID: 2ddbfdedb6db2abf18ffa896932edc68
-*** Element info: {Using=xpath, value=//div[@id=&apos;date-data&apos;]}
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:353)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementsByXPath(RemoteWebDriver.java:432)
-	at org.openqa.selenium.By$ByXPath.findElements(By.java:348)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:311)
-	at com.calendar.Calendars.$calenderMod(Calendars.java:57)
-	at runner.Local_Host.HomeModule(Local_Host.java:185)
+                  <div class="stack-trace">java.lang.NullPointerException
+	at runner.Dr_userLogin.HomeModule(Dr_userLogin.java:174)
 	at com.sun.proxy.$Proxy2.stop(Unknown Source)
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:750)
-... Removed 50 stack frames
+... Removed 46 stack frames
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
@@ -170,7 +151,7 @@ Session ID: 2ddbfdedb6db2abf18ffa896932edc68
 &lt;suite verbose=&quot;0&quot; name=&quot;Gradle suite&quot;&gt;
   &lt;test name=&quot;Gradle test&quot; preserve-order=&quot;false&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;runner.Local_Host&quot;/&gt;
+      &lt;class name=&quot;runner.Dr_userLogin&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Gradle test --&gt;
 &lt;/suite&gt; &lt;!-- Gradle suite --&gt;
@@ -194,14 +175,6 @@ Session ID: 2ddbfdedb6db2abf18ffa896932edc68
             <span class="header-content">Groups for Gradle suite</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
-            <div class="test-group">
-              <span class="test-group-name">home</span>
-              <br/>
-              <div class="method-in-group">
-                <span class="method-in-group-name">HomeModule</span>
-                <br/>
-              </div> <!-- method-in-group -->
-            </div> <!-- test-group -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="times-Gradle_suite" class="panel">
@@ -221,13 +194,13 @@ data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'HomeModule')
-data.setCell(0, 2, 'runner.Local_Host')
-data.setCell(0, 3, 210837);
+data.setCell(0, 2, 'runner.Dr_userLogin')
+data.setCell(0, 3, 6316);
 window.suiteTableData['Gradle_suite']= { tableData: data, tableDiv: 'times-div-Gradle_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 3 minutes</span>
+              <span class="suite-total-time">Total running time: 6 seconds</span>
               <div id="times-div-Gradle_suite">
               </div> <!-- times-div-Gradle_suite -->
             </div> <!-- times-div -->
@@ -253,7 +226,7 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">runner.Local_Host</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">runner.Dr_userLogin</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">LaunchBrwoser</span>
                 <span class="method-start">0 ms</span>
@@ -262,7 +235,7 @@ return data;
                 <img src="failed.png">
                 </img>
                 <span class="method-name">HomeModule</span>
-                <span class="method-start">42096 ms</span>
+                <span class="method-start">40594 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
