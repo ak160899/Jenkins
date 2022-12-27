@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="0" name="Failed suite [Gradle suite]">
+  <test name="Gradle test(failed)">
+    <classes>
+      <class name="runner.Local_Host">
+        <methods>
+          <include name="HomeModule"/>
+          <include name="LaunchBrwoser"/>
+        </methods>
+      </class> <!-- runner.Local_Host -->
+    </classes>
+  </test> <!-- Gradle test(failed) -->
+</suite> <!-- Failed suite [Gradle suite] -->

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="2" total="7" passed="5">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="157974" started-at="2022-12-27T07:24:27Z" finished-at="2022-12-27T07:27:05Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="157974" started-at="2022-12-27T07:24:27Z" finished-at="2022-12-27T07:27:05Z">
+      <class name="SubscriptionFeatures.Lite_package">
+        <test-method status="PASS" signature="LaunchBrwoser()[pri:0, instance:SubscriptionFeatures.Lite_package@6193932a]" name="LaunchBrwoser" is-config="true" duration-ms="30888" started-at="2022-12-27T12:54:27Z" finished-at="2022-12-27T12:54:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- LaunchBrwoser -->
+        <test-method status="PASS" signature="patient_modules()[pri:2, instance:SubscriptionFeatures.Lite_package@6193932a]" name="patient_modules" duration-ms="13069" started-at="2022-12-27T12:54:58Z" finished-at="2022-12-27T12:55:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- patient_modules -->
+        <test-method status="PASS" signature="calendar_module()[pri:4, instance:SubscriptionFeatures.Lite_package@6193932a]" name="calendar_module" duration-ms="30842" started-at="2022-12-27T12:55:11Z" finished-at="2022-12-27T12:55:42Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- calendar_module -->
+        <test-method status="PASS" signature="billing_module()[pri:5, instance:SubscriptionFeatures.Lite_package@6193932a]" name="billing_module" duration-ms="13790" started-at="2022-12-27T12:55:42Z" finished-at="2022-12-27T12:55:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- billing_module -->
+        <test-method status="PASS" signature="tele_doctor()[pri:6, instance:SubscriptionFeatures.Lite_package@6193932a]" name="tele_doctor" duration-ms="8134" started-at="2022-12-27T12:55:56Z" finished-at="2022-12-27T12:56:04Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tele_doctor -->
+        <test-method status="PASS" signature="settings_Module()[pri:7, instance:SubscriptionFeatures.Lite_package@6193932a]" name="settings_Module" duration-ms="61171" started-at="2022-12-27T12:56:04Z" finished-at="2022-12-27T12:57:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- settings_Module -->
+      </class> <!-- SubscriptionFeatures.Lite_package -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
