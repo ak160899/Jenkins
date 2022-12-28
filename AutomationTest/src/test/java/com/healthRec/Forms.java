@@ -1,8 +1,10 @@
 package com.healthRec;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.Launch.LaunchBrowser;
 import org.base.Base;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,24 +15,27 @@ import org.testng.annotations.Test;
 
 public class Forms extends Base {
 	public WebDriver driver;
-	String ur;
+	// String ur;
 
 	@Test
-	public void $addForm() throws Throwable {
+	public void $addForm(WebDriver driver) throws Throwable {
+		this.driver = driver;
 
-		EhrLink er = new EhrLink();
-		String $link = er.$ehrLink(ur);
-		driver.navigate().to($link);
+		for (int i = 1; i <= 5; i++) {
+			try {
+				WebElement formsaddicon = driver.findElement(By.xpath("//div[contains(@title,'Add Forms')]"));
+				if (formsaddicon.isDisplayed()) {
+					click(formsaddicon);
+					break;
+				} else {
+					actions("move to element", formsaddicon);
+					click(formsaddicon);
+				}
 
-		Healthrec rc = new Healthrec();
-		rc.driver = driver;
-		rc.$goToEhr();
+			} catch (Exception e) {
 
-		WebElement lj = driver.findElement(By.xpath("//div[contains(@title,'Add Forms')]"));
-		actions("move to element", lj);
-		visbility(driver, lj, 60);
-
-		actions("click", lj);
+			}
+		}
 		sleep(3000);
 
 		List<WebElement> numberofformspresent = driver
@@ -39,24 +44,28 @@ public class Forms extends Base {
 		// System.out.println(ffs);
 
 		String $frmName = "";
-		for (int imp = 4; imp <= ffs; imp++) {
+		boolean result = false;
+		/*
+		 * for (int imp = 4; imp <= ffs; imp++) {
+		 * 
+		 * // u = 1 + i; WebElement rtt = driver
+		 * .findElement(By.xpath("(//div[@class='form-pop-body'])[10]/div[" + imp +
+		 * "]/div/div[1]/span[2]")); System.out.println(rtt.getText());
+		 */
+		List<WebElement> $editFromicon = driver.findElements(By.xpath("//span[@title='Edit this Form']"));
 
-			// u = 1 + i;
-			WebElement rtt = driver
-					.findElement(By.xpath("(//div[@class='form-pop-body'])[10]/div[" + imp + "]/div/div[1]/span[2]"));
-			// System.out.println(rtt.getText());
+		for (WebElement web : $editFromicon) {
 
-			List<WebElement> $editFromicon = driver.findElements(By.xpath("//span[@title='Edit this Form']"));
-			for (WebElement web : $editFromicon) {
-
-				if (web.isDisplayed()) {
-
-					click(web);
-					break;
-
-				}
+			if (web.isDisplayed()) {
+				result = true;
+				System.out.println("TRUE");
+				click(web);
+				break;
 
 			}
+
+		}
+		if (result == true) {
 			sleep(4000);
 			WebElement $FormdisBox = driver
 					.findElement(By.xpath("(//label[text()='Form Title*'])[2]//following::input[1]"));
@@ -65,25 +74,22 @@ public class Forms extends Base {
 			$frmName = $FormdisBox.getAttribute("value");
 			System.out.println($frmName);
 
-			visbility(driver, rtt, 60);
 			System.out.println("ok");
 
 			WebElement js = driver.findElement(By.xpath("(//span[@id='del-form'])[2]"));
 			visbility(driver, js, 60);
 			javascriptclick(js);
 
-			break;
+			$addNewForm($frmName);
+			$addFormToEhr($frmName);
+			sleep(6000);
+			WebElement ytt = driver.findElement(By.xpath("//div[@id='FormsKpop2']/div[1]/div[2]/span"));
+			javascriptclick(ytt);
+			$delForm($frmName);
 
 		}
 
 		sleep(3000);
-
-		$addNewForm($frmName);
-		$addFormToEhr($frmName);
-		sleep(6000);
-		WebElement ytt = driver.findElement(By.xpath("//div[@id='FormsKpop2']/div[1]/div[2]/span"));
-		javascriptclick(ytt);
-		$delForm($frmName);
 
 	}
 

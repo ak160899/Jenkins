@@ -16,7 +16,7 @@ public class Calendars extends Base {
 	PageObjMan pom;
 	String kpid;
 	String s;
-	int cnt;
+	public int cnt;
 
 	public Calendars(WebDriver driver, PageObjMan pm) {
 
@@ -163,14 +163,14 @@ public class Calendars extends Base {
 
 	public void $nextsetOfDays(int cn) {
 		for (int i = 1; i <= 7; i++) {
-			System.out.println("URL NO:" + cn);
+			// System.out.println("URL NO:" + cn);
 			try {
 				WebElement $nextSetdays = driver.findElement(
 
 						By.xpath("(//button[@id='calendar-day-month'])[" + cn
 								+ "]//parent::div//parent::div[1]/div[2]/button"));
 
-				System.out.println("NEXT SET DAYS:" + $nextSetdays);
+				// System.out.println("NEXT SET DAYS:" + $nextSetdays);
 				if ($nextSetdays.isDisplayed()) {
 					click($nextSetdays);
 					break;

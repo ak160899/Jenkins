@@ -123,7 +123,7 @@ public class Dr_userLogin extends Base {
 
 	}
 
-	@Test(priority = 0, enabled = false)
+	@Test(priority = 0)
 	public void HomeModule() throws Exception {
 
 		while (true) {
@@ -493,7 +493,7 @@ public class Dr_userLogin extends Base {
 
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2,enabled = false)
 	public void HealthRec() throws Exception {
 
 		if (ur.equals("https://localhost:8443/")) {
@@ -3872,7 +3872,7 @@ public class Dr_userLogin extends Base {
 		sleep(4000);
 	}
 
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3)
 
 	public void calendar() throws Exception {
 		cal.caledarModule();
@@ -3880,7 +3880,7 @@ public class Dr_userLogin extends Base {
 		cal.$calenderMod($current, kpid);
 	}
 
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4,enabled = false)
 	public void BillingModule() throws InterruptedException {
 
 		while (true) {
@@ -3921,7 +3921,7 @@ public class Dr_userLogin extends Base {
 		visbility(driver, pom.getInstanceBilling().saveItem, 60);
 		click(pom.getInstanceBilling().saveItem);
 		sleep(3000);
-		while (true) {
+		for (int i = 1; i <= 7; i++) {
 			try {
 				WebElement r = driver.findElement(By.xpath("//div[@id='assign-side']/div[1]/div"));
 				visbility(driver, r, 60);
@@ -3931,7 +3931,7 @@ public class Dr_userLogin extends Base {
 				// TODO: handle exception
 			}
 		}
-		while (true) {
+		for (int i = 1; i <= 7; i++) {
 			try {
 				WebElement addiconfav = driver.findElement(
 						By.xpath("//div[@id='assign-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
@@ -3943,7 +3943,7 @@ public class Dr_userLogin extends Base {
 			}
 		}
 
-		while (true) {
+		for (int i = 1; i <= 7; i++) {
 			try {
 				WebElement favdes = driver.findElement(
 						By.xpath("//div[@id='assign-side']/div[3]/div/div/div[2]/div[3]/div[2]/div/input"));
@@ -3964,8 +3964,8 @@ public class Dr_userLogin extends Base {
 		javascriptclick(savefav);
 		// WebDriverWait wait = new WebDriverWait(driver, 30);
 		sleep(2500);
-		WebElement until;
-		while (true) {
+		WebElement until = null;
+		for (int i = 1; i <= 7; i++) {
 			try {
 				until = driver.findElement(By.xpath(
 						"(//span[text()='Kaaspro']//parent::div//parent::div[1]//parent::div[1]/div[1]/span[1])[1]"));
@@ -3977,7 +3977,7 @@ public class Dr_userLogin extends Base {
 
 		actions("click", until);
 		sleep(2000);
-		while (true) {
+		for (int i = 1; i <= 7; i++) {
 			try {
 				WebElement edi = driver.findElement(
 						By.xpath("(//span[text()='Kaaspro']//parent::div//parent::div[1]//parent::div[1]/div[2])[1]"));
@@ -3989,7 +3989,7 @@ public class Dr_userLogin extends Base {
 			}
 		}
 		sleep(2000);
-		while (true) {
+		for (int i = 1; i <= 7; i++) {
 			try {
 				WebElement delfav = driver
 						.findElement(By.xpath("//div[@id='assign-side']/div[3]/div/div/div[1]/div[2]/span[1]"));
@@ -4191,7 +4191,7 @@ public class Dr_userLogin extends Base {
 
 	}
 
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5)
 	public void TeleDoctor() throws InterruptedException {
 
 		while (true) {
@@ -4288,7 +4288,7 @@ public class Dr_userLogin extends Base {
 
 	}
 
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6)
 	public void Message() throws InterruptedException {
 
 		while (true) {
@@ -4461,7 +4461,7 @@ public class Dr_userLogin extends Base {
 
 	}
 
-	@Test(priority = 7,enabled = false)
+	@Test(priority = 7)
 	public void Settings() throws InterruptedException, IOException {
 
 		while (true) {
@@ -4675,7 +4675,128 @@ public class Dr_userLogin extends Base {
 		visbility(driver, savecds, 60);
 		javascriptclick(savecds);
 
+		for (int i = 1; i <= 5; i++) {
+			try {
+				WebElement clicksett = driver.findElement(By.xpath("//td[text()='Settings']"));
+				if (clicksett.isDisplayed()) {
+					javascriptclick(clicksett);
+					break;
+				}
+			} catch (Exception e) {
+
+			}
+		}
+
 		sleep(4000);
+
+		// favorrites..
+		driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
+		sleep(3000);
+		List<WebElement> setfav1 = driver.findElements(By.xpath("//ul[@id='setfavoritesul']/li"));
+		for (WebElement w : setfav1) {
+			if (w.getText().trim().equals("Item/service")) {
+				while (true) {
+					try {
+						visbility(driver, w, 60);
+						w.click();
+						break;
+					} catch (Exception e) {
+
+					}
+				}
+
+				WebElement clickadditem = driver.findElement(By.xpath(
+						"//div[@id='referral']//following::div[1]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
+				visbility(driver, clickadditem, 60);
+				click(clickadditem);
+				WebElement sdf = driver.findElement(By.xpath(
+						"(//div[contains(text(),'Type or select item/service and price')])[2]//following::input[1]"));
+				visbility(driver, sdf, 60);
+				sendkeys(sdf, "test");
+				WebElement sdf2 = driver.findElement(By.xpath(
+						"(//div[contains(text(),'Type or select item/service and price')])[2]//following::input[2]"));
+				visbility(driver, sdf2, 60);
+				sendkeys(sdf2, "5");
+				WebElement saveitem = driver.findElement(By
+						.xpath("//div[@id='referral']//following::div[1]/div[3]/div/div/div[2]/div[6]/div/button[2]"));
+				visbility(driver, saveitem, 60);
+				javascriptclick(saveitem);
+
+				sleep(2000);
+				WebElement edititem = driver.findElement(By.xpath("//span[text()='test']"));
+				visbility(driver, edititem, 60);
+				actions("click", edititem);
+				while (true) {
+					try {
+						WebElement deleteitem = driver.findElement(By.xpath(
+								"//div[@id='referral']//following::div[1]/div[3]/div/div/div[2]//parent::div[1]/div[1]/div[2]/span[2]"));
+						if (deleteitem.isDisplayed()) {
+							click(deleteitem);
+							break;
+						}
+
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+
+				WebElement itemservicebackarrow = driver
+						.findElement(By.xpath("(//div[@id='invoiceAdd'])[1]/div[1]/div[1]/span[1]"));
+				visbility(driver, itemservicebackarrow, 60);
+				javascriptclick(itemservicebackarrow);
+				sleep(2500);
+				while (true) {
+					try {
+						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
+						break;
+					} catch (Exception e) {
+
+					}
+				}
+
+			} else if (w.getText().trim().contentEquals("Message")) {
+				while (true) {
+					try {
+						visbility(driver, w, 60);
+						w.click();
+						break;
+					} catch (Exception e) {
+
+					}
+				}
+
+				WebElement addnewfavmessage = driver
+						.findElement(By.xpath("(//div[@id='message'])[1]/div[1]/div//following::td[4]/span[2]"));
+				visbility(driver, addnewfavmessage, 60);
+				javascriptclick(addnewfavmessage);
+
+				WebElement msf = driver.findElement(By.xpath("//textarea[@id='message1']"));
+
+				visbility(driver, msf, 60);
+				sendkeys(msf, "hello");
+				WebElement savemesssage = driver
+						.findElement(By.xpath("//textarea[@id='message1']//following::button[2]"));
+				visbility(driver, savemesssage, 60);
+				javascriptclick(savemesssage);
+				sleep(2500);
+				WebElement editmessage = driver.findElement(By.xpath("//div[text()='hello']"));
+				actions("click", editmessage);
+				WebElement deletemessage = driver
+						.findElement(By.xpath("//div[@id='MessageKpop2']/div[1]/div[2]/span[1]"));
+				visbility(driver, deletemessage, 60);
+				javascriptclick(deletemessage);
+
+				sleep(3000);
+				WebElement gobackmessage = driver
+						.findElement(By.xpath("(//span[text()='Favorite Message'])[1]//following::div[1]/span"));
+				visbility(driver, gobackmessage, 60);
+				javascriptclick(gobackmessage);
+
+				sleep(3000);
+
+			}
+
+		}
 
 		WebElement clicksett = driver.findElement(By.xpath("//td[text()='Settings']"));
 		visbility(driver, clicksett, 60);

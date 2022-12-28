@@ -98,6 +98,8 @@ public class LaunchBrowser extends Base {
 				break;
 			} else if (driver.getCurrentUrl().equals("https://www.75health.com/health/#home")) {
 				break;
+			} else if (driver.getCurrentUrl().equals("https://localhost:8443/health/#list_ehr")) {
+				break;
 			}
 		}
 		// driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);

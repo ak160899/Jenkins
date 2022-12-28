@@ -24,6 +24,7 @@ import org.testng.annotations.Test;
 
 import com.calendar.Calendars;
 import com.data.ConfigManager;
+import com.healthRec.Forms;
 import com.healthRec.Goals;
 import com.healthRec.Medication;
 import com.healthRec.Problems;
@@ -39,7 +40,7 @@ public class Local_Host extends Base {
 	public JavascriptExecutor j;
 	public WebDriverWait ww;
 	public WebDriver driver;
-	public String kpid;
+	public String kpid = "3089-861";
 	public String ur;
 	Calendars cal;
 	String $current;
@@ -112,7 +113,7 @@ public class Local_Host extends Base {
 
 	}
 
-	@Test(priority = 1, groups = "patient")
+	@Test(priority = 1, groups = "patient", enabled = false)
 	public void PatientModule() throws InterruptedException {
 
 		for (int i = 1; i <= 5; i++) {
@@ -2054,90 +2055,14 @@ public class Local_Host extends Base {
 
 				} else if (tagnames.equals("custom-form")) {
 
-					WebElement lj = driver.findElement(By.xpath("//div[contains(@title,'Add Forms')]"));
-					actions("move to element", lj);
-					visbility(driver, lj, 60);
-					ww.until(ExpectedConditions.elementToBeClickable(lj));
-					actions("click", lj);
-					sleep(3000);
+					Forms form = new Forms();
+					try {
+						form.$addForm(driver);
+					} catch (Throwable e) {
 
-					List<WebElement> numberofformspresent = driver
-							.findElements(By.xpath("(//div[@class='form-pop-body'])[10]/div/div[1]"));
-					int ffs = numberofformspresent.size();
-					// System.out.println(ffs);
-
-					// int u;
-					for (int imp = 4; imp <= ffs; imp++) {
-
-						// u = 1 + i;
-						WebElement rtt = driver.findElement(
-								By.xpath("(//div[@class='form-pop-body'])[10]/div[" + imp + "]/div/div[1]/span[2]"));
-						// System.out.println(rtt.getText());
-
-						if (rtt.getText().trim().equals("form6")) {
-
-							visbility(driver, rtt, 60);
-							System.out.println("ok");
-							rtt.click();
-							WebElement js = driver.findElement(By.xpath("(//span[@id='del-form'])[2]"));
-							visbility(driver, js, 60);
-							javascriptclick(js);
-
-							break;
-
-						}
-
+						e.printStackTrace();
 					}
-					sleep(3000);
 
-					WebElement addfrm = driver.findElement(By.xpath("//div[@id='FormsKpop2']/div[1]/span"));
-					visbility(driver, addfrm, 60);
-					actions("click", addfrm);
-					WebElement x9 = driver
-							.findElement(By.xpath("(//label[text()='Form Title*'])[2]//following::input[1]"));
-					visbility(driver, x9, 60);
-					sendkeys(x9, "form6");// .sendKeys("form5");
-
-					List<WebElement> drk = driver
-							.findElements(By.xpath("(//div[@id='build-wrap'])[2]/div[1]/div[2]/ul/li"));
-
-					for (WebElement web : drk) {
-
-						if (web.getText().trim().equals("Checkbox Group")) {
-
-							WebElement drop = driver.findElement(By.xpath(
-									"(//div[contains(@data-content,'Drag a field from the right to this area')])[2]/ul"));
-
-							Actions ac = new Actions(driver);
-							ac.dragAndDrop(web, drop).build().perform();
-							driver.findElement(By.xpath("//label[text()='Label']//following::div[1]/input")).clear();
-							driver.findElement(By.xpath("//label[text()='Label']//following::div[1]/input"))
-									.sendKeys("Kaaspro Enterprise");
-							driver.findElement(
-									By.xpath("(//div[@id='build-wrap'])[2]/div[1]/div[2]/ul//following::div[1]/button"))
-									.click();
-							sleep(7000);
-							implicitWait(30, TimeUnit.SECONDS);
-							WebElement addit = driver
-									.findElement(By.xpath("//span[text()='form6']//following::div[1]/span"));
-							visbility(driver, addit, 60);
-							actions("click", addit);
-							sleep(6000);
-							WebElement ytt = driver.findElement(By.xpath("//div[@id='FormsKpop2']/div[1]/div[2]/span"));
-							javascriptclick(ytt);
-							sleep(5000);
-							WebElement ffr = driver
-									.findElement(By.xpath("//span[text()='form6']//following::div[1]/div"));
-							actions("click", ffr);
-							sleep(4000);
-							WebElement delfr = driver
-									.findElement(By.xpath("(//span[text()='form6'])[2]//following::div[1]/span[1]"));
-							actions("click", delfr);
-							break;
-						}
-
-					}
-					sleep(3000);
 				} else if (tagnames.equals("attachFile")) {
 
 					WebElement ar = driver.findElement(By.xpath("//div[contains(@title,'Add Attach File')]"));
