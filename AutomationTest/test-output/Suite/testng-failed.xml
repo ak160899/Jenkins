@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test name="Test(failed)">
+    <groups>
+      <run>
+        <include name="before"/>
+        <include name="patient"/>
+        <include name="healthrec"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="runner.Local_Host">
+        <methods>
+          <include name="PatientModule"/>
+          <include name="HealthRec"/>
+          <include name="LaunchBrwoser"/>
+        </methods>
+      </class> <!-- runner.Local_Host -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

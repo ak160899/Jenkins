@@ -65,12 +65,25 @@ public class Vaccine extends Base {
 
 	}
 
-	public void $getPastVaccine() {
-		WebElement $vaccineEllipse$ = driver.findElement(
-				By.xpath("//div[@title='Show my favorite Vaccine list for selection']//following::div[2]"));
-		actions("move to element", $vaccineEllipse$);
-		visbility(driver, $vaccineEllipse$, 60);
-		javascriptclick($vaccineEllipse$);
+	public void $getPastVaccine() throws Throwable {
+		sleep(1500);
+
+		for (int i = 1; i <= 5; i++) {
+			WebElement $vaccineEllipse$ = null;
+			try {
+				$vaccineEllipse$ = driver.findElement(
+						By.xpath("//div[@title='Show my favorite Vaccine list for selection']//following::div[2]"));
+				actions("move to element", $vaccineEllipse$);
+				if ($vaccineEllipse$.isDisplayed()) {
+					visbility(driver, $vaccineEllipse$, 60);
+					javascriptclick($vaccineEllipse$);
+					break;
+				}
+			} catch (Exception e) {
+				actions("move to element", $vaccineEllipse$);
+			}
+		}
+		sleep(1500);
 
 		List<WebElement> $vaccEllipseList$ = null;
 		for (int i = 1; i <= 5; i++) {
@@ -94,13 +107,23 @@ public class Vaccine extends Base {
 			}
 
 		}
+		sleep(2000);
 
-		WebElement $vaccToehr$ = driver.findElement(By.xpath("(//span[@title='Click to add this vaccine'])[2]"));
-		System.out.println("finded");
-		visbility(driver, $vaccToehr$, 60);
-		System.out.println("its visble");
-		javascriptclick($vaccToehr$);
-
+		for (int i = 1; i <= 10; i++) {
+			try {
+				WebElement $vaccToehr$ = driver
+						.findElement(By.xpath("(//span[@title='Click to add this vaccine'])[2]"));
+				if ($vaccToehr$.isDisplayed()) {
+					visbility(driver, $vaccToehr$, 60);
+					System.out.println("its visble");
+					click($vaccToehr$);
+					break;
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+sleep(1500);
 		WebElement $closeVacc$ = driver
 				.findElement(By.xpath("(//span[text()='Past Taken Vaccine'])[1]//parent::div/span[1]"));
 		visbility(driver, $closeVacc$, 60);

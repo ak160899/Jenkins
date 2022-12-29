@@ -186,7 +186,7 @@ public class Calendars extends Base {
 
 		WebElement prp = driver.findElement(By.xpath("(//input[@id='AppointmentPatientName'])[" + i + "]"));
 		visbility(driver, prp, 60);
-		sendkeys(prp, kpid);
+		sendkeys(prp, id);
 		System.out.println("EXIT");
 
 	}

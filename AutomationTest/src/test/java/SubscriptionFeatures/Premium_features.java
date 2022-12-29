@@ -629,47 +629,115 @@ public class Premium_features extends Base {
 
 		}
 		driver.navigate().to("https://localhost:8443/health/#setting");
+		sleep(4000);
 		// SetFavorities..
+		driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
+		sleep(3000);
+		List<WebElement> setfav1 = driver.findElements(By.xpath("//ul[@id='setfavoritesul']/li"));
+		for (WebElement w : setfav1) {
+			if (w.getText().trim().equals("Item/service")) {
+				while (true) {
+					try {
+						visbility(driver, w, 60);
+						w.click();
+						break;
+					} catch (Exception e) {
 
-		// problems.
-		/*
-		 * driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click(
-		 * ); sleep(3000); boolean pb = false; List<WebElement> setfav1 =
-		 * driver.findElements(By.xpath("//ul[@id='setfavoritesul']/li")); for
-		 * (WebElement w : setfav1) { if (w.getText().trim().equals("Problems")) {
-		 * visbility(driver, w, 60); w.click();
-		 * 
-		 * for (int i = 1; i <= 5; i++) { try { WebElement $prob_fav_kpop$ =
-		 * driver.findElement(By.xpath(
-		 * "//div[@id='ProblemsFavKpop2']//following::div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"
-		 * )); visbility(driver, $prob_fav_kpop$, 60); javascriptclick($prob_fav_kpop$);
-		 * break; } catch (Exception e) { // TODO: handle exception } }
-		 * 
-		 * WebElement $probSendkeys$ = driver
-		 * .findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::input[1])[1]")
-		 * ); visbility(driver, $probSendkeys$, 60); sendkeys($probSendkeys$, "test");
-		 * List<WebElement> $probDrop$; while (true) { $probDrop$ = driver.findElements(
-		 * By.xpath(
-		 * "//div[@id='ProblemsKpop2']/div[2]/div[2]//following::ul[1]/li/a/div/small"))
-		 * ; System.out.println($probDrop$.size()); if ($probDrop$.size() >= 7) pb =
-		 * true; break; }
-		 * 
-		 * sleep(6000);
-		 * 
-		 * } if (pb = true) { WebElement cancelfavprob = driver .findElement(By.xpath(
-		 * "//div[@id='ProblemsKpop2']/div[1]/div[1]//following::div[1]/span[2]"));
-		 * visbility(driver, cancelfavprob, 60);
-		 * j.executeScript("arguments[0].click();", cancelfavprob);
-		 * 
-		 * WebElement $closeFvkpopwin$ = driver .findElement(By.xpath(
-		 * "(//div[@id='ProblemsFavKpop2']//following::span[1])[1]")); visbility(driver,
-		 * $closeFvkpopwin$, 60); click($closeFvkpopwin$); implicitWait(30,
-		 * TimeUnit.SECONDS); break;
-		 * 
-		 * }
-		 * 
-		 * }
-		 */
+					}
+				}
+
+				WebElement clickadditem = driver.findElement(By.xpath(
+						"//div[@id='referral']//following::div[1]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
+				visbility(driver, clickadditem, 60);
+				click(clickadditem);
+				WebElement sdf = driver.findElement(By.xpath(
+						"(//div[contains(text(),'Type or select item/service and price')])[2]//following::input[1]"));
+				visbility(driver, sdf, 60);
+				sendkeys(sdf, "test");
+				WebElement sdf2 = driver.findElement(By.xpath(
+						"(//div[contains(text(),'Type or select item/service and price')])[2]//following::input[2]"));
+				visbility(driver, sdf2, 60);
+				sendkeys(sdf2, "5");
+				WebElement saveitem = driver.findElement(By
+						.xpath("//div[@id='referral']//following::div[1]/div[3]/div/div/div[2]/div[6]/div/button[2]"));
+				visbility(driver, saveitem, 60);
+				javascriptclick(saveitem);
+
+				sleep(2000);
+				WebElement edititem = driver.findElement(By.xpath("//span[text()='test']"));
+				visbility(driver, edititem, 60);
+				actions("click", edititem);
+				while (true) {
+					try {
+						WebElement deleteitem = driver.findElement(By.xpath(
+								"//div[@id='referral']//following::div[1]/div[3]/div/div/div[2]//parent::div[1]/div[1]/div[2]/span[2]"));
+						if (deleteitem.isDisplayed()) {
+							click(deleteitem);
+							break;
+						}
+
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+
+				WebElement itemservicebackarrow = driver
+						.findElement(By.xpath("(//div[@id='invoiceAdd'])[1]/div[1]/div[1]/span[1]"));
+				visbility(driver, itemservicebackarrow, 60);
+				javascriptclick(itemservicebackarrow);
+				sleep(2500);
+				while (true) {
+					try {
+						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
+						break;
+					} catch (Exception e) {
+
+					}
+				}
+
+			} else if (w.getText().trim().contentEquals("Message")) {
+				while (true) {
+					try {
+						visbility(driver, w, 60);
+						w.click();
+						break;
+					} catch (Exception e) {
+
+					}
+				}
+
+				WebElement addnewfavmessage = driver
+						.findElement(By.xpath("(//div[@id='message'])[1]/div[1]/div//following::td[4]/span[2]"));
+				visbility(driver, addnewfavmessage, 60);
+				javascriptclick(addnewfavmessage);
+
+				WebElement msf = driver.findElement(By.xpath("//textarea[@id='message1']"));
+
+				visbility(driver, msf, 60);
+				sendkeys(msf, "hello");
+				WebElement savemesssage = driver
+						.findElement(By.xpath("//textarea[@id='message1']//following::button[2]"));
+				visbility(driver, savemesssage, 60);
+				javascriptclick(savemesssage);
+				sleep(2500);
+				WebElement editmessage = driver.findElement(By.xpath("//div[text()='hello']"));
+				actions("click", editmessage);
+				WebElement deletemessage = driver
+						.findElement(By.xpath("//div[@id='MessageKpop2']/div[1]/div[2]/span[1]"));
+				visbility(driver, deletemessage, 60);
+				javascriptclick(deletemessage);
+
+				sleep(3000);
+				WebElement gobackmessage = driver
+						.findElement(By.xpath("(//span[text()='Favorite Message'])[1]//following::div[1]/span"));
+				visbility(driver, gobackmessage, 60);
+				javascriptclick(gobackmessage);
+
+				sleep(3000);
+
+			}
+
+		}
 
 		// Set forms..
 		while (true) {

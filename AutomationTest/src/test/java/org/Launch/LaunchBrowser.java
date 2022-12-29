@@ -109,7 +109,6 @@ public class LaunchBrowser extends Base {
 		 * (!driver.getCurrentUrl().equals("https://localhost:8443/health/#home")) {
 		 * click(pom.getInstanceLoginPage().login); break; } else { break; } }
 		 */
-		sleep(3000);
 
 		try {
 			sleep(3000);
@@ -119,8 +118,6 @@ public class LaunchBrowser extends Base {
 		}
 
 		implicitWait(70, TimeUnit.SECONDS);
-		takeSnap();
-		sleep(2000);
 
 		return result;
 	}

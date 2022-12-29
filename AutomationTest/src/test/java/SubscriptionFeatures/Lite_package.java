@@ -25,6 +25,7 @@ public class Lite_package extends Base {
 	static JavascriptExecutor j;
 	WebDriverWait ww;
 	String kpid;
+	Calendars cal;
 
 	@BeforeClass
 	private void LaunchBrwoser() throws InterruptedException, IOException {
@@ -33,6 +34,7 @@ public class Lite_package extends Base {
 		pom = new PageObjMan(driver);
 		j = (JavascriptExecutor) driver;
 		ww = new WebDriverWait(driver, 20);
+		cal = new Calendars(driver, pom);
 		String ur = ConfigManager.getconfigManager().getInstanceConfigReader().getUrl();
 
 		while (true) {
@@ -82,7 +84,7 @@ public class Lite_package extends Base {
 
 	}
 
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1)
 	private void home() throws InterruptedException {
 
 		WebElement ata = driver.findElement(By.xpath("(//span[contains(text(),'New Pa')])[4]//parent::button"));
@@ -273,7 +275,7 @@ public class Lite_package extends Base {
 
 	}
 
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3)
 	private void ehr_module() throws InterruptedException {
 
 		driver.navigate().to("https://localhost:8443/health/#list_ehr");
@@ -353,28 +355,7 @@ public class Lite_package extends Base {
 	@Test(priority = 4)
 	private void calendar_module() throws Exception {
 
-		driver.navigate().to("https://localhost:8443/health/#calendar");
-		implicitWait(60, TimeUnit.SECONDS);
-
-		driver.navigate().refresh();
-
-		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
-
-		WebElement clbtn = driver.findElement(By.xpath("(//button[@id='calendar-day-month'])[1]"));
-
-		visbility(driver, clbtn, 60);
-		clickble(driver, clbtn, 60);
-		clbtn.click();
-		sleep(3000);
-		List<WebElement> choose = driver.findElements(By.xpath("//ul[@id='calendarul']/li"));
-
-		for (WebElement web : choose) {
-			if (web.getText().equals("Today")) {
-				driver.findElement(By.xpath("//ul[@id='calendarul']/li")).click();
-				break;
-			}
-		}
-		sleep(2000);
+		cal.caledarModule();
 
 		List<WebElement> totalnumberrowdy = driver.findElements(By.xpath("//div[@id='date-data']"));
 		int totalr = totalnumberrowdy.size();
@@ -384,63 +365,55 @@ public class Lite_package extends Base {
 
 		for (int i = 1; i <= totalr; i++) {
 			int a = 1 + i;
-			WebElement ss = driver.findElement(By.xpath("//div[@id='date-data'][" + i + "]/div[2]/div[2]/div"));
-			if (ss.getText().equals("Doctor/User not working")) {
-				System.out.println("yes doctor not working for the:" + i);
-				WebElement abcd = driver.findElement(By.xpath("(//span[@id='editCalendar'])[" + a + "]"));
-				visbility(driver, abcd, 60);
-				actions("click", abcd);
-				sleep(3000);
-				WebElement checkbx = driver.findElement(By.xpath("(//input[@id='is-working-day'])[1]"));
-				System.out.println("(//input[@id='is-working-day'])[" + i + "]");
-				visbility(driver, checkbx, 60);
-				actions("click", checkbx);
-				WebElement ampm = driver.findElement(By.xpath("(//div[@id='thru-ampm'])[1]"));
-				visbility(driver, ampm, 60);
-				actions("click", ampm);
-				WebElement rre = driver.findElement(By.xpath("(//div[@id='save-btn'])[1]"));
-				visbility(driver, rre, 60);
-				javascriptclick(rre);// .click();
-				sleep(5000);
 
-			}
+			cal.$checkDoctorUserStatus(i);
 
 			// represent total in a part..
 			List<WebElement> rchange = driver
 					.findElements(By.xpath("(//div[@id='date-data'][" + i + "]/div[2]/div/div[1]/div[1]/div[1])"));
 			int avaiable = rchange.size();
-
+			int count = 1;
 			for (int b = 1; b <= avaiable; b++) {
 
 				WebElement tp = driver.findElement(
 
 						By.xpath("(//div[@id='date-data'][" + i + "]/div[2]/div[" + b + "]/div[1]/div[1]/div[1])"));
 
-				String tr = tp.getText();
-				boolean trp = tp.isDisplayed();
+				// String tr = tp.getText();
+				// boolean trp = tp.isDisplayed();
 
 				// the kpid ..
 				WebElement kp = driver.findElement(
 						By.xpath("(//div[@id='date-data'])[" + i + "]/div[2]/div[" + b + "]/div/div[2]/span[2]"));
 
-				if (kp.getText().isEmpty() && tp.isDisplayed()) {
+				if (kp.getText().isEmpty() && tp.isDisplayed() && !tp.getText().isEmpty()) {
 
 					cond = true;
 					visbility(driver, tp, 60);
 					javascriptclick(tp);
-
-					WebElement prp = driver.findElement(By.xpath("(//input[@id='AppointmentPatientName'])[" + i + "]"));
-					visbility(driver, prp, 60);
-					sendkeys(prp, kpid);// .sendKeys(kpid);
+					if (count > 1) {
+						cal.$choosePatient(count, kpid);
+					} else {
+						cal.$choosePatient(i, kpid);
+					}
 					break;
+
+				} else if (tp.getText().isEmpty() && tp.isDisplayed()) {
+
+					count = count + 1;
+					continue;
+
 				}
 
 			}
+
 			if (cond == true) {
 				sleep(2000);
 				implicitWait(30, TimeUnit.SECONDS);
-				List<WebElement> choosepatient = driver
-						.findElements(By.xpath("//ul[@id='ui-id-2']/li/a/table/tbody/tr/td[2]"));
+				List<WebElement> choosepatient = driver.findElements(By.xpath(
+						"//div[@id='AppointmentMessage']/div[2]//following::ul[6]/li/a/table[1]/tbody/tr/td[2]"));
+				//// ul[@id='ui-id-2']/li/a/table/tbody/tr/td[2]
+
 				// (//td[text()='" + kpid + "'])[2]//parent::td
 				for (WebElement web : choosepatient) {
 					if (web.getText().trim().equals(kpid)) {
@@ -452,32 +425,115 @@ public class Lite_package extends Base {
 				}
 				sleep(3000);
 
-				WebElement ut = driver.findElement(By.xpath("(//select[@id='triage-appointment'])[" + i + "]"));
-				visbility(driver, ut, 60);
-				// ut.click();
-				dropDown("text", ut, "Emergency");
+				try {
+					WebElement $selectappType = driver
+							.findElement(By.xpath("(//button[@id='admissionVal_dropdown'])[" + i + "]"));
+					visbility(driver, $selectappType, 40);
+					click($selectappType);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				List<WebElement> $TypeDropdown = driver
+						.findElements(By.xpath("(//button[@id='admissionVal_dropdown'])//following::ul[1]/li/a"));
+				for (WebElement Element : $TypeDropdown) {
+					if (Element.getText().equals("Emergency") && Element.isDisplayed()) {
+						click(Element);
+						break;
+					}
 
-				WebElement $subscribe = driver
-						.findElement(By.xpath("//span[text()='Premium Subscription']//following::button[2]"));
-				visbility(driver, $subscribe, 30);
-				click($subscribe);
+				}
 
-				for (int in = 1; in <= 3; in++) {
+				for (int in = 1; in <= 5; in++) {
 					try {
-						visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-						actions("click", pom.getInstanceSetting().$Carosel$);
-						sleep(2500);
+						WebElement $dismiss = driver
+								.findElement(By.xpath("//span[text()='Premium Subscription']//following::button[1]"));
+
+						if ($dismiss.isDisplayed()) {
+							click($dismiss);
+							break;
+						}
+					} catch (Exception e) {
+
+					}
+				}
+
+				WebElement qt = driver.findElement(By.xpath("(//textarea[@id='description'])[" + i + "]"));
+				visbility(driver, qt, 60);
+				qt.sendKeys("no worries...");
+				WebElement utt = driver.findElement(By.xpath("(//button[@id='statusId_dropdown'])[" + i + "]"));
+				visbility(driver, utt, 60);
+				javascriptclick(utt);
+
+				List<WebElement> lop = driver.findElements(By.xpath("(//ul[@id='statusIdDropdown'])[" + i + "]/li"));
+				for (WebElement w : lop) {
+					if (w.getText().trim().equals("In Progress")) {
+						visbility(driver, w, 60);
+						w.click();
+						break;
+					}
+
+				}
+
+				WebElement vcv = driver.findElement(By.xpath("(//button[@id='accept-btn'])[1]"));
+				visbility(driver, vcv, 60);
+				ScriptExecutor(vcv);
+
+				javascriptclick(vcv);
+
+				sleep(1000);
+
+				WebElement ez = driver.findElement(By.xpath("//span[text()='" + kpid + "']"));
+				visbility(driver, ez, 60);
+				javascriptclick(ez);
+
+				sleep(2000);
+				// goto ehr..
+				WebElement ehr = driver.findElement(By.xpath("(//button[@id='cancel-btn1'])[1]"));
+				visbility(driver, ehr, 60);
+				click(ehr);// .click();
+
+				sleep(3000);
+				driver.navigate().back();
+				driver.navigate().refresh();
+
+				while (true) {
+
+					try {
+
+						click(pom.getInstanceCalendar().clickCalendar);
+						driver.navigate().refresh();
+						break;
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
 				}
 
-				driver.navigate().back();
+				cal.$dayDrop(driver.getCurrentUrl());
 
+				/*
+				 * visbility(driver, $deletepaitentAppoint, 60); click($deletepaitentAppoint);
+				 */
+				sleep(1000);
+
+				/*
+				 * List<WebElement> rtr = driver .findElements(By.xpath(
+				 * "(//span[@id='del-btn'])[1]//following::ul[1]/li/div/div[2]/span"));
+				 * 
+				 * for (WebElement web : rtr) { if (web.getAttribute("id").equals("yes-btn")) {
+				 * // System.out.println("yes it is deleted"); implicitWait(30,
+				 * TimeUnit.SECONDS); actions("click", web);
+				 * 
+				 * break; }
+				 * 
+				 * }
+				 */
+				// cal.$delAppointment(i);
+				System.out.println("EXIT BOOK APP");
 				break;
+
 			}
+
 		}
-		sleep(2000);
 	}
 
 	@Test(priority = 5)
@@ -489,15 +545,21 @@ public class Lite_package extends Base {
 				click(pom.getInstanceBilling().clickBill);
 				break;
 			} catch (Exception e) {
-				// TODO: handle exception
+
 			}
 		}
 		driver.navigate().refresh();
 		implicitWait(50, TimeUnit.SECONDS);
 		sleep(3000);
+		while (true) {
+			try {
+				visbility(driver, pom.getInstanceBilling().clickCreateNewBill, 60);
+				click(pom.getInstanceBilling().clickCreateNewBill);
+				break;
+			} catch (Exception e) {
 
-		visbility(driver, pom.getInstanceBilling().clickCreateNewBill, 60);
-		click(pom.getInstanceBilling().clickCreateNewBill);
+			}
+		}
 		visbility(driver, pom.getInstanceBilling().addItem, 60);
 
 		click(pom.getInstanceBilling().addItem);
@@ -514,7 +576,6 @@ public class Lite_package extends Base {
 		visbility(driver, pom.getInstanceBilling().saveItem, 60);
 		click(pom.getInstanceBilling().saveItem);
 		sleep(3000);
-
 	}
 
 	@Test(priority = 6)
@@ -625,16 +686,6 @@ public class Lite_package extends Base {
 		click(createuser);
 
 		while (true) {
-			try {
-				if (driver.getCurrentUrl().equals("https://localhost:8443/health/#user")) {
-					break;
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-
-		while (true) {
 			if (driver.getCurrentUrl().equals("https://localhost:8443/health/#setting")) {
 				break;
 			} else if (!driver.getCurrentUrl().equals("https://localhost:8443/health/#setting")) {
@@ -650,6 +701,8 @@ public class Lite_package extends Base {
 				.findElement(By.xpath("//span[text()='Subscription']//following::i[1]"));
 		visbility(driver, $createUserFromManageuser$, 60);
 		javascriptclick($createUserFromManageuser$);
+
+		sleep(5000);
 
 		WebElement $fisrtName$ = driver.findElement(By.xpath("//input[@id='Firstname']"));
 		visbility(driver, $fisrtName$, 60);
@@ -682,15 +735,6 @@ public class Lite_package extends Base {
 		visbility(driver, createuser, 60);
 		sleep(3000);
 		click($_createuser$);
-		while (true) {
-			try {
-				if (driver.getCurrentUrl().equals("https://localhost:8443/health/#user")) {
-					break;
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
 		System.out.println("manage sub");
 
 		driver.navigate().to("https://localhost:8443/health/#setting");

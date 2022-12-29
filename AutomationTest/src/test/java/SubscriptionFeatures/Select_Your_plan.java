@@ -22,7 +22,7 @@ public class Select_Your_plan extends Base {
 	static PageObjMan pom;
 	static JavascriptExecutor j;
 	WebDriverWait ww;
-	String kpid = "3088-785";
+	String kpid = "3089-823";
 
 	@BeforeClass()
 	private void LaunchBrwoser() throws InterruptedException, IOException {
@@ -62,7 +62,11 @@ public class Select_Your_plan extends Base {
 		click(pom.getInstanceLoginPage().login);
 		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 
-		
+		/*
+		 * while (true) { if
+		 * (!driver.getCurrentUrl().equals("https://localhost:8443/health/#home")) {
+		 * click(pom.getInstanceLoginPage().login); break; } else { break; } }
+		 */
 
 		System.out.println("BEFORE END...");
 	}
@@ -101,8 +105,18 @@ public class Select_Your_plan extends Base {
 		}
 		driver.navigate().back();
 
-		visbility(driver, pom.getInstanceNewPatient().addNewPatient, 60);
-		click(pom.getInstanceNewPatient().addNewPatient);
+		sleep(3000);
+		while (true) {
+			try {
+
+				WebElement ata = driver.findElement(By.xpath("(//span[contains(text(),'New Pa')])[4]//parent::button"));
+				visbility(driver, ata, 60);
+				javascriptclick(ata);
+				break;
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
 		visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
 		click(pom.getInstanceSetting().$sub$scribe$);
 
@@ -116,6 +130,8 @@ public class Select_Your_plan extends Base {
 			}
 		}
 		driver.navigate().back();
+
+		sleep(4000);
 
 		String hkpid = kpid;
 		// home modules appointment...
@@ -442,24 +458,26 @@ public class Select_Your_plan extends Base {
 				click(pom.getInstanceSetting().$editplnCrossIcon$);
 				visbility(driver, pom.getInstanceSetting().$editplan$, 60);
 				click(pom.getInstanceSetting().$editplan$);
-
-				for (int i = 1; i <= 3; i++) {
-					try {
-						visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-						actions("click", pom.getInstanceSetting().$Carosel$);
-						sleep(2500);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
 				break;
 			} catch (Exception e) {
-				// TODO: handle exception
+
+			}
+		}
+
+		for (int i = 1; i <= 3; i++) {
+			try {
+				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+				actions("click", pom.getInstanceSetting().$Carosel$);
+				sleep(2500);
+			} catch (Exception e) {
+
 			}
 		}
 
 		driver.navigate().to("https://localhost:8443/health/#bill_report");
-		while (true) {
+		while (true)
+
+		{
 			try {
 				click(pom.getInstanceSetting().$dismissSubscribe$);
 
@@ -476,21 +494,22 @@ public class Select_Your_plan extends Base {
 				click(pom.getInstanceSetting().$editplnCrossIcon$);
 				visbility(driver, pom.getInstanceSetting().$editplan$, 60);
 				click(pom.getInstanceSetting().$editplan$);
-
-				for (int i = 1; i <= 3; i++) {
-					try {
-						visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-						actions("click", pom.getInstanceSetting().$Carosel$);
-						sleep(2500);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
 				break;
+			} catch (Exception e) {
+
+			}
+		}
+
+		for (int i = 1; i <= 3; i++) {
+			try {
+				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+				actions("click", pom.getInstanceSetting().$Carosel$);
+				sleep(2500);
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
 		}
+
 		driver.navigate().back();
 
 	}
@@ -582,18 +601,6 @@ public class Select_Your_plan extends Base {
 			}
 		}
 		driver.navigate().back();
-		while (true) {
-			try {
-				driver.findElement(By.xpath("//div[@title='Create New Message']")).click();
-				visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
-				click(pom.getInstanceSetting().$sub$scribe$);
-				sleep(2500);
-				driver.navigate().back();
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
 
 	}
 

@@ -74,16 +74,43 @@ public class Goals extends Base {
 
 	}
 
-	public void $getPastGoals() {
-		WebElement $goalsYs_No$ = driver.findElement(By.xpath("(//div[text()='HELLO THIS IS GOALS MODULE.'])[1]"));
-		visbility(driver, $goalsYs_No$, 60);
-		javascriptclick($goalsYs_No$);
+	public void $getPastGoals() throws InterruptedException {
+		try {
+			sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		WebElement $yes_cnfrm_goal$ = driver
-				.findElement(By.xpath("(//div[text()='HELLO THIS IS GOALS MODULE.'])[1]//following::div[14]/span[1]"));
-		visbility(driver, $yes_cnfrm_goal$, 60);
-		javascriptclick($yes_cnfrm_goal$);
+		for (int i = 1; i <= 8; i++) {
+			try {
+				WebElement $goalsYs_No$ = driver
+						.findElement(By.xpath("(//div[text()='HELLO THIS IS GOALS MODULE.'])[1]"));
+				if ($goalsYs_No$.isDisplayed()) {
+					click($goalsYs_No$);
+					break;
+				}
+			} catch (Exception e) {
 
+			}
+		}
+
+		sleep(2000);
+
+		for (int i = 1; i <= 8; i++) {
+			try {
+				WebElement $yes_cnfrm_goal$ = driver.findElement(
+						By.xpath("(//div[text()='HELLO THIS IS GOALS MODULE.'])[1]//following::div[14]/span[1]"));
+				if ($yes_cnfrm_goal$.isDisplayed()) {
+					visbility(driver, $yes_cnfrm_goal$, 60);
+					javascriptclick($yes_cnfrm_goal$);
+					break;
+				}
+			} catch (Exception e) {
+
+			}
+		}
+		sleep(2000);
 		WebElement $goalsEllipse$ = driver
 				.findElement(By.xpath("//div[@title='Show my favorite Goals list for selection']//following::div[2]"));
 		actions("move to element", $goalsEllipse$);
@@ -99,10 +126,19 @@ public class Goals extends Base {
 
 		}
 
-		WebElement $addGoaltoehr$ = driver.findElement(By.xpath("(//span[@title='Click to add this goal'])[2]"));
-		visbility(driver, $addGoaltoehr$, 60);
-		javascriptclick($addGoaltoehr$);
+		for (int i = 1; i <= 8; i++) {
+			try {
+				WebElement $addGoaltoehr$ = driver
+						.findElement(By.xpath("(//span[@title='Click to add this goal'])[2]"));
+				if ($addGoaltoehr$.isDisplayed()) {
+					click($addGoaltoehr$);
+					break;
+				}
+			} catch (Exception e) {
 
+			}
+		}
+		sleep(2000);
 		WebElement $closegoals$ = driver
 				.findElement(By.xpath("(//span[text()='Past Completed Goals'])[1]//parent::div[1]/span[1]"));
 		visbility(driver, $closegoals$, 60);

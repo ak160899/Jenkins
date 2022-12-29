@@ -17,7 +17,6 @@ public class Forms extends Base {
 	public WebDriver driver;
 	// String ur;
 
-	@Test
 	public void $addForm(WebDriver driver) throws Throwable {
 		this.driver = driver;
 
@@ -95,12 +94,33 @@ public class Forms extends Base {
 
 	public void $addNewForm(String key) {
 
-		WebElement addfrm = driver.findElement(By.xpath("//div[@id='FormsKpop2']/div[1]/span"));
-		visbility(driver, addfrm, 60);
-		actions("click", addfrm);
-		WebElement x9 = driver.findElement(By.xpath("(//label[text()='Form Title*'])[2]//following::input[1]"));
-		visbility(driver, x9, 60);
-		sendkeys(x9, key);// .sendKeys("form5");
+		for (int i = 1; i <= 8; i++) {
+			try {
+				WebElement addfrm = driver.findElement(By.xpath("//div[@id='FormsKpop2']/div[1]/span"));
+				if (addfrm.isDisplayed()) {
+					click(addfrm);
+					break;
+				}
+			} catch (Exception e) {
+
+			}
+		}
+		try {
+			sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 1; i <= 5; i++) {
+			try {
+				WebElement x9 = driver.findElement(By.xpath("(//label[text()='Form Title*'])[2]//following::input[1]"));
+				visbility(driver, x9, 60);
+				sendkeys(x9, key);
+				break;
+			} catch (Exception e) {
+
+			}
+		}
 
 		List<WebElement> drk = driver.findElements(By.xpath("(//div[@id='build-wrap'])[2]/div[1]/div[2]/ul/li"));
 
@@ -120,15 +140,34 @@ public class Forms extends Base {
 						.click();
 			}
 		}
+		try {
+			sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
 	public void $addFormToEhr(String s) {
 
-		implicitWait(30, TimeUnit.SECONDS);
-		WebElement addit = driver.findElement(By.xpath("//span[text()='" + s + "']//following::div[1]/span"));
-		visbility(driver, addit, 60);
-		actions("click", addit);
+		for (int i = 1; i <= 5; i++) {
+			try {
+				implicitWait(30, TimeUnit.SECONDS);
+				WebElement addit = driver.findElement(By.xpath("//span[text()='" + s + "']//following::div[1]/span"));
+				visbility(driver, addit, 60);
+				actions("click", addit);
+				break;
+			} catch (Exception e) {
+
+			}
+		}
+		try {
+			sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

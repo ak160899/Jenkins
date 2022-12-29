@@ -42,7 +42,7 @@ public class PatientInfo extends Base {
 
 	}
 
-	@Test(priority = 0, enabled = false)
+	@Test(priority = 0)
 	private void healthRecord() throws InterruptedException {
 		System.out.println("1");
 
@@ -163,7 +163,7 @@ public class PatientInfo extends Base {
 
 	}
 
-	@Test(priority = 3,enabled = false)
+	@Test(priority = 3)
 	private void billing() throws InterruptedException {
 
 		implicitWait(30, TimeUnit.SECONDS);
@@ -198,7 +198,7 @@ public class PatientInfo extends Base {
 
 	}
 
-	@Test(priority = 4,enabled = false)
+	@Test(priority = 4)
 	private void message() throws InterruptedException {
 
 		while (true) {
@@ -282,7 +282,7 @@ public class PatientInfo extends Base {
 		 */
 	}
 
-	@Test(priority = 7,enabled = false)
+	@Test(priority = 7)
 	private void Settings() throws InterruptedException, IOException {
 
 		while (true) {

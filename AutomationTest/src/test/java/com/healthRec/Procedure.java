@@ -121,10 +121,34 @@ public class Procedure extends Base {
 	}
 
 	public void getPastProcedure() {
-		WebElement rss = driver.findElement(By.xpath("//div[contains(@title,'SALT Procedure')]//following::div[3]"));
-		actions("move to element", rss);
-		visbility(driver, rss, 60);
-		javascriptclick(rss);
+		try {
+			sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for (int i = 1; i <= 7; i++) {
+			WebElement rss = null;
+			try {
+				rss = driver.findElement(By.xpath("//div[contains(@title,'SALT Procedure')]//following::div[3]"));
+				actions("move to element", rss);
+				if (rss.isDisplayed()) {
+					visbility(driver, rss, 60);
+					javascriptclick(rss);
+					break;
+				}
+			} catch (Exception e) {
+				actions("move to element", rss);
+
+			}
+		}
+		try {
+			sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		List<WebElement> procdpast = driver.findElements(
 				By.xpath("//div[contains(@title,'SALT Procedure')]//following::div[3]//following::ul[1]/li"));
@@ -139,14 +163,38 @@ public class Procedure extends Base {
 			}
 
 		}
-		WebElement prcdad = driver
-				.findElement(By.xpath("(//span[text()='Past Procedure'])[1]//following::div[1]/div[3]/div/div/span"));
-		visbility(driver, prcdad, 50);
-		javascriptclick(prcdad);
-		WebElement clsprcd = driver.findElement(By.xpath("(//span[text()='Past Procedure'])[1]//parent::div/span[1]"));
+		try {
+			sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		visbility(driver, clsprcd, 50);
-		javascriptclick(clsprcd);
+		for (int i = 1; i <= 8; i++) {
+			try {
+				WebElement prcdad = driver.findElement(
+						By.xpath("(//span[text()='Past Procedure'])[1]//following::div[1]/div[3]/div/div/span"));
+				if (prcdad.isDisplayed()) {
+					click(prcdad);
+					break;
+				}
+			} catch (Exception e) {
+
+			}
+		}
+
+		for (int i = 1; i <= 8; i++) {
+			try {
+				WebElement clsprcd = driver
+						.findElement(By.xpath("(//span[text()='Past Procedure'])[1]//parent::div/span[1]"));
+				if (clsprcd.isDisplayed()) {
+					click(clsprcd);
+					break;
+				}
+			} catch (Exception e) {
+
+			}
+		}
 
 	}
 }

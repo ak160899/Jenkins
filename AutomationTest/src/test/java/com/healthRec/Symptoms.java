@@ -86,20 +86,42 @@ public class Symptoms extends Base {
 
 	public void getPastSymptom() throws InterruptedException {
 		sleep(2000);
-		WebElement $cureSypmtoms$ = driver
-				.findElement(By.xpath("(//div[text()='R76.1: Abnormal reaction to tuberculin test'])[1]"));
-		visbility(driver, $cureSypmtoms$, 60);
-		javascriptclick($cureSypmtoms$);
 
+		for (int i = 1; i <= 5; i++) {
+			try {
+				WebElement $cureSypmtoms$ = driver
+						.findElement(By.xpath("(//div[text()='R76.1: Abnormal reaction to tuberculin test'])[1]"));
+				if ($cureSypmtoms$.isDisplayed()) {
+					visbility(driver, $cureSypmtoms$, 60);
+					javascriptclick($cureSypmtoms$);
+					break;
+				}
+			} catch (Exception e) {
+
+			}
+		}
+
+		sleep(1500);
 		WebElement $yes_sympton$ = driver.findElement(By.xpath(
 				"(//div[text()='R76.1: Abnormal reaction to tuberculin test'])[1]//following::div[10]//following::div[1]/span[1]"));
 		visbility(driver, $yes_sympton$, 60);
 		javascriptclick($yes_sympton$);
 
-		WebElement symptn = driver.findElement(By.xpath("//div[contains(@title,'Add Symptoms')]//following::div[1]"));
-		actions("move to element", symptn);
-		visbility(driver, symptn, 60);
-		javascriptclick(symptn);
+		for (int i = 1; i <= 10; i++) {
+			WebElement symptn = null;
+			try {
+				symptn = driver.findElement(By.xpath("//div[contains(@title,'Add Symptoms')]//following::div[1]"));
+				actions("move to element", symptn);
+				if (symptn.isDisplayed()) {
+					visbility(driver, symptn, 60);
+					javascriptclick(symptn);
+					break;
+				}
+			} catch (Exception e) {
+				actions("move to element", symptn);
+
+			}
+		}
 		List<WebElement> vr = driver.findElements(
 				By.xpath("//div[contains(@title,'Add Symptoms')]//following::div[1]//following::ul[1]/li"));
 		for (WebElement web : vr) {
@@ -111,11 +133,20 @@ public class Symptoms extends Base {
 			}
 
 		}
+		sleep(2000);
+		for (int i = 1; i <= 8; i++) {
+			try {
+				WebElement addsymppast = driver.findElement(
+						By.xpath("(//span[text()='Past Cured Symptom'])[1]//following::div[1]/div[3]/div/div/span"));
+				if (addsymppast.isDisplayed()) {
+					click(addsymppast);
+					break;
+				}
+			} catch (Exception e) {
 
-		WebElement addsymppast = driver.findElement(
-				By.xpath("(//span[text()='Past Cured Symptom'])[1]//following::div[1]/div[3]/div/div/span"));
-		visbility(driver, addsymppast, 25);
-		javascriptclick(addsymppast);
+			}
+		}
+		sleep(2000);
 		WebElement clsesymp = driver
 				.findElement(By.xpath("(//span[text()='Past Cured Symptom'])[1]//parent::div/span[1]"));
 		visbility(driver, clsesymp, 25);

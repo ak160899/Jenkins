@@ -407,7 +407,6 @@ public class Dr_login_basicFeatures extends Base {
 				WebElement $MedcrsIcon$ = driver
 						.findElement(By.xpath("(//div[@id='MedicationsKpop2']//following::span[3])[1]"));
 				visbility(driver, $MedcrsIcon$, 60);
-				
 				javascriptclick($MedcrsIcon$);
 				break;
 			} catch (Exception e) {

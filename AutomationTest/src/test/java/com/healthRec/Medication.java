@@ -140,22 +140,50 @@ public class Medication extends Base {
 	}
 
 	public void $getPastMedication() throws InterruptedException {
+		sleep(2000);
 
-		WebElement $med_cr$ = driver.findElement(By.xpath("(//span[text()='RXNORM :  1009145  '])[1]"));
-		visbility(driver, $med_cr$, 60);
-		javascriptclick($med_cr$);
-		sleep(1000);
-		WebElement $curemed$ = driver
-				.findElement(By.xpath("(//span[text()='RXNORM :  1009145  '])[1]//following::div[20]/span[1]"));
-		visbility(driver, $curemed$, 60);
-		javascriptclick($curemed$);
+		for (int i = 1; i <= 8; i++) {
+			try {
+				WebElement $med_cr$ = driver.findElement(By.xpath("(//span[text()='RXNORM :  1009145  '])[1]"));
+				if ($med_cr$.isDisplayed()) {
+					visbility(driver, $med_cr$, 60);
+					javascriptclick($med_cr$);
+					break;
+				}
+			} catch (Exception e) {
+			}
+		}
 		sleep(1000);
 
-		WebElement $medEllipse$ = driver.findElement(
-				By.xpath("//div[@title='Show my favorite Medications list for selection']//following::div[2]"));
-		actions("move to element", $medEllipse$);
-		visbility(driver, $medEllipse$, 60);
-		javascriptclick($medEllipse$);
+		for (int i = 1; i <= 8; i++) {
+			try {
+				WebElement $curemed$ = driver
+						.findElement(By.xpath("(//span[text()='RXNORM :  1009145  '])[1]//following::div[20]/span[1]"));
+				if ($curemed$.isDisplayed()) {
+					visbility(driver, $curemed$, 60);
+					javascriptclick($curemed$);
+					break;
+				}
+			} catch (Exception e) {
+
+			}
+		}
+		sleep(1000);
+
+		for (int i = 1; i <= 8; i++) {
+			WebElement $medEllipse$ = null;
+			try {
+				$medEllipse$ = driver.findElement(
+						By.xpath("//div[@title='Show my favorite Medications list for selection']//following::div[2]"));
+				actions("move to element", $medEllipse$);
+				if ($medEllipse$.isDisplayed()) {
+					click($medEllipse$);
+					break;
+				}
+			} catch (Exception e) {
+				actions("move to element", $medEllipse$);
+			}
+		}
 
 		List<WebElement> $medellipseList$ = driver.findElements(By.xpath(
 				"//div[@title='Show my favorite Medications list for selection']//following::div[2]//following::ul[1]/li/a"));
@@ -167,6 +195,7 @@ public class Medication extends Base {
 			}
 
 		}
+		sleep(1500);
 		for (int i = 1; i <= 6; i++) {
 			try {
 				WebElement $addToEhr$ = driver
@@ -179,6 +208,7 @@ public class Medication extends Base {
 				// TODO: handle exception
 			}
 		}
+		sleep(1500);
 
 		WebElement $clsoemed$ = driver
 				.findElement(By.xpath("(//span[text()='Past Ended Medication'])[1]//parent::div/span[1]"));

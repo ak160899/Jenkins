@@ -201,7 +201,7 @@ public class Basic_features extends Base {
 						} else if (web.getText().trim().equals("Show Procedure")) {
 							web.click();
 						} else if (web.getText().trim().equals("Show Family Health")) {
-							web.click();//
+							web.click();
 						} else if (web.getText().trim().equals("Show Status")) {
 							web.click();
 						}
@@ -639,7 +639,7 @@ public class Basic_features extends Base {
 						w.click();
 						break;
 					} catch (Exception e) {
-						// TODO: handle exception
+
 					}
 				}
 
@@ -650,13 +650,13 @@ public class Basic_features extends Base {
 				WebElement sdf = driver.findElement(By.xpath(
 						"(//div[contains(text(),'Type or select item/service and price')])[2]//following::input[1]"));
 				visbility(driver, sdf, 60);
-				sendkeys(sdf, "test"); // .sendKeys("test");
+				sendkeys(sdf, "test");
 				WebElement sdf2 = driver.findElement(By.xpath(
 						"(//div[contains(text(),'Type or select item/service and price')])[2]//following::input[2]"));
 				visbility(driver, sdf2, 60);
-				sendkeys(sdf2, "5"); // .sendKeys("5");
-				WebElement saveitem = driver.findElement(
-						By.xpath("//div[@id='referral']//following::div[1]/div[3]/div/div/div[2]/div[6]/div/button"));
+				sendkeys(sdf2, "5");
+				WebElement saveitem = driver.findElement(By
+						.xpath("//div[@id='referral']//following::div[1]/div[3]/div/div/div[2]/div[6]/div/button[2]"));
 				visbility(driver, saveitem, 60);
 				javascriptclick(saveitem);
 
@@ -664,10 +664,19 @@ public class Basic_features extends Base {
 				WebElement edititem = driver.findElement(By.xpath("//span[text()='test']"));
 				visbility(driver, edititem, 60);
 				actions("click", edititem);
-				WebElement deleteitem = driver.findElement(
-						By.xpath("//div[@id='referral']//following::div[1]/div[3]/div/div/div[1]/div[2]/span[1]"));
-				visbility(driver, deleteitem, 60);
-				javascriptclick(deleteitem);
+				while (true) {
+					try {
+						WebElement deleteitem = driver.findElement(By.xpath(
+								"//div[@id='referral']//following::div[1]/div[3]/div/div/div[2]//parent::div[1]/div[1]/div[2]/span[2]"));
+						if (deleteitem.isDisplayed()) {
+							click(deleteitem);
+							break;
+						}
+
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
 
 				WebElement itemservicebackarrow = driver
 						.findElement(By.xpath("(//div[@id='invoiceAdd'])[1]/div[1]/div[1]/span[1]"));
@@ -679,7 +688,7 @@ public class Basic_features extends Base {
 						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
 						break;
 					} catch (Exception e) {
-						// TODO: handle exception
+
 					}
 				}
 
@@ -690,7 +699,7 @@ public class Basic_features extends Base {
 						w.click();
 						break;
 					} catch (Exception e) {
-						// TODO: handle exception
+
 					}
 				}
 
@@ -782,6 +791,7 @@ public class Basic_features extends Base {
 			}
 
 		}
+		driver.navigate().back();
 		sleep(2000);
 		// Notifications...
 
@@ -803,6 +813,7 @@ public class Basic_features extends Base {
 				ScriptExecutor($click$edit$planz$);
 				visbility(driver, $click$edit$planz$, 60);
 				javascriptclick($click$edit$planz$);
+				sleep(4000);
 
 				for (int i = 1; i <= 2; i++) {
 					try {
