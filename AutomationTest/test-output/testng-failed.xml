@@ -3,12 +3,19 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="SubscriptionFeatures.Lite_package">
+      <class name="runner.Local_Host">
         <methods>
-          <include name="settings_Module"/>
+          <include name="calendar"/>
+          <include name="PatientModule"/>
+          <include name="HomeModule"/>
+          <include name="HealthRec"/>
           <include name="LaunchBrwoser"/>
+          <include name="BillingModule"/>
+          <include name="Message"/>
+          <include name="Settings"/>
+          <include name="TeleDoctor"/>
         </methods>
-      </class> <!-- SubscriptionFeatures.Lite_package -->
+      </class> <!-- runner.Local_Host -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

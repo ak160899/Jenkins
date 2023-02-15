@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 public class PatientCreation {
 	public WebDriver driver;
 
-	@FindBy(xpath = "(//button[@title='Add new Patient'])[1]")
+	@FindBy(xpath = "(//button[@title='Add new Patient'])[2]")
 	public WebElement addNewPatient;
 
 	@FindBy(id = "firstname")

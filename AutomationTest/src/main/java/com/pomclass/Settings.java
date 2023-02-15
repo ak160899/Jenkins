@@ -16,7 +16,7 @@ public class Settings {
 
 	@FindBy(id = "editPlanCloseBtn")
 	public WebElement $editplnCrossIcon$;
-	
+
 	@FindBy(xpath = "//span[text()='Time To Upgrade!']//following::button[1]")
 	public WebElement UpgradeLaterPlanLiteKpop;
 
@@ -52,7 +52,7 @@ public class Settings {
 
 	@FindBy(xpath = "//span[text()='Subscription Options']//following::button[2]")
 	public WebElement $sub$scribe$;
-	
+
 	@FindBy(xpath = "//span[text()='Premium Upgrade']//following::button[2]")
 	public WebElement $upgradeNow;
 
@@ -67,11 +67,11 @@ public class Settings {
 
 	@FindBy(xpath = "//strong[text()='EIR Systems']")
 	public WebElement $eirsystembutton$;
-	
-	@FindBy(xpath ="//button[@onclick='allPaymentServices.editUsers();']" )
-	public WebElement  $editUserInpaymentpage;
-	
-	@FindBy(xpath ="//span[text()='Subscription']//following::i[1]")
+
+	@FindBy(xpath = "//button[@onclick='allPaymentServices.editUsers();']")
+	public WebElement $editUserInpaymentpage;
+
+	@FindBy(xpath = "//span[text()='Subscription']//following::i[1]")
 	public WebElement $createuserButtonManagersubPage;
 
 	@FindBy(xpath = "//button[@title='Upgrade']")
@@ -82,6 +82,9 @@ public class Settings {
 
 	@FindBy(xpath = "//button[@id='editPlanBtn']")
 	public WebElement $editplan$;
+
+	@FindBy(xpath = "(//button[@id='admissionVal_dropdown'])[1]")
+	public WebElement selectAppointmentTypeVisitReasonSetFav;
 
 	public Settings(WebDriver driver) {
 		this.driver = driver;

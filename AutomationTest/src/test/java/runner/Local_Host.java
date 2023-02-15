@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import org.Launch.LaunchBrowser;
 import org.base.Base;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -59,18 +60,20 @@ public class Local_Host extends Base {
 
 	@Test(priority = 0, groups = "home")
 	public void HomeModule() throws Exception {
-
 		while (true) {
-			try {
 
-				WebElement ata = driver.findElement(By.xpath("(//span[contains(text(),'New Pa')])[4]//parent::button"));
+			try {
+				System.out.println("ENTER");
+				WebElement ata = driver.findElement(By.xpath("(//BUTTON[@title='Add new Patient'])[3]"));
 				visbility(driver, ata, 60);
 				javascriptclick(ata);
 				break;
+
 			} catch (Exception e) {
 				System.out.println(e);
 			}
 		}
+
 		sendkeys(pom.getInstanceNewPatient().firstName, "sam");
 		sendkeys(pom.getInstanceNewPatient().lastname, "n");
 		click(pom.getInstanceNewPatient().clickGenderIcon);
@@ -89,7 +92,7 @@ public class Local_Host extends Base {
 		// Acc gets Created..
 		click(pom.getInstanceNewPatient().CreatePatient);
 
-		for (int i = 1; i <= 4; i++) {
+		while (true) {
 			try {
 				WebElement $patietcreateid$ = driver.findElement(By.xpath("//td[@id='val-kpid']"));
 				if ($patietcreateid$.isDisplayed()) {
@@ -522,21 +525,19 @@ public class Local_Host extends Base {
 		visbility(driver, r7, 60);
 		r7.click();
 
-		WebElement elipse = driver.findElement(By.xpath("(//span[@id='list_patient_needHelp'])[1]/span"));
-		visbility(driver, elipse, 60);
-		clickble(driver, elipse, 60);
-		actions("click", elipse);
-
-		List<WebElement> hh = driver
-				.findElements(By.xpath("(//span[@id='list_patient_needHelp'])[1]/span//following::ul[1]/li"));
-		for (WebElement web : hh) {
-			if (web.getText().trim().equals("Reset Setting")) {
-				visbility(driver, web, 60);
-				web.click();
-				break;
-			}
-
-		}
+		/*
+		 * WebElement elipse =
+		 * driver.findElement(By.xpath("(//span[@id='list_patient_needHelp'])[1]/span"))
+		 * ; visbility(driver, elipse, 60); clickble(driver, elipse, 60);
+		 * actions("click", elipse);
+		 * 
+		 * List<WebElement> hh = driver .findElements(By.xpath(
+		 * "(//span[@id='list_patient_needHelp'])[1]/span//following::ul[1]/li")); for
+		 * (WebElement web : hh) { if (web.getText().trim().equals("Reset Setting")) {
+		 * visbility(driver, web, 60); web.click(); break; }
+		 * 
+		 * }
+		 */
 
 		implicitWait(60, TimeUnit.SECONDS);
 
@@ -559,6 +560,7 @@ public class Local_Host extends Base {
 					bl = true;
 					WebElement r8 = driver.findElement(By.xpath("(//button[@id='options-img'])[1]"));
 					visbility(driver, r8, 60);
+					ww.until(ExpectedConditions.elementToBeClickable(r8));
 					r8.click();
 					List<WebElement> fin = driver.findElements(By.xpath("(//ul[@id='matchKey'])[2]/li/span/a"));
 					driver.findElement(By.xpath("(//input[@id='optionsSearch'])[2]")).sendKeys("show");
@@ -714,7 +716,7 @@ public class Local_Host extends Base {
 					}
 
 					List<WebElement> $TypeDropdown = driver.findElements(
-							By.xpath("(//button[@id='admissionVal_dropdown'])[1]//following::ul[1]/li/a"));
+							By.xpath("(//button[@id='admissionVal_dropdown'])[2]//following::ul[1]/li/a"));
 
 					for (WebElement Element : $TypeDropdown) {
 						System.out.println(Element.getText());
@@ -944,16 +946,20 @@ public class Local_Host extends Base {
 							"//div[@id='Family_HealthKpop2']/div[2]/div/select//following::div[1]/div[2]/input"));
 					visbility(driver, fh, 60);
 					fh.sendKeys("24781");
-					List<WebElement> fhkpop;
+					List<WebElement> fhkpop = null;
 
 					while (true) {
-						fhkpop = driver
-								.findElements(By.xpath("//div[@id='Family_HealthKpop2']/div[2]/ul/li/a/div/small"));
-
-						// System.out.println("element has been finded.." + "size is:" + fhkpop.size());
-						if (fhkpop.size() > 5) {
-
-							break;
+						try {
+							fhkpop = driver
+									.findElements(By.xpath("//div[@id='Family_HealthKpop2']/div[2]/ul/li/a/div/small"));
+							System.out.println("family health");
+							// System.out.println("element has been finded.." + "size is:" + fhkpop.size());
+							if (fhkpop.size() > 5) {
+								System.out.println(">=2 " + fhkpop.size());
+								break;
+							}
+						} catch (Exception e) {
+							System.out.println("");
 						}
 
 					}
@@ -2258,7 +2264,7 @@ public class Local_Host extends Base {
 			e1.printStackTrace();
 		}
 		Problems pro = new Problems(driver);
-		pro.getPastProblem();
+		// pro.getPastProblem();
 		Symptoms s = new Symptoms(driver);
 		s.getPastSymptom();
 		Procedure pr = new Procedure(driver);
@@ -2368,13 +2374,13 @@ public class Local_Host extends Base {
 			click(pom.getInstanceCalendar().selectAppointmentType);
 			System.out.println("ELEMENT CLICKED IN VISIT");
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e);
 		}
 
 		while (true) {
 			try {
 				List<WebElement> $TypeDropdown = driver.findElements(
-						By.xpath("(//button[@id='admissionVal_dropdown'])[1]//following::ul[1]/li/a/span[2]"));
+						By.xpath("(//button[@id='admissionVal_dropdown'])[2]//following::ul[1]/li/a/span[2]"));
 				for (WebElement Element : $TypeDropdown) {
 					System.out.println(Element.getText());
 					if (Element.getText().equals("Emergency")) {
@@ -2709,6 +2715,7 @@ public class Local_Host extends Base {
 		WebElement savesymptfav2 = driver.findElement(By.xpath("//div[@id='SymptomsKpop2']/div[2]/div[2]/button[2]"));
 		visbility(driver, savesymptfav2, 60);
 		javascriptclick(savesymptfav2);
+		sleep(3000);
 
 		WebElement addsymptolist = driver.findElement(By.xpath("(//span[contains(@title,'Add this symptom')])[1]"));
 		visbility(driver, addsymptolist, 60);
@@ -3482,10 +3489,10 @@ public class Local_Host extends Base {
 		actions("click", crt);
 		sleep(2000);
 		WebElement folowypyr = driver.findElement(By.xpath("//select[@class='ui-datepicker-year']"));
-		dropDown("text", folowypyr, "2022");
+		dropDown("text", folowypyr, "2023");
 		WebElement folowupmnth = driver.findElement(By.xpath("//select[@class='ui-datepicker-month']"));
 		dropDown("index", folowupmnth, "0");
-		driver.findElement(By.xpath("(//a[text()='31'])")).click();
+		driver.findElement(By.xpath("(//a[text()='28'])")).click();
 		WebElement fixappo = driver.findElement(By.xpath("(//button[@id='fixAppointment'])[1]"));
 
 		sleep(3000);
@@ -3574,7 +3581,9 @@ public class Local_Host extends Base {
 	public void calendar() throws Exception {
 
 		cal.caledarModule();
+
 		$current = driver.getCurrentUrl();
+		cal.$dayDrop($current);
 		cal.$calenderMod($current, kpid);
 
 	}
@@ -3582,16 +3591,10 @@ public class Local_Host extends Base {
 	@Test(priority = 4, groups = "billing")
 	public void BillingModule() throws InterruptedException {
 
-		while (true) {
-			try {
+		visbility(driver, pom.getInstanceBilling().clickBill, 60);
+		ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceBilling().clickBill));
+		click(pom.getInstanceBilling().clickBill);
 
-				visbility(driver, pom.getInstanceBilling().clickBill, 60);
-				click(pom.getInstanceBilling().clickBill);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
 		driver.navigate().refresh();
 		implicitWait(50, TimeUnit.SECONDS);
 		sleep(3000);
@@ -3605,7 +3608,7 @@ public class Local_Host extends Base {
 			}
 		}
 		visbility(driver, pom.getInstanceBilling().addItem, 60);
-
+		ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceBilling().addItem));
 		click(pom.getInstanceBilling().addItem);
 		visbility(driver, pom.getInstanceBilling().enterTheItem, 60);
 
@@ -3618,34 +3621,64 @@ public class Local_Host extends Base {
 		sendkeys(pom.getInstanceBilling().addQuantity, "2");
 
 		visbility(driver, pom.getInstanceBilling().saveItem, 60);
+		ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceBilling().saveItem));
 		click(pom.getInstanceBilling().saveItem);
 		sleep(3000);
-		while (true) {
-			try {
-				WebElement r = driver.findElement(By.xpath("//div[@id='assign-side']/div[1]/div"));
-				if (r.isDisplayed()) {
-					visbility(driver, r, 60);
-					click(r);
-					break;
-				}
+		/*
+		 * while (true) { try {
+		 */
 
-			} catch (Exception e) {
-
-			}
-		}
-		while (true) {
-			try {
-				WebElement addiconfav = driver.findElement(
-						By.xpath("//div[@id='assign-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
-				visbility(driver, addiconfav, 60);
-				javascriptclick(addiconfav);
-				break;
-			} catch (Exception e) {
-
-			}
+		try {
+			System.out.println("ENTER TRY BLOCK BILL");
+			WebElement billingFavoritesideview = driver.findElement(By.xpath("//div[@id='assign-side']/div[1]/div"));
+			visbility(driver, billingFavoritesideview, 40);
+			ww.until(ExpectedConditions.elementToBeClickable(billingFavoritesideview));
+			click(billingFavoritesideview);
+		} catch (StaleElementReferenceException e) {
+			WebElement billingFavoritesideview = driver.findElement(By.xpath("//div[@id='assign-side']/div[1]/div"));
+			visbility(driver, billingFavoritesideview, 50);
+			System.out.println("visbile billing side view");
+			ww.until(ExpectedConditions.elementToBeClickable(billingFavoritesideview));
+			click(billingFavoritesideview);
+			System.out.println("side view favorite clicked");
 		}
 
-		while (true) {
+		/*
+		 * if (r.isDisplayed()) { visbility(driver, r, 60); click(r);
+		 */
+		// break;
+		// }
+
+		/*
+		 * } catch (Exception e) {
+		 * 
+		 * } }
+		 */
+
+		/*
+		 * while (true) { try {
+		 */
+
+		try {
+			WebElement addiconfavorite = driver
+					.findElement(By.xpath("//div[@id='assign-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
+			visbility(driver, addiconfavorite, 40);
+			ww.until(ExpectedConditions.elementToBeClickable(addiconfavorite));
+			click(addiconfavorite);
+		} catch (StaleElementReferenceException e) {
+			WebElement addiconfavorite = driver
+					.findElement(By.xpath("//div[@id='assign-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
+			visbility(driver, addiconfavorite, 60);
+			ww.until(ExpectedConditions.elementToBeClickable(addiconfavorite));
+			click(addiconfavorite);
+		}
+
+		/*
+		 * break; } catch (Exception e) {
+		 * 
+		 * } }
+		 * 
+		 */ while (true) {
 			try {
 				WebElement favdes = driver.findElement(
 						By.xpath("//div[@id='assign-side']/div[3]/div/div/div[2]/div[3]/div[2]/div/input"));
@@ -4233,7 +4266,7 @@ public class Local_Host extends Base {
 			WebElement $addne;
 			try {
 
-				$addne = driver.findElement(By.xpath("(//span[contains(text(),'New Pa')])[4]//parent::button"));
+				$addne = driver.findElement(By.xpath("(//BUTTON[@title='Add new Patient'])[3]"));
 
 				if ($addne.isDisplayed()) {
 					break;
@@ -4435,7 +4468,8 @@ public class Local_Host extends Base {
 		WebElement $savefavmsg = driver.findElement(By.xpath("//textarea[@id='message1']//following::button[2]"));
 		visbility(driver, $savefavmsg, 40);
 		click($savefavmsg);
-		for (int i = 1; i <= 7; i++) {
+
+		while (true) {
 			try {
 				WebElement $addfavMsgToListIcon = driver.findElement(By
 						.xpath("(//div[text()='FAVORITE MESSAGE KPOP'])[1]//parent::div[1]//parent::div[1]/div/span"));
@@ -4723,20 +4757,31 @@ public class Local_Host extends Base {
 		}
 
 		// Manage users...
-		while (true) {
-			try {
-				WebElement manageuser = driver.findElement(By.xpath("//button[@onclick='setting.userList()']"));
-				visbility(driver, manageuser, 60);
-				click(manageuser);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
+		/*
+		 * while (true) { try {
+		 */
+		WebElement manageuser = driver.findElement(By.xpath("//button[@onclick='setting.userList()']"));
+		visbility(driver, manageuser, 60);
+		ww.until(ExpectedConditions.elementToBeClickable(manageuser));
+		click(manageuser);
+
+		/*
+		 * break; } catch (Exception e) { // TODO: handle exception } }
+		 */
 		sleep(2000);
-		WebElement adduser = driver.findElement(By.xpath("//button[@onclick='Health.user_new()']"));
-		visbility(driver, adduser, 60);
-		adduser.click();
+
+		try {
+			WebElement adduser = driver.findElement(By.xpath("(//button[@id='new'])[1]"));
+			visbility(driver, adduser, 60);
+			ww.until(ExpectedConditions.elementToBeClickable(adduser));
+			click(adduser);
+		} catch (ElementClickInterceptedException e) {
+			WebElement adduser = driver.findElement(By.xpath("(//button[@id='new'])[1]"));
+			visbility(driver, adduser, 60);
+			ww.until(ExpectedConditions.elementToBeClickable(adduser));
+			click(adduser);
+		}
+		System.out.println("ADD NEW USER CLICKED");
 		sleep(2000);
 		WebElement trp14 = driver.findElement(By.xpath("//input[@id='Firstname']"));
 		visbility(driver, trp14, 60);
@@ -4810,8 +4855,9 @@ public class Local_Host extends Base {
 		visbility(driver, s4, 60);
 		sendkeys(s4, "5");// .sendKeys("5");
 
-		WebElement s5 = driver.findElement(By.xpath("(//button[@id='save-btn'])[10]"));
+		WebElement s5 = driver.findElement(By.xpath("(//button[@id='save-btn'])[11]"));
 		visbility(driver, s5, 60);
+		ww.until(ExpectedConditions.elementToBeClickable(s5));
 		click(s5);// .click();
 		sleep(3000);
 		WebElement mn = driver.findElement(By.xpath("//div[text()='DK']"));
@@ -4824,16 +4870,19 @@ public class Local_Host extends Base {
 		sleep(2000);
 		WebElement s7 = driver.findElement(By.xpath("(//span[@title='Cancel'])[2]"));
 		visbility(driver, s7, 60);
+		ww.until(ExpectedConditions.elementToBeClickable(s7));
 		click(s7);// .click();
 		sleep(3000);
 
 		// cds
 		WebElement cdsclick = driver.findElement(By.xpath("//button[contains(text(),'Clinical Decision')]"));
 		visbility(driver, cdsclick, 60);
+		ww.until(ExpectedConditions.elementToBeClickable(cdsclick));
 		click(cdsclick);
 		sleep(2000);
 		WebElement newcds = driver.findElement(By.xpath("//span[contains(text(),'New Clinical')]"));
 		visbility(driver, newcds, 60);
+		ww.until(ExpectedConditions.elementToBeClickable(newcds));
 		click(newcds);
 
 		sleep(2000);
@@ -4889,43 +4938,46 @@ public class Local_Host extends Base {
 				}
 
 				WebElement clickadditem = driver.findElement(By.xpath(
-						"//div[@id='referral']//following::div[1]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
+						"//div[@id='referral']//following::div[4]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
 				visbility(driver, clickadditem, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(clickadditem));
 				click(clickadditem);
 				WebElement sdf = driver.findElement(By.xpath(
-						"(//div[contains(text(),'Type or select item/service and price')])[2]//following::input[1]"));
+						"(//div[contains(text(),'Type or select item/service and price')])[1]//following::input[1]"));
 				visbility(driver, sdf, 60);
 				sendkeys(sdf, "test");
 				WebElement sdf2 = driver.findElement(By.xpath(
-						"(//div[contains(text(),'Type or select item/service and price')])[2]//following::input[2]"));
+						"(//div[contains(text(),'Type or select item/service and price')])[1]//following::input[2]"));
 				visbility(driver, sdf2, 60);
 				sendkeys(sdf2, "5");
-				WebElement saveitem = driver.findElement(By
-						.xpath("//div[@id='referral']//following::div[1]/div[3]/div/div/div[2]/div[6]/div/button[2]"));
+				WebElement saveitem = driver.findElement(By.xpath("(//div[@id='ItemKpop2']//following::button[2])[1]"));
 				visbility(driver, saveitem, 60);
-				javascriptclick(saveitem);
+				ww.until(ExpectedConditions.elementToBeClickable(saveitem));
+				click(saveitem);
 
 				sleep(2000);
 				WebElement edititem = driver.findElement(By.xpath("//span[text()='test']"));
 				visbility(driver, edititem, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(edititem));
 				actions("click", edititem);
 				while (true) {
 					try {
-						WebElement deleteitem = driver.findElement(By.xpath(
-								"//div[@id='referral']//following::div[1]/div[3]/div/div/div[2]//parent::div[1]/div[1]/div[2]/span[2]"));
+						WebElement deleteitem = driver
+								.findElement(By.xpath("//div[@id='ItemKpop2']/div[1]/div[2]/span[1]"));
 						if (deleteitem.isDisplayed()) {
 							click(deleteitem);
 							break;
 						}
 
 					} catch (Exception e) {
-						// TODO: handle exception
+
 					}
 				}
 
 				WebElement itemservicebackarrow = driver
-						.findElement(By.xpath("(//div[@id='invoiceAdd'])[1]/div[1]/div[1]/span[1]"));
+						.findElement(By.xpath("//div[@id='ItemFavKpop2']/div[1]/div[2]/span"));
 				visbility(driver, itemservicebackarrow, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(itemservicebackarrow));
 				javascriptclick(itemservicebackarrow);
 				sleep(2500);
 				while (true) {
@@ -4951,6 +5003,7 @@ public class Local_Host extends Base {
 				WebElement addnewfavmessage = driver
 						.findElement(By.xpath("(//div[@id='message'])[1]/div[1]/div//following::td[4]/span[2]"));
 				visbility(driver, addnewfavmessage, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(addnewfavmessage));
 				javascriptclick(addnewfavmessage);
 
 				WebElement msf = driver.findElement(By.xpath("//textarea[@id='message1']"));
@@ -4960,237 +5013,692 @@ public class Local_Host extends Base {
 				WebElement savemesssage = driver
 						.findElement(By.xpath("//textarea[@id='message1']//following::button[2]"));
 				visbility(driver, savemesssage, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(savemesssage));
 				javascriptclick(savemesssage);
 				sleep(2500);
 				WebElement editmessage = driver.findElement(By.xpath("//div[text()='hello']"));
+				ww.until(ExpectedConditions.elementToBeClickable(editmessage));
 				actions("click", editmessage);
 				WebElement deletemessage = driver
 						.findElement(By.xpath("//div[@id='MessageKpop2']/div[1]/div[2]/span[1]"));
 				visbility(driver, deletemessage, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(deletemessage));
 				javascriptclick(deletemessage);
 
 				sleep(3000);
 				WebElement gobackmessage = driver
 						.findElement(By.xpath("(//span[text()='Favorite Message'])[1]//following::div[1]/span"));
 				visbility(driver, gobackmessage, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(gobackmessage));
 				javascriptclick(gobackmessage);
 
 				sleep(3000);
 
-			}
+			} else if (w.getText().trim().equals("Symptoms")) {
 
-		}
+				visbility(driver, w, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(w));
+				click(w);
 
-		// Hospital codes... // Item/service code...
+				WebElement symptomsAddIcon = driver
+						.findElement(By.xpath("(//div[@id='SymptomsFavKpop2']//following::span[5])[1]"));
+				visbility(driver, symptomsAddIcon, 30);
+				ww.until(ExpectedConditions.elementToBeClickable(symptomsAddIcon));
+				click(symptomsAddIcon);
 
-		driver.findElement(By.xpath("//button[@onclick='hospitalcodedropdown();']")).click();
-		List<WebElement> fh = driver.findElements(By.xpath("//ul[@id='hospitalcodeul']/li"));
-		for (WebElement w : fh) {
-			if (w.getText().trim().equals("Item/Service Code")) {
+				WebElement SymptomIcdTextBox = driver
+						.findElement(By.xpath("(//div[@id='SymptomsKpop2']//following::input[1])[1]"));
+				visbility(driver, SymptomIcdTextBox, 40);
+				sendkeys(SymptomIcdTextBox, "test");
+
+				List<WebElement> symptomsdrop;
 				while (true) {
 					try {
-						visbility(driver, w, 60);
-						w.click();
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-
-				WebElement itemcodeadd = driver.findElement(
-						By.xpath("(//div[@id='item-code'])[1]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-				visbility(driver, itemcodeadd, 60);
-				javascriptclick(itemcodeadd);
-
-				WebElement itemdis = driver
-						.findElement(By.xpath("(//div[@id='item-code'])[1]/div[3]/div/div/div[2]/div[3]/input"));
-				visbility(driver, itemdis, 60);
-				sendkeys(itemdis, "160899");
-
-				WebElement code2 = driver
-						.findElement(By.xpath("(//div[@id='item-code'])[1]/div[3]/div/div/div[2]/div[4]/textarea"));
-				visbility(driver, code2, 60);
-				sendkeys(code2, "Birthday");
-
-				WebElement code3 = driver
-						.findElement(By.xpath("(//div[@id='item-code'])[1]/div[3]/div/div/div[2]/div[5]/input"));
-				visbility(driver, code3, 60);
-				sendkeys(code3, "5");
-
-				WebElement hg = driver.findElement(By
-						.xpath("(//div[@id='item-code'])[1]/div[3]/div/div/div[2]/div[5]/input//following::button[2]"));
-
-				visbility(driver, hg, 60);
-
-				javascriptclick(hg);
-
-				sleep(3000);
-				while (true) {
-					try {
-						WebElement cc = driver.findElement(By.xpath("//div[text()='160899']"));
-						actions("click", cc);
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-
-				for (int i = 1; i <= 5; i++) {
-					try {
-						WebElement vv = driver.findElement(By.xpath(
-								"(//div[@id='item-code'][1]/div[3]/div/div/div[2]/div[3]/input//parent::div[1]//parent::div[1][1]//parent::div[1])[1]/div[1]/div[2]/span[2]"));
-						if (vv.isDisplayed()) {
-							click(vv);
+						symptomsdrop = driver.findElements(By.xpath(
+								"//div[@id='addfav-div']/div/div/div[4]//following::div[1]//following::ul[1]/li/a/div"));
+						if (symptomsdrop.size() > 5) {
 							break;
 						}
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
 				}
+				for (WebElement web : symptomsdrop) {
+					if (web.getText().trim().equals("R76.1: Abnormal reaction to tuberculin test")) {
+						visbility(driver, web, 60);
+						javascriptclick(web);
+						break;
+					}
 
-				WebElement th = driver.findElement(
-						By.xpath("(//span[contains(text(),'Item/Service Code')])[1]//parent::div/span[1]"));
-				visbility(driver, th, 60);
-				javascriptclick(th);
+				}
+
+				WebElement SymptomDisBox = driver
+						.findElement(By.xpath("(//div[@id='SymptomsKpop2']//following::input[2])[1]"));
+				visbility(driver, SymptomDisBox, 40);
+				sendkeys(SymptomDisBox, "Symptoms");
+
+				WebElement saveSymptom = driver
+						.findElement(By.xpath("(//div[@id='SymptomsKpop2']//following::button[2])[1]"));
+				visbility(driver, saveSymptom, 35);
+				ww.until(ExpectedConditions.elementToBeClickable(saveSymptom));
+				click(saveSymptom);
 				sleep(2500);
-				for (int i = 1; i <= 5; i++) {
-					try {
-						driver.findElement(By.xpath("//button[@onclick='hospitalcodedropdown();']")).click();
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-
-			} else if (w.getText().trim().equals("Procedure Code")) {
+				WebElement editSymptom;
 				while (true) {
 					try {
-						visbility(driver, w, 60);
-						w.click();
+						editSymptom = driver.findElement(
+								By.xpath("(//div[text()='R76.1: Abnormal reaction to tuberculin test'])[1]"));
 						break;
-					} catch (Exception e) {
-
+					} catch (StaleElementReferenceException e) {
+						e.printStackTrace();
 					}
 				}
+				visbility(driver, editSymptom, 35);
+				ww.until(ExpectedConditions.elementToBeClickable(editSymptom));
+				click(editSymptom);
 
-				WebElement addnewprocedurecode = driver.findElement(
-						By.xpath("(//div[@id='procedure-code'])[1]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-				visbility(driver, addnewprocedurecode, 60);
-				javascriptclick(addnewprocedurecode);
+				WebElement deleteSymptom = driver
+						.findElement(By.xpath("(//div[@id='SymptomsKpop2']//following::span[2])[1]"));
+				visbility(driver, deleteSymptom, 35);
+				ww.until(ExpectedConditions.elementToBeClickable(deleteSymptom));
+				click(deleteSymptom);
+				WebElement closeSymptomIcon = driver
+						.findElement(By.xpath("(//div[@id='SymptomsFavKpop2']//following::span[1])[1]"));
+				visbility(driver, closeSymptomIcon, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(closeSymptomIcon));
+				click(closeSymptomIcon);
 
-				WebElement prcd2 = driver
-						.findElement(By.xpath("(//label[text()='Procedure Code*'])[2]//following::div[1]/input"));
-				visbility(driver, prcd2, 60);
-				sendkeys(prcd2, "Procedure12");
-
-				WebElement prcd3 = driver.findElement(
-						By.xpath("(//label[text()='Procedure Name/Description*'])[2]//following::div[1]/textarea"));
-				visbility(driver, prcd3, 60);
-				sendkeys(prcd3, "medicine");
-				WebElement prcd4 = driver
-						.findElement(By.xpath("(//input[contains(@title,'Enter amount value for the procedure')])[2]"));
-				visbility(driver, prcd4, 60);
-				sendkeys(prcd4, "2");
-				WebElement saveprocedure = driver.findElement(By.xpath(
-						"(//input[contains(@title,'Enter amount value for the procedure')])[2]//following::button[1]"));
-				visbility(driver, saveprocedure, 60);
-				javascriptclick(saveprocedure);
-
-				sleep(3000);
-				while (true) {
-					try {
-						WebElement editprocedure = driver.findElement(By.xpath("//div[text()='PROCEDURE12']"));
-						visbility(driver, editprocedure, 60);
-						actions("click", editprocedure);
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-				WebElement delprocd = driver
-						.findElement(By.xpath("(//div[@id='procedure-code'])[1]/div[3]/div/div/div[1]/div[2]/span[1]"));
-				visbility(driver, delprocd, 60);
-				javascriptclick(delprocd);
-
-				WebElement gobackproced = driver
-						.findElement(By.xpath("(//span[text()='Procedure Code'])[1]//parent::div/span[1]"));
-				visbility(driver, gobackproced, 60);
-				javascriptclick(gobackproced);
 				sleep(2500);
-				for (int i = 1; i <= 5; i++) {
-					try {
-						driver.findElement(By.xpath("//button[@onclick='hospitalcodedropdown();']")).click();
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-			} else if (w.getText().trim().equals("Medication Code")) {
 				while (true) {
 					try {
-						visbility(driver, w, 60);
-						w.click();
+						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
 						break;
 					} catch (Exception e) {
 
 					}
 				}
 
-				WebElement clickaddmedd = driver.findElement(
-						By.xpath("(//div[@id='drug-code'])[1]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-				visbility(driver, clickaddmedd, 60);
-				j.executeScript("arguments[0].click();", clickaddmedd);
-				WebElement md2 = driver
-						.findElement(By.xpath("(//label[text()='Medication Code*'])[2]//following::div[1]/input"));
-				visbility(driver, md2, 60);
-				sendkeys(md2, "MED1");
-				WebElement med3 = driver
-						.findElement(By.xpath("(//input[contains(@title,'Enter name of the Medication')])[2]"));
-				visbility(driver, med3, 60);
-				sendkeys(med3, "medication med");
-				WebElement med4 = driver.findElement(
-						By.xpath("(//input[contains(@title,'Enter name of the Medication')])[2]//following::input[1]"));
-				visbility(driver, med4, 60);
-				sendkeys(med4, "powerful");
-				WebElement med5 = driver.findElement(
-						By.xpath("(//input[contains(@title,'Enter name of the Medication')])[2]//following::input[2]"));
-				visbility(driver, med5, 60);
-				sendkeys(med5, "kaaspro");
-				WebElement med6 = driver.findElement(
-						By.xpath("(//input[contains(@title,'Enter name of the Medication')])[2]//following::input[3]"));
-				visbility(driver, med6, 60);
-				sendkeys(med6, "3");
-				WebElement savemedication = driver.findElement(By.xpath(
-						"(//input[contains(@title,'Enter amount value for the Medication')])[2]//following::button[1]"));
-				visbility(driver, savemedication, 60);
-				javascriptclick(savemedication);
-				sleep(3000);
+			} else if (w.getText().trim().equals("Problems")) {
+
+				visbility(driver, w, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(w));
+				click(w);
+				WebElement ProblemsAddIcon = driver
+						.findElement(By.xpath("(//div[@id='ProblemsFavKpop2']//following::span[5])[1]"));
+				visbility(driver, ProblemsAddIcon, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(ProblemsAddIcon));
+				click(ProblemsAddIcon);
+
+				WebElement ProblemsIcdBox = driver
+						.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::input[1])[1]"));
+				visbility(driver, ProblemsIcdBox, 40);
+				sendkeys(ProblemsIcdBox, "test");
+				try {
+					Problems problem = new Problems(driver);
+					problem.$favproblemsIcdCode();
+				} catch (Exception e) {
+
+					e.printStackTrace();
+				}
+				WebElement problemTextBox = driver
+						.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::input[2])[1]"));
+				visbility(driver, problemTextBox, 40);
+				sendkeys(problemTextBox, "Problems");
+				WebElement saveProblem = driver
+						.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::button[2])[1]"));
+				visbility(driver, saveProblem, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(saveProblem));
+				click(saveProblem);
+				sleep(2500);
+				WebElement editProblem = driver
+						.findElement(By.xpath("(//span[text()='Malignant neoplasm of testis'])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(editProblem));
+				click(editProblem);
+				sleep(2000);
+				WebElement deleteProblem = driver
+						.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::span[2])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(deleteProblem));
+				click(deleteProblem);
+				WebElement closeProblemIcon = driver
+						.findElement(By.xpath("(//div[@id='ProblemsFavKpop2']//following::span[1])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(closeProblemIcon));
+				click(closeProblemIcon);
+				sleep(2500);
 				while (true) {
 					try {
-						WebElement editmedication = driver.findElement(By.xpath("(//div[text()='MED1'])[1]"));
-						visbility(driver, editmedication, 60);
-						actions("click", editmedication);
+						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
 						break;
 					} catch (Exception e) {
 
 					}
 				}
-				sleep(3000);
-				WebElement delmed = driver
-						.findElement(By.xpath("(//div[@id='drug-code'])[1]/div[3]/div/div/div[1]/div[2]/span[1]"));
-				visbility(driver, delmed, 60);
-				javascriptclick(delmed);
+			} else if (w.getText().trim().equals("Visit Reason")) {
 
-				WebElement gobackmed = driver
-						.findElement(By.xpath("(//span[text()='Medication Code'])[1]//parent::div/span[1]"));
-				visbility(driver, gobackmed, 60);
-				j.executeScript("arguments[0].click();", gobackmed);
-				sleep(3000);
+				visbility(driver, w, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(w));
+				click(w);
+				WebElement VisitReasonAddIcon = driver
+						.findElement(By.xpath("(//div[@id='Visit_ReasonFavKpop2']//following::span[5])[1]"));
+				visbility(driver, VisitReasonAddIcon, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(VisitReasonAddIcon));
+				click(VisitReasonAddIcon);
 
+				ww.until(ExpectedConditions
+						.elementToBeClickable(pom.getInstanceSetting().selectAppointmentTypeVisitReasonSetFav));
+				click(pom.getInstanceSetting().selectAppointmentTypeVisitReasonSetFav);
+				List<WebElement> $TypeDropdown = driver
+						.findElements(By.xpath("(//button[@id='admissionVal_dropdown'])[1]//following::ul[1]/li/a"));
+
+				for (WebElement Element : $TypeDropdown) {
+					System.out.println(Element.getText());
+					if (Element.getText().equals("Emergency") && Element.isDisplayed()) {
+						click(Element);
+						break;
+					}
+
+				}
+				WebElement VisitReasonDiscription = driver
+						.findElement(By.xpath("//div[@id='Visit_ReasonPellVal']/div[2]"));
+				visbility(driver, VisitReasonDiscription, 40);
+				sendkeys(VisitReasonDiscription, "VisitReason");
+
+				WebElement saveVisitReason = driver
+						.findElement(By.xpath("//div[@id='Visit_ReasonKpop2']/div[2]/div[2]/button[2]"));
+				ww.until(ExpectedConditions.elementToBeClickable(saveVisitReason));
+				click(saveVisitReason);
+				sleep(2500);
+				WebElement editVisitReason = driver.findElement(By.xpath("(//div[text()='VisitReason'])[1]"));
+				visbility(driver, editVisitReason, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(editVisitReason));
+				click(editVisitReason);
+				WebElement deleteVisitReason = driver
+						.findElement(By.xpath("(//div[@id='Visit_ReasonKpop2']//following::span[2])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(deleteVisitReason));
+				click(deleteVisitReason);
+
+				WebElement closeVisitReason = driver
+						.findElement(By.xpath("(//div[@id='Visit_ReasonFavKpop2']//following::span[1])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(closeVisitReason));
+				click(closeVisitReason);
+				sleep(2500);
+				while (true) {
+					try {
+						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
+						break;
+					} catch (Exception e) {
+
+					}
+				}
+			} else if (w.getText().trim().equals("Procedure")) {
+
+				visbility(driver, w, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(w));
+				click(w);
+				WebElement PreocedureSetFavAddIcon = driver
+						.findElement(By.xpath("(//div[@id='ProcedureFavKpop2']//following::span[5])[1]"));
+				visbility(driver, PreocedureSetFavAddIcon, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(PreocedureSetFavAddIcon));
+				click(PreocedureSetFavAddIcon);
+
+				WebElement SetfavprocedureCodeTypeDropdown = driver.findElement(By.xpath("//select[@id='codeType']"));
+				visbility(driver, SetfavprocedureCodeTypeDropdown, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(SetfavprocedureCodeTypeDropdown));
+				click(SetfavprocedureCodeTypeDropdown);
+
+				dropDown("text", SetfavprocedureCodeTypeDropdown, "SNOMED CT");
+
+				WebElement SetfavProcedureIcdBox = driver
+						.findElement(By.xpath("(//div[@id='ProcedureKpop2']//following::input[1])[1]"));
+				visbility(driver, SetfavProcedureIcdBox, 40);
+				sendkeys(SetfavProcedureIcdBox, "test");
+
+				List<WebElement> prcddropdwn;
+				;
+				while (true) {
+					try {
+						prcddropdwn = driver.findElements(By.xpath(
+								"//div[@id='addfav-div']/div/div/div[4]//following::div[1]//following::ul[1]/li/a/div/small/em"));
+						if (prcddropdwn.size() > 5) {
+							break;
+						}
+					} catch (Exception e) {
+
+					}
+				}
+				for (WebElement web : prcddropdwn) {
+
+					if (web.getText().trim().equals("SNOMED : 134287002")) {
+						// System.out.println("procedure met..");
+						visbility(driver, web, 60);
+						javascriptclick(web);
+						break;
+
+					}
+
+				}
+
+				WebElement SetFavProcedureTextbox = driver
+						.findElement(By.xpath("(//div[@id='ProcedureKpop2']//following::input[2])[1]"));
+				visbility(driver, SetFavProcedureTextbox, 40);
+				sendkeys(SetFavProcedureTextbox, "procedure");
+
+				WebElement saveSetFavProcedure = driver
+						.findElement(By.xpath("(//div[@id='ProcedureKpop2']//following::button[2])[1]"));
+				visbility(driver, saveSetFavProcedure, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(saveSetFavProcedure));
+				click(saveSetFavProcedure);
+				sleep(2500);
+
+				WebElement editSetFavProcedure = driver.findElement(
+						By.xpath("(//div[text()='134287002: Cytomegalovirus antigen test (procedure)'])[1]"));
+				visbility(driver, editSetFavProcedure, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(editSetFavProcedure));
+				click(editSetFavProcedure);
+
+				WebElement deleteProcedureSetFav = driver
+						.findElement(By.xpath("(//div[@id='ProcedureKpop2']//following::span[2])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(deleteProcedureSetFav));
+				click(deleteProcedureSetFav);
+
+				WebElement closeSetFavProcedure = driver
+						.findElement(By.xpath("(//div[@id='ProcedureFavKpop2']//following::span[1])[1]"));
+				visbility(driver, closeSetFavProcedure, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(closeSetFavProcedure));
+				click(closeSetFavProcedure);
+				sleep(2500);
+				while (true) {
+					try {
+						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
+						break;
+					} catch (Exception e) {
+
+					}
+				}
+
+			} else if (w.getText().trim().equals("Medications")) {
+				visbility(driver, w, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(w));
+				click(w);
+
+				WebElement MedicationAddIcon = driver
+						.findElement(By.xpath("(//div[@id='MedicationsFavKpop2']//following::span[5])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(MedicationAddIcon));
+				click(MedicationAddIcon);
+
+				WebElement MedicationIcdBoxSetfav = driver
+						.findElement(By.xpath("(//div[@id='MedicationsKpop2']//following::input[1])[1]"));
+				visbility(driver, MedicationIcdBoxSetfav, 40);
+				sendkeys(MedicationIcdBoxSetfav, "1009");
+				List<WebElement> $med$drop$down$;
+
+				while (true) {
+					try {
+						$med$drop$down$ = driver.findElements(By.xpath(
+								"//div[@id='MedicationsKpop2']/div[2]/div[3]//following::ul[2]/li/a/div/small/em"));
+						if ($med$drop$down$.size() > 5) {
+							break;
+						}
+					} catch (Exception e) {
+
+					}
+				}
+
+				for (WebElement we : $med$drop$down$) {
+					System.out.println(we.getText());
+					if (we.getText().trim().equals("RXNORM : 1009145")) {
+						// System.out.println("med cond met");
+						visbility(driver, we, 60);
+						javascriptclick(we);
+						break;
+
+					}
+
+				}
+
+				WebElement savemedicationSetFav = driver
+						.findElement(By.xpath("(//div[@id='MedicationsKpop2']//following::button[3])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(savemedicationSetFav));
+				click(savemedicationSetFav);
+				sleep(2500);
+				WebElement editmedicationSetFav = driver.findElement(By.xpath(
+						"(//div[text()='amphetamine aspartate 1.875 MG / amphetamine sulfate 1.875 MG / dextroamphetamine saccharate 1.875 MG / dextroamphetamine sulfate 1.875 MG Oral Tablet 1.875 MG / 1.875 MG / 1.875 MG / 1.875 MG'])[1]"));
+				visbility(driver, editmedicationSetFav, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(editmedicationSetFav));
+				click(editmedicationSetFav);
+
+				WebElement deletemedsetfav = driver
+						.findElement(By.xpath("(//div[@id='MedicationsKpop2']//following::span[2])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(deletemedsetfav));
+				click(deletemedsetfav);
+
+				WebElement closemedicationSetFav = driver
+						.findElement(By.xpath("(//div[@id='MedicationsFavKpop2']//following::span[1])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(closemedicationSetFav));
+				click(closemedicationSetFav);
+				sleep(2500);
+				while (true) {
+					try {
+						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
+						break;
+					} catch (Exception e) {
+
+					}
+				}
+			} else if (w.getText().trim().equals("Test Order")) {
+				visbility(driver, w, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(w));
+				click(w);
+
+				WebElement TestOrderAddIcon = driver
+						.findElement(By.xpath("(//div[@id='Test_OrderFavKpop2']//following::span[5])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(TestOrderAddIcon));
+				click(TestOrderAddIcon);
+
+				WebElement TestOrderIcdBoxSetfav = driver
+						.findElement(By.xpath("(//div[@id='Test_OrderKpop2']//following::input[1])[1]"));
+				visbility(driver, TestOrderIcdBoxSetfav, 40);
+				sendkeys(TestOrderIcdBoxSetfav, "test");
+
+				WebElement saveTestOrderSetFav = driver
+						.findElement(By.xpath("(//div[@id='Test_OrderKpop2']//following::button[2])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(saveTestOrderSetFav));
+				click(saveTestOrderSetFav);
+				sleep(2500);
+				WebElement editTestOrderSetFav = driver.findElement(By.xpath("(//div[text()='test'])[1]"));
+				visbility(driver, editTestOrderSetFav, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(editTestOrderSetFav));
+				click(editTestOrderSetFav);
+
+				WebElement deleteTestOrdersetfav = driver
+						.findElement(By.xpath("(//div[@id='Test_OrderKpop2']//following::span[2])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(deleteTestOrdersetfav));
+				click(deleteTestOrdersetfav);
+
+				WebElement closeTestOrderSetFav = driver
+						.findElement(By.xpath("(//div[@id='Test_OrderFavKpop2']//following::span[1])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(closeTestOrderSetFav));
+				click(closeTestOrderSetFav);
+				sleep(2500);
+				while (true) {
+					try {
+						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
+						break;
+					} catch (Exception e) {
+
+					}
+				}
+			} else if (w.getText().trim().equals("Vaccine")) {
+
+				visbility(driver, w, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(w));
+				click(w);
+
+				WebElement VaccineAddIcon = driver
+						.findElement(By.xpath("(//div[@id='VaccineFavKpop2']//following::span[5])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(VaccineAddIcon));
+				click(VaccineAddIcon);
+
+				WebElement vaccineIcdTextBox = driver
+						.findElement(By.xpath("(//div[@id='VaccineKpop2']//following::input[1])[1]"));
+				visbility(driver, vaccineIcdTextBox, 40);
+				sendkeys(vaccineIcdTextBox, "vacc");
+
+				List<WebElement> vc4;
+				while (true) {
+
+					vc4 = driver.findElements(By.xpath(
+							//// div[@id='VaccineKpop2']/div[1]/div[1]//following::input[2]//following::button[1]//following::ul[2]/li/a/span[2]
+
+							"//div[@id='VaccineKpop2']/div[1]/div[1]//following::input[2]//following::button[1]//following::ul[1]/li/a/span[2]"));
+
+					if (vc4.size() >= 5) {
+						System.out.println(vc4.size());
+						break;
+					}
+				}
+
+				for (WebElement web : vc4) {
+					System.out.println(web.getText());
+
+					if (web.getText().trim().equals("vaccinia (smallpox) diluted")) {
+						web.click();
+						break;
+					}
+
+				}
+
+				WebElement VaccDisBoxSetfav = driver
+						.findElement(By.xpath("(//div[@id='VaccineKpop2']//following::input[2])[1]"));
+				visbility(driver, VaccDisBoxSetfav, 40);
+				sendkeys(VaccDisBoxSetfav, "vaccine");
+
+				WebElement saveVaccineSetFav = driver
+						.findElement(By.xpath("(//div[@id='VaccineKpop2']//following::button[2])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(saveVaccineSetFav));
+				click(saveVaccineSetFav);
+				sleep(2500);
+				WebElement editVaccSetFav = driver
+						.findElement(By.xpath("(//div[text()='105: vaccinia (smallpox) diluted'])[1]"));
+				visbility(driver, editVaccSetFav, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(editVaccSetFav));
+				click(editVaccSetFav);
+
+				WebElement deleteVaccsetfav = driver
+						.findElement(By.xpath("(//div[@id='VaccineKpop2']//following::span[2])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(deleteVaccsetfav));
+				click(deleteVaccsetfav);
+
+				WebElement closeVaccSetFav = driver
+						.findElement(By.xpath("(//div[@id='VaccineFavKpop2']//following::span[1])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(closeVaccSetFav));
+				click(closeVaccSetFav);
+				sleep(2500);
+				while (true) {
+					try {
+						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
+						break;
+					} catch (Exception e) {
+
+					}
+				}
+			} else if (w.getText().trim().equals("Goals")) {
+
+				visbility(driver, w, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(w));
+				click(w);
+
+				WebElement GoalsAddIcon = driver
+						.findElement(By.xpath("(//div[@id='GoalsFavKpop2']//following::span[5])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(GoalsAddIcon));
+				click(GoalsAddIcon);
+
+				WebElement GoalsTextBox = driver.findElement(By.xpath("//div[@id='GoalsPellVal']/div[2]"));
+				visbility(driver, GoalsTextBox, 40);
+				sendkeys(GoalsTextBox, "goals");
+
+				WebElement saveGoalSetFav = driver
+						.findElement(By.xpath("//div[@id='GoalsPellVal']/div[2]//following::button[2]"));
+				ww.until(ExpectedConditions.elementToBeClickable(saveGoalSetFav));
+				click(saveGoalSetFav);
+				sleep(2500);
+				WebElement editGoalSetFav = driver.findElement(By.xpath("(//div[text()='goals'])[1]"));
+				visbility(driver, editGoalSetFav, 40);
+				ww.until(ExpectedConditions.elementToBeClickable(editGoalSetFav));
+				click(editGoalSetFav);
+
+				WebElement deleteGoalssetfav = driver
+						.findElement(By.xpath("(//div[@id='GoalsKpop2']//following::span[2])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(deleteGoalssetfav));
+				click(deleteGoalssetfav);
+
+				WebElement closeGoalsSetFav = driver
+						.findElement(By.xpath("(//div[@id='GoalsFavKpop2']//following::span[1])[1]"));
+				ww.until(ExpectedConditions.elementToBeClickable(closeGoalsSetFav));
+				click(closeGoalsSetFav);
+				sleep(2500);
+				while (true) {
+					try {
+						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
+						break;
+					} catch (Exception e) {
+
+					}
+				}
 			}
 
 		}
 
+		// Hospital codes... // Item/service code...
+		/*
+		 * driver.findElement(By.xpath("//button[@onclick='hospitalcodedropdown();']")).
+		 * click(); List<WebElement> fh =
+		 * driver.findElements(By.xpath("//ul[@id='hospitalcodeul']/li")); for
+		 * (WebElement w : fh) { if (w.getText().trim().equals("Item/Service Code")) {
+		 * while (true) { try { visbility(driver, w, 60); w.click(); break; } catch
+		 * (Exception e) {
+		 * 
+		 * } }
+		 * 
+		 * WebElement itemcodeadd = driver.findElement( By.xpath(
+		 * "//div[@id='Item_ServiceHosKpop2']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"
+		 * )); visbility(driver, itemcodeadd, 60); javascriptclick(itemcodeadd);
+		 * 
+		 * WebElement itemdis = driver .findElement(By.xpath(
+		 * "(//div[@id='Item_ServiceHosKpop2']/div[2]//following::input[2])[1]"));
+		 * visbility(driver, itemdis, 60); sendkeys(itemdis, "160899");
+		 * 
+		 * WebElement code2 = driver .findElement(By.xpath(
+		 * "(//div[@id='Item_ServiceHosKpop2']/div[2]//following::input[3])[1]"));
+		 * visbility(driver, code2, 60); sendkeys(code2, "Birthday");
+		 * 
+		 * WebElement code3 = driver .findElement(By.xpath(
+		 * "(//div[@id='Item_ServiceHosKpop2']/div[2]//following::input[4])[1]"));
+		 * visbility(driver, code3, 60); sendkeys(code3, "5");
+		 * 
+		 * WebElement hg = driver .findElement(By.xpath(
+		 * "(//div[@id='Item_ServiceHosKpop2']/div[2]//following::button[2])[1]"));
+		 * 
+		 * visbility(driver, hg, 60);
+		 * ww.until(ExpectedConditions.elementToBeClickable(hg)); javascriptclick(hg);
+		 * 
+		 * sleep(3000); while (true) { try { WebElement cc =
+		 * driver.findElement(By.xpath("//div[text()='160899']"));
+		 * ww.until(ExpectedConditions.elementToBeClickable(cc)); actions("click", cc);
+		 * break; } catch (Exception e) {
+		 * 
+		 * } }
+		 * 
+		 * WebElement vv = driver.findElement(By.xpath(
+		 * "(//div[@id='Item_ServiceKpop2']//following::span[2])[1]"));
+		 * visbility(driver, vv, 40);
+		 * ww.until(ExpectedConditions.elementToBeClickable(vv)); click(vv);
+		 * 
+		 * WebElement th = driver .findElement(By.xpath(
+		 * "(//div[@id='Item_ServiceHosKpop2']//following::span[1])[1]"));
+		 * visbility(driver, th, 60);
+		 * ww.until(ExpectedConditions.elementToBeClickable(th)); javascriptclick(th);
+		 * sleep(2500); for (int i = 1; i <= 5; i++) { try {
+		 * driver.findElement(By.xpath("//button[@onclick='hospitalcodedropdown();']")).
+		 * click(); break; } catch (Exception e) {
+		 * 
+		 * } }
+		 * 
+		 * } else if (w.getText().trim().equals("Procedure Code")) { while (true) { try
+		 * { visbility(driver, w, 60); w.click(); break; } catch (Exception e) {
+		 * 
+		 * } }
+		 * 
+		 * WebElement addnewprocedurecode = driver .findElement(By.xpath(
+		 * "(//div[@id='ProcedureHosKpop2']//following::span[6])[1]"));
+		 * visbility(driver, addnewprocedurecode, 60);
+		 * ww.until(ExpectedConditions.elementToBeClickable(addnewprocedurecode));
+		 * javascriptclick(addnewprocedurecode);
+		 * 
+		 * WebElement prcd2 = driver .findElement(By.xpath(
+		 * "(//div[@id='ProcedureHosKpop2']//following::input[2])[1]"));
+		 * visbility(driver, prcd2, 60); sendkeys(prcd2, "Procedure12");
+		 * 
+		 * WebElement prcd3 = driver .findElement(By.xpath(
+		 * "(//div[@id='ProcedureHosKpop2']//following::input[3])[1]"));
+		 * visbility(driver, prcd3, 60); sendkeys(prcd3, "medicine"); WebElement prcd4 =
+		 * driver .findElement(By.xpath(
+		 * "(//div[@id='ProcedureHosKpop2']//following::input[4])[1]"));
+		 * visbility(driver, prcd4, 60); sendkeys(prcd4, "2"); WebElement saveprocedure
+		 * = driver .findElement(By.xpath(
+		 * "(//div[@id='ProcedureHosKpop2']//following::button[2])[1]"));
+		 * visbility(driver, saveprocedure, 60);
+		 * ww.until(ExpectedConditions.elementToBeClickable(saveprocedure));
+		 * javascriptclick(saveprocedure);
+		 * 
+		 * sleep(3000); while (true) { try { WebElement editprocedure =
+		 * driver.findElement(By.xpath("//div[text()='PROCEDURE12']"));
+		 * visbility(driver, editprocedure, 60); actions("click", editprocedure); break;
+		 * } catch (Exception e) {
+		 * 
+		 * } } WebElement delprocd = driver
+		 * .findElement(By.xpath("(//div[@id='ProcedureKpop2']//following::span[2])[1]")
+		 * ); visbility(driver, delprocd, 60);
+		 * ww.until(ExpectedConditions.elementToBeClickable(delprocd));
+		 * javascriptclick(delprocd);
+		 * 
+		 * WebElement gobackproced = driver .findElement(By.xpath(
+		 * "(//div[@id='ProcedureHosKpop2']//following::span[1])[1]"));
+		 * visbility(driver, gobackproced, 60);
+		 * ww.until(ExpectedConditions.elementToBeClickable(gobackproced));
+		 * javascriptclick(gobackproced); sleep(2500); for (int i = 1; i <= 5; i++) {
+		 * try {
+		 * driver.findElement(By.xpath("//button[@onclick='hospitalcodedropdown();']")).
+		 * click(); break; } catch (Exception e) {
+		 * 
+		 * } } } else if (w.getText().trim().equals("Medication Code")) { while (true) {
+		 * try { visbility(driver, w, 60); w.click(); break; } catch (Exception e) {
+		 * 
+		 * } }
+		 * 
+		 * WebElement clickaddmedd = driver .findElement(By.xpath(
+		 * "(//div[@id='MedicationsHosKpop2']//following::span[6])[1]"));
+		 * visbility(driver, clickaddmedd, 60);
+		 * ww.until(ExpectedConditions.elementToBeClickable(clickaddmedd));
+		 * j.executeScript("arguments[0].click();", clickaddmedd); WebElement md2 =
+		 * driver .findElement(By.xpath(
+		 * "(//div[@id='MedicationsKpop2']//following::input[1])[1]"));
+		 * visbility(driver, md2, 60); sendkeys(md2, "MED1"); WebElement med3 = driver
+		 * .findElement(By.xpath(
+		 * "(//div[@id='MedicationsKpop2']//following::input[2])[1]"));
+		 * visbility(driver, med3, 60); sendkeys(med3, "medication med"); WebElement
+		 * med4 = driver .findElement(By.xpath(
+		 * "(//div[@id='MedicationsKpop2']//following::input[3])[1]"));
+		 * visbility(driver, med4, 60); sendkeys(med4, "powerful"); WebElement med5 =
+		 * driver .findElement(By.xpath(
+		 * "(//div[@id='MedicationsKpop2']//following::input[4])[1]"));
+		 * visbility(driver, med5, 60); sendkeys(med5, "kaaspro"); WebElement med6 =
+		 * driver .findElement(By.xpath(
+		 * "(//div[@id='MedicationsKpop2']//following::input[5])[1]"));
+		 * visbility(driver, med6, 60); sendkeys(med6, "3"); WebElement savemedication =
+		 * driver .findElement(By.xpath(
+		 * "(//div[@id='MedicationsKpop2']//following::button[2])[1]"));
+		 * visbility(driver, savemedication, 60);
+		 * ww.until(ExpectedConditions.elementToBeClickable(savemedication));
+		 * click(savemedication); sleep(3000); while (true) { try { WebElement
+		 * editmedication = driver.findElement(By.xpath("(//div[text()='MED1'])[1]"));
+		 * visbility(driver, editmedication, 60); actions("click", editmedication);
+		 * break; } catch (Exception e) {
+		 * 
+		 * } } sleep(3000); WebElement delmed = driver .findElement(By.xpath(
+		 * "(//div[@id='MedicationsKpop2']//following::span[2])[1]")); visbility(driver,
+		 * delmed, 60); ww.until(ExpectedConditions.elementToBeClickable(delmed));
+		 * click(delmed);
+		 * 
+		 * WebElement gobackmed = driver .findElement(By.xpath(
+		 * "(//div[@id='MedicationsHosKpop2']//following::span[1])[1]"));
+		 * visbility(driver, gobackmed, 60);
+		 * ww.until(ExpectedConditions.elementToBeClickable(gobackmed));
+		 * j.executeScript("arguments[0].click();", gobackmed); sleep(3000);
+		 * 
+		 * }
+		 * 
+		 * }
+		 */
 		// forms...
 
 		WebElement f1 = driver.findElement(By.xpath("//button[@id='form-script']"));
@@ -5272,18 +5780,22 @@ public class Local_Host extends Base {
 
 		WebElement s10 = driver.findElement(By.xpath("//button[@id='edit-print-preference']"));
 		visbility(driver, s10, 60);
+		ww.until(ExpectedConditions.elementToBeClickable(s10));
 		click(s10);
 		sleep(3000);
-		WebElement s11 = driver.findElement(By.xpath("(//button[@id='cancel-btn'])[18]"));
+		WebElement s11 = driver.findElement(By.xpath("(//div[@id='setupPrintPreference']//following::button[2])"));
 		visbility(driver, s11, 60);
+		ww.until(ExpectedConditions.elementToBeClickable(s11));
 		click(s11);
 		sleep(3000);
 		WebElement s12 = driver.findElement(By.xpath("//button[@title='Reset All Your Setting']"));
 		visbility(driver, s12, 60);
+		ww.until(ExpectedConditions.elementToBeClickable(s12));
 		click(s12);
 		sleep(2000);
 		WebElement df = driver.findElement(By.xpath("(//span[text()='Reset All Settings'])[1]//following::button[2]"));
 		visbility(driver, df, 60);
+		ww.until(ExpectedConditions.elementToBeClickable(df));
 		javascriptclick(df);
 
 		sleep(3000);
@@ -5299,8 +5811,9 @@ public class Local_Host extends Base {
 				WebElement uip = driver.findElement(By
 						.xpath("//span[text()='Edit Notification Messages']//parent::div//parent::div[1]/label/input"));
 
+				// ww.until(ExpectedConditions.elementToBeClickable(uip));
 				actions("click", uip);
-
+				ww.until(ExpectedConditions.elementToBeClickable(notify));
 				javascriptclick(notify);
 				WebElement sd = driver.findElement(By.xpath("(//span[@class='slider1 round1'])[4]"));
 				ScriptExecutor(sd);
@@ -5328,14 +5841,14 @@ public class Local_Host extends Base {
 
 				.xpath("//span[text()='Notify user when EHR is completed.']//parent::div//parent::div[1]/label/input"));
 		ScriptExecutor(ntfyehr);
-
+		// ww.until(ExpectedConditions.elementToBeClickable(ntfyehr));
 		actions("click", ntfyehr);
 
 		// set interval time for emial...
 
 		WebElement rr = driver.findElement(By
 				.xpath("//span[text()='Set interval for receiving emails.']//parent::div//parent::div[1]/label/input"));
-
+		// ww.until(ExpectedConditions.elementToBeClickable(rr));
 		actions("click", rr);
 
 		// Audit Report...

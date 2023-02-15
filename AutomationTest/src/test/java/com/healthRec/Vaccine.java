@@ -65,7 +65,29 @@ public class Vaccine extends Base {
 
 	}
 
+	private void curePastTaken() throws InterruptedException {
+		sleep(1500);
+
+		try {
+			WebElement curePast = driver.findElement(By.xpath("(//div[text()='79: vaccinia immune globulin'])[1]"));
+
+			visbility(driver, curePast, 40);
+			click(curePast);
+
+			sleep(2000);
+			WebElement yesOrNo = driver
+					.findElement(By.xpath("(//div[text()='79: vaccinia immune globulin'])[1]//following::span[3]"));
+			visbility(driver, yesOrNo, 30);
+			click(yesOrNo);
+		} catch (Exception e) {
+
+		}
+
+	}
+
 	public void $getPastVaccine() throws Throwable {
+		curePastTaken();
+
 		sleep(1500);
 
 		for (int i = 1; i <= 5; i++) {
@@ -123,7 +145,7 @@ public class Vaccine extends Base {
 				// TODO: handle exception
 			}
 		}
-sleep(1500);
+		sleep(1500);
 		WebElement $closeVacc$ = driver
 				.findElement(By.xpath("(//span[text()='Past Taken Vaccine'])[1]//parent::div/span[1]"));
 		visbility(driver, $closeVacc$, 60);

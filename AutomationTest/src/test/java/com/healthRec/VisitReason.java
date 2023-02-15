@@ -39,7 +39,7 @@ public class VisitReason extends Base {
 		}
 
 		List<WebElement> $TypeDropdown = driver
-				.findElements(By.xpath("(//button[@id='admissionVal_dropdown'])[1]//following::ul[1]/li/a"));
+				.findElements(By.xpath("(//button[@id='admissionVal_dropdown'])[2]//following::ul[1]/li/a"));
 
 		for (WebElement Element : $TypeDropdown) {
 			System.out.println(Element.getText());

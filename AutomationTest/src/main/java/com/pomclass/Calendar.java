@@ -24,7 +24,7 @@ public class Calendar {
 	@FindBy(xpath = "(//input[@id='AppointmentPatientName'])[1]")
 	public WebElement searchPatientName;
 
-	@FindBy(id = "admissionVal_dropdown")
+	@FindBy(xpath = "(//button[@id='admissionVal_dropdown'])[2]")
 	public WebElement selectAppointmentType;
 
 	@FindBy(xpath = "(//textarea[@id='description'])[3]")

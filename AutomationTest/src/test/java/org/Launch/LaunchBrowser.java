@@ -32,7 +32,7 @@ public class LaunchBrowser extends Base {
 		driver = setUp("chrome");
 		pom = new PageObjMan(driver);
 		j = (JavascriptExecutor) driver;
-		ww = new WebDriverWait(driver, 20);
+		ww = new WebDriverWait(driver, 55);
 		cal = new Calendars(driver, pom);
 		url = ConfigManager.getconfigManager().getInstanceConfigReader().getUrl();
 

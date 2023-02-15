@@ -6,7 +6,8 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.base.*;
 import com.pageObjeman.PageObjMan;
 
@@ -17,6 +18,7 @@ public class Calendars extends Base {
 	String kpid;
 	String s;
 	public int cnt;
+	int count = 2;
 
 	public Calendars(WebDriver driver, PageObjMan pm) {
 
@@ -31,17 +33,12 @@ public class Calendars extends Base {
 		 * if (cal.driver != null) { // System.out.println("Driver not null"); } else {
 		 * System.out.println("null"); }
 		 */
-		for (int i = 1; i <= 7; i++) {
-			try {
-				if (pom.getInstanceCalendar().clickCalendar.isDisplayed()) {
-					click(pom.getInstanceCalendar().clickCalendar);
-					break;
-				}
-			} catch (Exception e) {
-				// System.out.println(e);
-			}
 
-		}
+		visbility(driver, pom.getInstanceCalendar().clickCalendar, 50);
+		WebDriverWait wait = new WebDriverWait(driver, 50);
+		// elementClickable(pom.getInstanceCalendar().clickCalendar);
+		click(pom.getInstanceCalendar().clickCalendar);
+
 		implicitWait(60, TimeUnit.SECONDS);
 
 		driver.navigate().refresh();
@@ -69,7 +66,7 @@ public class Calendars extends Base {
 			List<WebElement> rchange = driver
 					.findElements(By.xpath("(//div[@id='date-data'][" + i + "]/div[2]/div/div[1]/div[1]/div[1])"));
 			int avaiable = rchange.size();
-			int count = 1;
+			int count = 2;
 			for (int b = 1; b <= avaiable; b++) {
 
 				WebElement tp = driver.findElement(
@@ -88,7 +85,7 @@ public class Calendars extends Base {
 					cond = true;
 					visbility(driver, tp, 60);
 					javascriptclick(tp);
-					if (count > 1) {
+					if (count >= 2) {
 						$choosePatient(count, kpid);
 					} else {
 						$choosePatient(i, kpid);
@@ -123,7 +120,7 @@ public class Calendars extends Base {
 
 			if (cond == true) {
 				System.out.println("DELETE");
-				$delAppointmentSchedule(i, cnt);
+				$delAppointmentSchedule(count, cnt, s);
 				break;
 			}
 			if (cond == false) {
@@ -172,11 +169,12 @@ public class Calendars extends Base {
 
 				// System.out.println("NEXT SET DAYS:" + $nextSetdays);
 				if ($nextSetdays.isDisplayed()) {
+
 					click($nextSetdays);
 					break;
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+
 			}
 		}
 
@@ -185,6 +183,7 @@ public class Calendars extends Base {
 	public void $choosePatient(int i, String id) {
 
 		WebElement prp = driver.findElement(By.xpath("(//input[@id='AppointmentPatientName'])[" + i + "]"));
+		System.out.println(prp);
 		visbility(driver, prp, 60);
 		sendkeys(prp, id);
 		System.out.println("EXIT");
@@ -252,15 +251,25 @@ public class Calendars extends Base {
 
 		javascriptclick(vcv);
 
-		sleep(1000);
+		sleep(3000);
 
-		WebElement ez = driver.findElement(By.xpath("//span[text()='" + kpid + "']"));
-		visbility(driver, ez, 60);
-		javascriptclick(ez);
+		while (true) {
+			try {
+				WebElement ez = driver.findElement(By.xpath("//span[text()='" + kpid + "']"));
+				if (ez.isDisplayed()) {
+
+					javascriptclick(ez);
+					break;
+				}
+			} catch (Exception e) {
+				System.out.println("");
+			}
+		}
 
 		sleep(2000);
 		// goto ehr..
-		WebElement ehr = driver.findElement(By.xpath("(//button[@id='cancel-btn1'])[1]"));
+		WebElement ehr = driver.findElement(By.id("goEhrButton"));
+
 		visbility(driver, ehr, 60);
 		click(ehr);// .click();
 
@@ -268,7 +277,8 @@ public class Calendars extends Base {
 
 		while (true) {
 			try {
-				if (ss.equals("https://localhost:8443/health/#home")) {
+				if (ss.equals("https://localhost:8443/health/#home")
+						|| ss.equals("https://www.75health.com/health/#home")) {
 					driver.navigate().back();
 					driver.navigate().refresh();
 					break;
@@ -277,7 +287,7 @@ public class Calendars extends Base {
 				driver.navigate().refresh();
 				break;
 			} catch (Exception e) {
-				// TODO: handle exception
+
 			}
 		}
 
@@ -305,38 +315,61 @@ public class Calendars extends Base {
 
 	}
 
-	public void $delAppointmentSchedule(int i, int c) throws InterruptedException {
+	public void $delAppointmentSchedule(int count, int c, String currenturl) throws InterruptedException {
 
 		System.out.println("ENTER DEL APP");
 
-		List<WebElement> $deletepaitentAppoint;
+		List<WebElement> $deletepaitentAppoint = null;
+
 		while (true) {
 			boolean b = false;
 			try {
-				// (//span[text()='" + kpid + "'])
+
 				$deletepaitentAppoint = driver.findElements(By.xpath("//span[@id='kpId']"));
 
-				for (WebElement web : $deletepaitentAppoint) {
-					System.out.println(web.getText());
+			} catch (Exception e) {
 
-					if (web.getText().equals(kpid)) {
-						b = true;
-						click(web);
-						break;
+				System.out.println("exception in delete appointment");
+			}
 
-					}
+			for (WebElement web : $deletepaitentAppoint) {
+				// System.out.println(web.getText());
+
+				if (web.getText().equals(kpid)) {
+					b = true;
+					visbility(driver, web, 40);
+					WebDriverWait wait = new WebDriverWait(driver, 45);
+					wait.until(ExpectedConditions.elementToBeClickable(web));
+					click(web);
+					System.out.println("del appointment button clicked");
+
+					break;
 
 				}
 
-			} catch (Exception e) {
-				// TODO: handle exception
 			}
+
 			if (b == false) {
 
-				$nextsetOfDays(c);
-				System.out.println("DONE");
-				// $delAppointmentSchedule(i);
+				if (currenturl.equals("https://www.75health.com/health/#home")) {
+					WebElement nextsetdays = driver.findElement(By.xpath("(//div[@id='unii'])[2]/div[2]/button"));
+					visbility(driver, nextsetdays, 40);
+					WebDriverWait wait = new WebDriverWait(driver, 40);
+					wait.until(ExpectedConditions.elementToBeClickable(nextsetdays));
+					click(nextsetdays);
+					// System.out.println("");
+				} else if (currenturl.equals("https://www.75health.com/health/#calendar")) {
+
+					WebElement nextsetdays = driver.findElement(By.xpath("(//div[@id='unii'])[1]/div[2]/button"));
+					visbility(driver, nextsetdays, 40);
+					WebDriverWait wait = new WebDriverWait(driver, 40);
+					wait.until(ExpectedConditions.elementToBeClickable(nextsetdays));
+					click(nextsetdays);
+
+				}
+
 				System.out.println("EXIT HERE");
+				sleep(3000);
 
 			} else if (b == true) {
 				System.out.println("TRUE...");
@@ -346,35 +379,48 @@ public class Calendars extends Base {
 
 		for (int in = 1; in <= 7; in++) {
 			try {
-				if (s.equals("https://localhost:8443/health/#home")) {
+				if (s.equals("https://localhost:8443/health/#home") || s.equals("https://www.75health.com/health/#home")
+						|| s.equals("https://www.75health.com/health/#calendar")) {
 
-					WebElement wtw = driver.findElement(By.xpath("(//span[@id='del-btn'])[1]"));
-					System.out.println("Hello del:" + wtw);
-					if (wtw.isDisplayed()) {
-						click(wtw);
-						System.out.println("EXIT APPOIN");
-						break;
+					if (count > 1) {
+						count = count - 1;
+						WebElement wtw = driver.findElement(By.xpath("(//span[@id='del-btn'])[" + count + "]"));
+						System.out.println("Hello del:" + wtw);
+						if (wtw.isDisplayed()) {
+							click(wtw);
+							System.out.println("EXIT APPOIN");
+							break;
+						}
 					}
 
-				} else {
-					WebElement wtw = driver.findElement(By.xpath("(//span[@id='del-btn'])[1]"));
-					System.out.println("Hello del:" + wtw);
-					if (wtw.isDisplayed()) {
-						click(wtw);
-						System.out.println("EXIT APPOIN");
-
-					}
-				}
+				} /*
+					 * else { WebElement wtw =
+					 * driver.findElement(By.xpath("(//span[@id='del-btn'])[1]"));
+					 * System.out.println("Hello del:" + wtw); if (wtw.isDisplayed()) { click(wtw);
+					 * System.out.println("EXIT APPOIN"); break;
+					 * 
+					 * } }
+					 */
 			} catch (Exception e) {
-				// TODO: handle exception
+
 			}
 		}
 
 		sleep(2000);
-		WebElement delappp = driver
-				.findElement(By.xpath("//div[@id='AppointmentCreateMessage']/div[2]/div[2]/button[2]"));
-		visbility(driver, delappp, 60);
-		javascriptclick(delappp);
+		while (true) {
+			try {
+
+				WebElement delappp = driver
+						.findElement(By.xpath("//div[@id='AppointmentCreateMessage']/div[2]/div[2]/button[2]"));
+				if (delappp.isDisplayed()) {
+					visbility(driver, delappp, 60);
+					javascriptclick(delappp);
+					break;
+				}
+			} catch (Exception e) {
+				System.out.println("");
+			}
+		}
 
 	}
 
@@ -382,16 +428,20 @@ public class Calendars extends Base {
 		while (true) {
 
 			try {
-				if (s.equals("https://localhost:8443/health/#home")) {
+				if (s.equals("https://localhost:8443/health/#home")
+						|| s.equals("https://www.75health.com/health/#home")) {
 					this.s = s;
 
 					WebElement clbtn = driver.findElement(By.xpath("(//button[@id='calendar-day-month'])[2]"));
 					cnt = 2;
+					System.out.println("HOME Appointment");
 					if (clbtn.isDisplayed()) {
 						click(clbtn);
 					}
-				} else if (s.equals("https://localhost:8443/health/#calendar")) {
+				} else if (s.equals("https://localhost:8443/health/#calendar")
+						|| s.equals("https://www.75health.com/health/#calendar")) {
 					this.s = s;
+					System.out.println("Calendar appointmnet");
 					WebElement clbtn = driver.findElement(By.xpath("(//button[@id='calendar-day-month'])[1]"));
 					cnt = 1;
 					if (clbtn.isDisplayed()) {

@@ -119,6 +119,15 @@ public class Base {
 
 	}
 
+	// WebDriver wait
+
+	public void elementClickable(WebElement e) {
+
+		
+		wait.until(ExpectedConditions.elementToBeClickable(e));
+
+	}
+
 	// clear....
 	public static void clear(WebElement e) {
 		e.clear();

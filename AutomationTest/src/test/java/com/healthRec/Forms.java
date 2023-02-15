@@ -64,6 +64,18 @@ public class Forms extends Base {
 			}
 
 		}
+
+		if (result == false) {
+
+			$addNewForm("hsdahjahjh");
+			$addFormToEhr("hsdahjahjh");
+			sleep(6000);
+			WebElement ytt = driver.findElement(By.xpath("//div[@id='FormsKpop2']/div[1]/div[2]/span"));
+			javascriptclick(ytt);
+			$delForm("hsdahjahjh");
+
+		}
+
 		if (result == true) {
 			sleep(4000);
 			WebElement $FormdisBox = driver
