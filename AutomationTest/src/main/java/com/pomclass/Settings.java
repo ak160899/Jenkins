@@ -1,8 +1,11 @@
 package com.pomclass;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 public class Settings {
@@ -14,6 +17,12 @@ public class Settings {
 	@FindBy(xpath = "//button[@id='trash-btn']")
 	public WebElement scrollTillDelete;
 
+	@FindBy(xpath = "(//div[@id='AlertMessage']//following::button[1])[1]")
+	public WebElement dismiss;
+
+	@FindBy(xpath = "(//div[@id='AlertMessage']//following::button[2])[1]")
+	public WebElement subscribe;
+
 	@FindBy(id = "editPlanCloseBtn")
 	public WebElement $editplnCrossIcon$;
 
@@ -22,6 +31,12 @@ public class Settings {
 
 	@FindBy(xpath = "//button[@id='taxbutton']")
 	public WebElement scrollTillTax;
+
+	@FindBy(xpath = "//ul[@id='hospitalcodeul']/li")
+	public List<WebElement> HosiptalCodeDropDown;
+
+	@FindBy(xpath = "//button[@onclick='hospitalcodedropdown();']")
+	public WebElement hospitalcodeButton;
 
 	@FindBy(xpath = "//button[@onclick='hospitalcodedropdown();']")
 	public WebElement scrollTillHospitalCode;

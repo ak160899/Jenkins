@@ -266,7 +266,7 @@ public class Problems extends Base {
 		for (int i = 1; i <= 7; i++) {
 			try {
 				WebElement $problemedit$ = driver
-						.findElement(By.xpath("(//span[text()='Malignant neoplasm of testis'])[2]"));
+						.findElement(By.xpath("(//span[text()='Malignant neoplasm of testis'])[1]"));
 				if ($problemedit$.isDisplayed()) {
 
 					click($problemedit$);

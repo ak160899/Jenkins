@@ -4,10 +4,13 @@ import org.openqa.selenium.WebDriver;
 
 import com.pomclass.Billing;
 import com.pomclass.Calendar;
+import com.pomclass.CardDetails;
 import com.pomclass.HealthRecord;
+import com.pomclass.HomeModule;
 import com.pomclass.LoginPage;
 import com.pomclass.Message;
 import com.pomclass.PatientCreation;
+import com.pomclass.SelectYourPlan;
 import com.pomclass.Settings;
 import com.pomclass.TeleDcotor;
 
@@ -21,6 +24,9 @@ public class PageObjMan {
 	private TeleDcotor t;
 	private Message m;
 	private Settings s;
+	private HomeModule home;
+	private SelectYourPlan selectplan;
+	private CardDetails card;
 
 	public WebDriver driver;
 
@@ -35,6 +41,30 @@ public class PageObjMan {
 
 		}
 		return lg;
+	}
+
+	public CardDetails getInstanceCardDetails() {
+		if (card == null) {
+			card = new CardDetails(driver);
+		}
+		return card;
+
+	}
+
+	public SelectYourPlan getInstanceSelectYourPlan() {
+		if (selectplan == null) {
+			selectplan = new SelectYourPlan(driver);
+		}
+		return selectplan;
+
+	}
+
+	public HomeModule getInstanceHomeModule() {
+		if (home == null) {
+			home = new HomeModule(driver);
+		}
+		return home;
+
 	}
 
 	public PatientCreation getInstanceNewPatient() {

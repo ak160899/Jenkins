@@ -9,7 +9,7 @@ public class HomeModule {
 
 	public WebDriver driver;
 
-	@FindBy(xpath = "(//span[contains(text(),'New Pa')])[4]//parent::button")
+	@FindBy(xpath = "(//BUTTON[@title='Add new Patient'])[3]")
 	public WebElement $patientCreationButton;
 
 	@FindBy(id = "firstname")
@@ -27,8 +27,9 @@ public class HomeModule {
 	@FindBy(id = "createPatient")
 	public WebElement CreatePatient;
 
-	public HomeModule() {
-		// TODO Auto-generated constructor stub
+	public HomeModule(WebDriver driver) {
+		this.driver = driver;
+
 		PageFactory.initElements(driver, this);
 	}
 

@@ -2,10 +2,13 @@ package SubscriptionFeatures;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.Launch.LaunchBrowser;
 import org.base.Base;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,93 +29,44 @@ public class Premium_features extends Base {
 	WebDriverWait ww;
 	String kpid = "";
 	Calendars cal;
+	String ur;
 
 	@BeforeClass
-	private void LaunchBrwoser() throws InterruptedException, IOException {
+	private void LaunchBrwoser() throws Exception {
 
-		driver = setUp("chrome");
-		pom = new PageObjMan(driver);
-		j = (JavascriptExecutor) driver;
-		ww = new WebDriverWait(driver, 20);
-		String ur = ConfigManager.getconfigManager().getInstanceConfigReader().getUrl();
+		Map<String, Object> getConnection = LaunchBrowser.openConnection();
 
-		while (true) {
-			if (ur.equals("https://localhost:8443/")) {
-
-				driver.get(ConfigManager.getconfigManager().getInstanceConfigReader().getUrl());
-				while (true) {
-					try {
-						driver.findElement(By.id("details-button")).click();
-						driver.findElement(By.id("proceed-link")).click();
-						break;
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-
-				break;
-			} else if (ur.equals("https://www.75health.com/login.jsp")) {
-				driver.get("https://www.75health.com/login.jsp");
-
-				break;
-			}
-
-		}
-
-		while (true) {
-			try {
-				click(pom.getInstanceLoginPage().sigIn);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-
-		}
-		sleep(2000);
-		sendkeys(pom.getInstanceLoginPage().email,
-				ConfigManager.getconfigManager().getInstanceConfigReader().getEmail());
-		sendkeys(pom.getInstanceLoginPage().pass, ConfigManager.getconfigManager().getInstanceConfigReader().getpass());
-		click(pom.getInstanceLoginPage().login);
-		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-
-		/*
-		 * while (true) { if
-		 * (!driver.getCurrentUrl().equals("https://localhost:8443/health/#home")) {
-		 * click(pom.getInstanceLoginPage().login); break; } else { break; } }
-		 */
-		sleep(3000);
-
-		try {
-			sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		implicitWait(70, TimeUnit.SECONDS);
-
+		pom = (PageObjMan) getConnection.get("pom");
+		j = (JavascriptExecutor) getConnection.get("j");
+		ww = (WebDriverWait) getConnection.get("ww");
+		cal = (Calendars) getConnection.get("cal");
+		ur = (String) getConnection.get("url");
+		driver = (WebDriver) getConnection.get("driver");
 	}
 
 	@Test(priority = 0)
 	private void home() {
-		while (true) {
-			try {
 
-				WebElement ata = driver.findElement(By.xpath("(//span[contains(text(),'New Pa')])[4]//parent::button"));
-				visbility(driver, ata, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(ata));
+		try {
 
-				j.executeScript("arguments[0].click();", ata);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 40);
+
+			elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
+			click(pom.getInstanceHomeModule().$patientCreationButton);
+
+		} catch (ElementClickInterceptedException e) {
+
+			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 40);
+			elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
+			click(pom.getInstanceHomeModule().$patientCreationButton);
 		}
+
 		sendkeys(pom.getInstanceNewPatient().firstName, "sam");
 		sendkeys(pom.getInstanceNewPatient().lastname, "n");
 		click(pom.getInstanceNewPatient().clickGenderIcon);
 
 		List<WebElement> genders = driver.findElements(By.xpath("(//ul[@id='genderDropdown'])[1]/li"));
+
 		for (WebElement opt : genders) {
 
 			if (opt.getText().equals("Male")) {
@@ -121,12 +75,23 @@ public class Premium_features extends Base {
 
 			}
 			break;
-		} // Acc gets Created..
+		}
+		// Acc gets Created..
 		click(pom.getInstanceNewPatient().CreatePatient);
 
-		WebElement id = driver.findElement(By.xpath("//td[@id='val-kpid']"));
-		visbility(driver, id, 60);
-		kpid = id.getText();
+		while (true) {
+			try {
+				WebElement $patietcreateid$ = driver.findElement(By.xpath("//td[@id='val-kpid']"));
+				if ($patietcreateid$.isDisplayed()) {
+					kpid = $patietcreateid$.getText();
+					System.out.println("HOME PATIENT" + kpid);
+
+					break;
+				}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
 
 	}
 

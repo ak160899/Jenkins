@@ -36,6 +36,24 @@ public class ConfigReader {
 
 	}
 
+	public String insufficient3dCard() {
+
+		String insufficientcard = p.getProperty("insuffientcard");
+		return insufficientcard;
+	}
+
+	public String declinePayment() {
+		String decline = p.getProperty("Decline");
+		return decline;
+
+	}
+
+	public String fraudPrevention() {
+		String fraud = p.getProperty("AlwaysBlocked");
+		return fraud;
+
+	}
+
 	public String getEmail() {
 		String email = p.getProperty("email");
 		return email;
@@ -72,7 +90,7 @@ public class ConfigReader {
 		return $browser;
 
 	}
-	
+
 	public String accountType() {
 		String $accStatus = p.getProperty("user");
 		return $accStatus;

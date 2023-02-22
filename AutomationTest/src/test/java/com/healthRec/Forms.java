@@ -10,15 +10,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 public class Forms extends Base {
 	public WebDriver driver;
+
+	WebDriverWait wait;
 	// String ur;
 
 	public void $addForm(WebDriver driver) throws Throwable {
 		this.driver = driver;
+		wait = new WebDriverWait(driver, 50);
 
 		for (int i = 1; i <= 5; i++) {
 			try {
@@ -163,22 +167,19 @@ public class Forms extends Base {
 
 	public void $addFormToEhr(String s) {
 
-		for (int i = 1; i <= 5; i++) {
-			try {
-				implicitWait(30, TimeUnit.SECONDS);
-				WebElement addit = driver.findElement(By.xpath("//span[text()='" + s + "']//following::div[1]/span"));
-				visbility(driver, addit, 60);
-				actions("click", addit);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
 		try {
-			sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			implicitWait(30, TimeUnit.SECONDS);
+			WebElement addit = driver.findElement(By.xpath("//span[text()='" + s + "']//following::div[1]/span"));
+			visbility(driver, addit, 60);
+			wait.until(ExpectedConditions.elementToBeClickable(addit));
+			click(addit);
+
+		} catch (Exception e) {
+			implicitWait(30, TimeUnit.SECONDS);
+			WebElement addit = driver.findElement(By.xpath("//span[text()='" + s + "']//following::div[1]/span"));
+			visbility(driver, addit, 60);
+			wait.until(ExpectedConditions.elementToBeClickable(addit));
+			click(addit);
 		}
 
 	}

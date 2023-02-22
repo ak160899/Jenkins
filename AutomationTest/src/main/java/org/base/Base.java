@@ -32,7 +32,7 @@ public class Base {
 	public static WebDriverManager driver;
 	public static WebDriver wd;
 	public String value;
-	WebDriverWait wait;
+	static WebDriverWait wait;
 
 	public static WebDriver setUp(String name) {
 
@@ -55,6 +55,7 @@ public class Base {
 			wd = new InternetExplorerDriver();
 		}
 		wd.manage().window().maximize();
+
 		return wd;
 	}
 
@@ -122,8 +123,8 @@ public class Base {
 	// WebDriver wait
 
 	public void elementClickable(WebElement e) {
+		wait = new WebDriverWait(wd, 50);
 
-		
 		wait.until(ExpectedConditions.elementToBeClickable(e));
 
 	}

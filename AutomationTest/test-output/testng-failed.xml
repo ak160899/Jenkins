@@ -5,15 +5,9 @@
     <classes>
       <class name="runner.Local_Host">
         <methods>
-          <include name="calendar"/>
           <include name="PatientModule"/>
-          <include name="HomeModule"/>
-          <include name="HealthRec"/>
           <include name="LaunchBrwoser"/>
-          <include name="BillingModule"/>
-          <include name="Message"/>
           <include name="Settings"/>
-          <include name="TeleDoctor"/>
         </methods>
       </class> <!-- runner.Local_Host -->
     </classes>

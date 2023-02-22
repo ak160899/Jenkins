@@ -5,16 +5,21 @@
     <groups>
       <run>
         <include name="before"/>
+        <include name="home"/>
         <include name="patient"/>
-        <include name="healthrec"/>
+        <include name="calendar"/>
+        <include name="billing"/>
+        <include name="teledoctor"/>
+        <include name="message"/>
+        <include name="settings"/>
       </run>
     </groups>
     <classes>
       <class name="runner.Local_Host">
         <methods>
           <include name="PatientModule"/>
-          <include name="HealthRec"/>
           <include name="LaunchBrwoser"/>
+          <include name="Settings"/>
         </methods>
       </class> <!-- runner.Local_Host -->
     </classes>

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -29,16 +31,19 @@ public class Calendars extends Base {
 
 	public void caledarModule() throws Exception {
 
-		/*
-		 * if (cal.driver != null) { // System.out.println("Driver not null"); } else {
-		 * System.out.println("null"); }
-		 */
-
-		visbility(driver, pom.getInstanceCalendar().clickCalendar, 50);
-		WebDriverWait wait = new WebDriverWait(driver, 50);
-		// elementClickable(pom.getInstanceCalendar().clickCalendar);
-		click(pom.getInstanceCalendar().clickCalendar);
-
+		try {
+			visbility(driver, pom.getInstanceCalendar().clickCalendar, 50);
+			elementClickable(pom.getInstanceCalendar().clickCalendar);
+			click(pom.getInstanceCalendar().clickCalendar);
+		} catch (ElementClickInterceptedException e) {
+			visbility(driver, pom.getInstanceCalendar().clickCalendar, 50);
+			elementClickable(pom.getInstanceCalendar().clickCalendar);
+			click(pom.getInstanceCalendar().clickCalendar);
+		} catch (StaleElementReferenceException e) {
+			visbility(driver, pom.getInstanceCalendar().clickCalendar, 50);
+			elementClickable(pom.getInstanceCalendar().clickCalendar);
+			click(pom.getInstanceCalendar().clickCalendar);
+		}
 		implicitWait(60, TimeUnit.SECONDS);
 
 		driver.navigate().refresh();
@@ -380,7 +385,8 @@ public class Calendars extends Base {
 		for (int in = 1; in <= 7; in++) {
 			try {
 				if (s.equals("https://localhost:8443/health/#home") || s.equals("https://www.75health.com/health/#home")
-						|| s.equals("https://www.75health.com/health/#calendar")) {
+						|| s.equals("https://www.75health.com/health/#calendar")
+						|| s.equals("https://localhost:8443/health/#calendar")) {
 
 					if (count > 1) {
 						count = count - 1;

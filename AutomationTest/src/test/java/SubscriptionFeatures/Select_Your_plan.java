@@ -2,10 +2,13 @@ package SubscriptionFeatures;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.Launch.LaunchBrowser;
 import org.base.Base;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.calendar.Calendars;
 import com.data.ConfigManager;
 import com.pageObjeman.PageObjMan;
 
@@ -22,101 +26,77 @@ public class Select_Your_plan extends Base {
 	static PageObjMan pom;
 	static JavascriptExecutor j;
 	WebDriverWait ww;
-	String kpid = "3089-823";
+	String kpid = "3090-160";
 
 	@BeforeClass()
-	private void LaunchBrwoser() throws InterruptedException, IOException {
+	private void LaunchBrwoser() throws Exception {
+		Map<String, Object> getConnection = LaunchBrowser.openConnection();
 
-		driver = setUp("chrome");
-		pom = new PageObjMan(driver);
-		j = (JavascriptExecutor) driver;
-		ww = new WebDriverWait(driver, 20);
-		String ur = ConfigManager.getconfigManager().getInstanceConfigReader().getUrl();
+		pom = (PageObjMan) getConnection.get("pom");
+		j = (JavascriptExecutor) getConnection.get("j");
+		ww = (WebDriverWait) getConnection.get("ww");
 
-		while (true) {
-			if (ur.equals("https://localhost:8443/")) {
-
-				driver.get(ConfigManager.getconfigManager().getInstanceConfigReader().getUrl());
-				sleep(3000);
-				driver.findElement(By.id("details-button")).click();
-				sleep(3000);
-
-				driver.findElement(By.id("proceed-link")).click();
-				sleep(4000);
-				implicitWait(60, TimeUnit.SECONDS);
-
-				break;
-			} else if (ur.equals("https://www.75health.com/login.jsp")) {
-				driver.get("https://www.75health.com/login.jsp");
-
-				break;
-			}
-
-		}
-
-		click(pom.getInstanceLoginPage().sigIn);
-		sleep(2000);
-		sendkeys(pom.getInstanceLoginPage().email,
-				ConfigManager.getconfigManager().getInstanceConfigReader().getEmail());
-		sendkeys(pom.getInstanceLoginPage().pass, ConfigManager.getconfigManager().getInstanceConfigReader().getpass());
-		click(pom.getInstanceLoginPage().login);
-		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-
-		/*
-		 * while (true) { if
-		 * (!driver.getCurrentUrl().equals("https://localhost:8443/health/#home")) {
-		 * click(pom.getInstanceLoginPage().login); break; } else { break; } }
-		 */
-
-		System.out.println("BEFORE END...");
+		driver = (WebDriver) getConnection.get("driver");
 	}
 
 	@Test(priority = 1)
 	private void Home() throws InterruptedException {
-		System.out.println("ENTER SELECT");
 
-		for (int i = 1; i <= 7; i++) {
-			try {
-				WebElement $$subs$cribe$$ = driver
-						.findElement(By.xpath("(//button[contains(@title,'Subscribe Now')])[1]"));
-				if ($$subs$cribe$$.isDisplayed()) {
-
-					click($$subs$cribe$$);
-					break;
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		/* for (int i = 1; i <= 7; i++) { */
+		try {
+			WebElement $$subscribe = driver.findElement(By.xpath("(//button[contains(@title,'Subscribe Now')])[1]"));
+			/* if ($$subs$cribe$$.isDisplayed()) { */
+			elementClickable($$subscribe);
+			click($$subscribe);
+			// break;
+		} catch (ElementClickInterceptedException e) {
+			WebElement $$subscribe = driver.findElement(By.xpath("(//button[contains(@title,'Subscribe Now')])[1]"));
+			/* if ($$subs$cribe$$.isDisplayed()) { */
+			elementClickable($$subscribe);
+			click($$subscribe);
 		}
 
 		visbility(driver, pom.getInstanceSetting().$editplnCrossIcon$, 60);
+		elementClickable(pom.getInstanceSetting().$editplnCrossIcon$);
 		click(pom.getInstanceSetting().$editplnCrossIcon$);
 		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
+		elementClickable(pom.getInstanceSetting().$editplan$);
 		click(pom.getInstanceSetting().$editplan$);
+		System.out.println("ENTER CAROSEL");
 
 		for (int i = 1; i <= 3; i++) {
 			try {
 				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+				elementClickable(pom.getInstanceSetting().$Carosel$);
+				// click(pom.getInstanceSetting().$Carosel$);
+				System.out.println("carosel clicked");
 				actions("click", pom.getInstanceSetting().$Carosel$);
 				sleep(2500);
 			} catch (Exception e) {
-				// TODO: handle exception
+
+				for (int iN = 1; iN <= 3; iN++) {
+
+					visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+					elementClickable(pom.getInstanceSetting().$Carosel$);
+					actions("click", pom.getInstanceSetting().$Carosel$);
+				}
+				System.out.println(e);
 			}
 		}
 		driver.navigate().back();
 
 		sleep(3000);
-		while (true) {
-			try {
 
-				WebElement ata = driver.findElement(By.xpath("(//span[contains(text(),'New Pa')])[4]//parent::button"));
-				visbility(driver, ata, 60);
-				javascriptclick(ata);
-				break;
-			} catch (Exception e) {
-				System.out.println(e);
-			}
+		try {
+
+			elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
+			click(pom.getInstanceHomeModule().$patientCreationButton);
+
+		} catch (Exception e) {
+			elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
+			click(pom.getInstanceHomeModule().$patientCreationButton);
 		}
+
 		visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
 		click(pom.getInstanceSetting().$sub$scribe$);
 
@@ -126,7 +106,12 @@ public class Select_Your_plan extends Base {
 				actions("click", pom.getInstanceSetting().$Carosel$);
 				sleep(2500);
 			} catch (Exception e) {
-				// TODO: handle exception
+				for (int b = 1; b <= 3; b++) {
+
+					visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+					actions("click", pom.getInstanceSetting().$Carosel$);
+					sleep(2500);
+				}
 			}
 		}
 		driver.navigate().back();
@@ -216,19 +201,19 @@ public class Select_Your_plan extends Base {
 				actions("click", pom.getInstanceSetting().$Carosel$);
 				sleep(2500);
 			} catch (Exception e) {
-				// TODO: handle exception
+
 			}
 		}
 
 		sleep(2500);
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2, enabled = false)
 	private void patient_Module$() {
 
 		driver.navigate().to("https://localhost:8443/health/#list_patient");
 
-		WebElement $new_patient_cr$ = driver.findElement(By.xpath("(//button[@title='Add new Patient'])[1]"));
+		WebElement $new_patient_cr$ = driver.findElement(By.xpath("(//button[@title='Add new Patient'])[2]"));
 		visbility(driver, $new_patient_cr$, 60);
 		j.executeScript("arguments[0].click();", $new_patient_cr$);
 		visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
@@ -260,7 +245,7 @@ public class Select_Your_plan extends Base {
 
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, enabled = false)
 	private void e_h_r() throws InterruptedException {
 
 		driver.navigate().to("https://localhost:8443/health/#list_ehr");
@@ -330,7 +315,7 @@ public class Select_Your_plan extends Base {
 
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 4, enabled = false)
 	private void calendar$$$() throws InterruptedException {
 
 		driver.navigate().to("https://localhost:8443/health/#calendar");
@@ -442,148 +427,24 @@ public class Select_Your_plan extends Base {
 
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 5, enabled = false)
 	private void billing_$() {
 
-		while (true) {
-			try {
-				visbility(driver, pom.getInstanceBilling().clickBill, 60);
-				click(pom.getInstanceBilling().clickBill);
-				visbility(driver, pom.getInstanceBilling().clickCreateNewBill, 60);
-				click(pom.getInstanceBilling().clickCreateNewBill);
-
-				visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
-				click(pom.getInstanceSetting().$sub$scribe$);
-				visbility(driver, pom.getInstanceSetting().$editplnCrossIcon$, 60);
-				click(pom.getInstanceSetting().$editplnCrossIcon$);
-				visbility(driver, pom.getInstanceSetting().$editplan$, 60);
-				click(pom.getInstanceSetting().$editplan$);
-				break;
-			} catch (Exception e) {
-
-			}
+		try {
+			visbility(driver, pom.getInstanceBilling().clickBill, 60);
+			elementClickable(pom.getInstanceBilling().clickBill);
+			click(pom.getInstanceBilling().clickBill);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceBilling().clickBill, 60);
+			elementClickable(pom.getInstanceBilling().clickBill);
+			click(pom.getInstanceBilling().clickBill);
 		}
 
-		for (int i = 1; i <= 3; i++) {
-			try {
-				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-				actions("click", pom.getInstanceSetting().$Carosel$);
-				sleep(2500);
-			} catch (Exception e) {
-
-			}
-		}
-
-		driver.navigate().to("https://localhost:8443/health/#bill_report");
-		while (true)
-
-		{
-			try {
-				click(pom.getInstanceSetting().$dismissSubscribe$);
-
-				WebElement $filterButton$ = driver.findElement(By.xpath("//button[@onclick='bill_report.filter();']"));
-				visbility(driver, $filterButton$, 60);
-				click($filterButton$);
-				WebElement $applybutton$ = driver.findElement(By.xpath("(//button[@title='Apply filter'])[1]"));
-				visbility(driver, $applybutton$, 60);
-				click($applybutton$);
-
-				visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
-				click(pom.getInstanceSetting().$sub$scribe$);
-				visbility(driver, pom.getInstanceSetting().$editplnCrossIcon$, 60);
-				click(pom.getInstanceSetting().$editplnCrossIcon$);
-				visbility(driver, pom.getInstanceSetting().$editplan$, 60);
-				click(pom.getInstanceSetting().$editplan$);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-
-		for (int i = 1; i <= 3; i++) {
-			try {
-				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-				actions("click", pom.getInstanceSetting().$Carosel$);
-				sleep(2500);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-
-		driver.navigate().back();
-
-	}
-
-	@Test(priority = 6)
-	private void $teleDoctor$() throws InterruptedException {
-
-		driver.navigate().to("https://localhost:8443/health/#call_history");
-
-		visbility(driver, pom.getInstanceTeleDoctor().searchPatient, 60);
-		sendkeys(pom.getInstanceTeleDoctor().searchPatient, kpid);
-		WebElement pstl = driver.findElement(By.xpath("//td[@id='nameh']//following::td[1]"));
-		visbility(driver, pstl, 60);
-		actions("click", pstl);
-
-		while (true) {
-
-			if (pom.getInstanceSetting().$sub$scribe$.isDisplayed()) {
-				visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
-				javascriptclick(pom.getInstanceSetting().$sub$scribe$);
-				break;
-
-			}
-		}
-
-		visbility(driver, pom.getInstanceSetting().$editplnCrossIcon$, 60);
-		click(pom.getInstanceSetting().$editplnCrossIcon$);
-		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
-		click(pom.getInstanceSetting().$editplan$);
-
-		for (int i = 1; i <= 3; i++) {
-			try {
-				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-				actions("click", pom.getInstanceSetting().$Carosel$);
-				sleep(2500);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-		driver.navigate().back();
-		sleep(2500);
-
-		WebElement np1 = driver.findElement(By.xpath("//button[@title='Create new Patinet']"));
-		visbility(driver, np1, 60);
-		javascriptclick(np1);
+		visbility(driver, pom.getInstanceBilling().clickCreateNewBill, 60);
+		click(pom.getInstanceBilling().clickCreateNewBill);
 
 		visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
-		javascriptclick(pom.getInstanceSetting().$sub$scribe$);
-		visbility(driver, pom.getInstanceSetting().$editplnCrossIcon$, 60);
-		click(pom.getInstanceSetting().$editplnCrossIcon$);
-		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
-		click(pom.getInstanceSetting().$editplan$);
-
-		for (int i = 1; i <= 3; i++) {
-			try {
-				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-				actions("click", pom.getInstanceSetting().$Carosel$);
-				sleep(2500);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-		driver.navigate().back();
-
-	}
-
-	@Test(priority = 7)
-	private void message() {
-
-		driver.navigate().to("https://localhost:8443/health/#message_list");
-		visbility(driver, pom.getInstanceMessage().clickComposemMessage, 60);
-		click(pom.getInstanceMessage().clickComposemMessage);
-
-		visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
+		elementClickable(pom.getInstanceSetting().$sub$scribe$);
 		click(pom.getInstanceSetting().$sub$scribe$);
 
 		visbility(driver, pom.getInstanceSetting().$editplnCrossIcon$, 60);
@@ -597,7 +458,154 @@ public class Select_Your_plan extends Base {
 				actions("click", pom.getInstanceSetting().$Carosel$);
 				sleep(2500);
 			} catch (Exception e) {
-				// TODO: handle exception
+
+			}
+		}
+
+		driver.navigate().to("https://localhost:8443/health/#bill_report");
+
+		try {
+			elementClickable(pom.getInstanceSetting().$dismissSubscribe$);
+			click(pom.getInstanceSetting().$dismissSubscribe$);
+		} catch (Exception e) {
+			elementClickable(pom.getInstanceSetting().$dismissSubscribe$);
+			click(pom.getInstanceSetting().$dismissSubscribe$);
+		}
+		WebElement $filterButton$ = driver.findElement(By.xpath("//button[@onclick='bill_report.filter();']"));
+		visbility(driver, $filterButton$, 60);
+		elementClickable($filterButton$);
+		click($filterButton$);
+		WebElement $applybutton$ = driver.findElement(By.xpath("(//button[@title='Apply filter'])[1]"));
+		visbility(driver, $applybutton$, 60);
+		elementClickable($applybutton$);
+		click($applybutton$);
+
+		visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
+		elementClickable(pom.getInstanceSetting().$sub$scribe$);
+		click(pom.getInstanceSetting().$sub$scribe$);
+		try {
+			elementClickable(pom.getInstanceSetting().$dismissSubscribe$);
+			click(pom.getInstanceSetting().$dismissSubscribe$);
+		} catch (Exception e) {
+			elementClickable(pom.getInstanceSetting().$dismissSubscribe$);
+			click(pom.getInstanceSetting().$dismissSubscribe$);
+		}
+
+		visbility(driver, pom.getInstanceSetting().$editplnCrossIcon$, 60);
+		click(pom.getInstanceSetting().$editplnCrossIcon$);
+		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
+		click(pom.getInstanceSetting().$editplan$);
+
+		for (int i = 1; i <= 3; i++) {
+			try {
+				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+				actions("click", pom.getInstanceSetting().$Carosel$);
+				sleep(2500);
+			} catch (Exception e) {
+				for (int c = 1; c <= 3; c++) {
+
+					visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+					actions("click", pom.getInstanceSetting().$Carosel$);
+
+				}
+			}
+		}
+
+		driver.navigate().back();
+
+	}
+
+	@Test(priority = 6, enabled = false)
+	private void $teleDoctor$() throws InterruptedException {
+
+		driver.navigate().to("https://localhost:8443/health/#call_history");
+
+		visbility(driver, pom.getInstanceTeleDoctor().searchPatient, 60);
+		sendkeys(pom.getInstanceTeleDoctor().searchPatient, "ydshjjf");
+
+		try {
+			visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
+			elementClickable(pom.getInstanceSetting().$sub$scribe$);
+			click(pom.getInstanceSetting().$sub$scribe$);
+
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
+			elementClickable(pom.getInstanceSetting().$sub$scribe$);
+			click(pom.getInstanceSetting().$sub$scribe$);
+
+		}
+
+		elementClickable(pom.getInstanceSetting().$editplnCrossIcon$);
+		click(pom.getInstanceSetting().$editplnCrossIcon$);
+		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
+		click(pom.getInstanceSetting().$editplan$);
+
+		for (int i = 1; i <= 3; i++) {
+			try {
+				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+				actions("click", pom.getInstanceSetting().$Carosel$);
+				sleep(2500);
+			} catch (Exception e) {
+				for (int b = 1; b <= 3; b++) {
+					visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+					actions("click", pom.getInstanceSetting().$Carosel$);
+				}
+			}
+		}
+		driver.navigate().back();
+		sleep(2500);
+
+		WebElement np1 = driver.findElement(By.xpath("//button[@title='Create new Patinet']"));
+		elementClickable(np1);
+		click(np1);
+		elementClickable(pom.getInstanceSetting().$sub$scribe$);
+		click(pom.getInstanceSetting().$sub$scribe$);
+
+		elementClickable(pom.getInstanceSetting().$editplnCrossIcon$);
+		click(pom.getInstanceSetting().$editplnCrossIcon$);
+
+		elementClickable(pom.getInstanceSetting().$editplan$);
+		click(pom.getInstanceSetting().$editplan$);
+
+		for (int i = 1; i <= 3; i++) {
+			try {
+				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+				actions("click", pom.getInstanceSetting().$Carosel$);
+				sleep(2500);
+			} catch (Exception e) {
+
+			}
+		}
+		driver.navigate().back();
+
+	}
+
+	@Test(priority = 7, enabled = false)
+	private void message() {
+
+		driver.navigate().to("https://localhost:8443/health/#message_list");
+		visbility(driver, pom.getInstanceMessage().clickComposemMessage, 60);
+		elementClickable(pom.getInstanceMessage().clickComposemMessage);
+		click(pom.getInstanceMessage().clickComposemMessage);
+
+		elementClickable(pom.getInstanceSetting().$sub$scribe$);
+		click(pom.getInstanceSetting().$sub$scribe$);
+
+		elementClickable(pom.getInstanceSetting().$editplnCrossIcon$);
+		click(pom.getInstanceSetting().$editplnCrossIcon$);
+		elementClickable(pom.getInstanceSetting().$editplan$);
+		click(pom.getInstanceSetting().$editplan$);
+
+		for (int i = 1; i <= 3; i++) {
+			try {
+				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+				actions("click", pom.getInstanceSetting().$Carosel$);
+				sleep(2500);
+			} catch (Exception e) {
+				for (int c = 1; c <= 3; c++) {
+					visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+					actions("click", pom.getInstanceSetting().$Carosel$);
+				}
 			}
 		}
 		driver.navigate().back();
@@ -610,36 +618,36 @@ public class Select_Your_plan extends Base {
 		driver.navigate().to("https://localhost:8443/health/#setting");
 
 		// manage your account..
-		while (true) {
-			try {
-				driver.findElement(By.xpath("//button[text()='Manage your Account']")).click();
-				sleep(3000);
-				WebElement Basicinfo = driver.findElement(By.xpath("(//span[@title='Edit'])[2]"));
-				visbility(driver, Basicinfo, 60);
 
-				javascriptclick(Basicinfo);
+		try {
+			WebElement ManageurAccount = driver.findElement(By.xpath("//button[text()='Manage your Account']"));
+			elementClickable(ManageurAccount);
+			click(ManageurAccount);
+			sleep(3000);
 
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		} catch (Exception e) {
+			WebElement ManageurAccount = driver.findElement(By.xpath("//button[text()='Manage your Account']"));
+			elementClickable(ManageurAccount);
+			click(ManageurAccount);
 		}
-		WebElement $$smsnotifcation$ = driver.findElement(By.xpath("(//button[@id='smsP'])[1]"));
-		visbility(driver, $$smsnotifcation$, 60);
-		javascriptclick($$smsnotifcation$);
-		while (true) {
-			try {
-				WebElement $subscribenow$ = driver.findElement(By.xpath("//button[@title='Subscribe']"));
-				click($subscribenow$);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
+
+		WebElement Basicinfo = driver.findElement(By.xpath("(//span[@title='Edit'])[2]"));
+		visbility(driver, Basicinfo, 60);
+		elementClickable(Basicinfo);
+		click(Basicinfo);
+
+		WebElement $smsnotifcation = driver.findElement(By.xpath("(//button[@id='smsP'])[1]"));
+		elementClickable($smsnotifcation);
+		click($smsnotifcation);
+
+		WebElement $subscribenow$ = driver.findElement(By.xpath("//button[@title='Subscribe']"));
+		elementClickable($subscribenow$);
+		click($subscribenow$);
+
 		sleep(2500);
 		WebElement $click$edit$plan$ = driver.findElement(By.xpath("//button[@id='editPlanBtn']"));
-		visbility(driver, $click$edit$plan$, 60);
-		javascriptclick($click$edit$plan$);
+		elementClickable($click$edit$plan$);
+		click($click$edit$plan$);
 
 		for (int i = 1; i <= 2; i++) {
 			try {
@@ -648,21 +656,23 @@ public class Select_Your_plan extends Base {
 
 				sleep(2500);
 			} catch (Exception e) {
-				// TODO: handle exception
+
 			}
 		}
 		driver.navigate().to("https://localhost:8443/health/#setting");
 
 		// change password...
-		WebElement trp9 = driver.findElement(By.xpath("//button[@onclick='setting.changep()']"));
-		visbility(driver, trp9, 60);
-		click(trp9);
+		WebElement changepassword = driver.findElement(By.xpath("//button[@onclick='setting.changep()']"));
+		elementClickable(changepassword);
+		click(changepassword);
 
-		visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
-		javascriptclick(pom.getInstanceSetting().$sub$scribe$);
-		visbility(driver, pom.getInstanceSetting().$editplnCrossIcon$, 60);
+		elementClickable(pom.getInstanceSetting().$sub$scribe$);
+		click(pom.getInstanceSetting().$sub$scribe$);
+
+		elementClickable(pom.getInstanceSetting().$editplnCrossIcon$);
 		click(pom.getInstanceSetting().$editplnCrossIcon$);
-		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
+
+		elementClickable(pom.getInstanceSetting().$editplan$);
 		click(pom.getInstanceSetting().$editplan$);
 
 		for (int i = 1; i <= 3; i++) {
@@ -671,7 +681,7 @@ public class Select_Your_plan extends Base {
 				actions("click", pom.getInstanceSetting().$Carosel$);
 				sleep(2500);
 			} catch (Exception e) {
-				// TODO: handle exception
+
 			}
 		}
 		driver.navigate().back();
@@ -679,19 +689,19 @@ public class Select_Your_plan extends Base {
 		// manage users..
 
 		WebElement manageuser = driver.findElement(By.xpath("//button[@onclick='setting.userList()']"));
-		visbility(driver, manageuser, 60);
-		manageuser.click();
+		elementClickable(manageuser);
+		click(manageuser);
 
 		WebElement adduser = driver.findElement(By.xpath("//button[@onclick='Health.user_new()']"));
-		visbility(driver, adduser, 60);
-		adduser.click();
+		elementClickable(adduser);
+		click(adduser);
 
-		visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
-		javascriptclick(pom.getInstanceSetting().$sub$scribe$);
+		elementClickable(pom.getInstanceSetting().$sub$scribe$);
+		click(pom.getInstanceSetting().$sub$scribe$);
 
-		visbility(driver, pom.getInstanceSetting().$editplnCrossIcon$, 60);
+		elementClickable(pom.getInstanceSetting().$editplnCrossIcon$);
 		click(pom.getInstanceSetting().$editplnCrossIcon$);
-		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
+		elementClickable(pom.getInstanceSetting().$editplan$);
 		click(pom.getInstanceSetting().$editplan$);
 
 		for (int i = 1; i <= 3; i++) {
@@ -700,7 +710,7 @@ public class Select_Your_plan extends Base {
 				actions("click", pom.getInstanceSetting().$Carosel$);
 				sleep(2500);
 			} catch (Exception e) {
-				// TODO: handle exception
+
 			}
 		}
 		driver.navigate().to("https://localhost:8443/health/#setting");
@@ -873,16 +883,19 @@ public class Select_Your_plan extends Base {
 		ScriptExecutor($mrktplace$);
 		WebElement $$edit$$notify$$message$$;
 		// notifications
-		while (true) {
-			try {
-				$$edit$$notify$$message$$ = driver.findElement(By
-						.xpath("//span[text()='Edit Notification Messages']//parent::div//parent::div[1]/label/input"));
 
-				actions("click", $$edit$$notify$$message$$);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		try {
+			$$edit$$notify$$message$$ = driver.findElement(
+					By.xpath("//span[text()='Edit Notification Messages']//parent::div//parent::div[1]/label/input"));
+
+			actions("click", $$edit$$notify$$message$$);
+
+		} catch (Exception e) {
+			System.out.println("Noticication :" + e);
+			$$edit$$notify$$message$$ = driver.findElement(
+					By.xpath("//span[text()='Edit Notification Messages']//parent::div//parent::div[1]/label/input"));
+
+			actions("click", $$edit$$notify$$message$$);
 		}
 
 		visbility(driver, pom.getInstanceSetting().$sub$scribe$, 60);
@@ -898,7 +911,7 @@ public class Select_Your_plan extends Base {
 				actions("click", pom.getInstanceSetting().$Carosel$);
 				sleep(2500);
 			} catch (Exception e) {
-				// TODO: handle exception
+
 			}
 		}
 		sleep(2500);
@@ -944,22 +957,36 @@ public class Select_Your_plan extends Base {
 		sleep(2500);
 		driver.navigate().back();
 
-		while (true) {
-			try {
-				WebElement $auditreport$ = driver.findElement(By.xpath("//button[@onclick='setting.audit()']"));
-				actions("click", $auditreport$);
+		try {
+			WebElement $auditreport$ = driver.findElement(By.xpath("//button[@onclick='setting.audit()']"));
+			elementClickable($auditreport$);
+			click($auditreport$);
 
-				break;
-			} catch (Exception e) {
-
-			}
+		} catch (Exception e) {
+			WebElement $auditreport$ = driver.findElement(By.xpath("//button[@onclick='setting.audit()']"));
+			elementClickable($auditreport$);
+			click($auditreport$);
 		}
 
 		WebElement $subscribepremium$ = driver.findElement(By.xpath("//button[@title='Subscribe']"));
 		visbility(driver, $subscribepremium$, 60);
+		elementClickable($subscribepremium$);
 
 		click($subscribepremium$);
+
+		elementClickable(pom.getInstanceSetting().$editplnCrossIcon$);
+		click(pom.getInstanceSetting().$editplnCrossIcon$);
 		sleep(2500);
+		for (int i = 1; i <= 2; i++) {
+			try {
+				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+				actions("click", pom.getInstanceSetting().$Carosel$);
+				sleep(2500);
+			} catch (Exception e) {
+
+			}
+		}
+		sleep(2000);
 		driver.navigate().back();
 
 	}

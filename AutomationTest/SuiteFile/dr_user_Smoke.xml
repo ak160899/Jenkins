@@ -11,13 +11,13 @@
 
 
 				<include name="before"></include>
-				<!-- <include name="home"></include> -->
-				<include name="patient"></include>
+				<include name="home"></include>
+				<!-- <include name="patient"></include>
 				<include name="healthrec"></include>
-				<!-- <include name="calendar"></include> -->
-				<!-- <include name="billing"></include> <include name="teledoctor"></include> 
-					<include name="message"></include> <include name="settings"></include> -->
-
+				<include name="calendar"></include>
+				<include name="billing"></include> <include name="teledoctor"></include> 
+					<include name="message"></include> <include name="settings"></include>
+ -->
 
 
 

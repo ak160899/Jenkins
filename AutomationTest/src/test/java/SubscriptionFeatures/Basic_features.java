@@ -2,10 +2,13 @@ package SubscriptionFeatures;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.Launch.LaunchBrowser;
 import org.base.Base;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,77 +28,46 @@ public class Basic_features extends Base {
 	static JavascriptExecutor j;
 	WebDriverWait ww;
 	static String kpid = "";
+	public static String url;
+	static Calendars cal;
+	String $current;
+	public String ur;
 
 	@BeforeClass
-	private void LaunchBrwoser() throws InterruptedException, IOException {
+	private void LaunchBrwoser() throws Exception {
+		Map<String, Object> getConnection = LaunchBrowser.openConnection();
 
-		driver = setUp("chrome");
-		pom = new PageObjMan(driver);
-		j = (JavascriptExecutor) driver;
-		ww = new WebDriverWait(driver, 20);
-		String ur = ConfigManager.getconfigManager().getInstanceConfigReader().getUrl();
+		pom = (PageObjMan) getConnection.get("pom");
+		j = (JavascriptExecutor) getConnection.get("j");
+		ww = (WebDriverWait) getConnection.get("ww");
+		cal = (Calendars) getConnection.get("cal");
+		ur = (String) getConnection.get("url");
 
-		while (true) {
-			if (ur.equals("https://localhost:8443/")) {
-
-				driver.get(ConfigManager.getconfigManager().getInstanceConfigReader().getUrl());
-				sleep(3000);
-				driver.findElement(By.id("details-button")).click();
-				sleep(3000);
-
-				driver.findElement(By.id("proceed-link")).click();
-				sleep(4000);
-				implicitWait(60, TimeUnit.SECONDS);
-
-				break;
-			} else if (ur.equals("https://www.75health.com/login.jsp")) {
-				driver.get("https://www.75health.com/login.jsp");
-
-				break;
-			}
-
-		}
-
-		click(pom.getInstanceLoginPage().sigIn);
-		sleep(2000);
-		sendkeys(pom.getInstanceLoginPage().email,
-				ConfigManager.getconfigManager().getInstanceConfigReader().getEmail());
-		sendkeys(pom.getInstanceLoginPage().pass, ConfigManager.getconfigManager().getInstanceConfigReader().getpass());
-		click(pom.getInstanceLoginPage().login);
-
-		ww.until(ExpectedConditions.urlToBe("https://localhost:8443/health/#home"));
-
-		while (true) {
-
-			if (driver.getCurrentUrl().equals("https://localhost:8443/health/#home")) {
-				break;
-			}
-		}
-
-		implicitWait(70, TimeUnit.SECONDS);
-
+		driver = (WebDriver) getConnection.get("driver");
 	}
 
 	@Test(priority = 0)
-	private void home() {
-		while (true) {
-			try {
+	private void home() throws Exception {
+		try {
 
-				WebElement ata = driver.findElement(By.xpath("(//span[contains(text(),'New Pa')])[4]//parent::button"));
-				visbility(driver, ata, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(ata));
+			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 40);
 
-				j.executeScript("arguments[0].click();", ata);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
+			click(pom.getInstanceHomeModule().$patientCreationButton);
+
+		} catch (ElementClickInterceptedException e) {
+
+			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 40);
+			elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
+			click(pom.getInstanceHomeModule().$patientCreationButton);
 		}
+
 		sendkeys(pom.getInstanceNewPatient().firstName, "sam");
 		sendkeys(pom.getInstanceNewPatient().lastname, "n");
 		click(pom.getInstanceNewPatient().clickGenderIcon);
 
 		List<WebElement> genders = driver.findElements(By.xpath("(//ul[@id='genderDropdown'])[1]/li"));
+
 		for (WebElement opt : genders) {
 
 			if (opt.getText().equals("Male")) {
@@ -104,31 +76,50 @@ public class Basic_features extends Base {
 
 			}
 			break;
-		} // Acc gets Created..
+		}
+		// Acc gets Created..
 		click(pom.getInstanceNewPatient().CreatePatient);
 
-		WebElement id = driver.findElement(By.xpath("//td[@id='val-kpid']"));
-		visbility(driver, id, 60);
-		kpid = id.getText();
+		try {
+			WebElement $patietcreateid$ = driver.findElement(By.xpath("//td[@id='val-kpid']"));
+			visbility(driver, $patietcreateid$, 40);
+			kpid = $patietcreateid$.getText();
+			System.out.println("HOME PATIENT" + kpid);
 
+		} catch (Exception e) {
+			WebElement $patietcreateid$ = driver.findElement(By.xpath("//td[@id='val-kpid']"));
+			visbility(driver, $patietcreateid$, 40);
+			kpid = $patietcreateid$.getText();
+			System.out.println("HOME PATIENT" + kpid);
+		}
+
+		navigateback(2);
+		$current = driver.getCurrentUrl();
+		cal = new Calendars(driver, pom);
+		cal.$calenderMod($current, kpid);
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 1, enabled = false)
 	private void $Ehr_features() throws InterruptedException {
 
 		driver.navigate().to("https://localhost:8443/health/#list_ehr");
-		while (true) {
-			try {
-				WebElement remv = driver
-						.findElement(By.xpath("(//div[@id='ehr-search']/div[2]//following::input[1])[1]"));
-				visbility(driver, remv, 60);
 
-				javascriptclick(remv);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		try {
+			WebElement remv = driver.findElement(By.xpath("(//div[@id='ehr-search']/div[2]//following::input[1])[1]"));
+			visbility(driver, remv, 60);
+
+			elementClickable(remv);
+			click(remv);
+
+		} catch (ElementClickInterceptedException e) {
+			System.out.println("exception in ehr");
+			WebElement remv = driver.findElement(By.xpath("(//div[@id='ehr-search']/div[2]//following::input[1])[1]"));
+			visbility(driver, remv, 60);
+
+			elementClickable(remv);
+			click(remv);
 		}
+
 		List<WebElement> wwe = driver
 				.findElements(By.xpath("//div[@id='vvid']//following::ul[2]/li/a/table/tbody/tr/td[2]"));
 		for (WebElement web : wwe) {
@@ -136,9 +127,9 @@ public class Basic_features extends Base {
 			if (web.getText().trim().equals(kpid)) {
 
 				visbility(driver, web, 60);
-				clickble(driver, web, 60);
+				elementClickable(web);
 
-				web.click();
+				click(web);
 				break;
 			}
 
@@ -146,20 +137,21 @@ public class Basic_features extends Base {
 		sleep(2000);
 
 		WebElement r7 = driver.findElement(By.id("newMedicalRecordButton"));
-		visbility(driver, r7, 60);
-		r7.click();
+		elementClickable(r7);
+		click(r7);
 
 		WebElement elipse = driver.findElement(By.xpath("(//span[@id='list_patient_needHelp'])[1]/span"));
 		visbility(driver, elipse, 60);
 		clickble(driver, elipse, 60);
-		actions("click", elipse);
+		click(elipse);
 
 		List<WebElement> hh = driver
 				.findElements(By.xpath("(//span[@id='list_patient_needHelp'])[1]/span//following::ul[1]/li"));
 		for (WebElement web : hh) {
 			if (web.getText().trim().equals("Reset Setting")) {
 				visbility(driver, web, 60);
-				web.click();
+				elementClickable(web);
+				click(web);
 				break;
 			}
 
@@ -228,72 +220,65 @@ public class Basic_features extends Base {
 		}
 
 		// check basic package form status..
-		while (true) {
+
+		WebElement formaddbtn = driver.findElement(By.xpath("//div[contains(@title,'Add Forms')]"));
+		actions("move to element", formaddbtn);
+		visbility(driver, formaddbtn, 60);
+		elementClickable(formaddbtn);
+		click(formaddbtn);
+
+		WebElement clickupgradebtninfrm = driver.findElement(By.xpath("(//button[contains(@title,'Upgrade')])[3]"));
+		elementClickable(clickupgradebtninfrm);
+		click(clickupgradebtninfrm);
+
+		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
+		elementClickable(pom.getInstanceSetting().$editplan$);
+		click(pom.getInstanceSetting().$editplan$);
+		sleep(2000);
+		for (int i = 1; i <= 2; i++) {
 			try {
-				WebElement formaddbtn = driver.findElement(By.xpath("//div[contains(@title,'Add Forms')]"));
-				actions("move to element", formaddbtn);
-				visbility(driver, formaddbtn, 60);
-				javascriptclick(formaddbtn);
-
-				WebElement clickupgradebtninfrm = driver
-						.findElement(By.xpath("(//button[contains(@title,'Upgrade')])[3]"));
-				visbility(driver, clickupgradebtninfrm, 60);
-				javascriptclick(clickupgradebtninfrm);
-
-				visbility(driver, pom.getInstanceSetting().$editplan$, 60);
-				javascriptclick(pom.getInstanceSetting().$editplan$);
-				sleep(2000);
-				for (int i = 1; i <= 2; i++) {
-					try {
-						visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-						actions("click", pom.getInstanceSetting().$Carosel$);
-						sleep(2500);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-
-				driver.navigate().back();
-				break;
+				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+				actions("click", pom.getInstanceSetting().$Carosel$);
+				sleep(2500);
 			} catch (Exception e) {
-
+				for (int b = 1; b <= 2; b++) {
+					visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+					actions("click", pom.getInstanceSetting().$Carosel$);
+				}
 			}
 		}
+
+		driver.navigate().back();
+
 		// Attach file..
-		while (true) {
+
+		WebElement attachfileAddBtn = driver.findElement(By.xpath("//div[contains(@title,'Add Attach File')]"));
+		actions("move to element", attachfileAddBtn);
+		visbility(driver, attachfileAddBtn, 60);
+		elementClickable(attachfileAddBtn);
+		click(attachfileAddBtn);
+
+		WebElement attdropdown = driver.findElement(By.xpath("//div[@id='Attach_FileKpop2']/div[2]/div[1]/select"));
+		dropDown("index", attdropdown, "3");
+		WebElement clickupgradebtninattach = driver.findElement(By.xpath("(//button[contains(@title,'Upgrade')])[3]"));
+		elementClickable(clickupgradebtninattach);
+		click(clickupgradebtninattach);
+
+		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
+		elementClickable(pom.getInstanceSetting().$editplan$);
+		click(pom.getInstanceSetting().$editplan$);
+
+		for (int i = 1; i <= 2; i++) {
 			try {
-
-				WebElement attachfileAddBtn = driver.findElement(By.xpath("//div[contains(@title,'Add Attach File')]"));
-				actions("move to element", attachfileAddBtn);
-				visbility(driver, attachfileAddBtn, 60);
-				javascriptclick(attachfileAddBtn);
-				WebElement attdropdown = driver
-						.findElement(By.xpath("//div[@id='Attach_FileKpop2']/div[2]/div[1]/select"));
-				dropDown("index", attdropdown, "3");
-				WebElement clickupgradebtninattach = driver
-						.findElement(By.xpath("(//button[contains(@title,'Upgrade')])[3]"));
-				visbility(driver, clickupgradebtninattach, 60);
-				javascriptclick(clickupgradebtninattach);
-				visbility(driver, pom.getInstanceSetting().$editplan$, 60);
-				javascriptclick(pom.getInstanceSetting().$editplan$);
-
-				for (int i = 1; i <= 2; i++) {
-					try {
-						visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-						actions("click", pom.getInstanceSetting().$Carosel$);
-						sleep(2500);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-
-				driver.navigate().back();
-				break;
+				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+				actions("click", pom.getInstanceSetting().$Carosel$);
+				sleep(2500);
 			} catch (Exception e) {
 
 			}
-
 		}
+
+		driver.navigate().back();
 
 		// icd codes search ehr..
 
@@ -443,97 +428,97 @@ public class Basic_features extends Base {
 			}
 		}
 
+		driver.findElement(By.xpath("(//button[contains(@title,'Add Multiple Vitals')])[1]")).click();
+
+		driver.findElement(By.id("wresult")).sendKeys("55");
+		WebElement edity = driver.findElement(By.xpath("(//button[@id='accept-btn'])[1]"));
+		visbility(driver, edity, 60);
+		elementClickable(edity);
+		click(edity);
+
 		// follow up custom option checking...
 
-		while (true) {
+		try {
 
-			try {
+			WebElement createfollowup = driver.findElement(By.xpath("(//button[@id='followUpAdd'])[1]/div[1]"));
+			elementClickable(createfollowup);
+			click(createfollowup);
+		} catch (ElementClickInterceptedException e) {
+			WebElement createfollowup = driver.findElement(By.xpath("(//button[@id='followUpAdd'])[1]/div[1]"));
+			elementClickable(createfollowup);
+			click(createfollowup);
+		}
+		sleep(4000);
+		implicitWait(30, TimeUnit.SECONDS);
+		WebElement crt = driver
+				.findElement(By.xpath("//div[@id='followupEhr']/div[2]/div[3]/div[1]//following::div[2]/input"));
+		elementClickable(crt);
+		click(crt);
+		sleep(2000);
+		WebElement folowypyr = driver.findElement(By.xpath("//select[@class='ui-datepicker-year']"));
+		dropDown("text", folowypyr, "2023");
+		WebElement folowupmnth = driver.findElement(By.xpath("//select[@class='ui-datepicker-month']"));
+		dropDown("text", folowupmnth, "Dec");
+		driver.findElement(By.xpath("(//a[text()='31'])")).click();
+		WebElement fixappo = driver.findElement(By.xpath("(//button[@id='fixAppointment'])[1]"));
+		visbility(driver, fixappo, 50);
+		elementClickable(fixappo);
+		click(fixappo);
 
-				driver.findElement(By.xpath("(//button[contains(@title,'Add Multiple Vitals')])[1]")).click();
+		List<WebElement> tot = driver.findElements(By.xpath("(//div[@id='date-data'])[1]"));
+		int totaly = tot.size();
+		// System.out.println("found you>>>" + totaly);
+		implicitWait(30, TimeUnit.SECONDS);
 
-				driver.findElement(By.id("wresult")).sendKeys("55");
-				WebElement edity = driver.findElement(By.xpath("(//button[@id='accept-btn'])[1]"));
-				visbility(driver, edity, 60);
-				javascriptclick(edity);
+		boolean b = false;
+		for (int i = 1; i <= totaly; i++) {
+			sleep(3000);
+			List<WebElement> rqq = driver
+					.findElements(By.xpath("(//div[@id='formAppointment'])[2]/div/div[2]/div[2]/div[2]/div"));
 
-				WebElement createfollowup = driver.findElement(By.xpath("(//button[@id='followUpAdd'])[1]/div[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(createfollowup));
-				actions("click", createfollowup);
-				sleep(4000);
-				implicitWait(30, TimeUnit.SECONDS);
-				WebElement crt = driver.findElement(
-						By.xpath("//div[@id='followupEhr']/div[2]/div[3]/div[1]//following::div[2]/input"));
-				actions("click", crt);
-				sleep(2000);
-				WebElement folowypyr = driver.findElement(By.xpath("//select[@class='ui-datepicker-year']"));
-				dropDown("text", folowypyr, "2022");
-				WebElement folowupmnth = driver.findElement(By.xpath("//select[@class='ui-datepicker-month']"));
-				dropDown("index", folowupmnth, "0");
-				driver.findElement(By.xpath("(//a[text()='31'])")).click();
-				WebElement fixappo = driver.findElement(By.xpath("(//button[@id='fixAppointment'])[1]"));
+			// System.out.println("total number of displayed time in the list:" +
+			// rqq.size());
+			for (int jj = 1; jj <= rqq.size(); jj++) {
 
-				sleep(3000);
-				javascriptclick(fixappo);
+				WebElement checkcn = driver
+						.findElement(By.xpath("(//div[@id='date-data'])[1]/div[2]/div[" + jj + "]/div/div[1]"));
+				// System.out.println(checkcn.getText());
 
-				List<WebElement> tot = driver.findElements(By.xpath("(//div[@id='date-data'])[1]"));
-				int totaly = tot.size();
-				// System.out.println("found you>>>" + totaly);
-				implicitWait(30, TimeUnit.SECONDS);
+				WebElement sm = driver
+						.findElement(By.xpath("(//div[@id='date-data'])[1]/div[2]/div[" + jj + "]/div/div[2]/span[3]"));
+				// System.out.println(sm.getText().isEmpty());
 
-				boolean b = false;
-				for (int i = 1; i <= totaly; i++) {
+				if (checkcn.isDisplayed() && sm.getText().isEmpty()) {
+					b = true;
+					checkcn.click();
 					sleep(3000);
-					List<WebElement> rqq = driver
-							.findElements(By.xpath("(//div[@id='formAppointment'])[2]/div/div[2]/div[2]/div[2]/div"));
+					break;
 
-					// System.out.println("total number of displayed time in the list:" +
-					// rqq.size());
-					for (int jj = 1; jj <= rqq.size(); jj++) {
-
-						WebElement checkcn = driver
-								.findElement(By.xpath("(//div[@id='date-data'])[1]/div[2]/div[" + jj + "]/div/div[1]"));
-						// System.out.println(checkcn.getText());
-
-						WebElement sm = driver.findElement(
-								By.xpath("(//div[@id='date-data'])[1]/div[2]/div[" + jj + "]/div/div[2]/span[3]"));
-						// System.out.println(sm.getText().isEmpty());
-
-						if (checkcn.isDisplayed() && sm.getText().isEmpty()) {
-							b = true;
-							checkcn.click();
-							sleep(3000);
-							break;
-
-						}
-
-					}
-					if (b == true) {
-						WebElement $foloupBtn = driver
-								.findElement(By.xpath("(//button[@id='followupAdmissionVal_dropdown'])[1]"));
-						visbility(driver, $foloupBtn, 40);
-						click($foloupBtn);
-						break;
-
-					}
 				}
-				break;
-
-			} catch (Exception e) {
 
 			}
+			if (b == true) {
+				WebElement $foloupBtn = driver
+						.findElement(By.xpath("(//button[@id='followupAdmissionVal_dropdown'])[1]"));
+				visbility(driver, $foloupBtn, 40);
+				click($foloupBtn);
+				break;
 
+			}
 		}
-		sleep(2500);
+
+		sleep(4000);
 
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2, enabled = false)
 	private void $$calendarFeatures() throws Exception {
 
 		Calendars cal = new Calendars(driver, pom);
 		cal.caledarModule();
-		String url = driver.getCurrentUrl();
-		cal.$calenderMod(url, kpid);
+		$current = driver.getCurrentUrl();
+		cal.$dayDrop($current);
+		cal.$calenderMod($current, kpid);
 
 	}
 
@@ -644,43 +629,46 @@ public class Basic_features extends Base {
 				}
 
 				WebElement clickadditem = driver.findElement(By.xpath(
-						"//div[@id='referral']//following::div[1]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
+						"//div[@id='referral']//following::div[4]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
 				visbility(driver, clickadditem, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(clickadditem));
 				click(clickadditem);
 				WebElement sdf = driver.findElement(By.xpath(
-						"(//div[contains(text(),'Type or select item/service and price')])[2]//following::input[1]"));
+						"(//div[contains(text(),'Type or select item/service and price')])[1]//following::input[1]"));
 				visbility(driver, sdf, 60);
 				sendkeys(sdf, "test");
 				WebElement sdf2 = driver.findElement(By.xpath(
-						"(//div[contains(text(),'Type or select item/service and price')])[2]//following::input[2]"));
+						"(//div[contains(text(),'Type or select item/service and price')])[1]//following::input[2]"));
 				visbility(driver, sdf2, 60);
 				sendkeys(sdf2, "5");
-				WebElement saveitem = driver.findElement(By
-						.xpath("//div[@id='referral']//following::div[1]/div[3]/div/div/div[2]/div[6]/div/button[2]"));
+				WebElement saveitem = driver.findElement(By.xpath("(//div[@id='ItemKpop2']//following::button[2])[1]"));
 				visbility(driver, saveitem, 60);
-				javascriptclick(saveitem);
+				ww.until(ExpectedConditions.elementToBeClickable(saveitem));
+				click(saveitem);
 
 				sleep(2000);
 				WebElement edititem = driver.findElement(By.xpath("//span[text()='test']"));
 				visbility(driver, edititem, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(edititem));
 				actions("click", edititem);
 				while (true) {
 					try {
-						WebElement deleteitem = driver.findElement(By.xpath(
-								"//div[@id='referral']//following::div[1]/div[3]/div/div/div[2]//parent::div[1]/div[1]/div[2]/span[2]"));
+						WebElement deleteitem = driver
+								.findElement(By.xpath("//div[@id='ItemKpop2']/div[1]/div[2]/span[1]"));
 						if (deleteitem.isDisplayed()) {
 							click(deleteitem);
 							break;
 						}
 
 					} catch (Exception e) {
-						// TODO: handle exception
+
 					}
 				}
 
 				WebElement itemservicebackarrow = driver
-						.findElement(By.xpath("(//div[@id='invoiceAdd'])[1]/div[1]/div[1]/span[1]"));
+						.findElement(By.xpath("//div[@id='ItemFavKpop2']/div[1]/div[2]/span"));
 				visbility(driver, itemservicebackarrow, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(itemservicebackarrow));
 				javascriptclick(itemservicebackarrow);
 				sleep(2500);
 				while (true) {
@@ -691,7 +679,6 @@ public class Basic_features extends Base {
 
 					}
 				}
-
 			} else if (w.getText().trim().contentEquals("Message")) {
 				while (true) {
 					try {
@@ -706,6 +693,7 @@ public class Basic_features extends Base {
 				WebElement addnewfavmessage = driver
 						.findElement(By.xpath("(//div[@id='message'])[1]/div[1]/div//following::td[4]/span[2]"));
 				visbility(driver, addnewfavmessage, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(addnewfavmessage));
 				javascriptclick(addnewfavmessage);
 
 				WebElement msf = driver.findElement(By.xpath("//textarea[@id='message1']"));
@@ -715,19 +703,23 @@ public class Basic_features extends Base {
 				WebElement savemesssage = driver
 						.findElement(By.xpath("//textarea[@id='message1']//following::button[2]"));
 				visbility(driver, savemesssage, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(savemesssage));
 				javascriptclick(savemesssage);
 				sleep(2500);
 				WebElement editmessage = driver.findElement(By.xpath("//div[text()='hello']"));
+				ww.until(ExpectedConditions.elementToBeClickable(editmessage));
 				actions("click", editmessage);
 				WebElement deletemessage = driver
 						.findElement(By.xpath("//div[@id='MessageKpop2']/div[1]/div[2]/span[1]"));
 				visbility(driver, deletemessage, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(deletemessage));
 				javascriptclick(deletemessage);
 
 				sleep(3000);
 				WebElement gobackmessage = driver
 						.findElement(By.xpath("(//span[text()='Favorite Message'])[1]//following::div[1]/span"));
 				visbility(driver, gobackmessage, 60);
+				ww.until(ExpectedConditions.elementToBeClickable(gobackmessage));
 				javascriptclick(gobackmessage);
 
 				sleep(3000);
@@ -775,11 +767,11 @@ public class Basic_features extends Base {
 		}
 
 		// market place..
-
+		WebElement $marketplace$;
 		while (true) {
 			try {
 
-				WebElement $marketplace$ = driver.findElement(By.xpath("//button[text()='Market Place']"));
+				$marketplace$ = driver.findElement(By.xpath("//button[text()='Market Place']"));
 
 				sleep(2000);
 				visbility(driver, $marketplace$, 60);
@@ -793,46 +785,56 @@ public class Basic_features extends Base {
 		}
 		driver.navigate().back();
 		sleep(2000);
+
+		try {
+			ScriptExecutor($marketplace$);
+			sleep(2500);
+		} catch (Exception e) {
+			ScriptExecutor($marketplace$);
+			sleep(2500);
+		}
+
 		// Notifications...
 
-		while (true) {
+		try {
+
+			WebElement $$edit$$notify$$message$$ = driver
+					.findElement(By.xpath("//input[@id='all-notification-mess']//following::span[1]"));
+			elementClickable($$edit$$notify$$message$$);
+			actions("click", $$edit$$notify$$message$$);
+			System.out.println("clicked Notication toggle button");
+
+		} catch (Exception e) {
+			WebElement $$edit$$notify$$message$$ = driver
+					.findElement(By.xpath("(//span[@class='slider1 round1'])[10]"));
+			elementClickable($$edit$$notify$$message$$);
+			actions("click", $$edit$$notify$$message$$);
+
+		}
+		WebElement $$plnupgrd$$detaisl$ = driver.findElement(By.xpath("(//button[contains(@title,'Upgrade')])[3]"));
+		visbility(driver, $$plnupgrd$$detaisl$, 60);
+		click($$plnupgrd$$detaisl$);
+
+		j.executeScript("window.scrollBy(0,350)", "");
+		sleep(4000);
+		WebElement $click$edit$planz$ = driver.findElement(By.xpath("//button[@id='editPlanBtn']"));
+		ScriptExecutor($click$edit$planz$);
+		visbility(driver, $click$edit$planz$, 60);
+		javascriptclick($click$edit$planz$);
+		sleep(4000);
+
+		for (int i = 1; i <= 2; i++) {
 			try {
-
-				WebElement $$edit$$notify$$message$$ = driver.findElement(By
-						.xpath("//span[text()='Edit Notification Messages']//parent::div//parent::div[1]/label/input"));
-
-				actions("click", $$edit$$notify$$message$$);
-				WebElement $$plnupgrd$$detail$ = driver
-						.findElement(By.xpath("(//button[contains(@title,'Upgrade')])[3]"));
-				visbility(driver, $$plnupgrd$$detail$, 60);
-				click($$plnupgrd$$detail$);
-
-				j.executeScript("window.scrollBy(0,350)", "");
-				sleep(4000);
-				WebElement $click$edit$planz$ = driver.findElement(By.xpath("//button[@id='editPlanBtn']"));
-				ScriptExecutor($click$edit$planz$);
-				visbility(driver, $click$edit$planz$, 60);
-				javascriptclick($click$edit$planz$);
-				sleep(4000);
-
-				for (int i = 1; i <= 2; i++) {
-					try {
-						visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-						click(pom.getInstanceSetting().$Carosel$);
-						sleep(2500);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-
-				sleep(3000);
-				driver.navigate().back();
-
-				break;
+				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
+				click(pom.getInstanceSetting().$Carosel$);
+				sleep(2500);
 			} catch (Exception e) {
 
 			}
 		}
+
+		sleep(3000);
+		driver.navigate().back();
 
 		// Audit Report...
 		while (true) {
