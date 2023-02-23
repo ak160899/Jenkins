@@ -187,16 +187,21 @@ public class Local_Host extends Base {
 			System.out.println(e);
 		}
 
-		WebElement s = driver.findElement(By.xpath("(//input[@id='patientPartyName'])[2]"));
-		visbility(driver, s, 60);
-		s.sendKeys(kpid);
-
+		try {
+			WebElement s = driver.findElement(By.xpath("(//input[@id='patientPartyName'])[2]"));
+			visbility(driver, s, 60);
+			s.sendKeys(kpid);
+		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+			WebElement s = driver.findElement(By.xpath("(//input[@id='patientPartyName'])[2]"));
+			visbility(driver, s, 60);
+			s.sendKeys(kpid);
+		}
 		try {
 			WebElement kp = driver.findElement(By.xpath("//div[text()=" + "'" + kpid + "']"));
 			elementClickable(kp);
 			click(kp);
 
-		} catch (ElementClickInterceptedException e) {
+		} catch (ElementClickInterceptedException | StaleElementReferenceException e) {
 			WebElement kp = driver.findElement(By.xpath("//div[text()=" + "'" + kpid + "']"));
 			elementClickable(kp);
 			click(kp);
@@ -380,9 +385,15 @@ public class Local_Host extends Base {
 		// driver.navigate().to("https://localhost:8443/health/#list_patient");
 		// driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
 
-		visbility(driver, pom.getInstanceNewPatient().patientmodReport, 40);
-		elementClickable(pom.getInstanceNewPatient().patientmodReport);
-		click(pom.getInstanceNewPatient().patientmodReport);
+		try {
+			visbility(driver, pom.getInstanceNewPatient().patientmodReport, 40);
+			elementClickable(pom.getInstanceNewPatient().patientmodReport);
+			click(pom.getInstanceNewPatient().patientmodReport);
+		} catch (ElementClickInterceptedException e) {
+			visbility(driver, pom.getInstanceNewPatient().patientmodReport, 40);
+			elementClickable(pom.getInstanceNewPatient().patientmodReport);
+			click(pom.getInstanceNewPatient().patientmodReport);
+		}
 
 		try {
 			visbility(driver, pom.getInstanceNewPatient().patientReportSerachNametxtBox, 40);
@@ -5569,7 +5580,7 @@ public class Local_Host extends Base {
 			}
 
 		}
-	//	driver.navigate().refresh();
+		// driver.navigate().refresh();
 		sleep(2500);
 		// Hospital codes... // Item/service code...
 

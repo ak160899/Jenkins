@@ -3,13 +3,12 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="runner.Local_Host">
+      <class name="org.patientLogin.PatientInfo">
         <methods>
-          <include name="PatientModule"/>
-          <include name="LaunchBrwoser"/>
-          <include name="Settings"/>
+          <include name="Login"/>
+          <include name="message"/>
         </methods>
-      </class> <!-- runner.Local_Host -->
+      </class> <!-- org.patientLogin.PatientInfo -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.base.Base;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -27,7 +28,7 @@ public class PatietAppoint extends Base {
 			List<WebElement> rchange = driver
 					.findElements(By.xpath("(//div[@id='date-data'][" + i + "]/div[2]/div/div[1]/div[1]/div[1])"));
 			int avaiable = rchange.size();
-			int count = 1;
+			int count = 2;
 			for (int b = 1; b <= avaiable; b++) {
 
 				WebElement tp = driver.findElement(
@@ -88,8 +89,9 @@ public class PatietAppoint extends Base {
 
 				for (int in = 1; in <= 7; in++) {
 					try {
-						WebElement goToehr = driver.findElement(By.xpath("(//button[@id='cancel-btn1'])[1]"));
+						WebElement goToehr = driver.findElement(By.id("goEhrButton"));
 						if (goToehr.isDisplayed()) {
+							elementClickable(goToehr);
 							click(goToehr);
 							break;
 						}
@@ -98,16 +100,16 @@ public class PatietAppoint extends Base {
 					}
 				}
 
-				for (int in = 1; in <= 7; in++) {
-					try {
-						WebElement back = driver.findElement(By.xpath("(//button[@id='back-btn'])[6]"));
-						if (back.isDisplayed()) {
-							click(back);
-							break;
-						}
-					} catch (Exception e) {
-
-					}
+				try {
+					WebElement back = driver.findElement(By.xpath("(//button[@id='back-btn'])[6]"));
+					visbility(driver, back, 50);
+					elementClickable(back);
+					click(back);
+				} catch (ElementClickInterceptedException e) {
+					WebElement back = driver.findElement(By.xpath("(//button[@id='back-btn'])[6]"));
+					visbility(driver, back, 50);
+					elementClickable(back);
+					click(back);
 				}
 
 				for (int in = 1; in <= 7; in++) {
@@ -124,7 +126,7 @@ public class PatietAppoint extends Base {
 				sleep(2000);
 
 				if (count > 1) {
-					count = count + 1;
+
 					System.out.println("ENTER DEL");
 					for (int in = 1; in <= 7; in++) {
 						try {

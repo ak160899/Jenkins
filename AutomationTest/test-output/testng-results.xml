@@ -1,170 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="2" ignored="0" total="8" passed="6">
+<testng-results skipped="0" failed="1" ignored="0" total="6" passed="5">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="1136734" started-at="2023-02-22T13:04:41Z" finished-at="2023-02-22T13:23:38Z">
+  <suite name="Default suite" duration-ms="493382" started-at="2023-02-23T07:56:35Z" finished-at="2023-02-23T08:04:48Z">
     <groups>
-      <group name="calendar">
-        <method signature="Local_Host.calendar()[pri:3, instance:runner.Local_Host@6ac13091]" name="calendar" class="runner.Local_Host"/>
-      </group> <!-- calendar -->
-      <group name="settings">
-        <method signature="Local_Host.Settings()[pri:7, instance:runner.Local_Host@6ac13091]" name="Settings" class="runner.Local_Host"/>
-      </group> <!-- settings -->
-      <group name="teledoctor">
-        <method signature="Local_Host.TeleDoctor()[pri:5, instance:runner.Local_Host@6ac13091]" name="TeleDoctor" class="runner.Local_Host"/>
-      </group> <!-- teledoctor -->
-      <group name="patient">
-        <method signature="Local_Host.PatientModule()[pri:1, instance:runner.Local_Host@6ac13091]" name="PatientModule" class="runner.Local_Host"/>
-      </group> <!-- patient -->
-      <group name="healthrec">
-        <method signature="Local_Host.HealthRec()[pri:2, instance:runner.Local_Host@6ac13091]" name="HealthRec" class="runner.Local_Host"/>
-      </group> <!-- healthrec -->
-      <group name="message">
-        <method signature="Local_Host.Message()[pri:6, instance:runner.Local_Host@6ac13091]" name="Message" class="runner.Local_Host"/>
-      </group> <!-- message -->
-      <group name="billing">
-        <method signature="Local_Host.BillingModule()[pri:4, instance:runner.Local_Host@6ac13091]" name="BillingModule" class="runner.Local_Host"/>
-      </group> <!-- billing -->
-      <group name="home">
-        <method signature="Local_Host.HomeModule()[pri:0, instance:runner.Local_Host@6ac13091]" name="HomeModule" class="runner.Local_Host"/>
-      </group> <!-- home -->
     </groups>
-    <test name="Default test" duration-ms="1136734" started-at="2023-02-22T13:04:41Z" finished-at="2023-02-22T13:23:38Z">
-      <class name="runner.Local_Host">
-        <test-method status="PASS" signature="LaunchBrwoser()[pri:0, instance:runner.Local_Host@6ac13091]" name="LaunchBrwoser" is-config="true" duration-ms="40975" started-at="2023-02-22T18:34:41Z" finished-at="2023-02-22T18:35:22Z">
+    <test name="Default test" duration-ms="493382" started-at="2023-02-23T07:56:35Z" finished-at="2023-02-23T08:04:48Z">
+      <class name="org.patientLogin.PatientInfo">
+        <test-method status="PASS" signature="Login()[pri:0, instance:org.patientLogin.PatientInfo@1677d1]" name="Login" is-config="true" duration-ms="12407" started-at="2023-02-23T13:26:35Z" finished-at="2023-02-23T13:26:47Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- LaunchBrwoser -->
-        <test-method status="PASS" signature="HomeModule()[pri:0, instance:runner.Local_Host@6ac13091]" name="HomeModule" duration-ms="35275" started-at="2023-02-22T18:35:22Z" finished-at="2023-02-22T18:35:57Z">
+        </test-method> <!-- Login -->
+        <test-method status="PASS" signature="healthRecord()[pri:0, instance:org.patientLogin.PatientInfo@1677d1]" name="healthRecord" duration-ms="19867" started-at="2023-02-23T13:26:47Z" finished-at="2023-02-23T13:27:07Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- HomeModule -->
-        <test-method status="FAIL" signature="PatientModule()[pri:1, instance:runner.Local_Host@6ac13091]" name="PatientModule" duration-ms="5604" started-at="2023-02-22T18:35:57Z" finished-at="2023-02-22T18:36:03Z">
-          <exception class="org.openqa.selenium.StaleElementReferenceException">
+        </test-method> <!-- healthRecord -->
+        <test-method status="PASS" signature="appointmentPatient()[pri:1, instance:org.patientLogin.PatientInfo@1677d1]" name="appointmentPatient" duration-ms="14710" started-at="2023-02-23T13:27:07Z" finished-at="2023-02-23T13:27:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- appointmentPatient -->
+        <test-method status="PASS" signature="appointment()[pri:2, instance:org.patientLogin.PatientInfo@1677d1]" name="appointment" duration-ms="26712" started-at="2023-02-23T13:27:22Z" finished-at="2023-02-23T13:27:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- appointment -->
+        <test-method status="PASS" signature="billing()[pri:3, instance:org.patientLogin.PatientInfo@1677d1]" name="billing" duration-ms="7415" started-at="2023-02-23T13:27:48Z" finished-at="2023-02-23T13:27:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- billing -->
+        <test-method status="FAIL" signature="message()[pri:4, instance:org.patientLogin.PatientInfo@1677d1]" name="message" duration-ms="369285" started-at="2023-02-23T13:27:56Z" finished-at="2023-02-23T13:34:05Z">
+          <exception class="org.openqa.selenium.TimeoutException">
             <message>
-              <![CDATA[stale element reference: element is not attached to the page document
-  (Session info: chrome=110.0.5481.104)
-For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/stale_element_reference.html
+              <![CDATA[Expected condition failed: waiting for visibility of [[ChromeDriver: chrome on WINDOWS (c73298089a3333db6b195158f519e49e)] -> xpath: (//input[@id='subject'])[1]] (tried for 60 second(s) with 500 milliseconds interval)
 Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
 System info: host: 'LAPTOP-Q33L4MJO', ip: '192.168.29.33', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_331'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.104, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:52886}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Session ID: a33afca36e757b6f881af72e623b6d7a]]>
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.104, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:61059}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: c73298089a3333db6b195158f519e49e]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.StaleElementReferenceException: stale element reference: element is not attached to the page document
-  (Session info: chrome=110.0.5481.104)
-For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/stale_element_reference.html
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of [[ChromeDriver: chrome on WINDOWS (c73298089a3333db6b195158f519e49e)] -> xpath: (//input[@id='subject'])[1]] (tried for 60 second(s) with 500 milliseconds interval)
 Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
 System info: host: 'LAPTOP-Q33L4MJO', ip: '192.168.29.33', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_331'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.104, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:52886}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Session ID: a33afca36e757b6f881af72e623b6d7a
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
-	at java.lang.reflect.Constructor.newInstance(Unknown Source)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:285)
-	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:84)
-	at org.base.Base.click(Base.java:76)
-	at runner.Local_Host.PatientModule(Local_Host.java:197)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
-	at org.testng.TestRunner.privateRun(TestRunner.java:756)
-	at org.testng.TestRunner.run(TestRunner.java:610)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
-	at org.testng.TestNG.runSuites(TestNG.java:1133)
-	at org.testng.TestNG.run(TestNG.java:1104)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.StaleElementReferenceException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- PatientModule -->
-        <test-method status="PASS" signature="HealthRec()[pri:2, instance:runner.Local_Host@6ac13091]" name="HealthRec" duration-ms="619011" started-at="2023-02-22T18:36:03Z" finished-at="2023-02-22T18:46:22Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- HealthRec -->
-        <test-method status="PASS" signature="calendar()[pri:3, instance:runner.Local_Host@6ac13091]" name="calendar" duration-ms="36298" started-at="2023-02-22T18:46:22Z" finished-at="2023-02-22T18:46:58Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- calendar -->
-        <test-method status="PASS" signature="BillingModule()[pri:4, instance:runner.Local_Host@6ac13091]" name="BillingModule" duration-ms="87680" started-at="2023-02-22T18:46:58Z" finished-at="2023-02-22T18:48:26Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- BillingModule -->
-        <test-method status="PASS" signature="TeleDoctor()[pri:5, instance:runner.Local_Host@6ac13091]" name="TeleDoctor" duration-ms="17898" started-at="2023-02-22T18:48:26Z" finished-at="2023-02-22T18:48:44Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TeleDoctor -->
-        <test-method status="PASS" signature="Message()[pri:6, instance:runner.Local_Host@6ac13091]" name="Message" duration-ms="11610" started-at="2023-02-22T18:48:44Z" finished-at="2023-02-22T18:48:56Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- Message -->
-        <test-method status="FAIL" signature="Settings()[pri:7, instance:runner.Local_Host@6ac13091]" name="Settings" duration-ms="282352" started-at="2023-02-22T18:48:56Z" finished-at="2023-02-22T18:53:38Z">
-          <exception class="org.openqa.selenium.StaleElementReferenceException">
-            <message>
-              <![CDATA[stale element reference: element is not attached to the page document
-  (Session info: chrome=110.0.5481.104)
-For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/stale_element_reference.html
-Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
-System info: host: 'LAPTOP-Q33L4MJO', ip: '192.168.29.33', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_331'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.104, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:52886}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Session ID: a33afca36e757b6f881af72e623b6d7a]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.StaleElementReferenceException: stale element reference: element is not attached to the page document
-  (Session info: chrome=110.0.5481.104)
-For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/stale_element_reference.html
-Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
-System info: host: 'LAPTOP-Q33L4MJO', ip: '192.168.29.33', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_331'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.104, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:52886}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Session ID: a33afca36e757b6f881af72e623b6d7a
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
-	at java.lang.reflect.Constructor.newInstance(Unknown Source)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:285)
-	at org.openqa.selenium.remote.RemoteWebElement.isDisplayed(RemoteWebElement.java:326)
-	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:314)
-	at org.openqa.selenium.support.ui.ExpectedConditions.access$000(ExpectedConditions.java:43)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:300)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:297)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.104, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:61059}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: c73298089a3333db6b195158f519e49e
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
 	at org.base.Base.visbility(Base.java:368)
-	at runner.Local_Host.Settings(Local_Host.java:5708)
+	at org.patientLogin.PatientInfo.message(PatientInfo.java:243)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -192,11 +75,15 @@ Session ID: a33afca36e757b6f881af72e623b6d7a
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.StaleElementReferenceException -->
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- message -->
+        <test-method status="PASS" signature="Settings()[pri:7, instance:org.patientLogin.PatientInfo@1677d1]" name="Settings" duration-ms="42967" started-at="2023-02-23T13:34:05Z" finished-at="2023-02-23T13:34:48Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Settings -->
-      </class> <!-- runner.Local_Host -->
+      </class> <!-- org.patientLogin.PatientInfo -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

@@ -91,31 +91,7 @@ public class LaunchBrowser extends Base {
 			}
 		}
 
-		while (true) {
-			if (driver.getCurrentUrl().equals("https://localhost:8443/health/#home")) {
-				break;
-			} else if (driver.getCurrentUrl().equals("https://www.test.75health.com/health/#home")) {
-				break;
-			} else if (driver.getCurrentUrl().equals("https://www.75health.com/health/#home")) {
-				break;
-			} else if (driver.getCurrentUrl().equals("https://localhost:8443/health/#list_ehr")) {
-				break;
-			}
-		}
-		// driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-
-		/*
-		 * while (true) { if
-		 * (!driver.getCurrentUrl().equals("https://localhost:8443/health/#home")) {
-		 * click(pom.getInstanceLoginPage().login); break; } else { break; } }
-		 */
-
-		try {
-			sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 		implicitWait(70, TimeUnit.SECONDS);
 

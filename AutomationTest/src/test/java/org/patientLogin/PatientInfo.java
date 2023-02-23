@@ -8,9 +8,12 @@ import java.util.concurrent.TimeUnit;
 import org.Launch.LaunchBrowser;
 import org.base.Base;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -139,10 +142,10 @@ public class PatientInfo extends Base {
 			}
 		}
 		sleep(3000);
-		driver.findElement(By.xpath("//input[@id='doctorPartyName-cal']")).sendKeys("308-8426");
+		driver.findElement(By.xpath("//input[@id='doctorPartyName-cal']")).sendKeys("334-8214");
 		for (int i = 1; i <= 7; i++) {
 			try {
-				WebElement clicdoctr = driver.findElement(By.xpath("//td[text()='308-8426']"));
+				WebElement clicdoctr = driver.findElement(By.xpath("//td[text()='334-8214']"));
 				if (clicdoctr.isDisplayed()) {
 					click(clicdoctr);
 					break;
@@ -154,6 +157,8 @@ public class PatientInfo extends Base {
 		}
 		$current = driver.getCurrentUrl();
 		cal.$dayDrop($current);
+		System.out.println("exit ...");
+		sleep(4000);
 	}
 
 	@Test(priority = 2)
@@ -167,32 +172,16 @@ public class PatientInfo extends Base {
 	private void billing() throws InterruptedException {
 
 		implicitWait(30, TimeUnit.SECONDS);
-		for (int i = 1; i <= 7; i++) {
-			try {
-				WebElement blinng = driver.findElement(By.xpath("//td[text()='Billing']"));
-				if (blinng.isDisplayed()) {
-					click(blinng);
-					break;
-				}
-
-			} catch (Exception e) {
-
-			}
-		}
+		visbility(driver, pom.getInstanceBilling().clickBill, 60);
+		ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceBilling().clickBill));
+		click(pom.getInstanceBilling().clickBill);
 		sleep(3000);
-		for (int i = 1; i <= 7; i++) {
-			try {
-				WebElement pr1 = driver.findElement(By.xpath("//i[@onclick='bill_report.print();']"));
-				if (pr1.isDisplayed()) {
-					click(pr1);
-					break;
-				}
 
-			} catch (Exception e) {
+		WebElement printbilling = driver.findElement(By.xpath("//i[@onclick='bill_report.print();']"));
+		visbility(driver, printbilling, 50);
+		elementClickable(printbilling);
+		click(printbilling);
 
-			}
-
-		}
 		sleep(3000);
 		driver.navigate().refresh();
 
@@ -201,26 +190,35 @@ public class PatientInfo extends Base {
 	@Test(priority = 4)
 	private void message() throws InterruptedException {
 
-		while (true) {
-			try {
-				visbility(driver, pom.getInstanceMessage().clickMessage, 60);
-				click(pom.getInstanceMessage().clickMessage);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		try {
+			visbility(driver, pom.getInstanceMessage().clickMessage, 60);
+			ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceMessage().clickMessage));
+			click(pom.getInstanceMessage().clickMessage);
+
+		} catch (ElementClickInterceptedException e) {
+			visbility(driver, pom.getInstanceMessage().clickMessage, 60);
+			ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceMessage().clickMessage));
+			click(pom.getInstanceMessage().clickMessage);
 		}
 
-		for (int i = 1; i <= 5; i++) {
-			try {
-				visbility(driver, pom.getInstanceMessage().clickComposemMessage, 60);
-				click(pom.getInstanceMessage().clickComposemMessage); //
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		try {
+			System.out.println("exception in message ");
+			visbility(driver, pom.getInstanceMessage().clickComposemMessage, 60);
+			System.out.println("exp 1");
+			elementClickable(pom.getInstanceMessage().clickComposemMessage);
+			System.out.println("exp 2");
+			click(pom.getInstanceMessage().clickComposemMessage);
+
+		} catch (ElementClickInterceptedException e) {
+			visbility(driver, pom.getInstanceMessage().clickComposemMessage, 60);
+			System.out.println("1");
+			elementClickable(pom.getInstanceMessage().clickComposemMessage);
+			System.out.println("2");
+			click(pom.getInstanceMessage().clickComposemMessage);
+			System.out.println("clicked com message");
 		}
 
+		System.out.println("compose message clicked");
 		for (int i = 1; i <= 5; i++) {
 			try {
 				sendkeys(pom.getInstanceMessage().search, "308-8426");
@@ -249,37 +247,18 @@ public class PatientInfo extends Base {
 		visbility(driver, pom.getInstanceMessage().sendMessage, 60);
 		click(pom.getInstanceMessage().sendMessage);
 
-		while (true) {
-			try {
-				visbility(driver, pom.getInstanceMessage().seeSentMessage, 60);
-				click(pom.getInstanceMessage().seeSentMessage);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		try {
+			visbility(driver, pom.getInstanceMessage().seeSentMessage, 60);
+			elementClickable(pom.getInstanceMessage().seeSentMessage);
+			click(pom.getInstanceMessage().seeSentMessage);
+
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceMessage().seeSentMessage, 60);
+			elementClickable(pom.getInstanceMessage().seeSentMessage);
+			click(pom.getInstanceMessage().seeSentMessage);
+
 		}
 
-		/*
-		 * WebElement msg = driver.findElement(By.xpath("//td[text()='Message ']"));
-		 * js.executeScript("arguments[0].click();", msg); sleep(3000);
-		 * 
-		 * WebElement ms1 = driver.findElement(By.xpath("//button[@id='compose-btn']"));
-		 * js.executeScript("arguments[0].click();", ms1); sleep(3000);
-		 * driver.findElement(By.xpath("(//input[@id='emailSearch'])[1]")).sendKeys(
-		 * "3087-516"); sleep(3000); WebElement id1 =
-		 * driver.findElement(By.xpath("//span[text()='us acc']"));
-		 * js.executeScript("arguments[0].click();", id1); sleep(2000);
-		 * driver.findElement(By.xpath("(//input[@id='subject'])[1]")).sendKeys("hello")
-		 * ; sleep(3000); WebElement tr =
-		 * driver.findElement(By.xpath("//div[@id='pell-content']"));
-		 * js.executeScript("arguments[0].click();", tr); sleep(3000); WebElement bld =
-		 * driver.findElement(By.xpath("//button[@title='Bold']"));
-		 * js.executeScript("arguments[0].click();", bld); sleep(3000);
-		 * driver.findElement(By.xpath("//div[@id='pell-content']")).
-		 * sendKeys("welcome to kaaspro");
-		 * driver.findElement(By.xpath("(//button[@id='send-btn'])[1]")).click();
-		 * sleep(4000);
-		 */
 	}
 
 	@Test(priority = 7)
@@ -419,17 +398,19 @@ public class PatientInfo extends Base {
 		}
 		driver.navigate().refresh();
 		// contact info
-		while (true) {
-			try {
-				WebElement contactIcon = driver.findElement(By
-						.xpath("//div[@id='p-address-phone']/div/div/div[1]/div[1]//following::div[1]/div[2]/div/div"));
-				if (contactIcon.isDisplayed()) {
-					click(contactIcon);
-					break;
-				}
-			} catch (Exception e) {
-				System.out.println(e);
-			}
+
+		try {
+			WebElement contactIcon = driver.findElement(
+					By.xpath("//div[@id='p-address-phone']/div/div/div[1]/div[1]//following::div[1]/div[2]/div/div"));
+			visbility(driver, contactIcon, 50);
+			elementClickable(contactIcon);
+			click(contactIcon);
+		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+			WebElement contactIcon = driver.findElement(
+					By.xpath("//div[@id='p-address-phone']/div/div/div[1]/div[1]//following::div[1]/div[2]/div/div"));
+			visbility(driver, contactIcon, 50);
+			elementClickable(contactIcon);
+			click(contactIcon);
 		}
 
 		visbility(driver, pom.getInstanceNewPatient().Addressline1, 40);
@@ -439,34 +420,36 @@ public class PatientInfo extends Base {
 		visbility(driver, pom.getInstanceNewPatient().City, 30);
 		sendkeys(pom.getInstanceNewPatient().City, "WWF");
 
-		while (true) {
-			try {
+		try {
 
-				visbility(driver, pom.getInstanceNewPatient().selectCountry, 40);
-				dropDown("index", pom.getInstanceNewPatient().selectCountry, "03");
-				break;
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		}
-		while (true) {
-			try {
+			visbility(driver, pom.getInstanceNewPatient().selectCountry, 40);
+			dropDown("index", pom.getInstanceNewPatient().selectCountry, "03");
 
-				visbility(driver, pom.getInstanceNewPatient().selectState, 40);
-				dropDown("index", pom.getInstanceNewPatient().selectState, "05");
-				break;
-			} catch (Exception e) {
-				System.out.println(e);
-			}
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceNewPatient().selectCountry, 40);
+			dropDown("index", pom.getInstanceNewPatient().selectCountry, "03");
+			System.out.println(e);
 		}
 
+		try {
+
+			visbility(driver, pom.getInstanceNewPatient().selectState, 40);
+			dropDown("index", pom.getInstanceNewPatient().selectState, "05");
+
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceNewPatient().selectState, 40);
+			dropDown("index", pom.getInstanceNewPatient().selectState, "05");
+			System.out.println(e);
+		}
 		visbility(driver, pom.getInstanceNewPatient().zipCode, 40);
 
 		sendkeys(pom.getInstanceNewPatient().zipCode, "600110");
 
 		visbility(driver, pom.getInstanceNewPatient().saveContactInfo, 40);
 
-		javascriptclick(pom.getInstanceNewPatient().saveContactInfo);
+		elementClickable(pom.getInstanceNewPatient().saveContactInfo);
+		click(pom.getInstanceNewPatient().saveContactInfo);
+
 		/*
 		 * // alternate contact info...
 		 * 
@@ -505,69 +488,55 @@ public class PatientInfo extends Base {
 		sleep(2000);
 
 		// patient info..
-		while (true) {
-			try {
-				if (pom.getInstanceNewPatient().addPatientInfoIcon.isDisplayed()) {
-					click(pom.getInstanceNewPatient().addPatientInfoIcon);
-					break;
-				}
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		}
-		while (true) {
-			try {
+		try {
+			visbility(driver, pom.getInstanceNewPatient().addPatientInfoIcon, 40);
+			elementClickable(pom.getInstanceNewPatient().addPatientInfoIcon);
+			click(pom.getInstanceNewPatient().addPatientInfoIcon);
 
-				visbility(driver, pom.getInstanceNewPatient().addOccupation, 30);
-				sendkeys(pom.getInstanceNewPatient().addOccupation, "Software tester");
-				break;
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		}
-		while (true) {
-			try {
-
-				if (pom.getInstanceNewPatient().savePatientinfo.isDisplayed()) {
-					click(pom.getInstanceNewPatient().savePatientinfo);
-					break;
-				}
-			} catch (Exception e) {
-				System.out.println(e);
-			}
+		} catch (ElementClickInterceptedException e) {
+			visbility(driver, pom.getInstanceNewPatient().addPatientInfoIcon, 40);
+			elementClickable(pom.getInstanceNewPatient().addPatientInfoIcon);
+			click(pom.getInstanceNewPatient().addPatientInfoIcon);
 		}
 
-		for (int i = 1; i <= 7; i++) {
+		visbility(driver, pom.getInstanceNewPatient().addOccupation, 30);
+		sendkeys(pom.getInstanceNewPatient().addOccupation, "Software tester");
 
-			try {
-				if (pom.getInstanceSetting().clickSettings.isDisplayed()) {
-					javascriptclick(pom.getInstanceSetting().clickSettings);
-					break;
-				}
+		elementClickable(pom.getInstanceNewPatient().savePatientinfo);
+		click(pom.getInstanceNewPatient().savePatientinfo);
+		System.out.println("ENTER");
+		driver.navigate().refresh();
 
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		try {
+			visbility(driver, pom.getInstanceSetting().clickSettings, 50);
+			elementClickable(pom.getInstanceSetting().clickSettings);
+			click(pom.getInstanceSetting().clickSettings);
 
+		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+			visbility(driver, pom.getInstanceSetting().clickSettings, 50);
+			elementClickable(pom.getInstanceSetting().clickSettings);
+			click(pom.getInstanceSetting().clickSettings);
 		}
+		System.out.println("EXIT");
+
 		sleep(3000);
-		WebElement trp9 = driver.findElement(By.xpath("//button[@onclick='setting.changep()']"));
-		visbility(driver, trp9, 60);
-		click(trp9);// .click();
-		WebElement trp10 = driver.findElement(By.id("currentPassword"));
-		visbility(driver, trp10, 60);
-		sendkeys(trp10, ConfigManager.getconfigManager().getInstanceConfigReader().getpass());
-		WebElement trp11 = driver.findElement(By.id("newPassword"));
-		visbility(driver, trp11, 60);
-		sendkeys(trp11, ConfigManager.getconfigManager().getInstanceConfigReader().newpassword());
-		WebElement trp12 = driver.findElement(By.id("confirmNewPassword"));
-		visbility(driver, trp12, 60);
-		sendkeys(trp12, ConfigManager.getconfigManager().getInstanceConfigReader().newpassword());
-
-		WebElement trp13 = driver.findElement(By.id("save-submitform"));
-		visbility(driver, trp13, 60);
-		click(trp13);// .click();
-
+		/*
+		 * WebElement trp9 =
+		 * driver.findElement(By.xpath("//button[@onclick='setting.changep()']"));
+		 * visbility(driver, trp9, 60); click(trp9);// .click(); WebElement trp10 =
+		 * driver.findElement(By.id("currentPassword")); visbility(driver, trp10, 60);
+		 * sendkeys(trp10,
+		 * ConfigManager.getconfigManager().getInstanceConfigReader().getpass());
+		 * WebElement trp11 = driver.findElement(By.id("newPassword"));
+		 * visbility(driver, trp11, 60); sendkeys(trp11,
+		 * ConfigManager.getconfigManager().getInstanceConfigReader().newpassword());
+		 * WebElement trp12 = driver.findElement(By.id("confirmNewPassword"));
+		 * visbility(driver, trp12, 60); sendkeys(trp12,
+		 * ConfigManager.getconfigManager().getInstanceConfigReader().newpassword());
+		 * 
+		 * WebElement trp13 = driver.findElement(By.id("save-submitform"));
+		 * visbility(driver, trp13, 60); click(trp13);// .click();
+		 */
 		while (true) {
 
 			if (driver.getCurrentUrl().equals("https://localhost:8443/health/#setting")) {
@@ -583,7 +552,7 @@ public class PatientInfo extends Base {
 			try {
 				WebElement autoLogout = driver.findElement(By.xpath("//button[@id='auto-logout-time']"));
 				if (autoLogout.isDisplayed()) {
-
+					elementClickable(autoLogout);
 					click(autoLogout);
 					break;
 				}
@@ -654,7 +623,9 @@ public class PatientInfo extends Base {
 		 */
 		sleep(3000);
 		WebElement dateformat = driver.findElement(By.xpath("//button[@id='date-format']"));
-		js.executeScript("arguments[0].click();", dateformat);
+		visbility(driver, dateformat, 40);
+		elementClickable(dateformat);
+		click(dateformat);
 		sleep(3000);
 		List<WebElement> sel3 = driver.findElements(By.xpath("//ul[@id='Dateformatscroll']/li"));
 		for (WebElement w : sel3) {
