@@ -1,4 +1,4 @@
-package org.ThreeDSubscription;
+package org.selectyourPlan3D;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,30 +21,11 @@ import org.testng.annotations.Test;
 import com.data.ConfigManager;
 import com.pageObjeman.PageObjMan;
 
-public class SelectYourPlan extends Base {
+public class SelectYourPlan extends LaunchBrowser {
 
-	public static WebDriver driver;
-	com.pageObjeman.PageObjMan pom;
-	String $userKp;
-	String $drKp;
-	JavascriptExecutor j;
-	WebDriverWait ww;
-	String kpid;
-	String $gm;
-	String $preplsdc;
 	String cardNumber;
 
 	@BeforeClass
-	private void browserOpen() throws Exception {
-		Map<String, Object> getConnection = LaunchBrowser.openConnection();
-		pom = (PageObjMan) getConnection.get("pom");
-		j = (JavascriptExecutor) getConnection.get("j");
-		ww = (WebDriverWait) getConnection.get("ww");
-		driver = (WebDriver) getConnection.get("driver");
-
-	}
-
-	@Test(priority = 0)
 	private void selectYourPln() {
 
 		try {
@@ -58,17 +39,8 @@ public class SelectYourPlan extends Base {
 			click(pom.getInstanceSelectYourPlan().dismiss);
 		}
 
-		visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 50);
-		elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
-		click(pom.getInstanceHomeModule().$patientCreationButton);
-
-		visbility(driver, pom.getInstanceSetting().subscribe, 40);
-		elementClickable(pom.getInstanceSetting().subscribe);
-		click(pom.getInstanceSetting().subscribe);
-
-		visbility(driver, pom.getInstanceSelectYourPlan().paymentpriceUi, 50);
-		System.out.println("payment ui displayed...");
-
+		driver.navigate().to("https://localhost:8443/health/#allPaymentServices");
+		log.info("Navigated to payment page");
 	}
 
 	@Test(priority = 1)
@@ -270,10 +242,10 @@ public class SelectYourPlan extends Base {
 
 		driver.switchTo().frame(driver.findElement(By.xpath("//body[@id='body']/div[1]/iframe")));
 		System.out.println("??????????????????");
-		 sleep(3000);
+		sleep(3000);
 		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='LightboxModalContent']/div/iframe")));
 		System.out.println("Nested frame");
-		 sleep(3000);
+		sleep(3000);
 		driver.switchTo().frame(driver.findElement(By.xpath("//form[@id='form']//following::iframe")));
 		System.out.println("nested 2");
 

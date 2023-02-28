@@ -30,9 +30,33 @@ public class ConfigReader {
 
 	}
 
+	public String getvalid3dCard() {
+		String validcrd = p.getProperty("validcard");
+		return validcrd;
+
+	}
+
 	public String getUrl() {
 		String url = p.getProperty("url");
 		return url;
+
+	}
+
+	public String getCvcfail() {
+		String cvcFail = p.getProperty("cvcfail");
+		return cvcFail;
+
+	}
+
+	public String getPostalFail() {
+		String ps = p.getProperty("postal");
+		return ps;
+
+	}
+
+	public String getExpiredCard() {
+		String expcrd = p.getProperty("expcard");
+		return expcrd;
 
 	}
 

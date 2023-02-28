@@ -5,11 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.BasicConfigurator;
 import org.base.Base;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.testng.annotations.BeforeSuite;
 
 import com.calendar.Calendars;
 import com.data.ConfigManager;
@@ -25,10 +28,13 @@ public class LaunchBrowser extends Base {
 	public static String url;
 	static Calendars cal;
 	String $current;
+	public static org.apache.log4j.Logger log;
 
+	@BeforeSuite
 	public static Map<String, Object> openConnection() throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
-
+		log = org.apache.log4j.Logger.getLogger(LaunchBrowser.class);
+		BasicConfigurator.configure();
 		driver = setUp("chrome");
 		pom = new PageObjMan(driver);
 		j = (JavascriptExecutor) driver;
@@ -90,8 +96,6 @@ public class LaunchBrowser extends Base {
 				System.out.println(e);
 			}
 		}
-
-		
 
 		implicitWait(70, TimeUnit.SECONDS);
 

@@ -122,7 +122,7 @@ public class Base {
 
 	// WebDriver wait
 
-	public void elementClickable(WebElement e) {
+	public static void elementClickable(WebElement e) {
 		wait = new WebDriverWait(wd, 50);
 
 		wait.until(ExpectedConditions.elementToBeClickable(e));

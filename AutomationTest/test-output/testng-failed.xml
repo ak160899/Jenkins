@@ -3,12 +3,12 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="org.patientLogin.PatientInfo">
+      <class name="org.LitePlan3d.Lite_CaroselUi">
         <methods>
-          <include name="Login"/>
-          <include name="message"/>
+          <include name="openConnection"/>
+          <include name="run"/>
         </methods>
-      </class> <!-- org.patientLogin.PatientInfo -->
+      </class> <!-- org.LitePlan3d.Lite_CaroselUi -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="3d Testing" verbose="2">
+	<test name="Test">
+
+		<classes>
+
+			<class name="org.selectyourPlan3D.Invalidcard"></class>
+			<!-- <class name="org.selectyourPlan3D.Insufficient3dCard"></class> <class 
+				name="org.selectyourPlan3D.Valid3dcardFailAuth"></class> -->
+			<class name="org.selectyourPlan3D.Valid3dCardRefreshPage"></class>
+			<!-- <class name="org.selectyourPlan3D.InvalidCardCvcMonth"></class> -->
+
+		</classes>
+
+	</test>
+
+	<test name="test">
+
+		<classes>
+
+		<!-- 	<class name="org.selectyourPlan3D.Valid3dcard_cancel"></class> -->
+		</classes>
+
+
+	</test>
+	
+	<test name="test1">
+
+		<classes>
+
+			<class name="org.selectyourPlan3D.UpgradeToLite"></class>
+		</classes>
+
+
+	</test>
+</suite>
