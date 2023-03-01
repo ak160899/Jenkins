@@ -6,25 +6,26 @@
 		<classes>
 
 			<class name="org.selectyourPlan3D.Invalidcard"></class>
-			<!-- <class name="org.selectyourPlan3D.Insufficient3dCard"></class> <class 
-				name="org.selectyourPlan3D.Valid3dcardFailAuth"></class> -->
+			<class name="org.selectyourPlan3D.Insufficient3dCard"></class>
+			<class name="org.selectyourPlan3D.Valid3dcardFailAuth"></class>
 			<class name="org.selectyourPlan3D.Valid3dCardRefreshPage"></class>
-			<!-- <class name="org.selectyourPlan3D.InvalidCardCvcMonth"></class> -->
+			<class name="org.selectyourPlan3D.InvalidCardCvcMonth"></class>
 
 		</classes>
 
 	</test>
+
 
 	<test name="test">
 
 		<classes>
 
-		<!-- 	<class name="org.selectyourPlan3D.Valid3dcard_cancel"></class> -->
+			<class name="org.selectyourPlan3D.Valid3dcard_cancel"></class>
 		</classes>
 
 
 	</test>
-	
+
 	<test name="test1">
 
 		<classes>
@@ -34,4 +35,18 @@
 
 
 	</test>
+
+
+
+	<test name="test2">
+
+		<classes>
+
+			<class name="org.LitePlan3d.Carosel"></class>
+		</classes>
+
+
+	</test>
+
+	
 </suite>

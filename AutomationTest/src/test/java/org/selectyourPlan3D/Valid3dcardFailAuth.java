@@ -43,7 +43,7 @@ public class Valid3dcardFailAuth extends LaunchBrowser {
 
 	}
 
-	public void failAuthentication() {
+	public static void failAuthentication() {
 		log.info("valid card authenwindow");
 
 		try {
@@ -75,7 +75,7 @@ public class Valid3dcardFailAuth extends LaunchBrowser {
 
 	}
 
-	public void validCardFailAuthAlert() {
+	public  void validCardFailAuthAlert() {
 		log.info("verify alert valid 3d card ");
 		WebElement alertMessage = driver.findElement(By.xpath("(//div[@id='bootstrap-alert'])[1]/div[1]/div"));
 		if (alertMessage.isDisplayed()) {

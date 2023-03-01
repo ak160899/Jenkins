@@ -7,6 +7,7 @@ import com.pomclass.Calendar;
 import com.pomclass.CardDetails;
 import com.pomclass.HealthRecord;
 import com.pomclass.HomeModule;
+import com.pomclass.Lite;
 import com.pomclass.LoginPage;
 import com.pomclass.Message;
 import com.pomclass.PatientCreation;
@@ -27,11 +28,23 @@ public class PageObjMan {
 	private HomeModule home;
 	private SelectYourPlan selectplan;
 	private CardDetails card;
+	private Lite lite;
 
 	public WebDriver driver;
 
 	public PageObjMan(WebDriver driver) {
 		this.driver = driver;
+	}
+
+	public Lite getLite() {
+
+		if (lite == null) {
+			lite = new Lite(driver);
+			return lite;
+
+		}
+		return lite;
+
 	}
 
 	public LoginPage getInstanceLoginPage() {

@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite verbose="2" name="Failed suite [3d Testing]">
-  <test name="test1(failed)">
+  <test name="Test(failed)">
     <classes>
-      <class name="org.selectyourPlan3D.UpgradeToLite">
+      <class name="org.selectyourPlan3D.Insufficient3dCard">
+        <methods>
+          <include name="insufficinet3dCardVerify"/>
+        </methods>
+      </class> <!-- org.selectyourPlan3D.Insufficient3dCard -->
+      <class name="org.selectyourPlan3D.Valid3dCardRefreshPage">
+        <methods>
+          <include name="valid3dCardRefeshPage"/>
+        </methods>
+      </class> <!-- org.selectyourPlan3D.Valid3dCardRefreshPage -->
+      <class name="org.selectyourPlan3D.InvalidCardCvcMonth">
+        <methods>
+          <include name="yearExpired"/>
+          <include name="cvcFails"/>
+          <include name="postalFails"/>
+        </methods>
+      </class> <!-- org.selectyourPlan3D.InvalidCardCvcMonth -->
+      <class name="org.selectyourPlan3D.Valid3dcardFailAuth">
+        <methods>
+          <include name="verifyValid3dCardFailAuthentication"/>
+        </methods>
+      </class> <!-- org.selectyourPlan3D.Valid3dcardFailAuth -->
+      <class name="org.LitePlan3d.EditCardDetails">
         <methods>
           <include name="openConnection"/>
-          <include name="liteUpgrade"/>
         </methods>
-      </class> <!-- org.selectyourPlan3D.UpgradeToLite -->
+      </class> <!-- org.LitePlan3d.EditCardDetails -->
     </classes>
-  </test> <!-- test1(failed) -->
+  </test> <!-- Test(failed) -->
+  <test name="liteTc_1(failed)">
+    <classes>
+      <class name="org.LitePlan3d.Carosel">
+        <methods>
+          <include name="caroselUiVerify"/>
+        </methods>
+      </class> <!-- org.LitePlan3d.Carosel -->
+      <class name="org.LitePlan3d.EditCardDetails">
+        <methods>
+          <include name="openConnection"/>
+        </methods>
+      </class> <!-- org.LitePlan3d.EditCardDetails -->
+    </classes>
+  </test> <!-- liteTc_1(failed) -->
 </suite> <!-- Failed suite [3d Testing] -->

@@ -52,6 +52,20 @@ public class UpgradeToLite extends LaunchBrowser {
 			elementClickable(activateSubLite);
 			click(activateSubLite);
 		}
+
+		try {
+			WebElement finishLite = driver
+					.findElement(By.xpath("//button[@onclick='allVasPremiumThankyou.setting();']"));
+			visbility(driver, finishLite, 40);
+			elementClickable(finishLite);
+			click(finishLite);
+		} catch (Exception e) {
+			WebElement finishLite = driver
+					.findElement(By.xpath("//button[@onclick='allVasPremiumThankyou.setting();']"));
+			visbility(driver, finishLite, 40);
+			elementClickable(finishLite);
+			click(finishLite);
+		}
 	}
 
 }

@@ -12,7 +12,7 @@ import com.data.ConfigManager;
 
 public class Insufficient3dCard extends LaunchBrowser {
 
-	public void insufficnetcardDetails() throws IOException {
+	public static void insufficnetcardDetails() throws IOException {
 
 		frame("WebElement", pom.getInstanceCardDetails().switchToCardFrame);
 		log.info("switched to frame");
@@ -42,14 +42,32 @@ public class Insufficient3dCard extends LaunchBrowser {
 
 	}
 
-	public void authenticationWindow() {
+	public static void authenticationWindow() throws InterruptedException {
 
-		driver.switchTo().frame(driver.findElement(By.xpath("//body[@id='body']/div[1]/iframe")));
+		sleep(30000);
+		try {
+			WebElement frame = driver.findElement(By.xpath("//body[@id='body']/div[1]/iframe"));
+			visbility(driver, frame, 50);
 
-		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='LightboxModalContent']/div/iframe")));
-
-		driver.switchTo().frame(driver.findElement(By.xpath("//form[@id='form']//following::iframe")));
-
+		} catch (Exception e) {
+			WebElement frame = driver.findElement(By.xpath("//body[@id='body']/div[1]/iframe"));
+			visbility(driver, frame, 50);
+			driver.switchTo().frame((frame));
+		}
+		try {
+			visbility(driver, driver.findElement(By.xpath("//div[@class='LightboxModalContent']/div/iframe")), 50);
+			driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='LightboxModalContent']/div/iframe")));
+		} catch (Exception e) {
+			visbility(driver, driver.findElement(By.xpath("//div[@class='LightboxModalContent']/div/iframe")), 50);
+			driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='LightboxModalContent']/div/iframe")));
+		}
+		try {
+			visbility(driver, driver.findElement(By.xpath("//form[@id='form']//following::iframe")), 50);
+			driver.switchTo().frame(driver.findElement(By.xpath("//form[@id='form']//following::iframe")));
+		} catch (Exception e) {
+			visbility(driver, driver.findElement(By.xpath("//form[@id='form']//following::iframe")), 50);
+			driver.switchTo().frame(driver.findElement(By.xpath("//form[@id='form']//following::iframe")));
+		}
 		WebElement failAuthentication = driver.findElement(By.id("test-source-authorize-3ds"));
 		visbility(driver, failAuthentication, 50);
 		elementClickable(failAuthentication);
@@ -73,7 +91,7 @@ public class Insufficient3dCard extends LaunchBrowser {
 	}
 
 	@Test
-	public void insufficinet3dCardVerify() throws IOException {
+	public void insufficinet3dCardVerify() throws IOException, InterruptedException {
 		insufficnetcardDetails();
 		authenticationWindow();
 		verifyInsufficient3dCardAlert();

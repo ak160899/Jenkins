@@ -6,12 +6,13 @@ import org.Launch.LaunchBrowser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class Valid3dcard_cancel extends LaunchBrowser {
 
-	public void cancellAutheticationWindow() {
+	public static void cancellAutheticationWindow() {
 
 		log.info("valid card authenwindow");
 
@@ -34,12 +35,14 @@ public class Valid3dcard_cancel extends LaunchBrowser {
 
 			driver.switchTo().frame(driver.findElement(By.xpath("//form[@id='form']//following::iframe")));
 		}
+
+		driver.switchTo().parentFrame();
 		try {
 			WebElement cancelAuthWindow = driver.findElement(By.xpath("//button[@class='LightboxModalClose']"));
 			visbility(driver, cancelAuthWindow, 40);
 			elementClickable(cancelAuthWindow);
 			click(cancelAuthWindow);
-		} catch (ElementClickInterceptedException e) {
+		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
 			WebElement cancelAuthWindow = driver.findElement(By.xpath("//button[@class='LightboxModalClose']"));
 			visbility(driver, cancelAuthWindow, 50);
 			elementClickable(cancelAuthWindow);

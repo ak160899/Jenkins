@@ -20,6 +20,9 @@ public class Settings {
 	@FindBy(xpath = "(//div[@id='AlertMessage']//following::button[1])[1]")
 	public WebElement dismiss;
 
+	@FindBy(xpath = "((//div[@id='active-users'])[3]//following::span[1])[1]")
+	public WebElement UsersUiActiveUsrPage;
+
 	@FindBy(xpath = "(//div[@id='AlertMessage']//following::button[2])[1]")
 	public WebElement subscribe;
 

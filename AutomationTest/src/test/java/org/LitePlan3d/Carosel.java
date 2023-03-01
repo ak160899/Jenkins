@@ -1,27 +1,43 @@
 package org.LitePlan3d;
 
+import java.io.IOException;
+
 import org.Launch.LaunchBrowser;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
+import org.selectyourPlan3D.Valid3dcardFailAuth;
+import org.testng.annotations.Test;
 
 public class Carosel extends LaunchBrowser {
 
 	static Logger log;
 
-	public static void linktextUpgradePlanActiveuser() {
+	public static void linktextUpgradePlanActiveuser() throws InterruptedException {
 		log = Logger.getLogger(Carosel.class);
 		BasicConfigurator.configure();
+
 		visbility(driver, pom.getInstanceSetting().dismiss, 40);
 		click(pom.getInstanceSetting().dismiss);
 		log.info("clicked upgrade later in lite");
 
 		driver.navigate().to("https://localhost:8443/health/#allSubscriptionActiveUsers");
+		j.executeScript("window.scrollBy(0,0)", "");
+		sleep(2500);
+		try {
+			WebElement link = driver.findElement(By.xpath("(//span[@id='manage-sub-text'])[1]/a"));
+			visbility(driver, link, 40);
+			elementClickable(link);
+			click(link);
+		} catch (ElementClickInterceptedException e) {
+			WebElement link = driver.findElement(By.xpath("(//span[@id='manage-sub-text'])[1]/a"));
+			visbility(driver, link, 40);
+			elementClickable(link);
+			click(link);
+		}
 
-		WebElement link = driver.findElement(By.xpath("(//span[@id='manage-sub-text'])[1]/a"));
-		visbility(driver, link, 40);
-		click(link);
 	}
 
 	public static void basicCaroselUi() throws InterruptedException {
@@ -108,4 +124,14 @@ public class Carosel extends LaunchBrowser {
 		}
 
 	}
+
+	@Test
+	private void caroselUiVerify() throws Exception {
+		linktextUpgradePlanActiveuser();
+		basicCaroselUi();
+		premium55CaroselUi();
+		premium79carsolUi();
+
+	}
+
 }

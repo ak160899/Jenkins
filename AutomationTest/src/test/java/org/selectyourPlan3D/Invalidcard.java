@@ -33,12 +33,12 @@ public class Invalidcard extends LaunchBrowser {
 
 		driver.navigate().to("https://localhost:8443/health/#allPaymentServices");
 		log.info("Navigated to payment page");
-		/*
-		 * visbility(driver, pom.getInstanceSelectYourPlan().proceedPaymentButton, 50);
-		 * elementClickable(pom.getInstanceSelectYourPlan().proceedPaymentButton);
-		 * click(pom.getInstanceSelectYourPlan().proceedPaymentButton);
-		 * log.info("proceed payment clicked");
-		 */
+
+		visbility(driver, pom.getInstanceSelectYourPlan().proceedPaymentButton, 50);
+		elementClickable(pom.getInstanceSelectYourPlan().proceedPaymentButton);
+		click(pom.getInstanceSelectYourPlan().proceedPaymentButton);
+		log.info("proceed payment clicked");
+
 	}
 
 	public void cardDetails() throws IOException {
@@ -67,17 +67,19 @@ public class Invalidcard extends LaunchBrowser {
 
 	}
 
-	public  void verifyAlert() {
+	public static String verifyAlert() {
 		log.info("verify alert");
+		String alertMess ="";
 		WebElement alertMessage = driver.findElement(By.xpath("(//div[@id='bootstrap-alert'])[1]/div[1]/div"));
 		System.out.println(alertMessage.getText());
 
 		if (alertMessage.isDisplayed()) {
-			String alertMess = alertMessage.getText();
+			alertMess = alertMessage.getText();
 
 			Assert.assertEquals(alertMess, "Your card was declined.");
 			log.info("alert is displayed");
 		}
+		return alertMess;
 
 	}
 
