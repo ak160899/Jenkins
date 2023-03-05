@@ -15,8 +15,11 @@ public class Lite {
 	@FindBy(xpath = "//button[@id='update-subscription-btn']")
 	public WebElement updateSubscription;
 
-	@FindBy(xpath ="(//button[@id='update-card-btn'])[2]")
+	@FindBy(xpath = "(//button[@id='update-card-btn'])[2]")
 	public WebElement cardFieldEdit;
+
+	@FindBy(xpath = "//button[@onclick='allVasPremiumThankyou.setting();']")
+	public WebElement finishLite;
 
 	public Lite(WebDriver driver) {
 

@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>testcase</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>2/2/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>4/2/0</td>
 </tr><tr>
-<td>Started on:</td><td>Wed Mar 01 20:28:39 IST 2023</td>
+<td>Started on:</td><td>Thu Mar 02 13:05:41 IST 2023</td>
 </tr>
-<tr><td>Total time:</td><td>298 seconds (298023 ms)</td>
+<tr><td>Total time:</td><td>95 seconds (95567 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,16 +75,14 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='org.LitePlan3d.EditCardDetails.giveValid3dCardCancelAndVerify()'><b>giveValid3dCardCancelAndVerify</b><br>Test class: org.LitePlan3d.EditCardDetails</td>
-<td><div><pre>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//button[@class=&apos;LightboxModalClose&apos;]&quot;}
+<td title='org.LitePlan3d.EditCardDetails.editCardWithInvalidAndVerfiy()'><b>editCardWithInvalidAndVerfiy</b><br>Test class: org.LitePlan3d.EditCardDetails</td>
+<td><div><pre>org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element &lt;button id=&quot;save_btn&quot; class=&quot;col-xs-7 col-xs-offset-2 col-md-4 col-md-offset-4 text-center paymentPageBtn paymentHover&quot; data-toggle=&quot;tooltip&quot; title=&quot;Update card and make payment&quot; style=&quot;text-decoration: none; cursor: pointer;&quot;&gt;...&lt;/button&gt; is not clickable at point (860, 320). Other element would receive the click: &lt;div id=&quot;--working--&quot; class=&quot;center-cont&quot; style=&quot;width: 100%; height: 100vh; position: fixed; left: 0px; top: 0px; z-index: 1030; background-color: rgba(239, 239, 239, 0.5); overflow: hidden !important; display: flex;&quot;&gt;...&lt;/div&gt;
   (Session info: chrome=110.0.5481.178)
-For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
 Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
 System info: host: &apos;LAPTOP-Q33L4MJO&apos;, ip: &apos;192.168.29.33&apos;, os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_331&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.178, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:50445}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Session ID: 3eddd9239a763fce3ccf4ed81b928ff7
-*** Element info: {Using=xpath, value=//button[@class=&apos;LightboxModalClose&apos;]}
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.178, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:58109}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 23f200b3b8efe538c147221556a9f050
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
 	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
@@ -95,12 +93,16 @@ Session ID: 3eddd9239a763fce3ccf4ed81b928ff7
 	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
-	at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
-	at org.selectyourPlan3D.Valid3dcard_cancel.cancellAutheticationWindow(Valid3dcard_cancel.java:41)
-	at org.LitePlan3d.EditCardDetails.giveValid3dCardCancelAndVerify(EditCardDetails.java:153)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:285)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:84)
+	at sun.reflect.GeneratedMethodAccessor2.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at com.sun.proxy.$Proxy8.click(Unknown Source)
+	at org.base.Base.click(Base.java:76)
+	at org.selectyourPlan3D.Insufficient3dCard.insufficnetcardDetails(Insufficient3dCard.java:40)
+	at org.LitePlan3d.EditCardDetails.editCardWithInvalidAndVerfiy(EditCardDetails.java:107)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -126,16 +128,14 @@ Session ID: 3eddd9239a763fce3ccf4ed81b928ff7
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1886381510", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1886381510'><pre>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//button[@class=&apos;LightboxModalClose&apos;]&quot;}
+</pre></div><a href='#' onClick='toggleBox("stack-trace7646139", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace7646139'><pre>org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element &lt;button id=&quot;save_btn&quot; class=&quot;col-xs-7 col-xs-offset-2 col-md-4 col-md-offset-4 text-center paymentPageBtn paymentHover&quot; data-toggle=&quot;tooltip&quot; title=&quot;Update card and make payment&quot; style=&quot;text-decoration: none; cursor: pointer;&quot;&gt;...&lt;/button&gt; is not clickable at point (860, 320). Other element would receive the click: &lt;div id=&quot;--working--&quot; class=&quot;center-cont&quot; style=&quot;width: 100%; height: 100vh; position: fixed; left: 0px; top: 0px; z-index: 1030; background-color: rgba(239, 239, 239, 0.5); overflow: hidden !important; display: flex;&quot;&gt;...&lt;/div&gt;
   (Session info: chrome=110.0.5481.178)
-For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
 Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
 System info: host: &apos;LAPTOP-Q33L4MJO&apos;, ip: &apos;192.168.29.33&apos;, os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_331&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.178, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:50445}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Session ID: 3eddd9239a763fce3ccf4ed81b928ff7
-*** Element info: {Using=xpath, value=//button[@class=&apos;LightboxModalClose&apos;]}
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.178, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:58109}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 23f200b3b8efe538c147221556a9f050
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
 	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
@@ -146,12 +146,16 @@ Session ID: 3eddd9239a763fce3ccf4ed81b928ff7
 	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
-	at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
-	at org.selectyourPlan3D.Valid3dcard_cancel.cancellAutheticationWindow(Valid3dcard_cancel.java:41)
-	at org.LitePlan3d.EditCardDetails.giveValid3dCardCancelAndVerify(EditCardDetails.java:153)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:285)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:84)
+	at sun.reflect.GeneratedMethodAccessor2.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at com.sun.proxy.$Proxy8.click(Unknown Source)
+	at org.base.Base.click(Base.java:76)
+	at org.selectyourPlan3D.Insufficient3dCard.insufficnetcardDetails(Insufficient3dCard.java:40)
+	at org.LitePlan3d.EditCardDetails.editCardWithInvalidAndVerfiy(EditCardDetails.java:107)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -178,18 +182,18 @@ Session ID: 3eddd9239a763fce3ccf4ed81b928ff7
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
-<td>156</td>
+<td>2</td>
 <td>org.LitePlan3d.EditCardDetails@f6c48ac</td></tr>
 <tr>
 <td title='org.LitePlan3d.EditCardDetails.goToPayemntpageAddIncorrectCvc()'><b>goToPayemntpageAddIncorrectCvc</b><br>Test class: org.LitePlan3d.EditCardDetails</td>
-<td><div><pre>java.lang.AssertionError: expected [Your card&apos;s security code is incomplete.] but found [Card details has been updated Successfully]
+<td><div><pre>java.lang.AssertionError: expected [Your card&apos;s security code is incomplete.] but found [We are unable to authenticate your payment method. Please choose a different payment method and try again.]
 	at org.testng.Assert.fail(Assert.java:94)
 	at org.testng.Assert.failNotEquals(Assert.java:513)
 	at org.testng.Assert.assertEqualsImpl(Assert.java:135)
 	at org.testng.Assert.assertEquals(Assert.java:116)
 	at org.testng.Assert.assertEquals(Assert.java:190)
 	at org.testng.Assert.assertEquals(Assert.java:200)
-	at org.LitePlan3d.EditCardDetails.goToPayemntpageAddIncorrectCvc(EditCardDetails.java:105)
+	at org.LitePlan3d.EditCardDetails.goToPayemntpageAddIncorrectCvc(EditCardDetails.java:97)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -215,15 +219,15 @@ Session ID: 3eddd9239a763fce3ccf4ed81b928ff7
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace382252989", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace382252989'><pre>java.lang.AssertionError: expected [Your card&apos;s security code is incomplete.] but found [Card details has been updated Successfully]
+</pre></div><a href='#' onClick='toggleBox("stack-trace1205321651", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1205321651'><pre>java.lang.AssertionError: expected [Your card&apos;s security code is incomplete.] but found [We are unable to authenticate your payment method. Please choose a different payment method and try again.]
 	at org.testng.Assert.fail(Assert.java:94)
 	at org.testng.Assert.failNotEquals(Assert.java:513)
 	at org.testng.Assert.assertEqualsImpl(Assert.java:135)
 	at org.testng.Assert.assertEquals(Assert.java:116)
 	at org.testng.Assert.assertEquals(Assert.java:190)
 	at org.testng.Assert.assertEquals(Assert.java:200)
-	at org.LitePlan3d.EditCardDetails.goToPayemntpageAddIncorrectCvc(EditCardDetails.java:105)
+	at org.LitePlan3d.EditCardDetails.goToPayemntpageAddIncorrectCvc(EditCardDetails.java:97)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -250,7 +254,7 @@ Session ID: 3eddd9239a763fce3ccf4ed81b928ff7
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
-<td>6</td>
+<td>4</td>
 <td>org.LitePlan3d.EditCardDetails@f6c48ac</td></tr>
 </table><p>
 <table width='100%' border='1' class='invocation-passed'>
@@ -266,9 +270,19 @@ Session ID: 3eddd9239a763fce3ccf4ed81b928ff7
 <td>43</td>
 <td>org.LitePlan3d.EditCardDetails@f6c48ac</td></tr>
 <tr>
-<td title='org.LitePlan3d.EditCardDetails.editCardWithInvalidAndVerfiy()'><b>editCardWithInvalidAndVerfiy</b><br>Test class: org.LitePlan3d.EditCardDetails</td>
+<td title='org.LitePlan3d.EditCardDetails.verify3dCardAndCompleteIt()'><b>verify3dCardAndCompleteIt</b><br>Test class: org.LitePlan3d.EditCardDetails</td>
 <td></td>
-<td>91</td>
+<td>22</td>
+<td>org.LitePlan3d.EditCardDetails@f6c48ac</td></tr>
+<tr>
+<td title='org.LitePlan3d.EditCardDetails.verify3dcardInPayementPageAndEditCardDetails()'><b>verify3dcardInPayementPageAndEditCardDetails</b><br>Test class: org.LitePlan3d.EditCardDetails</td>
+<td></td>
+<td>21</td>
+<td>org.LitePlan3d.EditCardDetails@f6c48ac</td></tr>
+<tr>
+<td title='org.LitePlan3d.EditCardDetails.verifySubscriptionWithoutCvc()'><b>verifySubscriptionWithoutCvc</b><br>Test class: org.LitePlan3d.EditCardDetails</td>
+<td></td>
+<td>1</td>
 <td>org.LitePlan3d.EditCardDetails@f6c48ac</td></tr>
 </table><p>
 </body>

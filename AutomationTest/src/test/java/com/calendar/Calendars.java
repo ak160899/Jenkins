@@ -263,11 +263,22 @@ public class Calendars extends Base {
 				WebElement ez = driver.findElement(By.xpath("//span[text()='" + kpid + "']"));
 				if (ez.isDisplayed()) {
 
-					javascriptclick(ez);
+					visbility(driver, ez, 40);
+					elementClickable(ez);
+					click(ez);
 					break;
+				} else {
+					WebElement locateKpid = driver.findElement(By.xpath("(//span[text()='" + kpid + "'])[2]"));
+					if (locateKpid.isDisplayed()) {
+						visbility(driver, locateKpid, 40);
+						elementClickable(locateKpid);
+						click(locateKpid);
+						break;
+					}
+					System.out.println("not visble ");
 				}
 			} catch (Exception e) {
-				System.out.println("");
+				System.out.println("exception in click on kpid");
 			}
 		}
 

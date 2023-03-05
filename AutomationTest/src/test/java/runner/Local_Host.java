@@ -4,9 +4,11 @@ import java.io.IOException;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.Launch.LaunchBrowser;
+import org.apache.commons.lang.RandomStringUtils;
 import org.base.Base;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -90,6 +92,26 @@ public class Local_Host extends Base {
 			}
 			break;
 		}
+
+		// String character = RandomStringUtils.randomAlphabetic(12);
+
+		visbility(driver, pom.getInstanceHomeModule().emailId, 40);
+		sendkeys(pom.getInstanceHomeModule().emailId, generateRandom("letter"));
+		visbility(driver, pom.getInstanceHomeModule().selectFlagPhoneNumField, 50);
+		elementClickable(pom.getInstanceHomeModule().selectFlagPhoneNumField);
+		click(pom.getInstanceHomeModule().selectFlagPhoneNumField);
+
+		for (WebElement flag : pom.getInstanceHomeModule().chooseCountrycodeFlag) {
+			if (flag.getText().trim().equals("+91")) {
+				click(flag);
+				break;
+			}
+		}
+
+		// String numericRand = RandomStringUtils.randomNumeric(5);
+		visbility(driver, pom.getInstanceHomeModule().phoneNumberField, 40);
+		sendkeys(pom.getInstanceHomeModule().phoneNumberField, "95518" + generateRandom("number"));
+
 		// Acc gets Created..
 		click(pom.getInstanceNewPatient().CreatePatient);
 
@@ -158,6 +180,24 @@ public class Local_Host extends Base {
 			}
 
 		}
+
+		visbility(driver, pom.getInstanceHomeModule().emailId, 40);
+		sendkeys(pom.getInstanceHomeModule().emailId, generateRandom("letter"));
+
+		visbility(driver, pom.getInstanceHomeModule().selectFlagPhoneNumField, 50);
+		elementClickable(pom.getInstanceHomeModule().selectFlagPhoneNumField);
+		click(pom.getInstanceHomeModule().selectFlagPhoneNumField);
+
+		for (WebElement flag : pom.getInstanceHomeModule().chooseCountrycodeFlag) {
+			if (flag.getText().trim().equals("+91")) {
+				click(flag);
+				break;
+			}
+		}
+
+		// String numericRand = RandomStringUtils.randomNumeric(5);
+		visbility(driver, pom.getInstanceHomeModule().phoneNumberField, 40);
+		sendkeys(pom.getInstanceHomeModule().phoneNumberField, "95518" + generateRandom("number"));
 
 		// Acc gets Created..
 		elementClickable(pom.getInstanceNewPatient().CreatePatient);
@@ -367,10 +407,15 @@ public class Local_Host extends Base {
 
 		visbility(driver, pom.getInstanceNewPatient().addOccupation, 30);
 		sendkeys(pom.getInstanceNewPatient().addOccupation, "Software tester");
-
-		elementClickable(pom.getInstanceNewPatient().savePatientinfo);
-		click(pom.getInstanceNewPatient().savePatientinfo);
-
+		try {
+			visbility(driver, pom.getInstanceNewPatient().savePatientinfo, 40);
+			elementClickable(pom.getInstanceNewPatient().savePatientinfo);
+			click(pom.getInstanceNewPatient().savePatientinfo);
+		} catch (ElementClickInterceptedException e) {
+			visbility(driver, pom.getInstanceNewPatient().savePatientinfo, 40);
+			elementClickable(pom.getInstanceNewPatient().savePatientinfo);
+			click(pom.getInstanceNewPatient().savePatientinfo);
+		}
 		try {
 			visbility(driver, pom.getInstanceNewPatient().$patienmod, 40);
 			elementClickable(pom.getInstanceNewPatient().$patienmod);
@@ -4207,10 +4252,10 @@ public class Local_Host extends Base {
 		}
 		WebElement np2 = driver.findElement(By.id("firstname"));
 		visbility(driver, np2, 60);
-		sendkeys(np2, "Abigazi");// .sendKeys("Abigazi");
+		sendkeys(np2, "Ayyyyyi");// .sendKeys("Abigazi");
 		WebElement np3 = driver.findElement(By.id("lastname"));
 		visbility(driver, np3, 60);
-		sendkeys(np3, "Ak");// .sendKeys("Ak");
+		sendkeys(np3, "ghghgjg");// .sendKeys("Ak");
 		WebElement gn1 = driver.findElement(By.xpath("(//button[@id='gender_dropdown'])[1]"));
 		visbility(driver, gn1, 60);
 		javascriptclick(gn1);
@@ -4224,6 +4269,24 @@ public class Local_Host extends Base {
 			}
 
 		}
+
+		visbility(driver, pom.getInstanceHomeModule().emailId, 40);
+		sendkeys(pom.getInstanceHomeModule().emailId, generateRandom("letter"));
+
+		visbility(driver, pom.getInstanceHomeModule().selectFlagPhoneNumField, 50);
+		elementClickable(pom.getInstanceHomeModule().selectFlagPhoneNumField);
+		click(pom.getInstanceHomeModule().selectFlagPhoneNumField);
+
+		for (WebElement flag : pom.getInstanceHomeModule().chooseCountrycodeFlag) {
+			if (flag.getText().trim().equals("+91")) {
+				click(flag);
+				break;
+			}
+		}
+
+		// String numericRand = RandomStringUtils.randomNumeric(5);
+		visbility(driver, pom.getInstanceHomeModule().phoneNumberField, 40);
+		sendkeys(pom.getInstanceHomeModule().phoneNumberField, "95518" + generateRandom("number"));
 
 		WebElement cp1 = driver.findElement(By.xpath("//div[@id='createPatient']"));
 		visbility(driver, cp1, 60);

@@ -2,15 +2,26 @@
 <suite name="Lite3d" verbose="2">
 
 	<test name="Lite">
-		<classes>
-			<class name="org.LitePlan3d.Carosel"></class>
-		</classes>
-	</test>
 
-	<test name="testcase">
+		<groups>
+			<run>
+
+
+				<include name="basic"></include>
+
+			</run>
+
+		</groups>
+
+
 		<classes>
+
+
 			<class name="org.LitePlan3d.EditCardDetails"></class>
 		</classes>
+
+
+
 	</test>
 
 </suite>

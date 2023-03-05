@@ -6,20 +6,19 @@ import org.Launch.LaunchBrowser;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import org.testng.annotations.Test;
 
 import com.data.ConfigManager;
+import com.pageObjeman.PageObjMan;
 
 public class Invalidcard extends LaunchBrowser {
 
-	static Logger log;
-
 	public static void selectYourPln() {
-		log = Logger.getLogger(Invalidcard.class);
-		BasicConfigurator.configure();
+
 		try {
 			visbility(driver, pom.getInstanceSelectYourPlan().dismiss, 60);
 			elementClickable(pom.getInstanceSelectYourPlan().dismiss);
@@ -41,7 +40,7 @@ public class Invalidcard extends LaunchBrowser {
 
 	}
 
-	public void cardDetails() throws IOException {
+	public static void cardDetails() throws IOException {
 
 		frame("WebElement", pom.getInstanceCardDetails().switchToCardFrame);
 		log.info("switched to frame");
@@ -69,7 +68,7 @@ public class Invalidcard extends LaunchBrowser {
 
 	public static String verifyAlert() {
 		log.info("verify alert");
-		String alertMess ="";
+		String alertMess = "";
 		WebElement alertMessage = driver.findElement(By.xpath("(//div[@id='bootstrap-alert'])[1]/div[1]/div"));
 		System.out.println(alertMessage.getText());
 

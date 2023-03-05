@@ -2,6 +2,7 @@ package com.pageObjeman;
 
 import org.openqa.selenium.WebDriver;
 
+import com.pomclass.Basic;
 import com.pomclass.Billing;
 import com.pomclass.Calendar;
 import com.pomclass.CardDetails;
@@ -9,6 +10,7 @@ import com.pomclass.HealthRecord;
 import com.pomclass.HomeModule;
 import com.pomclass.Lite;
 import com.pomclass.LoginPage;
+import com.pomclass.MarketPlace;
 import com.pomclass.Message;
 import com.pomclass.PatientCreation;
 import com.pomclass.SelectYourPlan;
@@ -29,6 +31,8 @@ public class PageObjMan {
 	private SelectYourPlan selectplan;
 	private CardDetails card;
 	private Lite lite;
+	private MarketPlace marketplc;
+	private Basic basic;
 
 	public WebDriver driver;
 
@@ -56,11 +60,29 @@ public class PageObjMan {
 		return lg;
 	}
 
+	public Basic getInstanceBasic() {
+		if (basic == null) {
+			basic = new Basic(driver);
+			return basic;
+		}
+		return basic;
+	}
+
 	public CardDetails getInstanceCardDetails() {
 		if (card == null) {
 			card = new CardDetails(driver);
 		}
 		return card;
+
+	}
+
+	public MarketPlace getInstanceMarketplace() {
+		if (marketplc == null) {
+			marketplc = new MarketPlace(driver);
+			return marketplc;
+		}
+
+		return marketplc;
 
 	}
 

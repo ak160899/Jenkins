@@ -18,7 +18,7 @@ public class SelectYourPlan {
 	@FindBy(xpath = "//button[@id='proceed_button']")
 	public WebElement proceedPaymentButton;
 
-	@FindBy(xpath = "(//div[@id='AlertMessage'])//following::button[1]")
+	@FindBy(xpath = "((//div[@id='AlertMessage'])//following::button[1])[1]")
 	public WebElement accept;
 	
 	@FindBy(xpath = "(//div[@id='AlertMessage'])//following::button[2]")

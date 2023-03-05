@@ -14,14 +14,16 @@ public class TestRunner {
 		// subscriptionValidation.Lite_Basic_premium55_premium79.class });
 		// test.setTestClasses(new Class[] {
 		// subscriptionValidation.SelctyourPlan_Premiumplus.class });
-		test.setTestClasses(new Class[] { runner.Dr_userLogin.class });
+		test.setTestClasses(new Class[] { runner.Local_Host.class });
 
-		List suite = Lists.newArrayList();
-
-		suite.add(System.getProperty("user.dir") + "\\3dSuiteFile\\3DTesting.xml");
-		suite.add(System.getProperty("user.dir") + "\\3dSuiteFile\\Lite.xml.xml");
-
-		test.setTestSuites(suite);
+		/*
+		 * List suite = Lists.newArrayList();
+		 * 
+		 * suite.add(System.getProperty("user.dir") + "\\3dSuiteFile\\3DTesting.xml");
+		 * suite.add(System.getProperty("user.dir") + "\\3dSuiteFile\\Lite.xml.xml");
+		 * 
+		 * test.setTestSuites(suite);
+		 */
 		test.run();
 
 	}

@@ -7,12 +7,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class Valid3dcard_cancel extends LaunchBrowser {
 
-	public static void cancellAutheticationWindow() {
+	public static void cancellAutheticationWindow() throws NoSuchElementException {
 
 		log.info("valid card authenwindow");
 
@@ -37,18 +38,22 @@ public class Valid3dcard_cancel extends LaunchBrowser {
 		}
 
 		driver.switchTo().parentFrame();
+		driver.switchTo().parentFrame();
 		try {
 			WebElement cancelAuthWindow = driver.findElement(By.xpath("//button[@class='LightboxModalClose']"));
 			visbility(driver, cancelAuthWindow, 40);
 			elementClickable(cancelAuthWindow);
 			click(cancelAuthWindow);
-		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+			log.info("authentication window closed");
+		} catch (WebDriverException e) {
 			WebElement cancelAuthWindow = driver.findElement(By.xpath("//button[@class='LightboxModalClose']"));
 			visbility(driver, cancelAuthWindow, 50);
 			elementClickable(cancelAuthWindow);
 			click(cancelAuthWindow);
+			log.info("authentication window closed");
 		}
-		log.info("authentication window closed");
+		defaultcontent();
+
 	}
 
 	@Test(priority = 1)

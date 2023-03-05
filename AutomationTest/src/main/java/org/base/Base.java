@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -372,6 +373,17 @@ public class Base {
 	public static void clickble(WebDriver driver, WebElement element, int seconds) {
 		WebDriverWait wait = new WebDriverWait(driver, seconds);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
+
+	}
+
+	public static String generateRandom(String genreateType) {
+		String type = null;
+		if (genreateType.equals("number")) {
+			type = RandomStringUtils.randomNumeric(5);
+		} else if (genreateType.equals("letter")) {
+			type = RandomStringUtils.randomAlphabetic(10) + "@gmail.com";
+		}
+		return type;
 
 	}
 

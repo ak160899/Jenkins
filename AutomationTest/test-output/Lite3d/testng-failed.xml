@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite verbose="2" name="Failed suite [Lite3d]">
-  <test name="testcase(failed)">
+  <test name="Lite(failed)">
+    <groups>
+      <run>
+        <include name="basic"/>
+      </run>
+    </groups>
     <classes>
       <class name="org.LitePlan3d.EditCardDetails">
         <methods>
-          <include name="goToPayemntpageAddIncorrectCvc"/>
-          <include name="openConnection"/>
-          <include name="giveValid3dCardCancelAndVerify"/>
+          <include name="goToMarketPlaceAndGiveValidCvCAndCancel"/>
+          <include name="checkRecent3dCardUpdateInCardDetail"/>
         </methods>
       </class> <!-- org.LitePlan3d.EditCardDetails -->
     </classes>
-  </test> <!-- testcase(failed) -->
+  </test> <!-- Lite(failed) -->
 </suite> <!-- Failed suite [Lite3d] -->

@@ -24,7 +24,7 @@ public class Carosel extends LaunchBrowser {
 		log.info("clicked upgrade later in lite");
 
 		driver.navigate().to("https://localhost:8443/health/#allSubscriptionActiveUsers");
-		j.executeScript("window.scrollBy(0,0)", "");
+		j.executeScript("window.scrollBy(0,-950)", "");
 		sleep(2500);
 		try {
 			WebElement link = driver.findElement(By.xpath("(//span[@id='manage-sub-text'])[1]/a"));

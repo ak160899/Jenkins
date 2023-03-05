@@ -1,5 +1,7 @@
 package com.pomclass;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,8 +20,20 @@ public class HomeModule {
 	@FindBy(id = "lastname")
 	public WebElement lastname;
 
+	@FindBy(id = "userloginId")
+	public WebElement emailId;
+
+	@FindBy(xpath = "//div[@class='selected-flag']")
+	public WebElement selectFlagPhoneNumField;
+
+	@FindBy(xpath = "//div[@class='selected-flag']//following::ul[1]/li/span[2]")
+	public List<WebElement> chooseCountrycodeFlag;
+
 	@FindBy(xpath = "(//button[@id='gender_dropdown'])[1]")
 	public WebElement clickGenderIcon;
+
+	@FindBy(id = "Phone")
+	public WebElement phoneNumberField;
 
 	@FindBy(xpath = "(//ul[@id='genderDropdown'])[1]")
 	public WebElement chooseGender;
