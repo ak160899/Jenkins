@@ -2,12 +2,13 @@ package com.healthRec;
 
 import java.util.List;
 
+import org.Launch.LaunchBrowser;
 import org.base.Base;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class Procedure extends Base {
+public class Procedure extends LaunchBrowser {
 
 	WebDriver driver;
 
@@ -121,79 +122,57 @@ public class Procedure extends Base {
 	}
 
 	public void getPastProcedure() {
-		try {
-			sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
-		for (int i = 1; i <= 7; i++) {
-			WebElement rss = null;
-			try {
-				rss = driver.findElement(By.xpath("//div[contains(@title,'SALT Procedure')]//following::div[3]"));
-				actions("move to element", rss);
-				if (rss.isDisplayed()) {
-					visbility(driver, rss, 60);
-					javascriptclick(rss);
-					break;
-				}
-			} catch (Exception e) {
-				actions("move to element", rss);
-
+		while (true) {
+			if (pom.getInstanceProcedure().ellipses.isDisplayed()) {
+				visbility(driver, pom.getInstanceProcedure().ellipses, 30);
+				elementClickable(pom.getInstanceProcedure().ellipses);
+				click(pom.getInstanceProcedure().ellipses);
+				break;
+			} else if (!pom.getInstanceProcedure().ellipses.isDisplayed()) {
+				actions("move to element", pom.getInstanceProcedure().ellipses);
 			}
 		}
 		try {
 			sleep(2000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 
-		List<WebElement> procdpast = driver.findElements(
-				By.xpath("//div[contains(@title,'SALT Procedure')]//following::div[3]//following::ul[1]/li"));
-
-		for (WebElement we : procdpast) {
+		for (WebElement we : pom.getInstanceProcedure().ellipsesList) {
 
 			if (we.getText().trim().equals("Past Procedure")) {
 				visbility(driver, we, 60);
-
-				we.click();
+				elementClickable(we);
+				click(we);
 				break;
 			}
 
 		}
+
 		try {
-			sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			visbility(driver, pom.getInstanceProcedure().addPast, 30);
+			elementClickable(pom.getInstanceProcedure().addPast);
+			click(pom.getInstanceProcedure().addPast);
+
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceProcedure().addPast, 30);
+			elementClickable(pom.getInstanceProcedure().addPast);
+			click(pom.getInstanceProcedure().addPast);
 		}
 
-		for (int i = 1; i <= 8; i++) {
-			try {
-				WebElement prcdad = driver.findElement(
-						By.xpath("(//span[text()='Past Procedure'])[1]//following::div[1]/div[3]/div/div/span"));
-				if (prcdad.isDisplayed()) {
-					click(prcdad);
-					break;
-				}
-			} catch (Exception e) {
+		try {
 
-			}
-		}
+			visbility(driver, pom.getInstanceProcedure().closePast, 30);
+			elementClickable(pom.getInstanceProcedure().closePast);
+			click(pom.getInstanceProcedure().closePast);
 
-		for (int i = 1; i <= 8; i++) {
-			try {
-				WebElement clsprcd = driver
-						.findElement(By.xpath("(//span[text()='Past Procedure'])[1]//parent::div/span[1]"));
-				if (clsprcd.isDisplayed()) {
-					click(clsprcd);
-					break;
-				}
-			} catch (Exception e) {
-
-			}
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceProcedure().closePast, 30);
+			elementClickable(pom.getInstanceProcedure().closePast);
+			click(pom.getInstanceProcedure().closePast);
 		}
 
 	}

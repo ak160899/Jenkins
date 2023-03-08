@@ -5,13 +5,11 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
+import org.Launch.LaunchBrowser;
 import org.base.*;
 import com.pageObjeman.PageObjMan;
 
-public class FamilyHealth extends Base {
-	WebDriver driver;
-	PageObjMan pom;
+public class FamilyHealth extends LaunchBrowser {
 
 	public void $familH() {
 		WebElement a = driver.findElement(By.xpath("//div[contains(@title,'Add Family Health')]"));
@@ -74,6 +72,44 @@ public class FamilyHealth extends Base {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+
+	}
+
+	public static void familyHealthIcd() {
+		boolean check = false;
+		
+
+		try {
+
+			if (pom.getInstanceFamilyHaelth().icdDropdown.size() <= 2) {
+				System.out.println(">=2 " + pom.getInstanceFamilyHaelth().icdDropdown.size());
+				check = true;
+
+			}
+		} catch (Exception e) {
+
+		}
+
+		System.out.println("exit fh");
+
+		if (check == true) {
+			for (WebElement web : pom.getInstanceFamilyHaelth().icdDropdown) {
+				System.out.println("ENTER");
+				System.out.println(web.getText());
+				if (web.getText().equals("ICD10 : F40.2 | SNOMED : 247810008") && web.isDisplayed()) {
+					visbility(driver, web, 60);
+					elementClickable(web);
+					click(web);
+					System.out.println("FAMILY HEALTH ");
+					check = true;
+					break;
+				}
+
+			}
+		}
+		if (check == false) {
+			familyHealthIcd();
 		}
 
 	}

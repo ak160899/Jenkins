@@ -98,7 +98,7 @@ public class LaunchBrowser extends Base {
 		}
 
 		implicitWait(70, TimeUnit.SECONDS);
-
+		
 		return result;
 	}
 

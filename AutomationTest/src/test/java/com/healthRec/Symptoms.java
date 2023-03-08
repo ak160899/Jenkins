@@ -3,6 +3,7 @@ package com.healthRec;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.Launch.LaunchBrowser;
 import org.base.Base;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +11,7 @@ import org.openqa.selenium.WebElement;
 
 import com.pageObjeman.PageObjMan;
 
-public class Symptoms extends Base {
+public class Symptoms extends LaunchBrowser {
 
 	WebDriver driver;
 	// PageObjMan pom;
@@ -87,44 +88,41 @@ public class Symptoms extends Base {
 	public void getPastSymptom() throws InterruptedException {
 		sleep(2000);
 
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement $cureSypmtoms$ = driver
-						.findElement(By.xpath("(//div[text()='R76.1: Abnormal reaction to tuberculin test'])[1]"));
-				if ($cureSypmtoms$.isDisplayed()) {
-					visbility(driver, $cureSypmtoms$, 60);
-					javascriptclick($cureSypmtoms$);
-					break;
-				}
-			} catch (Exception e) {
-
-			}
+		try {
+			visbility(driver, pom.getInstanceSymptom().curePast, 30);
+			elementClickable(pom.getInstanceSymptom().curePast);
+			click(pom.getInstanceSymptom().curePast);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceSymptom().curePast, 30);
+			elementClickable(pom.getInstanceSymptom().curePast);
+			click(pom.getInstanceSymptom().curePast);
 		}
 
 		sleep(1500);
-		WebElement $yes_sympton$ = driver.findElement(By.xpath(
-				"(//div[text()='R76.1: Abnormal reaction to tuberculin test'])[1]//following::div[10]//following::div[1]/span[1]"));
-		visbility(driver, $yes_sympton$, 60);
-		javascriptclick($yes_sympton$);
+		try {
+			visbility(driver, pom.getInstanceSymptom().yesCure, 30);
+			elementClickable(pom.getInstanceSymptom().yesCure);
+			click(pom.getInstanceSymptom().yesCure);
 
-		for (int i = 1; i <= 10; i++) {
-			WebElement symptn = null;
-			try {
-				symptn = driver.findElement(By.xpath("//div[contains(@title,'Add Symptoms')]//following::div[1]"));
-				actions("move to element", symptn);
-				if (symptn.isDisplayed()) {
-					visbility(driver, symptn, 60);
-					javascriptclick(symptn);
-					break;
-				}
-			} catch (Exception e) {
-				actions("move to element", symptn);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceSymptom().yesCure, 30);
+			elementClickable(pom.getInstanceSymptom().yesCure);
+			click(pom.getInstanceSymptom().yesCure);
+		}
 
+		while (true) {
+
+			if (pom.getInstanceSymptom().ellipses.isDisplayed()) {
+				visbility(driver, pom.getInstanceSymptom().ellipses, 30);
+				elementClickable(pom.getInstanceSymptom().ellipses);
+				click(pom.getInstanceSymptom().ellipses);
+				break;
+			} else if (!pom.getInstanceSymptom().ellipses.isDisplayed()) {
+				actions("move to element", pom.getInstanceSymptom().ellipses);
 			}
 		}
-		List<WebElement> vr = driver.findElements(
-				By.xpath("//div[contains(@title,'Add Symptoms')]//following::div[1]//following::ul[1]/li"));
-		for (WebElement web : vr) {
+
+		for (WebElement web : pom.getInstanceSymptom().ellipsesList) {
 
 			if (web.getText().trim().equals("Past Cured Symptom")) {
 
@@ -133,24 +131,26 @@ public class Symptoms extends Base {
 			}
 
 		}
-		sleep(2000);
-		for (int i = 1; i <= 8; i++) {
-			try {
-				WebElement addsymppast = driver.findElement(
-						By.xpath("(//span[text()='Past Cured Symptom'])[1]//following::div[1]/div[3]/div/div/span"));
-				if (addsymppast.isDisplayed()) {
-					click(addsymppast);
-					break;
-				}
-			} catch (Exception e) {
 
-			}
+		try {
+			visbility(driver, pom.getInstanceSymptom().addPast, 40);
+			elementClickable(pom.getInstanceSymptom().addPast);
+			click(pom.getInstanceSymptom().addPast);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceSymptom().addPast, 40);
+			elementClickable(pom.getInstanceSymptom().addPast);
+			click(pom.getInstanceSymptom().addPast);
 		}
-		sleep(2000);
-		WebElement clsesymp = driver
-				.findElement(By.xpath("(//span[text()='Past Cured Symptom'])[1]//parent::div/span[1]"));
-		visbility(driver, clsesymp, 25);
-		javascriptclick(clsesymp);
+
+		try {
+			visbility(driver, pom.getInstanceSymptom().closePast, 30);
+			elementClickable(pom.getInstanceSymptom().closePast);
+			click(pom.getInstanceSymptom().closePast);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceSymptom().closePast, 30);
+			elementClickable(pom.getInstanceSymptom().closePast);
+			click(pom.getInstanceSymptom().closePast);
+		}
 
 	}
 }

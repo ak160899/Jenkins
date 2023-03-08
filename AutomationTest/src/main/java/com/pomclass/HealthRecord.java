@@ -1,5 +1,7 @@
 package com.pomclass;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 public class HealthRecord {
 	public WebDriver driver;
 
-	@FindBy(xpath = "//td[text()='Health Record']")
+	@FindBy(xpath = "(//td[text()='Health Record'])[1]")
 	public WebElement clickHealthRec;
 
 	@FindBy(id = "newMedicalRecordButton")
@@ -137,12 +139,26 @@ public class HealthRecord {
 	@FindBy(xpath = "(//button[@id='complete-btn'])[1]")
 	public WebElement complete;
 
-	@FindBy(xpath = "(//button[@id='Billing'])[1]")
+	@FindBy(xpath = "(//div[@id='generate_bill'])[1]/button[2]")
 	public WebElement generateBill;
 
 	@FindBy(xpath = "(//button[@id='delete-btn'])[1]")
 	public WebElement delete;
+	
+	@FindBy(xpath = "(//div[@id='generate_bill'])[1]/button[2]//following::ul[1]/li")
+	public List<WebElement> genratebillDropdown;
 
+
+	@FindBy(xpath = "//i[@onclick='ehr.ehrShowPrintOptions();']")
+	public WebElement ehrprintIcon;
+	
+	@FindBy(xpath = "//i[@onclick='ehr.ehrShowPrintOptions();']//following::span[3]")
+	public WebElement ehrEllipses;
+	
+	@FindBy(xpath = "//i[@onclick='ehr.ehrShowPrintOptions();']//following::span[3]//following::ul[1]/li")
+	public List<WebElement> ehrEllipsesList;
+	
+	
 	public HealthRecord(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);

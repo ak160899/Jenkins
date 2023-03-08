@@ -2,9 +2,12 @@ package com.healthRec;
 
 import java.util.List;
 
+import org.Launch.LaunchBrowser;
 import org.base.Base;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,73 +16,80 @@ import com.pageObjeman.PageObjMan;
 
 import runner.Local_Host;
 
-public class Problems extends Base {
-	WebDriver driver;
+public class Problems extends LaunchBrowser {
 
-	public Problems(WebDriver driver) throws Exception {
-		this.driver = driver;
+	public static void Addproblems() throws InterruptedException {
 
-	}
+		while (true) {
 
-	public void Addproblems() throws InterruptedException {
-		WebElement a3 = driver.findElement(By.xpath("//div[contains(@title,'Add Problems')]"));
-		actions("move to element", a3);
-		visbility(driver, a3, 60);
+			if (pom.getInstanceProblems().addIcon.isDisplayed()) {
+				visbility(driver, pom.getInstanceProblems().addIcon, 30);
+				elementClickable(pom.getInstanceProblems().addIcon);
+				click(pom.getInstanceProblems().addIcon);
+				break;
+			} else if (!pom.getInstanceProblems().addIcon.isDisplayed()) {
+				actions("move to element", pom.getInstanceProblems().addIcon);
+			}
+		}
 
-		actions("click", a3);
-		sleep(2000);
-
-		WebElement ct = driver.findElement(By.xpath("//div[@id='ProblemsKpop2']/div[2]/div/div[1]/div[2]/input"));
-		visbility(driver, ct, 60);
-		// driver.findElement(By.xpath("//div[@id='ProblemsKpop2']/div[2]/div/div[1]/div[2]/input"))
-		ct.sendKeys("Cleft uvula");
+		visbility(driver, pom.getInstanceProblems().icd, 30);
+		sendkeys(pom.getInstanceProblems().icd, "Cleft uvula");
 
 		sleep(3000);
-		WebElement prbcl = driver.findElement(By.xpath("//small[text()='ICD10 : Q35.7 | SNOMED : --']"));
-		visbility(driver, prbcl, 60);
+		try {
+			WebElement icdCode = driver.findElement(By.xpath("//small[text()='ICD10 : Q35.7 | SNOMED : --']"));
+			visbility(driver, icdCode, 60);
+			elementClickable(icdCode);
+			click(icdCode);
+		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+			WebElement icdCode = driver.findElement(By.xpath("//small[text()='ICD10 : Q35.7 | SNOMED : --']"));
+			visbility(driver, icdCode, 60);
+			elementClickable(icdCode);
+			click(icdCode);
+		}
+		elementClickable(pom.getInstanceProblems().save);
+		click(pom.getInstanceProblems().save);
 
-		actions("click", prbcl);
-		sleep(2000);
-
-		WebElement gg = driver.findElement(By.xpath("//button[@id='btnSaveAdd']"));
-		visbility(driver, gg, 60);
-
-		javascriptclick(gg);
-
-		List<WebElement> a5 = driver.findElements(By.xpath("//div[@id='saveadd-btn']/ul/li"));
-		for (WebElement w : a5) {
-			if (w.getText().trim().equals("Save")) {
-				visbility(driver, w, 60);
-				w.click();
+		for (WebElement save : pom.getInstanceProblems().saveMore) {
+			if (save.getText().trim().equals("Save")) {
+				visbility(driver, save, 60);
+				elementClickable(save);
+				click(save);
 				break;
 			}
 
 		}
-		sleep(3000);
-		WebElement a6 = driver.findElement(By.xpath("//div[text()='Cleft uvula']"));
-		visbility(driver, a6, 60);
+		try {
+			WebElement edit = driver.findElement(By.xpath("//div[text()='Cleft uvula']"));
+			visbility(driver, edit, 60);
+			elementClickable(edit);
 
-		actions("click", a6);
-		sleep(3000);
-		WebElement clr = driver
-				.findElement(By.xpath("//div[@id='ProblemsKpop2']/div[2]/div[1]/div[1]/div[2]//following::div[2]"));
-		visbility(driver, clr, 60);
-
-		javascriptclick(clr);
-
+			click(edit);
+		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+			WebElement edit = driver.findElement(By.xpath("//div[text()='Cleft uvula']"));
+			visbility(driver, edit, 60);
+			elementClickable(edit);
+			click(edit);
+		}
+		try {
+			visbility(driver, pom.getInstanceProblems().removeProblem, 30);
+			elementClickable(pom.getInstanceProblems().removeProblem);
+			click(pom.getInstanceProblems().removeProblem);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceProblems().removeProblem, 30);
+			elementClickable(pom.getInstanceProblems().removeProblem);
+			click(pom.getInstanceProblems().removeProblem);
+		}
 		addFavoritedisbox();
 		problemIcdCode();
+		elementClickable(pom.getInstanceProblems().save);
+		click(pom.getInstanceProblems().save);
 
-		WebElement gg1 = driver.findElement(By.xpath("//button[@id='btnSaveAdd']"));
-		visbility(driver, gg1, 60);
-
-		javascriptclick(gg1);
-		sleep(3000);
-		List<WebElement> a56 = driver.findElements(By.xpath("//div[@id='saveadd-btn']/ul/li"));
-		for (WebElement w : a56) {
+		for (WebElement w : pom.getInstanceProblems().saveMore) {
 			if (w.getText().trim().equals("Save")) {
-				visbility(driver, w, 60);
-				w.click();
+				visbility(driver, w, 40);
+				elementClickable(w);
+				click(w);
 				break;
 
 			}
@@ -193,24 +203,30 @@ public class Problems extends Base {
 
 	}
 
-	public void favoriteProblemAddIcon() throws InterruptedException {
-		WebElement pr1 = driver.findElement(By.xpath("//div[contains(@title,'Show my favorite Problems list ')]"));
-		actions("move to element", pr1);
-		visbility(driver, pr1, 60);
-		javascriptclick(pr1);
-		sleep(2000);
+	public static void favoriteProblemAddIcon() throws InterruptedException {
 
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement $prob_fav_kpop$ = driver.findElement(By.xpath(
-						"//div[@id='ProblemsFavKpop2']//following::div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
-				visbility(driver, $prob_fav_kpop$, 60);
-				javascriptclick($prob_fav_kpop$);
+		while (true) {
+			if (pom.getInstanceProblems().favoriteIcon.isDisplayed()) {
+				visbility(driver, pom.getInstanceProblems().favoriteIcon, 30);
+				elementClickable(pom.getInstanceProblems().favoriteIcon);
+				click(pom.getInstanceProblems().favoriteIcon);
 				break;
-			} catch (Exception e) {
-				// TODO: handle exception
+			} else if (!pom.getInstanceProblems().favoriteIcon.isDisplayed()) {
+				actions("move to element", pom.getInstanceProblems().favoriteIcon);
 			}
 		}
+
+		try {
+			visbility(driver, pom.getInstanceProblems().addNewFavorite, 30);
+			elementClickable(pom.getInstanceProblems().addNewFavorite);
+			click(pom.getInstanceProblems().addNewFavorite);
+
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceProblems().addNewFavorite, 30);
+			elementClickable(pom.getInstanceProblems().addNewFavorite);
+			click(pom.getInstanceProblems().addNewFavorite);
+		}
+
 		addFavoritedisbox();
 		$favproblemsIcdCode();
 		problemFavoriteSaveButton();
@@ -218,35 +234,34 @@ public class Problems extends Base {
 
 	}
 
-	public void addFavoritedisbox() throws InterruptedException {
-		// $$$$$$problems$$$$$$$
+	public static void addFavoritedisbox() throws InterruptedException {
 
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement $probSendkeys$ = driver
-						.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::input[1])[1]"));
-				visbility(driver, $probSendkeys$, 60);
-				sendkeys($probSendkeys$, "test");
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		try {
+
+			visbility(driver, pom.getInstanceProblems().favoriteIcd, 40);
+			sendkeys(pom.getInstanceProblems().favoriteIcd, "malignant neoplasm of testis");
+
+		} catch (Exception e) {
+
+			visbility(driver, pom.getInstanceProblems().favoriteIcd, 40);
+			sendkeys(pom.getInstanceProblems().favoriteIcd, "malignant neoplasm of testis");
 		}
+
 	}
 
-	public void $favproblemsIcdCode() throws InterruptedException {
+	public static void $favproblemsIcdCode() throws InterruptedException {
 		boolean value = false;
-		List<WebElement> $probDrop$;
 		while (true) {
-			$probDrop$ = driver.findElements(
-					By.xpath("//div[@id='ProblemsKpop2']/div[2]/div[2]//following::ul[1]/li/a/div/small"));
-			if ($probDrop$.size() > 7)
+
+			if (pom.getInstanceProblems().favoriteIcdList.size() > 7)
 				break;
 		}
-		// System.out.println($probDrop$.size());
-		for (WebElement web : $probDrop$) {
+
+		for (WebElement web : pom.getInstanceProblems().favoriteIcdList) {
 
 			if (web.getText().trim().equals("ICD10 : C62 | SNOMED : --") && web.isDisplayed()) {
+				visbility(driver, web, 40);
+				elementClickable(web);
 				value = true;
 				web.click();
 				break;
@@ -260,33 +275,26 @@ public class Problems extends Base {
 
 	}
 
-	public void $editAndSaveProblemav() throws InterruptedException {
+	public static void $editAndSaveProblemav() throws InterruptedException {
 
-		sleep(2000);
-		for (int i = 1; i <= 7; i++) {
-			try {
-				WebElement $problemedit$ = driver
-						.findElement(By.xpath("(//span[text()='Malignant neoplasm of testis'])[1]"));
-				if ($problemedit$.isDisplayed()) {
+		try {
+			visbility(driver, pom.getInstanceProblems().editFavorite, 30);
+			elementClickable(pom.getInstanceProblems().editFavorite);
+			click(pom.getInstanceProblems().editFavorite);
 
-					click($problemedit$);
-					break;
-				}
-			} catch (Exception e) {
-
-			}
+		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+			visbility(driver, pom.getInstanceProblems().editFavorite, 30);
+			elementClickable(pom.getInstanceProblems().editFavorite);
+			click(pom.getInstanceProblems().editFavorite);
 		}
-
-		while (true) {
-			try {
-				WebElement $cancel_icon_prblem$ = driver
-						.findElement(By.xpath("//td[text()='Malignant neoplasm of testis']//following::div[1]"));
-				visbility(driver, $cancel_icon_prblem$, 60);
-				click($cancel_icon_prblem$);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		try {
+			visbility(driver, pom.getInstanceProblems().removeFavoriteCode, 30);
+			elementClickable(pom.getInstanceProblems().removeFavoriteCode);
+			click(pom.getInstanceProblems().removeFavoriteCode);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceProblems().removeFavoriteCode, 30);
+			elementClickable(pom.getInstanceProblems().removeFavoriteCode);
+			click(pom.getInstanceProblems().removeFavoriteCode);
 		}
 
 		addFavoritedisbox();
@@ -294,52 +302,40 @@ public class Problems extends Base {
 		$favproblemsIcdCode();
 		problemFavoriteSaveButton();
 
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement $add_problem_to_list$ = driver.findElement(By.xpath(
-						"(//span[text()='Malignant neoplasm of testis'])[2]//parent::div//parent::div[1]//parent::div[1]/div[1]/span[1]"));
-				click($add_problem_to_list$);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		try {
+			visbility(driver, pom.getInstanceProblems().addThisFavorite, 30);
+			elementClickable(pom.getInstanceProblems().addThisFavorite);
+			click(pom.getInstanceProblems().addThisFavorite);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceProblems().addThisFavorite, 30);
+			elementClickable(pom.getInstanceProblems().addThisFavorite);
+			click(pom.getInstanceProblems().addThisFavorite);
 		}
 
-		sleep(2000);
-
-		WebElement $cancelprobKpop2$ = driver
-				.findElement(By.xpath("(//div[@id='ProblemsFavKpop2']/div[1]//following::span[1])[1]"));
-		click($cancelprobKpop2$);
+		try {
+			visbility(driver, pom.getInstanceProblems().closeFavorite, 30);
+			elementClickable(pom.getInstanceProblems().closeFavorite);
+			click(pom.getInstanceProblems().closeFavorite);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceProblems().closeFavorite, 30);
+			elementClickable(pom.getInstanceProblems().closeFavorite);
+			click(pom.getInstanceProblems().closeFavorite);
+		}
 		sleep(2000);
 
 	}
 
-	private void problemFavoriteSaveButton() {
+	private static void problemFavoriteSaveButton() {
 
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement $problemsNotes$ = driver
-						.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::input[2])[1]"));
-				sendkeys($problemsNotes$, "problems");
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement $problemsave$ = driver
-						.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::button[2])[1]"));
-				click($problemsave$);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
+		visbility(driver, pom.getInstanceProblems().favoriteNote, 40);
+		sendkeys(pom.getInstanceProblems().favoriteNote, "problems");
+
+		elementClickable(pom.getInstanceProblems().favoriteSave);
+		click(pom.getInstanceProblems().favoriteSave);
 
 	}
 
-	private void problemIcdCode() {
+	private static void problemIcdCode() {
 
 		boolean value = false;
 		List<WebElement> $probDrop$;
@@ -349,11 +345,12 @@ public class Problems extends Base {
 			if ($probDrop$.size() > 7)
 				break;
 		}
-		// System.out.println($probDrop$.size());
-		for (WebElement web : $probDrop$) {
 
-			if (web.getText().trim().equals("ICD10 : C62 | SNOMED : --") && web.isDisplayed()) {
+		for (WebElement web : $probDrop$) {
+			System.out.println(web.getText());
+			if (web.getText().equals("ICD10 : C62 | SNOMED : --") && web.isDisplayed()) {
 				value = true;
+				System.out.println("Problem icd met");
 				web.click();
 				break;
 			}

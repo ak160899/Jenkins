@@ -3,6 +3,7 @@ package com.healthRec;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.Launch.LaunchBrowser;
 import org.base.Base;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,9 +11,7 @@ import org.openqa.selenium.WebElement;
 
 import com.pageObjeman.PageObjMan;
 
-public class Vaccine extends Base {
-	WebDriver driver;
-	// PageObjMan pom;
+public class Vaccine extends LaunchBrowser {
 
 	public Vaccine(WebDriver driver) {
 		this.driver = driver;
@@ -69,18 +68,25 @@ public class Vaccine extends Base {
 		sleep(1500);
 
 		try {
-			WebElement curePast = driver.findElement(By.xpath("(//div[text()='79: vaccinia immune globulin'])[1]"));
 
-			visbility(driver, curePast, 40);
-			click(curePast);
+			visbility(driver, pom.getInstanceVaccine().curePast, 40);
+			elementClickable(pom.getInstanceVaccine().curePast);
+			click(pom.getInstanceVaccine().curePast);
 
-			sleep(2000);
-			WebElement yesOrNo = driver
-					.findElement(By.xpath("(//div[text()='79: vaccinia immune globulin'])[1]//following::span[3]"));
-			visbility(driver, yesOrNo, 30);
-			click(yesOrNo);
 		} catch (Exception e) {
+			visbility(driver, pom.getInstanceVaccine().curePast, 40);
+			elementClickable(pom.getInstanceVaccine().curePast);
+			click(pom.getInstanceVaccine().curePast);
 
+		}
+		try {
+			visbility(driver, pom.getInstanceVaccine().yesCure, 30);
+			elementClickable(pom.getInstanceVaccine().yesCure);
+			click(pom.getInstanceVaccine().yesCure);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceVaccine().yesCure, 30);
+			elementClickable(pom.getInstanceVaccine().yesCure);
+			click(pom.getInstanceVaccine().yesCure);
 		}
 
 	}
@@ -90,38 +96,23 @@ public class Vaccine extends Base {
 
 		sleep(1500);
 
-		for (int i = 1; i <= 5; i++) {
-			WebElement $vaccineEllipse$ = null;
-			try {
-				$vaccineEllipse$ = driver.findElement(
-						By.xpath("//div[@title='Show my favorite Vaccine list for selection']//following::div[2]"));
-				actions("move to element", $vaccineEllipse$);
-				if ($vaccineEllipse$.isDisplayed()) {
-					visbility(driver, $vaccineEllipse$, 60);
-					javascriptclick($vaccineEllipse$);
-					break;
-				}
-			} catch (Exception e) {
-				actions("move to element", $vaccineEllipse$);
+		while (true) {
+			if (pom.getInstanceVaccine().ellipses.isDisplayed()) {
+				visbility(driver, pom.getInstanceVaccine().ellipses, 30);
+				elementClickable(pom.getInstanceVaccine().ellipses);
+				click(pom.getInstanceVaccine().ellipses);
+				break;
+			} else if (!pom.getInstanceVaccine().ellipses.isDisplayed()) {
+				actions("move to element", pom.getInstanceVaccine().ellipses);
 			}
 		}
 		sleep(1500);
 
-		List<WebElement> $vaccEllipseList$ = null;
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				$vaccEllipseList$ = driver.findElements(By.xpath(
-						"//div[@title='Show my favorite Vaccine list for selection']//following::div[2]//following::ul[1]/li/a/span[2]"));
-				break;
-			} catch (Exception e) {
-				System.out.println("yes exception occurs here...");
-			}
-		}
-		for (WebElement web : $vaccEllipseList$) {
+		for (WebElement web : pom.getInstanceVaccine().ellipsesList) {
 
 			if (web.getText().trim().equals("Past Taken Vaccine")) {
-				System.out.println("cnd me...");
+				visbility(driver, web, 30);
+				elementClickable(web);
 
 				click(web);
 
@@ -129,26 +120,29 @@ public class Vaccine extends Base {
 			}
 
 		}
-		sleep(2000);
 
-		for (int i = 1; i <= 10; i++) {
-			try {
-				WebElement $vaccToehr$ = driver
-						.findElement(By.xpath("(//span[@title='Click to add this vaccine'])[2]"));
-				if ($vaccToehr$.isDisplayed()) {
-					visbility(driver, $vaccToehr$, 60);
-					System.out.println("its visble");
-					click($vaccToehr$);
-					break;
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		try {
+
+			visbility(driver, pom.getInstanceVaccine().addThisVaccine, 40);
+			elementClickable(pom.getInstanceVaccine().addThisVaccine);
+			click(pom.getInstanceVaccine().addThisVaccine);
+		} catch (Exception e) {
+
+			visbility(driver, pom.getInstanceVaccine().addThisVaccine, 40);
+			elementClickable(pom.getInstanceVaccine().addThisVaccine);
+			click(pom.getInstanceVaccine().addThisVaccine);
 		}
+
 		sleep(1500);
-		WebElement $closeVacc$ = driver
-				.findElement(By.xpath("(//span[text()='Past Taken Vaccine'])[1]//parent::div/span[1]"));
-		visbility(driver, $closeVacc$, 60);
-		javascriptclick($closeVacc$);
+		try {
+			visbility(driver, pom.getInstanceVaccine().cancelPastTaken, 30);
+			elementClickable(pom.getInstanceVaccine().cancelPastTaken);
+			click(pom.getInstanceVaccine().cancelPastTaken);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceVaccine().cancelPastTaken, 30);
+			elementClickable(pom.getInstanceVaccine().cancelPastTaken);
+			click(pom.getInstanceVaccine().cancelPastTaken);
+		}
+
 	}
 }

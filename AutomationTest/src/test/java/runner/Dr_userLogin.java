@@ -627,8 +627,8 @@ public class Dr_userLogin extends Base {
 				String tagnames = gettag.getAttribute("id");
 
 				if (tagnames.equals("vital")) {
-					Vitals v = new Vitals(driver);
-					v.vitalsFeature();
+					//Vitals v = new Vitals(driver);
+				//	v.vitalsFeature();
 
 				} else if (tagnames.equals("visit-reason")) {
 					implicitWait(60, TimeUnit.SECONDS);

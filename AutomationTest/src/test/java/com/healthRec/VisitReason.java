@@ -1,32 +1,34 @@
 package com.healthRec;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.Launch.LaunchBrowser;
 import org.base.Base;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.pageObjeman.PageObjMan;
 
-public class VisitReason extends Base {
-	public WebDriver driver;
-	PageObjMan pom;
+public class VisitReason extends LaunchBrowser {
 
-	public void visitFeat() throws InterruptedException {
-		// TODO Auto-generated method stub
+	public static void visit() throws InterruptedException {
 
 		implicitWait(60, TimeUnit.SECONDS);
 
-		WebElement u = driver.findElement(By.xpath("//div[contains(@title,'Add Visit R')]"));
+		while (true) {
+			if (pom.getInstanceVistReason().AddIcon.isDisplayed()) {
+				visbility(driver, pom.getInstanceVistReason().AddIcon, 40);
+				elementClickable(pom.getInstanceVistReason().AddIcon);
+				click(pom.getInstanceVistReason().AddIcon);
+				break;
+			} else {
+				if (!pom.getInstanceVistReason().AddIcon.isDisplayed()) {
+					actions("move to element", pom.getInstanceVistReason().AddIcon);
 
-		if (u.isDisplayed()) {
-			click(u);
-		} else {
-			if (!u.isDisplayed()) {
-				actions("move to element", u);
-				click(u);
+				}
 			}
 		}
 
@@ -35,54 +37,44 @@ public class VisitReason extends Base {
 			click(pom.getInstanceCalendar().selectAppointmentType);
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			visbility(driver, pom.getInstanceCalendar().selectAppointmentType, 60);
+			click(pom.getInstanceCalendar().selectAppointmentType);
 		}
 
-		List<WebElement> $TypeDropdown = driver
-				.findElements(By.xpath("(//button[@id='admissionVal_dropdown'])[2]//following::ul[1]/li/a"));
-
-		for (WebElement Element : $TypeDropdown) {
-			System.out.println(Element.getText());
-			if (Element.getText().equals("Emergency") && Element.isDisplayed()) {
-				click(Element);
+		for (WebElement chooseAppType : pom.getInstanceVistReason().appointmentTypeDropDown) {
+			if (chooseAppType.getText().equals("Emergency") && chooseAppType.isDisplayed()) {
+				click(chooseAppType);
 				break;
 			}
+		}
+
+		visbility(driver, pom.getInstanceVistReason().discription, 30);
+		sendkeys(pom.getInstanceVistReason().discription, "cold");
+
+		elementClickable(pom.getInstanceVistReason().save);
+		click(pom.getInstanceVistReason().save);
+		WebElement edit;
+		try {
+			visbility(driver, pom.getInstanceVistReason().edit, 30);
+			elementClickable(pom.getInstanceVistReason().edit);
+			click(pom.getInstanceVistReason().edit);
+		} catch (StaleElementReferenceException e) {
+			visbility(driver, pom.getInstanceVistReason().edit, 30);
+			elementClickable(pom.getInstanceVistReason().edit);
+			click(pom.getInstanceVistReason().edit);
 
 		}
-		sleep(2000);
-		WebElement mj = driver.findElement(By.xpath("//div[@title='Enter the description of the patient visit']"));
-		visbility(driver, mj, 60);
-		mj.sendKeys("cold");
 
-		WebElement svg = driver.findElement(By.xpath("//div[@id='Visit_ReasonKpop2']/div[2]/div[2]/button[2]"));
-		visbility(driver, svg, 60);
-		//// div[@title='Enter the description of the patient
-		//// visit']//following::div[28]/button[2]
+		visbility(driver, pom.getInstanceVistReason().discription, 30);
+		clear(pom.getInstanceVistReason().discription);
+		sendkeys(pom.getInstanceVistReason().discription, "Kaaspro");
 
-		svg.click();
-		sleep(2000);
-		WebElement afk = driver.findElement(By.xpath("(//div[text()='cold'])[1]"));
-		visbility(driver, afk, 60);
+		elementClickable(pom.getInstanceVistReason().discription);
+		click(pom.getInstanceVistReason().discription);
 
-		actions("click", afk);
+		elementClickable(pom.getInstanceVistReason().save);
+		click(pom.getInstanceVistReason().save);
 
-		implicitWait(30, TimeUnit.SECONDS);
-		WebElement mjj = driver.findElement(By.xpath("//div[@title='Enter the description of the patient visit']"));
-		visbility(driver, mjj, 60);
-
-		mjj.clear();
-		mjj.sendKeys("KAASPRO");
-
-		WebElement svg1 = driver.findElement(By.xpath("//div[@id='Visit_ReasonKpop2']/div[2]/div[2]/button[2]"));
-		visbility(driver, svg1, 60);
-		svg1.click();
-
-		/*
-		 * WebElement delvis = driver
-		 * .findElement(By.xpath("//div[@id='Visit_ReasonKpop2']/div[1]/div[2]/span"));
-		 * javascriptclick(delvis);
-		 */
-		sleep(3000);
 	}
 
 }

@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" ignored="0" total="2" passed="1">
+<testng-results skipped="0" failed="1" ignored="6" total="8" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="126586" started-at="2023-03-04T13:31:47Z" finished-at="2023-03-04T13:33:54Z">
+  <suite name="Suite" duration-ms="438234" started-at="2023-03-08T15:14:25Z" finished-at="2023-03-08T15:21:43Z">
     <groups>
+      <group name="healthrec">
+        <method signature="Local_Host.HealthRec()[pri:2, instance:runner.Local_Host@670002]" name="HealthRec" class="runner.Local_Host"/>
+      </group> <!-- healthrec -->
+      <group name="home">
+        <method signature="Local_Host.HomeModule()[pri:0, instance:runner.Local_Host@670002]" name="HomeModule" class="runner.Local_Host"/>
+      </group> <!-- home -->
     </groups>
-    <test name="Default test" duration-ms="126586" started-at="2023-03-04T13:31:47Z" finished-at="2023-03-04T13:33:54Z">
-      <class name="org.marketPlace.MarketPlace">
-        <test-method status="PASS" signature="openConnection()[pri:0, instance:org.marketPlace.MarketPlace@5dd6264]" name="openConnection" is-config="true" duration-ms="26241" started-at="2023-03-04T19:01:21Z" finished-at="2023-03-04T19:01:47Z">
+    <test name="Test" duration-ms="438234" started-at="2023-03-08T15:14:25Z" finished-at="2023-03-08T15:21:43Z">
+      <class name="runner.Local_Host">
+        <test-method status="PASS" signature="LaunchBrwoser()[pri:0, instance:runner.Local_Host@670002]" name="LaunchBrwoser" is-config="true" duration-ms="27449" started-at="2023-03-08T20:44:25Z" finished-at="2023-03-08T20:44:53Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- openConnection -->
-        <test-method status="PASS" signature="marketPlaceTest()[pri:1, instance:org.marketPlace.MarketPlace@5dd6264]" name="marketPlaceTest" duration-ms="17055" started-at="2023-03-04T19:01:47Z" finished-at="2023-03-04T19:02:04Z">
+        </test-method> <!-- LaunchBrwoser -->
+        <test-method status="PASS" signature="HomeModule()[pri:0, instance:runner.Local_Host@670002]" name="HomeModule" duration-ms="26844" started-at="2023-03-08T20:44:53Z" finished-at="2023-03-08T20:45:20Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- marketPlaceTest -->
-        <test-method status="FAIL" signature="addUsers()[pri:2, instance:org.marketPlace.MarketPlace@5dd6264]" name="addUsers" duration-ms="109516" started-at="2023-03-04T19:02:04Z" finished-at="2023-03-04T19:03:54Z">
+        </test-method> <!-- HomeModule -->
+        <test-method status="FAIL" signature="HealthRec()[pri:2, instance:runner.Local_Host@670002]" name="HealthRec" duration-ms="383845" started-at="2023-03-08T20:45:20Z" finished-at="2023-03-08T20:51:43Z">
           <exception class="org.openqa.selenium.ElementNotInteractableException">
             <message>
-              <![CDATA[element not interactable
+              <![CDATA[element not interactable: [object HTMLSpanElement] has no size and location
   (Session info: chrome=110.0.5481.178)
 Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
 System info: host: 'LAPTOP-Q33L4MJO', ip: '192.168.29.33', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_331'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.178, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:59404}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Session ID: 3897813448d187d0d30e7c7fcd988c31]]>
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.178, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:51674}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: b4ea6fdfc598876d5697ea236622ad3d]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.ElementNotInteractableException: element not interactable
+              <![CDATA[org.openqa.selenium.ElementNotInteractableException: element not interactable: [object HTMLSpanElement] has no size and location
   (Session info: chrome=110.0.5481.178)
 Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
 System info: host: 'LAPTOP-Q33L4MJO', ip: '192.168.29.33', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_331'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.178, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:59404}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Session ID: 3897813448d187d0d30e7c7fcd988c31
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.178, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:51674}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: b4ea6fdfc598876d5697ea236622ad3d
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
 	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
@@ -44,16 +50,10 @@ Session ID: 3897813448d187d0d30e7c7fcd988c31
 	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:285)
-	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:84)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
-	at com.sun.proxy.$Proxy8.click(Unknown Source)
-	at org.base.Base.click(Base.java:77)
-	at org.marketPlace.MarketPlace.addUsers(MarketPlace.java:108)
+	at org.openqa.selenium.remote.RemoteWebDriver.perform(RemoteWebDriver.java:618)
+	at org.openqa.selenium.interactions.Actions$BuiltAction.perform(Actions.java:639)
+	at org.base.Base.actions(Base.java:355)
+	at runner.Local_Host.HealthRec(Local_Host.java:3243)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -84,8 +84,8 @@ Session ID: 3897813448d187d0d30e7c7fcd988c31
           </exception> <!-- org.openqa.selenium.ElementNotInteractableException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- addUsers -->
-      </class> <!-- org.marketPlace.MarketPlace -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+        </test-method> <!-- HealthRec -->
+      </class> <!-- runner.Local_Host -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
 </testng-results>

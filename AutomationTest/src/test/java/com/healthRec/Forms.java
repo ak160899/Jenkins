@@ -14,31 +14,24 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-public class Forms extends Base {
-	public WebDriver driver;
-
-	WebDriverWait wait;
-	// String ur;
+public class Forms extends LaunchBrowser {
 
 	public void $addForm(WebDriver driver) throws Throwable {
-		this.driver = driver;
-		wait = new WebDriverWait(driver, 50);
 
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement formsaddicon = driver.findElement(By.xpath("//div[contains(@title,'Add Forms')]"));
-				if (formsaddicon.isDisplayed()) {
-					click(formsaddicon);
-					break;
-				} else {
-					actions("move to element", formsaddicon);
-					click(formsaddicon);
-				}
+		while (true) {
 
-			} catch (Exception e) {
+			if (pom.getInstanceform().addIcon.isDisplayed()) {
+				visbility(driver, pom.getInstanceform().addIcon, 30);
+				elementClickable(pom.getInstanceform().addIcon);
+				click(pom.getInstanceform().addIcon);
+				break;
+			} else if (!pom.getInstanceform().addIcon.isDisplayed()) {
+				actions("move to element", pom.getInstanceform().addIcon);
 
 			}
+
 		}
+
 		sleep(3000);
 
 		List<WebElement> numberofformspresent = driver
@@ -55,9 +48,8 @@ public class Forms extends Base {
 		 * .findElement(By.xpath("(//div[@class='form-pop-body'])[10]/div[" + imp +
 		 * "]/div/div[1]/span[2]")); System.out.println(rtt.getText());
 		 */
-		List<WebElement> $editFromicon = driver.findElements(By.xpath("//span[@title='Edit this Form']"));
 
-		for (WebElement web : $editFromicon) {
+		for (WebElement web : pom.getInstanceform().editicon) {
 
 			if (web.isDisplayed()) {
 				result = true;
@@ -171,14 +163,15 @@ public class Forms extends Base {
 			implicitWait(30, TimeUnit.SECONDS);
 			WebElement addit = driver.findElement(By.xpath("//span[text()='" + s + "']//following::div[1]/span"));
 			visbility(driver, addit, 60);
-			wait.until(ExpectedConditions.elementToBeClickable(addit));
+
+			elementClickable(addit);
 			click(addit);
 
 		} catch (Exception e) {
 			implicitWait(30, TimeUnit.SECONDS);
 			WebElement addit = driver.findElement(By.xpath("//span[text()='" + s + "']//following::div[1]/span"));
 			visbility(driver, addit, 60);
-			wait.until(ExpectedConditions.elementToBeClickable(addit));
+			elementClickable(addit);
 			click(addit);
 		}
 

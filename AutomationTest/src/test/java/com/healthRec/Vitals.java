@@ -1,65 +1,72 @@
 package com.healthRec;
 
-import org.base.Base;
+import org.Launch.LaunchBrowser;
+import org.apache.log4j.Logger;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.StaleElementReferenceException;
+
 import org.openqa.selenium.WebElement;
 
-public class Vitals extends Base {
-	public WebDriver driver;
+public class Vitals extends LaunchBrowser {
 
-	public Vitals(WebDriver driver) {
-		this.driver = driver;
-	}
+	static Logger log;
 
-	public void vitalsFeature() throws InterruptedException {
-		// TODO Auto-generated method stub
+	public static void vitalsFeature() throws InterruptedException {
+		log = Logger.getLogger(Vitals.class);
 
-		driver.findElement(By.xpath("(//button[contains(@title,'Add Multiple Vitals')])[1]")).click();
+		visbility(driver, pom.getInstanceVitals().getVitalsAddIcon, 40);
+		elementClickable(pom.getInstanceVitals().getVitalsAddIcon);
+		click(pom.getInstanceVitals().getVitalsAddIcon);
+		log.info("vitals add icon clicked");
+		visbility(driver, pom.getInstanceVitals().weight, 30);
+		sendkeys(pom.getInstanceVitals().weight, "55");
+		log.info("weight entered");
+		elementClickable(pom.getInstanceVitals().selectWeightUnit);
 
-		driver.findElement(By.id("wresult")).sendKeys("55");
+		click(pom.getInstanceVitals().selectWeightUnit);
 
-		WebElement sel = driver.findElement(By.xpath("(//select[@id='unit'])[1]"));
+		dropDown("text", pom.getInstanceVitals().selectWeightUnit, "kilograms");
+		log.info("weight unit selected");
+		sendkeys(pom.getInstanceVitals().height, "7'7");
+		log.info("height entered");
+		elementClickable(pom.getInstanceVitals().selectHeightUnit);
 
-		sel.click();
-		sleep(2000);
-		dropDown("text", sel, "kilograms");
+		click(pom.getInstanceVitals().selectHeightUnit);
 
-		driver.findElement(By.id("hresult")).sendKeys("7'7");
+		dropDown("text", pom.getInstanceVitals().selectHeightUnit, "ft-in");
+		log.info("height unit selected");
+		elementClickable(pom.getInstanceVitals().saveVitals);
+		click(pom.getInstanceVitals().saveVitals);
+		log.info("vitals saved");
+		try {
+			WebElement edicon = driver.findElement(By.xpath("(//span[text()='55 kilograms'])[1]"));
+			visbility(driver, edicon, 40);
+			elementClickable(edicon);
+			click(edicon);
+			log.info("vitals edit clicked");
+		} catch (StaleElementReferenceException e) {
+			WebElement edicon = driver.findElement(By.xpath("(//span[text()='55 kilograms'])[1]"));
+			visbility(driver, edicon, 40);
+			elementClickable(edicon);
+			click(edicon);
+			log.info("vitals edit clicked");
+		}
 
-		WebElement hdrp = driver.findElement(By.xpath("(//select[@id='unit'])[2]"));
+		visbility(driver, pom.getInstanceVitals().weight, 40);
+		clear(pom.getInstanceVitals().weight);
+		log.info("vitals weight cleared");
+		sendkeys(pom.getInstanceVitals().weight, "59");
+		log.info("vitals weight added");
+		elementClickable(pom.getInstanceVitals().saveVitals);
+		click(pom.getInstanceVitals().saveVitals);
+		log.info("vitals edit and save complete");
 
-		hdrp.click();
-
-		dropDown("text", hdrp, "ft-in");
-
-		WebElement edity = driver.findElement(By.xpath("(//button[@id='accept-btn'])[1]"));
-
-		javascriptclick(edity);
-
-		sleep(2000);
-		WebElement edicon = driver.findElement(By.xpath("(//span[text()='55 kilograms'])[1]"));
-
-		actions("click", edicon);
-		sleep(2000);
-		driver.findElement(By.xpath("//input[@id='wresult']")).clear();
-		driver.findElement(By.xpath("//input[@id='wresult']")).sendKeys("59");
-
-		driver.findElement(By.xpath("(//button[@id='accept-btn'])[1]")).click();
-		sleep(3000);
-		/*
-		 * WebElement mv =
-		 * driver.findElement(By.xpath("//span[text()='59 kilograms']"));
-		 * actions("click", mv); WebElement mm =
-		 * driver.findElement(By.xpath("(//span[@id='del-btn'])[1]")); actions("click",
-		 * mm); sleep(2000)
-		 */;
 	}
 
 	public void $vitalsSalt() {
-		WebElement vitalsal = driver.findElement(By.xpath("//div[@id='vital']/div[1]/div[1]/div/div[2]/div[1]"));
 
-		actions("click", vitalsal);
+		actions("click", pom.getInstanceVitals().vitalsSaltIcon);
 
 	}
 }

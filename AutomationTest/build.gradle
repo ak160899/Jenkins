@@ -47,7 +47,7 @@ implementation group: 'log4j', name: 'log4j', version: '1.2.17'
 
 test {
   // Discover and execute JUnit4-based tests
-  //useJUnit()
+ // useJUnit()
 
   // Discover and execute TestNG-based tests
   useTestNG(){
