@@ -9,6 +9,8 @@ import java.util.concurrent.TimeUnit;
 import com.healthRec.*;
 import org.Launch.LaunchBrowser;
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 import org.base.Base;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -35,54 +37,39 @@ import com.healthRec.Symptoms;
 import com.healthRec.Vaccine;
 import com.healthRec.Vitals;
 import com.pageObjeman.PageObjMan;
+import com.pomclass.Basic;
 import com.pomclass.VisitReason;
 
-public class Local_Host extends Base {
+public class Local_Host extends LaunchBrowser {
 
-	public PageObjMan pom;
-	public JavascriptExecutor j;
-	public WebDriverWait ww;
-	public WebDriver driver;
-	public String kpid = "";
-	public String ur;
-	Calendars cal;
-	String $current;
-
-	@BeforeClass(groups = "before")
-	public void LaunchBrwoser() throws Exception {
-
-		Map<String, Object> getConnection = LaunchBrowser.openConnection();
-
-		pom = (PageObjMan) getConnection.get("pom");
-		j = (JavascriptExecutor) getConnection.get("j");
-		ww = (WebDriverWait) getConnection.get("ww");
-		cal = (Calendars) getConnection.get("cal");
-		ur = (String) getConnection.get("url");
-		driver = (WebDriver) getConnection.get("driver");
-
-	}
+	static Logger log;
 
 	@Test(priority = 0, groups = "home")
 	public void HomeModule() throws Exception {
+		log = Logger.getLogger(Local_Host.class);
+		BasicConfigurator.configure();
 
 		try {
 
-			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 40);
+			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 50);
 
 			elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
 			click(pom.getInstanceHomeModule().$patientCreationButton);
-
+			log.info("patient create button clicked");
 		} catch (ElementClickInterceptedException e) {
 
-			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 40);
+			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 50);
 			elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
 			click(pom.getInstanceHomeModule().$patientCreationButton);
+			log.info("patient create button clicked");
 		}
 
 		sendkeys(pom.getInstanceNewPatient().firstName, "sam");
+		log.info("first name entered");
 		sendkeys(pom.getInstanceNewPatient().lastname, "n");
+		log.info("last name entered");
 		click(pom.getInstanceNewPatient().clickGenderIcon);
-
+		log.info("gender clicked");
 		List<WebElement> genders = driver.findElements(By.xpath("(//ul[@id='genderDropdown'])[1]/li"));
 
 		for (WebElement opt : genders) {
@@ -90,6 +77,7 @@ public class Local_Host extends Base {
 			if (opt.getText().equals("Male")) {
 
 				driver.findElement(By.xpath("(//ul[@id='genderDropdown'])[1]/li")).click();
+				log.info("gender Choosed");
 
 			}
 			break;
@@ -99,6 +87,7 @@ public class Local_Host extends Base {
 
 		visbility(driver, pom.getInstanceHomeModule().emailId, 40);
 		sendkeys(pom.getInstanceHomeModule().emailId, generateRandom("letter"));
+		log.info("email id entered");
 		visbility(driver, pom.getInstanceHomeModule().selectFlagPhoneNumField, 50);
 		elementClickable(pom.getInstanceHomeModule().selectFlagPhoneNumField);
 		click(pom.getInstanceHomeModule().selectFlagPhoneNumField);
@@ -110,19 +99,19 @@ public class Local_Host extends Base {
 			}
 		}
 
-		// String numericRand = RandomStringUtils.randomNumeric(5);
 		visbility(driver, pom.getInstanceHomeModule().phoneNumberField, 40);
 		sendkeys(pom.getInstanceHomeModule().phoneNumberField, "95518" + generateRandom("number"));
-
+		log.info("phone number entered");
 		// Acc gets Created..
 		click(pom.getInstanceNewPatient().CreatePatient);
+		log.info("patient created ");
 
 		while (true) {
 			try {
 				WebElement $patietcreateid$ = driver.findElement(By.xpath("//td[@id='val-kpid']"));
 				if ($patietcreateid$.isDisplayed()) {
 					kpid = $patietcreateid$.getText();
-					System.out.println("HOME PATIENT" + kpid);
+					log.info(kpid);
 
 					break;
 				}
@@ -131,12 +120,13 @@ public class Local_Host extends Base {
 			}
 		}
 
-		/*
-		 * navigateback(2);
-		 * 
-		 * $current = driver.getCurrentUrl(); cal.$dayDrop($current);
-		 * cal.$calenderMod($current, kpid);
-		 */
+		navigateback(2);
+		refresh();
+
+		$current = driver.getCurrentUrl();
+		cal.$dayDrop($current);
+		cal.$calenderMod($current, kpid);
+		log.info("Appointment booked and deleted");
 
 	}
 
@@ -450,6 +440,7 @@ public class Local_Host extends Base {
 			visbility(driver, pom.getInstanceNewPatient().patientReportSerachNametxtBox, 40);
 			sendkeys(pom.getInstanceNewPatient().patientReportSerachNametxtBox, "Kaaspro");
 		}
+
 		while (true) {
 			try {
 				if (pom.getInstanceNewPatient().ellipses.isDisplayed()) {
@@ -460,33 +451,34 @@ public class Local_Host extends Base {
 				System.out.println(e);
 			}
 		}
-
-		for (WebElement t : pom.getInstanceNewPatient().ellipsesOptions) {
-			if (t.getText().trim().equals("Import") && t.isDisplayed()) {
-				click(t);
-				break;
-			}
-
-		}
-
-		sleep(2000);
-
-		for (WebElement w : pom.getInstanceNewPatient().$ccdImport) {
-			if (w.getText().trim().equals("CCD Import") && w.isDisplayed()) {
-				click(w);
-				break;
-			}
-
-		}
-		while (true) {
-			try {
-
-				if (pom.getInstanceNewPatient().$closeCcdImport.isDisplayed()) {
-					click(pom.getInstanceNewPatient().$closeCcdImport);
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
+			for (WebElement t : pom.getInstanceNewPatient().ellipsesOptions) {
+				if (t.getText().trim().equals("Import") && t.isDisplayed()) {
+					click(t);
 					break;
 				}
-			} catch (Exception e) {
-				System.out.println(e);
+
+			}
+
+			sleep(2000);
+
+			for (WebElement w : pom.getInstanceNewPatient().$ccdImport) {
+				if (w.getText().trim().equals("CCD Import") && w.isDisplayed()) {
+					click(w);
+					break;
+				}
+
+			}
+			while (true) {
+				try {
+
+					if (pom.getInstanceNewPatient().$closeCcdImport.isDisplayed()) {
+						click(pom.getInstanceNewPatient().$closeCcdImport);
+						break;
+					}
+				} catch (Exception e) {
+					System.out.println(e);
+				}
 			}
 		}
 
@@ -495,11 +487,11 @@ public class Local_Host extends Base {
 	@Test(priority = 2, groups = "healthrec")
 	public void HealthRec() throws Exception {
 
-		if (ur.equals("https://localhost:8443/")) {
+		if (url.equals("https://localhost:8443/")) {
 			driver.navigate().to("https://localhost:8443/health/#list_ehr");
-		} else if (ur.equals("https://www.test.75health.com/")) {
+		} else if (url.equals("https://www.test.75health.com/")) {
 			driver.navigate().to("https://www.test.75health.com/health/#list_ehr");
-		} else if (ur.equals("https://www.75health.com/login.jsp")) {
+		} else if (url.equals("https://www.75health.com/login.jsp")) {
 			driver.navigate().to("https://www.75health.com/health/#list_ehr");
 		}
 
@@ -552,19 +544,24 @@ public class Local_Host extends Base {
 			r7.click();
 		}
 
-		/*
-		 * WebElement elipse =
-		 * driver.findElement(By.xpath("(//span[@id='list_patient_needHelp'])[1]/span"))
-		 * ; visbility(driver, elipse, 60); clickble(driver, elipse, 60);
-		 * actions("click", elipse);
-		 * 
-		 * List<WebElement> hh = driver .findElements(By.xpath(
-		 * "(//span[@id='list_patient_needHelp'])[1]/span//following::ul[1]/li")); for
-		 * (WebElement web : hh) { if (web.getText().trim().equals("Reset Setting")) {
-		 * visbility(driver, web, 60); web.click(); break; }
-		 * 
-		 * }
-		 */
+		try {
+			visbility(driver, pom.getInstanceHealthRec().ehrEllipses, 60);
+			clickble(driver, pom.getInstanceHealthRec().ehrEllipses, 60);
+			actions("click", pom.getInstanceHealthRec().ehrEllipses);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceHealthRec().ehrEllipses, 60);
+			clickble(driver, pom.getInstanceHealthRec().ehrEllipses, 60);
+			actions("click", pom.getInstanceHealthRec().ehrEllipses);
+		}
+
+		for (WebElement web : pom.getInstanceHealthRec().ehrEllipsesList) {
+			if (web.getText().trim().equals("Reset Setting")) {
+				visbility(driver, web, 60);
+				web.click();
+				break;
+			}
+
+		}
 
 		implicitWait(60, TimeUnit.SECONDS);
 
@@ -950,6 +947,7 @@ public class Local_Host extends Base {
 					}
 					elementClickable(pom.getInstanceAlert().save);
 					click(pom.getInstanceAlert().save);
+					sleep(1500);
 
 					try {
 						visbility(driver, pom.getInstanceAlert().edit, 40);
@@ -971,7 +969,7 @@ public class Local_Host extends Base {
 
 					elementClickable(pom.getInstanceAlert().save);
 					click(pom.getInstanceAlert().save);
-					sleep(3000);
+
 				} else if (tagnames.equals("vaccine")) {
 
 					while (true) {
@@ -1016,7 +1014,6 @@ public class Local_Host extends Base {
 
 					elementClickable(pom.getInstanceVaccine().save);
 					click(pom.getInstanceVaccine().save);
-					sleep(3000);
 
 				} else if (tagnames.equals("implantable-devices")) {
 
@@ -1332,8 +1329,8 @@ public class Local_Host extends Base {
 						visbility(driver, pom.getInstanceGoal().edit, 60);
 						elementClickable(pom.getInstanceGoal().edit);
 						click(pom.getInstanceGoal().edit);
-					} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
-
+					} catch (Exception e) {
+						System.out.println("GOALS STALE");
 						visbility(driver, pom.getInstanceGoal().edit, 60);
 						elementClickable(pom.getInstanceGoal().edit);
 						click(pom.getInstanceGoal().edit);
@@ -1523,27 +1520,29 @@ public class Local_Host extends Base {
 						}
 					}
 
-					if (ur.equals("https://localhost:8443/") | ur.equals("https://www.75health.com/login.jsp")) {
-						try {
-
-							WebElement edit = driver.findElement(By.xpath("(//div[text()='test'])[1]"));
-							visbility(driver, edit, 30);
-							elementClickable(edit);
-							click(edit);
-						} catch (StaleElementReferenceException e) {
-							WebElement edit = driver.findElement(By.xpath("(//div[text()='test'])[1]"));
-							try {
-								visbility(driver, edit, 30);
-								elementClickable(edit);
-								click(edit);
-							} catch (ElementClickInterceptedException h) {
-								visbility(driver, edit, 30);
-								elementClickable(edit);
-								click(edit);
-							}
+					for (WebElement web : pom.getInstanceTestOrder().icdList) {
+						if (web.getText().trim().equals("test")) {
+							visbility(driver, web, 30);
+							elementClickable(web);
+							click(web);
 						}
 
-					} /*
+					}
+
+					/*
+					 * if (url.equals("https://localhost:8443/") |
+					 * url.equals("https://www.75health.com/login.jsp")) { try {
+					 * 
+					 * WebElement edit = driver.findElement(By.xpath("(//div[text()='test'])[1]"));
+					 * visbility(driver, edit, 30); elementClickable(edit); click(edit); } catch
+					 * (StaleElementReferenceException e) { WebElement edit =
+					 * driver.findElement(By.xpath("(//div[text()='test'])[1]")); try {
+					 * visbility(driver, edit, 30); elementClickable(edit); click(edit); } catch
+					 * (ElementClickInterceptedException h) { visbility(driver, edit, 30);
+					 * elementClickable(edit); click(edit); } }
+					 * 
+					 * }
+					 */ /*
 						 * else if (ur.equals("https://www.75health.com/login.jsp")) { try { WebElement
 						 * edit = driver.findElement(By.xpath("(//div[text()='test'])[2]"));
 						 * visbility(driver, edit, 30); elementClickable(edit); click(edit); } catch
@@ -1760,6 +1759,7 @@ public class Local_Host extends Base {
 					sendkeys(pom.getInstanceNotes().enterNote, "hell");
 					elementClickable(pom.getInstanceNotes().save);
 					click(pom.getInstanceNotes().save);
+					sleep(1500);
 					try {
 						visbility(driver, pom.getInstanceNotes().edit, 30);
 						elementClickable(pom.getInstanceNotes().edit);
@@ -1984,11 +1984,11 @@ public class Local_Host extends Base {
 		sleep(4000);
 
 		sleep(3000);
-		if (ur.equals("https://localhost:8443/")) {
+		if (url.equals("https://localhost:8443/")) {
 			driver.navigate().to("https://localhost:8443/health/#list_ehr");
-		} else if (ur.equals("https://www.test.75health.com/")) {
+		} else if (url.equals("https://www.test.75health.com/")) {
 			driver.navigate().to("https://www.test.75health.com/health/#list_ehr");
-		} else if (ur.equals("https://www.75health.com/login.jsp")) {
+		} else if (url.equals("https://www.75health.com/login.jsp")) {
 			driver.navigate().to("https://www.75health.com/health/#list_ehr");
 		}
 
@@ -2142,7 +2142,7 @@ public class Local_Host extends Base {
 		sendkeys(pom.getInstanceVistReason().favoriteDiscription, "favorite visit reason");
 		elementClickable(pom.getInstanceVistReason().FavoriteSave);
 		click(pom.getInstanceVistReason().FavoriteSave);
-
+		sleep(1500);
 		try {
 
 			visbility(driver, pom.getInstanceVistReason().editFavorite, 30);
@@ -2255,7 +2255,7 @@ public class Local_Host extends Base {
 
 		elementClickable(pom.getInstanceVaccine().favoriteSave);
 		click(pom.getInstanceVaccine().favoriteSave);
-
+		sleep(1500);
 		try {
 
 			visbility(driver, pom.getInstanceVaccine().editFavorite, 30);
@@ -2385,7 +2385,7 @@ public class Local_Host extends Base {
 
 		elementClickable(pom.getInstanceSymptom().favoriteSave);
 		click(pom.getInstanceSymptom().favoriteSave);
-
+		sleep(1500);
 		try {
 
 			visbility(driver, pom.getInstanceSymptom().editFavorite, 40);
@@ -2528,7 +2528,7 @@ public class Local_Host extends Base {
 			}
 
 		}
-
+		sleep(1500);
 		try {
 
 			visbility(driver, pom.getInstanceProcedure().editFavorite, 30);
@@ -2658,7 +2658,7 @@ public class Local_Host extends Base {
 
 		elementClickable(pom.getInstanceGoal().favoritesave);
 		click(pom.getInstanceGoal().favoritesave);
-
+		sleep(1500);
 		try {
 
 			visbility(driver, pom.getInstanceGoal().addThisFavorite, 30);
@@ -2670,14 +2670,14 @@ public class Local_Host extends Base {
 			elementClickable(pom.getInstanceGoal().addThisFavorite);
 			click(pom.getInstanceGoal().addThisFavorite);
 		}
-
+		sleep(1500);
 		try {
 
 			visbility(driver, pom.getInstanceGoal().closeFavorite, 30);
 			elementClickable(pom.getInstanceGoal().closeFavorite);
 			click(pom.getInstanceGoal().closeFavorite);
 
-		} catch (Exception e) {
+		} catch (ElementClickInterceptedException e) {
 			visbility(driver, pom.getInstanceGoal().closeFavorite, 30);
 			elementClickable(pom.getInstanceGoal().closeFavorite);
 			click(pom.getInstanceGoal().closeFavorite);
@@ -2738,7 +2738,7 @@ public class Local_Host extends Base {
 
 		elementClickable(pom.getInstanceStatus().favoriteSave);
 		click(pom.getInstanceStatus().favoriteSave);
-
+		sleep(1500);
 		try {
 
 			visbility(driver, pom.getInstanceStatus().editFavorite, 30);
@@ -2943,7 +2943,7 @@ public class Local_Host extends Base {
 		sendkeys(pom.getInstanceAdvanceDirective().favoriteDiscription, "Advance directives");
 		elementClickable(pom.getInstanceAdvanceDirective().favoriteSave);
 		click(pom.getInstanceAdvanceDirective().favoriteSave);
-
+		sleep(1500);
 		try {
 			visbility(driver, pom.getInstanceAdvanceDirective().editFavorite, 30);
 			elementClickable(pom.getInstanceAdvanceDirective().editFavorite);
@@ -3011,7 +3011,7 @@ public class Local_Host extends Base {
 		sendkeys(pom.getInstanceNotes().favoriteDiscription, "Notes module");
 		elementClickable(pom.getInstanceNotes().favoriteSave);
 		click(pom.getInstanceNotes().favoriteSave);
-
+		sleep(1500);
 		try {
 
 			visbility(driver, pom.getInstanceNotes().editFavorite, 30);
@@ -3047,7 +3047,7 @@ public class Local_Host extends Base {
 			visbility(driver, pom.getInstanceNotes().closeFavorite, 30);
 			elementClickable(pom.getInstanceNotes().closeFavorite);
 			click(pom.getInstanceNotes().closeFavorite);
-		} catch (Exception e) {
+		} catch (ElementClickInterceptedException e) {
 			visbility(driver, pom.getInstanceNotes().closeFavorite, 30);
 			elementClickable(pom.getInstanceNotes().closeFavorite);
 			click(pom.getInstanceNotes().closeFavorite);
@@ -3086,7 +3086,7 @@ public class Local_Host extends Base {
 
 		elementClickable(pom.getInstancePhysicalExam().favoriteSave);
 		click(pom.getInstancePhysicalExam().favoriteSave);
-
+		sleep(1500);
 		try {
 			visbility(driver, pom.getInstancePhysicalExam().editFavorite, 30);
 			elementClickable(pom.getInstancePhysicalExam().editFavorite);
@@ -3117,13 +3117,13 @@ public class Local_Host extends Base {
 			elementClickable(pom.getInstancePhysicalExam().addThisFavorite);
 			click(pom.getInstancePhysicalExam().addThisFavorite);
 		}
-
+		sleep(2000);
 		try {
 			visbility(driver, pom.getInstancePhysicalExam().closeFavorite, 30);
 			elementClickable(pom.getInstancePhysicalExam().closeFavorite);
 			click(pom.getInstancePhysicalExam().closeFavorite);
 
-		} catch (Exception e) {
+		} catch (ElementClickInterceptedException e) {
 			visbility(driver, pom.getInstancePhysicalExam().closeFavorite, 30);
 			elementClickable(pom.getInstancePhysicalExam().closeFavorite);
 			click(pom.getInstancePhysicalExam().closeFavorite);
@@ -3249,12 +3249,14 @@ public class Local_Host extends Base {
 		}
 
 		sleep(2000);
-		WebElement delehrf = driver.findElement(By.xpath("(//button[contains(@title,'Delete Health Record')])[1]"));
-		javascriptclick(delehrf);
-		sleep(2000);
-		WebElement zr = driver
-				.findElement(By.xpath("//span[text()='Delete Health Record']//following::div[4]/button[2]"));
-		javascriptclick(zr);
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
+			WebElement delehrf = driver.findElement(By.xpath("(//button[contains(@title,'Delete Health Record')])[1]"));
+			javascriptclick(delehrf);
+			sleep(2000);
+			WebElement zr = driver
+					.findElement(By.xpath("//span[text()='Delete Health Record']//following::div[4]/button[2]"));
+			javascriptclick(zr);
+		}
 		sleep(4000);
 	}
 
@@ -3332,22 +3334,6 @@ public class Local_Host extends Base {
 			System.out.println("side view favorite clicked");
 		}
 
-		/*
-		 * if (r.isDisplayed()) { visbility(driver, r, 60); click(r);
-		 */
-		// break;
-		// }
-
-		/*
-		 * } catch (Exception e) {
-		 * 
-		 * } }
-		 */
-
-		/*
-		 * while (true) { try {
-		 */
-
 		try {
 			WebElement addiconfavorite = driver
 					.findElement(By.xpath("//div[@id='assign-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
@@ -3362,13 +3348,9 @@ public class Local_Host extends Base {
 			click(addiconfavorite);
 		}
 
-		/*
-		 * break; } catch (Exception e) {
-		 * 
-		 * } }
-		 * 
-		 */ while (true) {
+		while (true) {
 			try {
+
 				WebElement favdes = driver.findElement(
 						By.xpath("//div[@id='assign-side']/div[3]/div/div/div[2]/div[3]/div[2]/div/input"));
 				visbility(driver, favdes, 60);
@@ -3403,8 +3385,9 @@ public class Local_Host extends Base {
 		sleep(2000);
 		while (true) {
 			try {
-				WebElement edi = driver.findElement(
-						By.xpath("(//span[text()='Kaaspro']//parent::div//parent::div[1]//parent::div[1]/div[2])[1]"));
+				// (//span[text()='Kaaspro']//parent::div//parent::div[1]//parent::div[1]/div[2])[1]
+
+				WebElement edi = driver.findElement(By.xpath("(//span[text()='Kaaspro'])[2]"));
 				visbility(driver, edi, 60);
 				actions("click", edi);
 				break;
@@ -3426,263 +3409,268 @@ public class Local_Host extends Base {
 			}
 		}
 		sleep(2500);
-		while (true) {
-			try {
-				WebElement itser = driver.findElement(By.xpath("//div[@id='item-code-side']/div[1]/div"));
-				visbility(driver, itser, 60);
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
+			while (true) {
+				try {
+					WebElement itser = driver.findElement(By.xpath("//div[@id='item-code-side']/div[1]/div"));
+					visbility(driver, itser, 60);
 
-				actions("click", itser);
-				break;
-			} catch (Exception e) {
+					actions("click", itser);
+					break;
+				} catch (Exception e) {
 
-			}
-		}
-
-		while (true) {
-			try {
-				WebElement additser = driver.findElement(
-						By.xpath("//div[@id='item-code-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-				visbility(driver, additser, 60);
-
-				javascriptclick(additser);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		while (true) {
-			try {
-				WebElement wrr = driver
-						.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[3]/input"));
-				visbility(driver, wrr, 60);
-				sendkeys(wrr, "product001");// .sendKeys("product001");
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		WebElement err = driver
-				.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[4]/textarea"));
-		visbility(driver, err, 60);
-		sendkeys(err, "sr");// .sendKeys("sr");
-		WebElement weq = driver.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[5]/input"));
-		visbility(driver, weq, 60);
-		sendkeys(weq, "5");// .sendKeys("5");
-		while (true) {
-			try {
-				WebElement itersav = driver.findElement(
-						By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[7]/div/button[2]"));
-				visbility(driver, itersav, 60);
-				javascriptclick(itersav);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		sleep(2000);
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement ft = driver.findElement(
-						By.xpath("//div[text()='PRODUCT001']//parent::div[1]//parent::div[1]/div[1]/span"));
-				visbility(driver, ft, 60);
-
-				javascriptclick(ft);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		sleep(2000);
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement edititser = driver.findElement(By.xpath("//div[text()='PRODUCT001']"));
-				visbility(driver, edititser, 60);
-
-				actions("click", edititser);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement delitser = driver
-						.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
-				visbility(driver, delitser, 60);
-
-				javascriptclick(delitser);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		sleep(2000);
-
-		// service/charge tax..
-		while (true) {
-			try {
-
-				WebElement sct = driver.findElement(By.xpath("//div[@id='tax-side']/div[1]/div/span[3]"));
-				visbility(driver, sct, 60);
-
-				actions("click", sct);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				WebElement sctadd = driver
-						.findElement(By.xpath("//div[@id='tax-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-				visbility(driver, sctadd, 60);
-
-				javascriptclick(sctadd);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		WebElement tre = driver.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[2]/div[3]/input"));
-		visbility(driver, tre, 60);
-		sendkeys(tre, "service charge<>"); // .sendKeys("service charge<>");
-		WebElement tp1 = driver.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[2]/div[4]/input"));
-		visbility(driver, tp1, 60);
-		sendkeys(tp1, "5");// .sendKeys("5");
-		WebElement sctsav = driver
-				.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[2]/div[6]/div/button[2]"));
-		visbility(driver, sctsav, 60);
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				javascriptclick(sctsav);
-				WebElement adsct = driver.findElement(
-						By.xpath("//div[text()='service charge<>']//parent::div[1]//parent::div[1]/div/span"));
-				visbility(driver, adsct, 60);
-
-				actions("click", adsct);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		sleep(2000);
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				WebElement edsct = driver.findElement(By.xpath("//div[text()='service charge<>']"));
-				visbility(driver, edsct, 60);
-
-				actions("click", edsct);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				WebElement delsct = driver
-						.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
-				visbility(driver, delsct, 60);
-				javascriptclick(delsct);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		sleep(2000);
-		// discount..
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				WebElement dis = driver.findElement(By.xpath("//div[@id='discount-side']/div[1]/div"));
-				visbility(driver, dis, 60);
-
-				actions("click", dis);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				WebElement addds = driver.findElement(
-						By.xpath("//div[@id='discount-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-				visbility(driver, addds, 60);
-
-				javascriptclick(addds);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		WebElement trp3 = driver.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[3]/input"));
-		visbility(driver, trp3, 60);
-		sendkeys(trp3, "Discnt");// .sendKeys("Discnt");
-		WebElement cldrpdis = driver
-				.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[4]/div/button"));
-		visbility(driver, cldrpdis, 60);
-		javascriptclick(cldrpdis);
-		List<WebElement> dispercen = null;
-		for (int i = 1; i <= 5; i++) {
-			try {
-
-				dispercen = driver
-						.findElements(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[4]/div/ul/li/a"));
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		for (WebElement we : dispercen) {
-			if (we.getText().trim().equals("Percentage Discount")) {
-				visbility(driver, we, 60);
-				we.click();
-				break;
+				}
 			}
 
-		}
-		WebElement trp6 = driver
-				.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[5]/div/input"));
-		visbility(driver, trp6, 60);
-		sendkeys(trp6, "5");// .sendKeys("5");
-		WebElement dissav = driver
-				.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[8]/div/button[2]"));
-		visbility(driver, dissav, 60);
-		javascriptclick(dissav);
-		WebElement adddiscc = driver
-				.findElement(By.xpath("//div[text()='Discnt']//parent::div[1]//parent::div/div/span"));
-		visbility(driver, adddiscc, 60);
+			while (true) {
+				try {
+					WebElement additser = driver.findElement(
+							By.xpath("//div[@id='item-code-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
+					visbility(driver, additser, 60);
 
-		actions("click", adddiscc);
-		sleep(2000);
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement editdis = driver.findElement(By.xpath("//div[text()='Discnt']"));
-				visbility(driver, editdis, 60);
+					javascriptclick(additser);
+					break;
+				} catch (Exception e) {
 
-				actions("click", editdis);
-				break;
-			} catch (Exception e) {
+				}
+			}
+			while (true) {
+				try {
+					WebElement wrr = driver
+							.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[3]/input"));
+					visbility(driver, wrr, 60);
+					sendkeys(wrr, "product001");// .sendKeys("product001");
+					break;
+				} catch (Exception e) {
+
+				}
+			}
+			WebElement err = driver
+					.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[4]/textarea"));
+			visbility(driver, err, 60);
+			sendkeys(err, "sr");// .sendKeys("sr");
+			WebElement weq = driver
+					.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[5]/input"));
+			visbility(driver, weq, 60);
+			sendkeys(weq, "5");// .sendKeys("5");
+			while (true) {
+				try {
+					WebElement itersav = driver.findElement(
+							By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[7]/div/button[2]"));
+					visbility(driver, itersav, 60);
+					javascriptclick(itersav);
+					break;
+				} catch (Exception e) {
+
+				}
+			}
+			sleep(2000);
+			for (int i = 1; i <= 5; i++) {
+				try {
+					WebElement ft = driver.findElement(
+							By.xpath("//div[text()='PRODUCT001']//parent::div[1]//parent::div[1]/div[1]/span"));
+					visbility(driver, ft, 60);
+
+					javascriptclick(ft);
+					break;
+				} catch (Exception e) {
+
+				}
+			}
+			sleep(2000);
+			for (int i = 1; i <= 5; i++) {
+				try {
+					WebElement edititser = driver.findElement(By.xpath("//div[text()='PRODUCT001']"));
+					visbility(driver, edititser, 60);
+
+					actions("click", edititser);
+					break;
+				} catch (Exception e) {
+
+				}
+			}
+			for (int i = 1; i <= 5; i++) {
+				try {
+					WebElement delitser = driver
+							.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
+					visbility(driver, delitser, 60);
+
+					javascriptclick(delitser);
+					break;
+				} catch (Exception e) {
+
+				}
+			}
+			sleep(2000);
+
+			// service/charge tax..
+			while (true) {
+				try {
+
+					WebElement sct = driver.findElement(By.xpath("//div[@id='tax-side']/div[1]/div/span[3]"));
+					visbility(driver, sct, 60);
+
+					actions("click", sct);
+					break;
+				} catch (Exception e) {
+
+				}
+			}
+
+			for (int i = 1; i <= 5; i++) {
+				try {
+
+					WebElement sctadd = driver.findElement(
+							By.xpath("//div[@id='tax-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
+					visbility(driver, sctadd, 60);
+
+					javascriptclick(sctadd);
+					break;
+				} catch (Exception e) {
+
+				}
+			}
+			WebElement tre = driver.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[2]/div[3]/input"));
+			visbility(driver, tre, 60);
+			sendkeys(tre, "service charge<>"); // .sendKeys("service charge<>");
+			WebElement tp1 = driver.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[2]/div[4]/input"));
+			visbility(driver, tp1, 60);
+			sendkeys(tp1, "5");// .sendKeys("5");
+			WebElement sctsav = driver
+					.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[2]/div[6]/div/button[2]"));
+			visbility(driver, sctsav, 60);
+			for (int i = 1; i <= 5; i++) {
+				try {
+
+					javascriptclick(sctsav);
+					WebElement adsct = driver.findElement(
+							By.xpath("//div[text()='service charge<>']//parent::div[1]//parent::div[1]/div/span"));
+					visbility(driver, adsct, 60);
+
+					actions("click", adsct);
+					break;
+				} catch (Exception e) {
+
+				}
+			}
+			sleep(2000);
+			for (int i = 1; i <= 5; i++) {
+				try {
+
+					WebElement edsct = driver.findElement(By.xpath("//div[text()='service charge<>']"));
+					visbility(driver, edsct, 60);
+
+					actions("click", edsct);
+					break;
+				} catch (Exception e) {
+
+				}
+			}
+			for (int i = 1; i <= 5; i++) {
+				try {
+
+					WebElement delsct = driver
+							.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
+					visbility(driver, delsct, 60);
+					javascriptclick(delsct);
+					break;
+				} catch (Exception e) {
+
+				}
+			}
+			sleep(2000);
+			// discount..
+			for (int i = 1; i <= 5; i++) {
+				try {
+
+					WebElement dis = driver.findElement(By.xpath("//div[@id='discount-side']/div[1]/div"));
+					visbility(driver, dis, 60);
+
+					actions("click", dis);
+					break;
+				} catch (Exception e) {
+
+				}
+			}
+
+			for (int i = 1; i <= 5; i++) {
+				try {
+
+					WebElement addds = driver.findElement(
+							By.xpath("//div[@id='discount-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
+					visbility(driver, addds, 60);
+
+					javascriptclick(addds);
+					break;
+				} catch (Exception e) {
+
+				}
+			}
+			WebElement trp3 = driver
+					.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[3]/input"));
+			visbility(driver, trp3, 60);
+			sendkeys(trp3, "Discnt");// .sendKeys("Discnt");
+			WebElement cldrpdis = driver
+					.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[4]/div/button"));
+			visbility(driver, cldrpdis, 60);
+			javascriptclick(cldrpdis);
+			List<WebElement> dispercen = null;
+			for (int i = 1; i <= 5; i++) {
+				try {
+
+					dispercen = driver.findElements(
+							By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[4]/div/ul/li/a"));
+					break;
+				} catch (Exception e) {
+
+				}
+			}
+			for (WebElement we : dispercen) {
+				if (we.getText().trim().equals("Percentage Discount")) {
+					visbility(driver, we, 60);
+					we.click();
+					break;
+				}
 
 			}
-		}
+			WebElement trp6 = driver
+					.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[5]/div/input"));
+			visbility(driver, trp6, 60);
+			sendkeys(trp6, "5");// .sendKeys("5");
+			WebElement dissav = driver
+					.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[8]/div/button[2]"));
+			visbility(driver, dissav, 60);
+			javascriptclick(dissav);
+			WebElement adddiscc = driver
+					.findElement(By.xpath("//div[text()='Discnt']//parent::div[1]//parent::div/div/span"));
+			visbility(driver, adddiscc, 60);
 
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement deldis = driver
-						.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
-				visbility(driver, deldis, 60);
-				javascriptclick(deldis);
-				break;
-			} catch (Exception e) {
+			actions("click", adddiscc);
+			sleep(2000);
+			for (int i = 1; i <= 5; i++) {
+				try {
+					WebElement editdis = driver.findElement(By.xpath("//div[text()='Discnt']"));
+					visbility(driver, editdis, 60);
 
+					actions("click", editdis);
+					break;
+				} catch (Exception e) {
+
+				}
 			}
+
+			for (int i = 1; i <= 5; i++) {
+				try {
+					WebElement deldis = driver
+							.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
+					visbility(driver, deldis, 60);
+					javascriptclick(deldis);
+					break;
+				} catch (Exception e) {
+
+				}
+			}
+
 		}
 		sleep(2000);
 		for (int i = 1; i <= 5; i++) {
@@ -3747,16 +3735,18 @@ public class Local_Host extends Base {
 
 		javascriptclick(dz);
 		sleep(2000);
-		WebElement trp7 = driver.findElement(By.xpath("//button[@id='finalize-bill']//following::button[2]"));// .click();
-		visbility(driver, trp7, 60);
-		javascriptclick(trp7);
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
+			WebElement trp7 = driver.findElement(By.xpath("//button[@id='finalize-bill']//following::button[2]"));// .click();
+			visbility(driver, trp7, 60);
+			javascriptclick(trp7);
+			sleep(2000);
+			WebElement delbil = driver.findElement(
+					By.xpath("//center[text()='Do you like to delete Invoice?']//following::div[1]/button[2]"));
+			visbility(driver, delbil, 60);
+			javascriptclick(delbil);
+		}
 		sleep(2000);
-		WebElement delbil = driver.findElement(
-				By.xpath("//center[text()='Do you like to delete Invoice?']//following::div[1]/button[2]"));
-		visbility(driver, delbil, 60);
-		javascriptclick(delbil);
-		sleep(2000);
-		// driver.navigate().to("https://localhost:8443/health/#bill_report");
+
 		while (true) {
 			try {
 				click(pom.getInstanceBilling().clickBill);
@@ -3818,69 +3808,49 @@ public class Local_Host extends Base {
 		visbility(driver, pom.getInstanceBilling().saveItem, 60);
 		click(pom.getInstanceBilling().saveItem);
 		sleep(2000);
-		String inc;
-		while (true) {
-			try {
-				WebElement getinc = driver.findElement(By.xpath("//span[@id='receiptId']"));
-				visbility(driver, getinc, 60);
-				inc = getinc.getText();
-				System.out.println(inc);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-
-		sleep(3000);
-
-		driver.navigate().back();
-
-		while (true) {
-			if (driver.getCurrentUrl().equals("https://localhost:8443/health/#bill_report")) {
-				break;
-			} else if (driver.getCurrentUrl().equals("https://www.test.75health.com/health/#bill_report")) {
-				break;
-			} else if (driver.getCurrentUrl().equals("https://www.75health.com/health/#bill_report")) {
-				break;
-			}
-		}
-
-		while (true) {
-			try {
-				WebElement rqs = driver.findElement(By.xpath("//div[text()='" + inc + "']"));
-				visbility(driver, rqs, 60);
-
-				actions("click", rqs);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		sleep(1000);
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement editit = driver.findElement(By.xpath("//div[text()='dolo']"));
-				visbility(driver, editit, 60);
-				javascriptclick(editit);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		visbility(driver, pom.getInstanceBilling().enterTheItem, 60);
-		clear(pom.getInstanceBilling().enterTheItem);
-
-		visbility(driver, pom.getInstanceBilling().enterTheItem, 60);
-		sendkeys(pom.getInstanceBilling().enterTheItem, "Paracetamal");
-
-		visbility(driver, pom.getInstanceBilling().addPrice, 60);
-		clear(pom.getInstanceBilling().addPrice);
-		sendkeys(pom.getInstanceBilling().addPrice, "90");
-
-		WebElement saveit = driver.findElement(
-				By.xpath("//div[text()='dolo']//following::div[6]/div[2]//following::div[1]/div[2]/div[1]/button[3]"));
-		visbility(driver, saveit, 60);
-		javascriptclick(saveit);
+		/*
+		 * String inc; while (true) { try { WebElement getinc =
+		 * driver.findElement(By.xpath("//span[@id='receiptId']")); visbility(driver,
+		 * getinc, 60); inc = getinc.getText(); System.out.println(inc); break; } catch
+		 * (Exception e) {
+		 * 
+		 * } }
+		 * 
+		 * sleep(3000);
+		 * 
+		 * driver.navigate().back();
+		 * 
+		 * while (true) { if
+		 * (driver.getCurrentUrl().equals("https://localhost:8443/health/#bill_report"))
+		 * { break; } else if (driver.getCurrentUrl().equals(
+		 * "https://www.test.75health.com/health/#bill_report")) { break; } else if
+		 * (driver.getCurrentUrl().equals("https://www.75health.com/health/#bill_report"
+		 * )) { break; } }
+		 * 
+		 * while (true) { try { WebElement rqs =
+		 * driver.findElement(By.xpath("//div[text()='" + inc + "']"));
+		 * visbility(driver, rqs, 60);
+		 * 
+		 * actions("click", rqs); break; } catch (Exception e) {
+		 * 
+		 * } } sleep(1000); for (int i = 1; i <= 5; i++) { try { WebElement editit =
+		 * driver.findElement(By.xpath("//div[text()='dolo']")); visbility(driver,
+		 * editit, 60); javascriptclick(editit); break; } catch (Exception e) {
+		 * 
+		 * } } visbility(driver, pom.getInstanceBilling().enterTheItem, 60);
+		 * clear(pom.getInstanceBilling().enterTheItem);
+		 * 
+		 * visbility(driver, pom.getInstanceBilling().enterTheItem, 60);
+		 * sendkeys(pom.getInstanceBilling().enterTheItem, "Paracetamal");
+		 * 
+		 * visbility(driver, pom.getInstanceBilling().addPrice, 60);
+		 * clear(pom.getInstanceBilling().addPrice);
+		 * sendkeys(pom.getInstanceBilling().addPrice, "90");
+		 * 
+		 * WebElement saveit = driver.findElement( By.xpath(
+		 * "//div[text()='dolo']//following::div[6]/div[2]//following::div[1]/div[2]/div[1]/button[3]"
+		 * )); visbility(driver, saveit, 60); javascriptclick(saveit);
+		 */
 
 	}
 
@@ -3898,7 +3868,7 @@ public class Local_Host extends Base {
 			click(pom.getInstanceTeleDoctor().clickTeleDoctor);
 
 		}
-		driver.navigate().refresh();
+	//	driver.navigate().refresh();
 
 		implicitWait(60, TimeUnit.SECONDS);
 
@@ -3959,69 +3929,70 @@ public class Local_Host extends Base {
 		click(cp1);
 
 		implicitWait(30, TimeUnit.SECONDS);
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
+			try {
+				ScriptExecutor(pom.getInstanceNewPatient().deletePatient);
+				ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceNewPatient().deletePatient));
+				click(pom.getInstanceNewPatient().deletePatient);
+			} catch (ElementClickInterceptedException e) {
+				ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceNewPatient().deletePatient));
+				click(pom.getInstanceNewPatient().deletePatient);
+			}
+
+			while (true) {
+				try {
+
+					WebElement $delpat$ = driver.findElement(By.xpath("//button[text()='Delete']"));
+					javascriptclick($delpat$);
+					break;
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+
+			implicitWait(60, TimeUnit.SECONDS);
+
+			while (true) {
+				WebElement $addne;
+				try {
+
+					$addne = driver.findElement(By.xpath("(//BUTTON[@title='Add new Patient'])[3]"));
+
+					if ($addne.isDisplayed()) {
+						break;
+					}
+
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		}
+		if (url.equals("https://www.75health.com/login.jsp")) {
+			driver.navigate().to("https://www.75health.com/health/#call_history");
+		} else if (url.equals("")) {
+
+		} else if (url.equals("https://localhost:8443/")) {
+			driver.navigate().to("https://localhost:8443/health/#call_history");
+		}
 
 		try {
-			ScriptExecutor(pom.getInstanceNewPatient().deletePatient);
-			ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceNewPatient().deletePatient));
-			click(pom.getInstanceNewPatient().deletePatient);
-		} catch (ElementClickInterceptedException e) {
-			ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceNewPatient().deletePatient));
-			click(pom.getInstanceNewPatient().deletePatient);
+			visbility(driver, pom.getInstanceTeleDoctor().clickTeleDoctor, 60);
+			elementClickable(pom.getInstanceTeleDoctor().clickTeleDoctor);
+			click(pom.getInstanceTeleDoctor().clickTeleDoctor);
+
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceTeleDoctor().clickTeleDoctor, 60);
+			elementClickable(pom.getInstanceTeleDoctor().clickTeleDoctor);
+			click(pom.getInstanceTeleDoctor().clickTeleDoctor);
 		}
 
-		while (true) {
-			try {
-
-				WebElement $delpat$ = driver.findElement(By.xpath("//button[text()='Delete']"));
-				javascriptclick($delpat$);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-
-		implicitWait(60, TimeUnit.SECONDS);
-
-		while (true) {
-			WebElement $addne;
-			try {
-
-				$addne = driver.findElement(By.xpath("(//BUTTON[@title='Add new Patient'])[3]"));
-
-				if ($addne.isDisplayed()) {
-					break;
-				}
-
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-
-		if (ur.equals("https://www.75health.com/login.jsp")) {
-			driver.navigate().to("https://www.75health.com/health/#call_history");
-		} else if (ur.equals("")) {
-
-		} else if (ur.equals("")) {
-
-		}
-
-		while (true) {
-			try {
-				visbility(driver, pom.getInstanceTeleDoctor().clickTeleDoctor, 60);
-				javascriptclick(pom.getInstanceTeleDoctor().clickTeleDoctor);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
-		// System.out.println("done");
 		while (true) {
 			try {
 				visbility(driver, pom.getInstanceTeleDoctor().searchPatient, 60);
 				sendkeys(pom.getInstanceTeleDoctor().searchPatient, kpid);
 				break;
 			} catch (Exception e) {
-				// TODO: handle exception
+
 			}
 		}
 
@@ -4032,11 +4003,10 @@ public class Local_Host extends Base {
 				actions("click", pstl);
 				break;
 			} catch (Exception e) {
-				// TODO: handle exception
+
 			}
 		}
 
-		// ScriptExecutor(pom.getInstanceCalendar().saveAppointment);
 		while (true) {
 			try {
 				WebElement clickpatie = driver.findElement(By.xpath("(//div[@title='Click to view'])[4]"));
@@ -4045,7 +4015,7 @@ public class Local_Host extends Base {
 				actions("click", clickpatie);
 				break;
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 		}
 		sleep(3000);
@@ -4230,223 +4200,254 @@ public class Local_Host extends Base {
 	@Test(priority = 7, groups = "settings")
 	public void Settings() throws InterruptedException, IOException {
 
-		while (true) {
-
-			if (ur.equals("https://localhost:8443/")) {
-				driver.navigate().to("https://localhost:8443/health/#setting");
-				driver.navigate().refresh();
-				break;
-
-			} else if (ur.equals("https://www.75health.com/login.jsp")) {
-				driver.navigate().to("https://www.75health.com/health/#setting");
-				driver.navigate().refresh();
-				break;
-			} else if (ur.equals("https://www.test.75health.com/")) {
-				javascriptclick(pom.getInstanceSetting().clickSettings);
-				driver.navigate().refresh();
-				break;
-			}
-
+		try {
+			visbility(driver, pom.getInstanceSetting().clickSettings, 40);
+			elementClickable(pom.getInstanceSetting().clickSettings);
+			click(pom.getInstanceSetting().clickSettings);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceSetting().clickSettings, 40);
+			elementClickable(pom.getInstanceSetting().clickSettings);
+			click(pom.getInstanceSetting().clickSettings);
 		}
-		implicitWait(40, TimeUnit.SECONDS);
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		while (true) {
-			try {
-				WebElement $manageaccount$ = driver.findElement(By.xpath("//button[text()='Manage your Account']"));
-				visbility(driver, $manageaccount$, 60);
-				click($manageaccount$);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-		sleep(3000);
-		WebElement Basicinfo = driver.findElement(By.xpath("(//span[@title='Edit'])[2]"));
-		visbility(driver, Basicinfo, 60);
-		javascriptclick(Basicinfo);
+		try {
 
-		WebElement set1 = driver.findElement(By.id("hospitalName"));
-		visbility(driver, set1, 60);
-		clear(set1);// .clear();
-		sleep(2000);
-		WebElement set2 = driver.findElement(By.id("hospitalName"));
-		visbility(driver, set2, 60);
-		sendkeys(set2, "75health organisation");// .sendKeys("75health organisation");
-		sleep(3000);
-		WebElement set3 = driver.findElement(By.xpath("//button[@title='Administrator Title']"));// .click();
-		visbility(driver, set3, 60);
-		click(set3);
-		sleep(3000);
-		List<WebElement> titledrp = driver
-				.findElements(By.xpath("//button[@title='Administrator Title']//following::ul[1]/li"));
-		for (WebElement choose : titledrp) {
-			if (choose.getText().trim().equals("Dr")) {
-				visbility(driver, set3, 60);
-				choose.click();
-				break;
-			}
+			visbility(driver, pom.getInstanceSetting().manageYorAccount, 40);
+			elementClickable(pom.getInstanceSetting().manageYorAccount);
+			click(pom.getInstanceSetting().manageYorAccount);
 
-		}
-		WebElement Firstnname = driver.findElement(By.id("firstName"));
-		visbility(driver, Firstnname, 60);
-		Firstnname.clear();
-
-		Firstnname.sendKeys("Automation Acc");
-
-		WebElement lastname = driver.findElement(By.id("lastName"));
-		visbility(driver, lastname, 60);
-		lastname.clear();
-		lastname.sendKeys("Account");
-		sleep(3000);
-		WebElement hospitalActive = driver.findElement(By.xpath("//button[@id='hospitalActiveId']"));
-		visbility(driver, hospitalActive, 60);
-		j.executeScript("arguments[0].click();", hospitalActive);
-		sleep(2000);
-		List<WebElement> Adminstatus = driver.findElements(By.xpath("(//ul[@id='advBillType_Dropdown'])[2]/li"));
-		for (WebElement Ch1 : Adminstatus) {
-			if (Ch1.getText().trim().equals("ACTIVE")) {
-				Ch1.click();
-				break;
-			}
-
+		} catch (ElementClickInterceptedException | StaleElementReferenceException e) {
+			visbility(driver, pom.getInstanceSetting().manageYorAccount, 40);
+			elementClickable(pom.getInstanceSetting().manageYorAccount);
+			click(pom.getInstanceSetting().manageYorAccount);
 		}
 		sleep(2000);
+		try {
+			visbility(driver, pom.getInstanceSetting().basicInfoEditIcon, 40);
+			elementClickable(pom.getInstanceSetting().basicInfoEditIcon);
+			click(pom.getInstanceSetting().basicInfoEditIcon);
+			// log.info("basic info edit clicked");
+		} catch (ElementClickInterceptedException e) {
+			visbility(driver, pom.getInstanceSetting().basicInfoEditIcon, 40);
+			elementClickable(pom.getInstanceSetting().basicInfoEditIcon);
+			click(pom.getInstanceSetting().basicInfoEditIcon);
+			// log.info("basic info edit clicked");
+		}
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
+			visbility(driver, pom.getInstanceSetting().hosipitalName, 40);
+			clear(pom.getInstanceSetting().hosipitalName);
+			sendkeys(pom.getInstanceSetting().hosipitalName, "75health organisation");
+			elementClickable(pom.getInstanceSetting().basicInfoTitle);
+			click(pom.getInstanceSetting().basicInfoTitle);
 
-		WebElement em = driver.findElement(By.xpath("(//button[@id='smsP'])[1]"));
-		visbility(driver, em, 60);
-		j.executeScript("arguments[0].click();", em);
+			for (WebElement choose : pom.getInstanceSetting().basicInfoTitleDropdown) {
+				if (choose.getText().trim().equals("Dr")) {
 
-		sleep(2000);
-		List<WebElement> smsnotification = driver.findElements(By.xpath("//ul[@id='Smsul']/li"));
-		for (WebElement web : smsnotification) {
-			if (web.getText().trim().equals("ON")) {
-				visbility(driver, web, 60);
-				web.click();
-				break;
+					visbility(driver, choose, 60);
+					elementClickable(choose);
+					click(choose);
+					break;
+				}
+
+			}
+		}
+
+		visbility(driver, pom.getInstanceSetting().firstName, 40);
+		clear(pom.getInstanceSetting().firstName);
+		sendkeys(pom.getInstanceSetting().firstName, "Automation Acc");
+
+		visbility(driver, pom.getInstanceSetting().lastName, 40);
+		clear(pom.getInstanceSetting().lastName);
+		sendkeys(pom.getInstanceSetting().lastName, "Automation Acc");
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
+			elementClickable(pom.getInstanceSetting().basicInfoAdminstatus);
+			click(pom.getInstanceSetting().basicInfoAdminstatus);
+
+			for (WebElement status : pom.getInstanceSetting().basicInfoAdminstatusDropdown) {
+				if (status.getText().trim().equals("ACTIVE")) {
+					visbility(driver, status, 40);
+					elementClickable(status);
+					click(status);
+					break;
+				}
+
 			}
 
+			elementClickable(pom.getInstanceSetting().basicInfoSmsNotication);
+			click(pom.getInstanceSetting().basicInfoSmsNotication);
+
+			for (WebElement web : pom.getInstanceSetting().basicInfoSmsNoticationDropdown) {
+				if (web.getText().trim().equals("ON")) {
+					visbility(driver, web, 60);
+					elementClickable(web);
+					click(web);
+					break;
+				}
+
+			}
+
+			elementClickable(pom.getInstanceSetting().basicInfoSave);
+			click(pom.getInstanceSetting().basicInfoSave);
+		} else {
+			elementClickable(pom.getInstanceSetting().basicInfoSavedrLogin);
+			click(pom.getInstanceSetting().basicInfoSavedrLogin);
 		}
-		sleep(2000);
-		WebElement fint = driver.findElement(By.xpath("(//button[@id='save-btn'])[3]"));
-		visbility(driver, fint, 60);
-		j.executeScript("arguments[0].click();", fint);
-		sleep(3000);
+		log.info("basic info saved");
+		sleep(1000);
 
 		// Contact info..
-		while (true) {
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
 			try {
-				WebElement contactinfoadd = driver
-						.findElement(By.xpath("(//span[text()='Contact'])[1]//following::div[1]"));
-				visbility(driver, contactinfoadd, 60);
-				actions("click", contactinfoadd);
-				break;
+				visbility(driver, pom.getInstanceSetting().conatctInfoEditIcon, 40);
+				elementClickable(pom.getInstanceSetting().conatctInfoEditIcon);
+				click(pom.getInstanceSetting().conatctInfoEditIcon);
 			} catch (Exception e) {
-				// TODO: handle exception
+				visbility(driver, pom.getInstanceSetting().conatctInfoEditIcon, 40);
+				elementClickable(pom.getInstanceSetting().conatctInfoEditIcon);
+				click(pom.getInstanceSetting().conatctInfoEditIcon);
 			}
+
+			visbility(driver, pom.getInstanceSetting().contactInfoAddressLine1, 40);
+			clear(pom.getInstanceSetting().contactInfoAddressLine1);
+			sendkeys(pom.getInstanceSetting().contactInfoAddressLine1, "no.224,Main avenue");
+			visbility(driver, pom.getInstanceSetting().contactInfoAddressLine2, 40);
+			clear(pom.getInstanceSetting().contactInfoAddressLine2);
+			sendkeys(pom.getInstanceSetting().contactInfoAddressLine2, "watson street usa");
+
+			visbility(driver, pom.getInstanceSetting().contactInfoCity, 40);
+			clear(pom.getInstanceSetting().contactInfoCity);
+			sendkeys(pom.getInstanceSetting().contactInfoCity, "usa");
+			visbility(driver, pom.getInstanceSetting().contactInfoCountry, 40);
+			dropDown("text", pom.getInstanceSetting().contactInfoCountry, "Germany");
+			visbility(driver, pom.getInstanceSetting().contactInfoState, 40);
+			dropDown("text", pom.getInstanceSetting().contactInfoState, "Berlin");
+			visbility(driver, pom.getInstanceSetting().contactInfoPostalCode, 30);
+			clear(pom.getInstanceSetting().contactInfoPostalCode);
+			sendkeys(pom.getInstanceSetting().contactInfoPostalCode, "2001143");
+
+			elementClickable(pom.getInstanceSetting().contactInfoPhone1Flag);
+			click(pom.getInstanceSetting().contactInfoPhone1Flag);
+			for (WebElement flag : pom.getInstanceSetting().contactInfoPh1FlagDropdown) {
+				if (flag.getText().trim().equals("+91")) {
+					visbility(driver, flag, 30);
+					elementClickable(flag);
+					click(flag);
+				}
+
+			}
+
+			visbility(driver, pom.getInstanceSetting().contactInfoPhone1field, 30);
+			clear(pom.getInstanceSetting().contactInfoPhone1field);
+			sendkeys(pom.getInstanceSetting().contactInfoPhone1field, "9898764536");
+
+			elementClickable(pom.getInstanceSetting().contactInfoPhone2Flag);
+			click(pom.getInstanceSetting().contactInfoPhone2Flag);
+			for (WebElement flag : pom.getInstanceSetting().contactInfoPh2FlagDropdown) {
+				if (flag.getText().trim().equals("+91")) {
+					visbility(driver, flag, 30);
+					elementClickable(flag);
+					click(flag);
+				}
+
+			}
+			visbility(driver, pom.getInstanceSetting().contactInfoPhone2field, 30);
+			clear(pom.getInstanceSetting().contactInfoPhone2field);
+			sendkeys(pom.getInstanceSetting().contactInfoPhone2field, "9898764536");
+
+			elementClickable(pom.getInstanceSetting().contactInfoSave);
+			click(pom.getInstanceSetting().contactInfoSave);
+
 		}
-
-		WebElement add1 = driver.findElement(By.xpath("(//input[@id='address1'])[1]"));
-		visbility(driver, add1, 60);
-		add1.clear();
-		add1.sendKeys("no.224,Main avenue");
-		WebElement add2 = driver.findElement(By.xpath("(//input[@id='address2'])[1]"));
-		visbility(driver, add2, 60);
-		add2.clear();
-		add2.sendKeys("watson street usa");
-		sleep(2000);
-		WebElement city = driver.findElement(By.xpath("(//input[@id='city'])[1]"));
-		visbility(driver, city, 60);
-		city.clear();
-		city.sendKeys("usa");
-		sleep(2000);
-		WebElement set = driver.findElement(By.xpath("(//select[@id='countryGeoId'])[1]"));
-		visbility(driver, set, 60);
-		click(set);// .click();
-		sleep(2000);
-		WebElement selectcountry = driver.findElement(By.xpath("(//select[@id='countryGeoId'])[1]"));
-		visbility(driver, selectcountry, 60);
-		dropDown("text", selectcountry, "Germany");
-		sleep(2000);
-		WebElement selectstate = driver.findElement(By.xpath("(//select[@id='stateProvinceGeoId'])[1]"));
-		visbility(driver, selectstate, 60);
-		dropDown("text", selectstate, "Berlin");
-		sleep(2000);
-		WebElement trp6 = driver.findElement(By.xpath("(//input[@id='postalCode'])[1]"));// .sendKeys("2001143");
-		visbility(driver, trp6, 60);
-		sendkeys(trp6, "2001143");
-		WebElement savecontactinfo = driver.findElement(By.xpath("(//button[@id='save-btn'])[5]"));
-		visbility(driver, savecontactinfo, 60);
-		j.executeScript("arguments[0].click();", savecontactinfo);
-
 		// specailaity
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
 
-		/*
-		 * WebElement add = driver.findElement(By.xpath("(//div[@id='add-btn'])[3]"));
-		 * 
-		 * sleep(2000); js.executeScript("arguments[0].click();", add); WebElement rr =
-		 * driver.findElement(By.
-		 * xpath("(//input[@placeholder='Select or Enter Specialty'])[1]"));
-		 * sleep(2000); actions("click", rr); sleep(2000);
-		 * rr.sendKeys("abdominal surgery"); sleep(3000); WebElement splm =
-		 * driver.findElement(By.xpath("//span[text()='Abdominal Surgery']"));
-		 * actions("click", splm);
-		 * driver.findElement(By.xpath("(//button[@id='save-btn'])[7]")).click();
-		 * sleep(3000); WebElement splrem =
-		 * driver.findElement(By.xpath("//div[text()='Abdominal Surgery']"));
-		 * actions("click", splrem); sleep(3000); WebElement spldel =
-		 * driver.findElement(By.xpath("(//img[@id='del-btn'])[1]"));
-		 * j.executeScript("arguments[0].click();", spldel);
-		 * 
-		 */ sleep(2000);
-
-		// patient info
-		while (true) {
 			try {
-				WebElement patientinfoedit = driver.findElement(By.xpath("(//span[@id='edit-btn'])[1]"));
-				visbility(driver, patientinfoedit, 60);
-				actions("click", patientinfoedit);
-				break;
+
+				visbility(driver, pom.getInstanceSetting().specialtyAddIcon, 40);
+				elementClickable(pom.getInstanceSetting().specialtyAddIcon);
+				click(pom.getInstanceSetting().specialtyAddIcon);
 			} catch (Exception e) {
-				// TODO: handle exception
+				visbility(driver, pom.getInstanceSetting().specialtyAddIcon, 40);
+				elementClickable(pom.getInstanceSetting().specialtyAddIcon);
+				click(pom.getInstanceSetting().specialtyAddIcon);
+			}
+		} else if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("dr")) {
+			try {
+
+				visbility(driver, pom.getInstanceSetting().specialtyAddIcondrLogin, 40);
+				elementClickable(pom.getInstanceSetting().specialtyAddIcondrLogin);
+				click(pom.getInstanceSetting().specialtyAddIcondrLogin);
+			} catch (Exception e) {
+				visbility(driver, pom.getInstanceSetting().specialtyAddIcondrLogin, 40);
+				elementClickable(pom.getInstanceSetting().specialtyAddIcondrLogin);
+				click(pom.getInstanceSetting().specialtyAddIcondrLogin);
 			}
 		}
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")
+				| ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("dr")) {
+			visbility(driver, pom.getInstanceSetting().specialtyEnter, 40);
 
-		WebElement gender = driver.findElement(By.xpath("(//button[@id='gender'])[1]"));
-		visbility(driver, gender, 60);
-		j.executeScript("arguments[0].click();", gender);
-		List<WebElement> genderdropdown = driver
-				.findElements(By.xpath("(//button[@id='gender'])[1]//following::ul[1]/li"));
-		for (WebElement web : genderdropdown) {
+			String rand = RandomStringUtils.randomAlphabetic(20);
+			sendkeys(pom.getInstanceSetting().specialtyEnter, rand);
+			try {
+				elementClickable(pom.getInstanceSetting().specialtySave);
+				click(pom.getInstanceSetting().specialtySave);
+			} catch (Exception e) {
+				elementClickable(pom.getInstanceSetting().specialtySave);
+				click(pom.getInstanceSetting().specialtySave);
+			}
+		}
+		// patient info
+		try {
+			visbility(driver, pom.getInstanceSetting().patientInfoeditIcon, 30);
+			elementClickable(pom.getInstanceSetting().patientInfoeditIcon);
+			click(pom.getInstanceSetting().patientInfoeditIcon);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceSetting().patientInfoeditIcon, 30);
+			elementClickable(pom.getInstanceSetting().patientInfoeditIcon);
+			click(pom.getInstanceSetting().patientInfoeditIcon);
+		}
+
+		try {
+			elementClickable(pom.getInstanceSetting().patientInfoGender);
+			click(pom.getInstanceSetting().patientInfoGender);
+		} catch (Exception e) {
+			elementClickable(pom.getInstanceSetting().patientInfoGender);
+			click(pom.getInstanceSetting().patientInfoGender);
+		}
+
+		for (WebElement web : pom.getInstanceSetting().patientInfoGenderDrop) {
 			if (web.getText().trim().equals("Male")) {
 				visbility(driver, web, 60);
-				web.click();
+				elementClickable(web);
+				click(web);
 				break;
 			}
 
 		}
-		WebElement education = driver.findElement(By.xpath("(//input[@id='educationform'])[1]"));
-		visbility(driver, education, 60);
-		education.clear();
-		education.sendKeys("B.tech");
-		sleep(2000);
-		WebElement license = driver.findElement(By.xpath("(//input[@id='licensenum'])[1]"));
-		visbility(driver, license, 60);
-		license.clear();
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")
+				| ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("dr")) {
+			visbility(driver, pom.getInstanceSetting().patinetInfoEducation, 30);
+			clear(pom.getInstanceSetting().patinetInfoEducation);
+			sendkeys(pom.getInstanceSetting().patinetInfoEducation, "B.tech");
 
-		license.sendKeys("trt43534");
-		sleep(2000);
-		WebElement saveadmininfo = driver.findElement(By.xpath("(//button[@id='save-btn'])[1]"));
-		visbility(driver, saveadmininfo, 60);
-		j.executeScript("arguments[0].click();", saveadmininfo);
-		while (true) {
-			try {
-				WebElement trp7 = driver.findElement(By.xpath("(//button[@onclick='Page.goBack()'])[1]"));
-				visbility(driver, trp7, 60);
-				click(trp7);
-				break;
-			} catch (Exception e) {
+			visbility(driver, pom.getInstanceSetting().patientInfoLicense, 30);
+			clear(pom.getInstanceSetting().patientInfoLicense);
+			sendkeys(pom.getInstanceSetting().patientInfoLicense, "trt43534");
+		}
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
+			elementClickable(pom.getInstanceSetting().patientInfoSave);
+			click(pom.getInstanceSetting().patientInfoSave);
+		} else {
+			elementClickable(pom.getInstanceSetting().patientInfoSavedrLogin);
+			click(pom.getInstanceSetting().patientInfoSavedrLogin);
+		}
 
-			}
+		try {
+			javascriptclick(pom.getInstanceSetting().managerYouraccBack);
+
+			System.out.println("Try");
+		} catch (Exception e) {
+			javascriptclick(pom.getInstanceSetting().managerYouraccBack);
 		}
 
 		/*
@@ -4478,607 +4479,647 @@ public class Local_Host extends Base {
 		}
 
 		// Manage users...
-		/*
-		 * while (true) { try {
-		 */
-		WebElement manageuser = driver.findElement(By.xpath("//button[@onclick='setting.userList()']"));
-		visbility(driver, manageuser, 60);
-		ww.until(ExpectedConditions.elementToBeClickable(manageuser));
-		click(manageuser);
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
+			try {
+				visbility(driver, pom.getInstanceSetting().manageuser, 30);
+				elementClickable(pom.getInstanceSetting().manageuser);
+				click(pom.getInstanceSetting().manageuser);
+				log.info("manage user clicked");
+			} catch (Exception e) {
+				visbility(driver, pom.getInstanceSetting().manageuser, 30);
+				elementClickable(pom.getInstanceSetting().manageuser);
+				click(pom.getInstanceSetting().manageuser);
+				log.info("manage user clicked");
+			}
+			try {
 
-		/*
-		 * break; } catch (Exception e) { // TODO: handle exception } }
-		 */
-		sleep(2000);
+				visbility(driver, pom.getInstanceSetting().manageuserAddNewUser, 60);
+				elementClickable(pom.getInstanceSetting().manageuserAddNewUser);
+				click(pom.getInstanceSetting().manageuserAddNewUser);
+			} catch (ElementClickInterceptedException e) {
 
-		try {
-			WebElement adduser = driver.findElement(By.xpath("(//button[@id='new'])[1]"));
-			visbility(driver, adduser, 60);
-			elementClickable(adduser);
-			click(adduser);
-		} catch (ElementClickInterceptedException e) {
-			WebElement adduser = driver.findElement(By.xpath("(//button[@id='new'])[1]"));
-			visbility(driver, adduser, 60);
-			elementClickable(adduser);
-			click(adduser);
-		}
-		System.out.println("ADD NEW USER CLICKED");
-		sleep(2000);
-		WebElement trp14 = driver.findElement(By.xpath("//input[@id='Firstname']"));
-		visbility(driver, trp14, 60);
-		sendkeys(trp14, "Akash");// .sendKeys("Akash");
-		WebElement trp15 = driver.findElement(By.xpath("//input[@id='LastName']"));
-		visbility(driver, trp15, 60);
-		sendkeys(trp15, "N");// .sendKeys("N");
-		sleep(2000);
-		WebElement trp16 = driver.findElement(By.xpath("//input[@id='UserLoginId']"));
-		visbility(driver, trp16, 60);
-		sendkeys(trp16, "Akashn1212@gmail.com");// .sendKeys("Akashn1212@gmail.com");
-		sleep(2000);
-		WebElement trp17 = driver.findElement(By.xpath("//button[@id='user_dropdown']"));
-		visbility(driver, trp17, 60);
-		click(trp17);// .click();
-		List<WebElement> usserdrp = driver.findElements(By.xpath("//button[@id='user_dropdown']//following::ul[1]/li"));
-		for (WebElement web : usserdrp) {
-			if (web.getText().trim().equals("Standard User")) {
-				visbility(driver, web, 60);
-				web.click();
-				break;
+				visbility(driver, pom.getInstanceSetting().manageuserAddNewUser, 60);
+				elementClickable(pom.getInstanceSetting().manageuserAddNewUser);
+				click(pom.getInstanceSetting().manageuserAddNewUser);
+			}
+			visbility(driver, pom.getInstanceSetting().MangerUserFirstName, 30);
+			sendkeys(pom.getInstanceSetting().MangerUserFirstName, "KAASPRO");
+			visbility(driver, pom.getInstanceSetting().ManageUserLastNmae, 30);
+			sendkeys(pom.getInstanceSetting().ManageUserLastNmae, "ENTERPRISES");
+
+			String random = RandomStringUtils.randomAlphabetic(25);
+			visbility(driver, pom.getInstanceSetting().manageuserEmailId, 30);
+			sendkeys(pom.getInstanceSetting().manageuserEmailId, random + "@gmail.com");
+			try {
+
+				elementClickable(pom.getInstanceSetting().manageUserType);
+				click(pom.getInstanceSetting().manageUserType);
+			} catch (ElementClickInterceptedException e) {
+				elementClickable(pom.getInstanceSetting().manageUserType);
+				click(pom.getInstanceSetting().manageUserType);
+			}
+			for (WebElement web : pom.getInstanceSetting().manageUserTypeDrop) {
+				if (web.getText().trim().equals("Standard User")) {
+					visbility(driver, web, 60);
+					elementClickable(web);
+					click(web);
+					break;
+				}
+
+			}
+			/*
+			 * elementClickable(pom.getInstanceSetting().manageUserPhoneFlag);
+			 * click(pom.getInstanceSetting().manageUserPhoneFlag); sleep(2000); for
+			 * (WebElement flag : pom.getInstanceSetting().manageUserPhoneFlagDrop) { if
+			 * (flag.getText().trim().equals("+1")) { visbility(driver, flag, 30);
+			 * elementClickable(flag); click(flag); } }
+			 * 
+			 * visbility(driver, pom.getInstanceSetting().manageUserPhonefield, 30); String
+			 * numeric = RandomStringUtils.randomNumeric(8);
+			 * 
+			 * sendkeys(pom.getInstanceSetting().manageUserPhonefield, "23" + numeric);
+			 */
+			try {
+				elementClickable(pom.getInstanceSetting().createuser);
+				click(pom.getInstanceSetting().createuser);
+			} catch (Exception e) {
+				elementClickable(pom.getInstanceSetting().createuser);
+				click(pom.getInstanceSetting().createuser);
+			}
+			sleep(2500);
+
+			while (true) {
+				if (driver.getCurrentUrl().equals("https://localhost:8443/health/#user")) {
+					break;
+				} else if (driver.getCurrentUrl().equals("https://www.75health.com/health/#user")) {
+					break;
+				} else if (driver.getCurrentUrl().equals("https://www.test.75health.com/health/#user")) {
+					break;
+				}
 			}
 
+			if (url.equals("https://localhost:8443/")) {
+				driver.navigate().to("https://localhost:8443/health/#setting");
+
+			} else if (url.equals("https://www.75health.com/login.jsp")) {
+				driver.navigate().to("https://www.75health.com/health/#setting");
+			} else if (url.equals("https://www.test.75health.com/")) {
+				driver.navigate().to("https://www.test.75health.com/health/#setting");
+			}
 		}
-		sleep(2000);
-		WebElement phone = driver.findElement(By.xpath("//input[@id='PhonE']"));
-
-		phone.sendKeys("2013556237");
-		sleep(2000);
-		// WebElement createuser =
-		// driver.findElement(By.xpath("(//button[@id='createButton'])[2]"));
-		WebElement canceluser = driver.findElement(By.xpath("(//button[@onclick='window.history.back()'])[2]"));
-		visbility(driver, canceluser, 60);
-		canceluser.click(); // createuser.click(); sleep(3000);
-		click(pom.getInstanceSetting().clickSettings);
-		sleep(5000);
-
-		WebElement frs = driver.findElement(By.xpath("//button[@id='auto-logout-time']"));
-		visbility(driver, frs, 60);
-		click(frs);// .click();
-		sleep(2000);
-		List<WebElement> time = driver.findElements(By.xpath("//ul[@id='logoutt']/li"));
-		for (WebElement w : time) {
+		for (WebElement w : pom.getInstanceSetting().autoLogoutDrop) {
 
 			if (w.getText().trim().equals("2 Hour")) {
 				visbility(driver, w, 60);
-				w.click();
+				elementClickable(w);
+				click(w);
 				break;
 			}
 
 		}
-		sleep(2000);
+		sleep(1000);
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
+			try {
+				elementClickable(pom.getInstanceSetting().hospitalServiceChargeTaxclick);
+				click(pom.getInstanceSetting().hospitalServiceChargeTaxclick);
+			} catch (Exception e) {
+				elementClickable(pom.getInstanceSetting().hospitalServiceChargeTaxclick);
+				click(pom.getInstanceSetting().hospitalServiceChargeTaxclick);
+			}
 
-		WebElement s1 = driver.findElement(By.xpath("//button[@id='taxbutton']"));
-		visbility(driver, s1, 60);
-		click(s1);// .click();
+			visbility(driver, pom.getInstanceSetting().hospitalServiceChargeTaxdropclick, 40);
+			elementClickable(pom.getInstanceSetting().hospitalServiceChargeTaxdropclick);
+			click(pom.getInstanceSetting().hospitalServiceChargeTaxdropclick);
 
-		WebElement cl = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[4]/div[1]/div[2]/div/table/tbody/tr/td[2]/div/div[6]/div[8]/div/div[1]/div[1]/div[6]/div[1]/div/div[3]/div[1]/ul/li/a"));
-		visbility(driver, cl, 60);
-		actions("click", cl);
-		sleep(3000);
-		WebElement s2 = driver.findElement(By.xpath("(//span[@id='plus-add'])[1]"));
-		visbility(driver, s2, 60);
-		click(s2);// .click();
-		sleep(4000);
-		WebElement s3 = driver.findElement(By.xpath("(//input[@id='description'])[2]"));
-		visbility(driver, s3, 60);
-		sendkeys(s3, "DK");// .sendKeys("DK");
-		WebElement s4 = driver.findElement(By.xpath("(//input[@id='percentage'])[2]"));
-		visbility(driver, s4, 60);
-		sendkeys(s4, "5");// .sendKeys("5");
+			try {
 
-		WebElement s5 = driver.findElement(By.xpath("(//button[@id='save-btn'])[11]"));
-		visbility(driver, s5, 60);
-		ww.until(ExpectedConditions.elementToBeClickable(s5));
-		click(s5);// .click();
-		sleep(3000);
-		WebElement mn = driver.findElement(By.xpath("//div[text()='DK']"));
-		visbility(driver, mn, 60);
-		actions("click", mn);
-		sleep(3000);
-		WebElement s6 = driver.findElement(By.xpath("(//span[@id='del-btn'])[2]"));
-		visbility(driver, s6, 60);
-		click(s6);// .click();
-		sleep(2000);
-		WebElement s7 = driver.findElement(By.xpath("(//span[@title='Cancel'])[2]"));
-		visbility(driver, s7, 60);
-		ww.until(ExpectedConditions.elementToBeClickable(s7));
-		click(s7);// .click();
-		sleep(3000);
+				visbility(driver, pom.getInstanceSetting().hospitalTaxAddnewTax, 30);
+				elementClickable(pom.getInstanceSetting().hospitalTaxAddnewTax);
+				click(pom.getInstanceSetting().hospitalTaxAddnewTax);
+			} catch (Exception e) {
+				visbility(driver, pom.getInstanceSetting().hospitalTaxAddnewTax, 30);
+				elementClickable(pom.getInstanceSetting().hospitalTaxAddnewTax);
+				click(pom.getInstanceSetting().hospitalTaxAddnewTax);
+			}
+			visbility(driver, pom.getInstanceSetting().hospitalTaxdiscription, 30);
+			sendkeys(pom.getInstanceSetting().hospitalTaxdiscription, "DK");
 
+			visbility(driver, pom.getInstanceSetting().hospitalTaxPercentage, 30);
+			sendkeys(pom.getInstanceSetting().hospitalTaxPercentage, "5");
+			try {
+				elementClickable(pom.getInstanceSetting().hospitaltaxSave);
+				click(pom.getInstanceSetting().hospitaltaxSave);
+			} catch (Exception e) {
+				elementClickable(pom.getInstanceSetting().hospitaltaxSave);
+				click(pom.getInstanceSetting().hospitaltaxSave);
+			}
+			try {
+				visbility(driver, pom.getInstanceSetting().editHospitalTax, 30);
+				elementClickable(pom.getInstanceSetting().editHospitalTax);
+				click(pom.getInstanceSetting().editHospitalTax);
+			} catch (Exception e) {
+				visbility(driver, pom.getInstanceSetting().editHospitalTax, 30);
+				elementClickable(pom.getInstanceSetting().editHospitalTax);
+				click(pom.getInstanceSetting().editHospitalTax);
+			}
+
+			try {
+				visbility(driver, pom.getInstanceSetting().deleteHospitalTAX, 30);
+				elementClickable(pom.getInstanceSetting().deleteHospitalTAX);
+				click(pom.getInstanceSetting().deleteHospitalTAX);
+			} catch (Exception e) {
+				visbility(driver, pom.getInstanceSetting().deleteHospitalTAX, 30);
+				elementClickable(pom.getInstanceSetting().deleteHospitalTAX);
+				click(pom.getInstanceSetting().deleteHospitalTAX);
+			}
+
+			try {
+				visbility(driver, pom.getInstanceSetting().closeHospitalTax, 30);
+				elementClickable(pom.getInstanceSetting().closeHospitalTax);
+				click(pom.getInstanceSetting().closeHospitalTax);
+			} catch (Exception e) {
+				visbility(driver, pom.getInstanceSetting().closeHospitalTax, 30);
+				elementClickable(pom.getInstanceSetting().closeHospitalTax);
+				click(pom.getInstanceSetting().closeHospitalTax);
+			}
+		}
 		// cds
-		WebElement cdsclick = driver.findElement(By.xpath("//button[contains(text(),'Clinical Decision')]"));
-		visbility(driver, cdsclick, 60);
-		ww.until(ExpectedConditions.elementToBeClickable(cdsclick));
-		click(cdsclick);
-		sleep(2000);
-		WebElement newcds = driver.findElement(By.xpath("//span[contains(text(),'New Clinical')]"));
-		visbility(driver, newcds, 60);
-		ww.until(ExpectedConditions.elementToBeClickable(newcds));
-		click(newcds);
 
-		sleep(2000);
-		WebElement s8 = driver.findElement(By.xpath("(//input[@id='description'])[3]"));
-		visbility(driver, s8, 60);
-		sendkeys(s8, "Akash");// .sendKeys("Akash");
+		try {
+			visbility(driver, pom.getInstanceSetting().cdsClick, 30);
+			elementClickable(pom.getInstanceSetting().cdsClick);
+			click(pom.getInstanceSetting().cdsClick);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceSetting().cdsClick, 30);
+			elementClickable(pom.getInstanceSetting().cdsClick);
+			click(pom.getInstanceSetting().cdsClick);
+		}
+
+		try {
+			visbility(driver, pom.getInstanceSetting().addnewCds, 30);
+			elementClickable(pom.getInstanceSetting().addnewCds);
+			click(pom.getInstanceSetting().addnewCds);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceSetting().addnewCds, 30);
+			elementClickable(pom.getInstanceSetting().addnewCds);
+			click(pom.getInstanceSetting().addnewCds);
+		}
+
+		visbility(driver, pom.getInstanceSetting().enterCds, 30);
+		sendkeys(pom.getInstanceSetting().enterCds, "Akash");
+
 		sleep(2000);
 		WebElement scrolltill = driver.findElement(By.xpath("//input[@id='weight_from']"));
 		ScriptExecutor(scrolltill);
+
 		sleep(2000);
-		visbility(driver, scrolltill, 60);
-		WebElement s9 = driver.findElement(By.xpath("(//input[@id='problem_icd_10'])[2]"));
-		visbility(driver, s9, 60);
-		sendkeys(s9, "test");// .sendKeys("test");
+		visbility(driver, pom.getInstanceSetting().cdsIcd, 30);
+		sendkeys(pom.getInstanceSetting().cdsIcd, "test");
 		sleep(3000);
-		WebElement actionproblem = driver.findElement(By.xpath("//div[text()='Malignant neoplasm of testis']"));
-		visbility(driver, actionproblem, 60);
-		actions("click", actionproblem);
-		sleep(2000);
-		WebElement activecheck = driver.findElement(By.xpath("//input[@id='active']"));
-		visbility(driver, activecheck, 60);
-		actions("click", activecheck);
-		sleep(2000);
-		WebElement savecds = driver.findElement(By.xpath("//input[@id='active']//following::div[4]/div/button"));
-		visbility(driver, savecds, 60);
-		javascriptclick(savecds);
+		visbility(driver, pom.getInstanceSetting().CdsicdList, 30);
+		elementClickable(pom.getInstanceSetting().CdsicdList);
+		click(pom.getInstanceSetting().CdsicdList);
 
-		sleep(4000);
+		visbility(driver, pom.getInstanceSetting().cdsCheckbox, 30);
+		elementClickable(pom.getInstanceSetting().cdsCheckbox);
+		click(pom.getInstanceSetting().cdsCheckbox);
 
-		WebElement clicksett = driver.findElement(By.xpath("//td[text()='Settings']"));
-		visbility(driver, clicksett, 60);
-		javascriptclick(clicksett);
-		visbility(driver, cdsclick, 60);
-		ScriptExecutor(cdsclick);
+		elementClickable(pom.getInstanceSetting().saveCds);
+		click(pom.getInstanceSetting().saveCds);
 
 		sleep(3000);
+
+		try {
+			visbility(driver, pom.getInstanceSetting().clickSettings, 40);
+			elementClickable(pom.getInstanceSetting().clickSettings);
+			click(pom.getInstanceSetting().clickSettings);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceSetting().clickSettings, 40);
+			elementClickable(pom.getInstanceSetting().clickSettings);
+			click(pom.getInstanceSetting().clickSettings);
+		}
+		sleep(1000);
+		ScriptExecutor(pom.getInstanceSetting().cdsClick);
 
 		// Set Favorities..
 
-		driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
-		sleep(3000);
-		List<WebElement> setfav1 = driver.findElements(By.xpath("//ul[@id='setfavoritesul']/li"));
-		for (WebElement w : setfav1) {
+		try {
+			visbility(driver, pom.getInstanceSetting().setFavoritesClick, 40);
+			elementClickable(pom.getInstanceSetting().setFavoritesClick);
+			click(pom.getInstanceSetting().setFavoritesClick);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceSetting().setFavoritesClick, 40);
+			elementClickable(pom.getInstanceSetting().setFavoritesClick);
+			click(pom.getInstanceSetting().setFavoritesClick);
+		}
+
+		for (WebElement w : pom.getInstanceSetting().setFavoriteListDrop) {
 			if (w.getText().trim().equals("Item/service")) {
-				while (true) {
-					try {
-						visbility(driver, w, 60);
-						w.click();
-						break;
-					} catch (Exception e) {
 
-					}
+				visbility(driver, w, 60);
+				elementClickable(w);
+				click(w);
+
+				try {
+					visbility(driver, pom.getInstanceSetting().setfavoritesItemServiceAddIcon, 30);
+					elementClickable(pom.getInstanceSetting().setfavoritesItemServiceAddIcon);
+					click(pom.getInstanceSetting().setfavoritesItemServiceAddIcon);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setfavoritesItemServiceAddIcon, 30);
+					elementClickable(pom.getInstanceSetting().setfavoritesItemServiceAddIcon);
+					click(pom.getInstanceSetting().setfavoritesItemServiceAddIcon);
 				}
 
-				WebElement clickadditem = driver.findElement(By.xpath(
-						"//div[@id='referral']//following::div[4]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
-				visbility(driver, clickadditem, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(clickadditem));
-				click(clickadditem);
-				WebElement sdf = driver.findElement(By.xpath(
-						"(//div[contains(text(),'Type or select item/service and price')])[1]//following::input[1]"));
-				visbility(driver, sdf, 60);
-				sendkeys(sdf, "test");
-				WebElement sdf2 = driver.findElement(By.xpath(
-						"(//div[contains(text(),'Type or select item/service and price')])[1]//following::input[2]"));
-				visbility(driver, sdf2, 60);
-				sendkeys(sdf2, "5");
-				WebElement saveitem = driver.findElement(By.xpath("(//div[@id='ItemKpop2']//following::button[2])[1]"));
-				visbility(driver, saveitem, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(saveitem));
-				click(saveitem);
+				visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceDiscription, 60);
+				sendkeys(pom.getInstanceSetting().setFavoritesItemServiceDiscription, "test");
+				visbility(driver, pom.getInstanceSetting().setFavoritesItemServicePrice, 40);
+				sendkeys(pom.getInstanceSetting().setFavoritesItemServicePrice, "5");
+				elementClickable(pom.getInstanceSetting().setFavoritesItemServiceSave);
+				click(pom.getInstanceSetting().setFavoritesItemServiceSave);
+				sleep(1000);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceEdit, 40);
+					elementClickable(pom.getInstanceSetting().setFavoritesItemServiceEdit);
+					click(pom.getInstanceSetting().setFavoritesItemServiceEdit);
 
-				sleep(2000);
-				WebElement edititem = driver.findElement(By.xpath("//span[text()='test']"));
-				visbility(driver, edititem, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(edititem));
-				actions("click", edititem);
-				while (true) {
-					try {
-						WebElement deleteitem = driver
-								.findElement(By.xpath("//div[@id='ItemKpop2']/div[1]/div[2]/span[1]"));
-						if (deleteitem.isDisplayed()) {
-							click(deleteitem);
-							break;
-						}
-
-					} catch (Exception e) {
-
-					}
+				} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+					visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceEdit, 40);
+					elementClickable(pom.getInstanceSetting().setFavoritesItemServiceEdit);
+					click(pom.getInstanceSetting().setFavoritesItemServiceEdit);
 				}
 
-				WebElement itemservicebackarrow = driver
-						.findElement(By.xpath("//div[@id='ItemFavKpop2']/div[1]/div[2]/span"));
-				visbility(driver, itemservicebackarrow, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(itemservicebackarrow));
-				javascriptclick(itemservicebackarrow);
-				sleep(2500);
-				while (true) {
-					try {
-						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
-						break;
-					} catch (Exception e) {
-
-					}
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceDelete, 30);
+					elementClickable(pom.getInstanceSetting().setFavoritesItemServiceDelete);
+					click(pom.getInstanceSetting().setFavoritesItemServiceDelete);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceDelete, 30);
+					elementClickable(pom.getInstanceSetting().setFavoritesItemServiceDelete);
+					click(pom.getInstanceSetting().setFavoritesItemServiceDelete);
 				}
+
+				try {
+					elementClickable(pom.getInstanceSetting().setFavoritesItemServiceClose);
+					click(pom.getInstanceSetting().setFavoritesItemServiceClose);
+				} catch (Exception e) {
+					elementClickable(pom.getInstanceSetting().setFavoritesItemServiceClose);
+					click(pom.getInstanceSetting().setFavoritesItemServiceClose);
+				}
+
+				elementClickable(pom.getInstanceSetting().setFavoritesClick);
+				click(pom.getInstanceSetting().setFavoritesClick);
 
 			} else if (w.getText().trim().contentEquals("Message")) {
-				while (true) {
-					try {
-						visbility(driver, w, 60);
-						w.click();
-						break;
-					} catch (Exception e) {
+				visbility(driver, w, 40);
+				elementClickable(w);
+				click(w);
 
-					}
+				try {
+
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageAddIcon, 30);
+					elementClickable(pom.getInstanceSetting().setFavoritesMessageAddIcon);
+					click(pom.getInstanceSetting().setFavoritesMessageAddIcon);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageAddIcon, 30);
+					elementClickable(pom.getInstanceSetting().setFavoritesMessageAddIcon);
+					click(pom.getInstanceSetting().setFavoritesMessageAddIcon);
+				}
+				visbility(driver, pom.getInstanceSetting().setFavoritesMessageDiscription, 30);
+				sendkeys(pom.getInstanceSetting().setFavoritesMessageDiscription, "hello");
+				elementClickable(pom.getInstanceSetting().setFavoritesMessageSave);
+				click(pom.getInstanceSetting().setFavoritesMessageSave);
+				sleep(1000);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageEdit, 30);
+					elementClickable(pom.getInstanceSetting().setFavoritesMessageEdit);
+					click(pom.getInstanceSetting().setFavoritesMessageEdit);
+				} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageEdit, 30);
+					elementClickable(pom.getInstanceSetting().setFavoritesMessageEdit);
+					click(pom.getInstanceSetting().setFavoritesMessageEdit);
 				}
 
-				WebElement addnewfavmessage = driver
-						.findElement(By.xpath("(//div[@id='message'])[1]/div[1]/div//following::td[4]/span[2]"));
-				visbility(driver, addnewfavmessage, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(addnewfavmessage));
-				javascriptclick(addnewfavmessage);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageDelete, 30);
+					elementClickable(pom.getInstanceSetting().setFavoritesMessageDelete);
+					click(pom.getInstanceSetting().setFavoritesMessageDelete);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageDelete, 30);
+					elementClickable(pom.getInstanceSetting().setFavoritesMessageDelete);
+					click(pom.getInstanceSetting().setFavoritesMessageDelete);
+				}
 
-				WebElement msf = driver.findElement(By.xpath("//textarea[@id='message1']"));
-
-				visbility(driver, msf, 60);
-				sendkeys(msf, "hello");
-				WebElement savemesssage = driver
-						.findElement(By.xpath("//textarea[@id='message1']//following::button[2]"));
-				visbility(driver, savemesssage, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(savemesssage));
-				javascriptclick(savemesssage);
-				sleep(2500);
-				WebElement editmessage = driver.findElement(By.xpath("//div[text()='hello']"));
-				ww.until(ExpectedConditions.elementToBeClickable(editmessage));
-				actions("click", editmessage);
-				WebElement deletemessage = driver
-						.findElement(By.xpath("//div[@id='MessageKpop2']/div[1]/div[2]/span[1]"));
-				visbility(driver, deletemessage, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(deletemessage));
-				javascriptclick(deletemessage);
-
-				sleep(3000);
-				WebElement gobackmessage = driver
-						.findElement(By.xpath("(//span[text()='Favorite Message'])[1]//following::div[1]/span"));
-				visbility(driver, gobackmessage, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(gobackmessage));
-				javascriptclick(gobackmessage);
-
-				sleep(3000);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageClose, 40);
+					elementClickable(pom.getInstanceSetting().setFavoritesMessageClose);
+					click(pom.getInstanceSetting().setFavoritesMessageClose);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageClose, 40);
+					elementClickable(pom.getInstanceSetting().setFavoritesMessageClose);
+					click(pom.getInstanceSetting().setFavoritesMessageClose);
+				}
 
 			} else if (w.getText().trim().equals("Symptoms")) {
 
 				visbility(driver, w, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(w));
+				elementClickable(w);
 				click(w);
 
-				WebElement symptomsAddIcon = driver
-						.findElement(By.xpath("(//div[@id='SymptomsFavKpop2']//following::span[5])[1]"));
-				visbility(driver, symptomsAddIcon, 30);
-				ww.until(ExpectedConditions.elementToBeClickable(symptomsAddIcon));
-				click(symptomsAddIcon);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoritesSymptomsAddIcon, 30);
+					elementClickable(pom.getInstanceSetting().setFavoritesSymptomsAddIcon);
+					click(pom.getInstanceSetting().setFavoritesSymptomsAddIcon);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoritesSymptomsAddIcon, 30);
+					elementClickable(pom.getInstanceSetting().setFavoritesSymptomsAddIcon);
+					click(pom.getInstanceSetting().setFavoritesSymptomsAddIcon);
+				}
 
-				WebElement SymptomIcdTextBox = driver
-						.findElement(By.xpath("(//div[@id='SymptomsKpop2']//following::input[1])[1]"));
-				visbility(driver, SymptomIcdTextBox, 40);
-				sendkeys(SymptomIcdTextBox, "test");
+				visbility(driver, pom.getInstanceSetting().setFavoritesSymptomsIcd, 30);
+				sendkeys(pom.getInstanceSetting().setFavoritesSymptomsIcd, "test");
 
-				List<WebElement> symptomsdrop;
 				while (true) {
 					try {
-						symptomsdrop = driver.findElements(By.xpath(
-								"//div[@id='addfav-div']/div/div/div[4]//following::div[1]//following::ul[1]/li/a/div"));
-						if (symptomsdrop.size() > 5) {
+						/*
+						 * symptomsdrop = driver.findElements(By.xpath(
+						 * "//div[@id='addfav-div']/div/div/div[4]//following::div[1]//following::ul[1]/li/a/div"
+						 * ));
+						 */
+						if (pom.getInstanceSymptom().favoriteicdList.size() > 5) {
 							break;
 						}
 					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-				for (WebElement web : symptomsdrop) {
-					if (web.getText().trim().equals("R76.1: Abnormal reaction to tuberculin test")) {
-						visbility(driver, web, 60);
-						javascriptclick(web);
-						break;
-					}
-
-				}
-
-				WebElement SymptomDisBox = driver
-						.findElement(By.xpath("(//div[@id='SymptomsKpop2']//following::input[2])[1]"));
-				visbility(driver, SymptomDisBox, 40);
-				sendkeys(SymptomDisBox, "Symptoms");
-
-				WebElement saveSymptom = driver
-						.findElement(By.xpath("(//div[@id='SymptomsKpop2']//following::button[2])[1]"));
-				visbility(driver, saveSymptom, 35);
-				ww.until(ExpectedConditions.elementToBeClickable(saveSymptom));
-				click(saveSymptom);
-				sleep(2500);
-				WebElement editSymptom;
-				while (true) {
-					try {
-						editSymptom = driver.findElement(
-								By.xpath("(//div[text()='R76.1: Abnormal reaction to tuberculin test'])[1]"));
-						break;
-					} catch (StaleElementReferenceException e) {
 						e.printStackTrace();
 					}
 				}
-				visbility(driver, editSymptom, 35);
-				ww.until(ExpectedConditions.elementToBeClickable(editSymptom));
-				click(editSymptom);
-
-				WebElement deleteSymptom = driver
-						.findElement(By.xpath("(//div[@id='SymptomsKpop2']//following::span[2])[1]"));
-				visbility(driver, deleteSymptom, 35);
-				ww.until(ExpectedConditions.elementToBeClickable(deleteSymptom));
-				click(deleteSymptom);
-				WebElement closeSymptomIcon = driver
-						.findElement(By.xpath("(//div[@id='SymptomsFavKpop2']//following::span[1])[1]"));
-				visbility(driver, closeSymptomIcon, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(closeSymptomIcon));
-				click(closeSymptomIcon);
-
-				sleep(2500);
-				while (true) {
-					try {
-						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
+				for (WebElement web : pom.getInstanceSymptom().favoriteicdList) {
+					if (web.getText().trim().equals("R76.1: Abnormal reaction to tuberculin test")) {
+						visbility(driver, web, 60);
+						elementClickable(web);
+						click(web);
 						break;
-					} catch (Exception e) {
-
 					}
+
 				}
 
+				visbility(driver, pom.getInstanceSetting().setFavoritesSymotomsdiscription, 30);
+				sendkeys(pom.getInstanceSetting().setFavoritesSymotomsdiscription, "Symptoms");
+				elementClickable(pom.getInstanceSetting().setFavoritesSymptomsSave);
+				click(pom.getInstanceSetting().setFavoritesSymptomsSave);
+				sleep(1000);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoritesSymptomsedit, 30);
+					elementClickable(pom.getInstanceSetting().setFavoritesSymptomsedit);
+					click(pom.getInstanceSetting().setFavoritesSymptomsedit);
+				} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+					visbility(driver, pom.getInstanceSetting().setFavoritesSymptomsedit, 30);
+					elementClickable(pom.getInstanceSetting().setFavoritesSymptomsedit);
+					click(pom.getInstanceSetting().setFavoritesSymptomsedit);
+				}
+
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoriteSymtomsDelete, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteSymtomsDelete);
+					click(pom.getInstanceSetting().setFavoriteSymtomsDelete);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteSymtomsDelete, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteSymtomsDelete);
+					click(pom.getInstanceSetting().setFavoriteSymtomsDelete);
+				}
+
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoriteSymtomsClose, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteSymtomsClose);
+					click(pom.getInstanceSetting().setFavoriteSymtomsClose);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteSymtomsClose, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteSymtomsClose);
+					click(pom.getInstanceSetting().setFavoriteSymtomsClose);
+				}
+
+				elementClickable(pom.getInstanceSetting().setFavoritesClick);
+				click(pom.getInstanceSetting().setFavoritesClick);
 			} else if (w.getText().trim().equals("Problems")) {
 
 				visbility(driver, w, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(w));
+				elementClickable(w);
 				click(w);
-				WebElement ProblemsAddIcon = driver
-						.findElement(By.xpath("(//div[@id='ProblemsFavKpop2']//following::span[5])[1]"));
-				visbility(driver, ProblemsAddIcon, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(ProblemsAddIcon));
-				click(ProblemsAddIcon);
-
-				WebElement ProblemsIcdBox = driver
-						.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::input[1])[1]"));
-				visbility(driver, ProblemsIcdBox, 40);
-				sendkeys(ProblemsIcdBox, "test");
 				try {
-					Problems problem = new Problems();
-					problem.$favproblemsIcdCode();
+					visbility(driver, pom.getInstanceSetting().setFavoriteProblemsAddIcon, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteProblemsAddIcon);
+					click(pom.getInstanceSetting().setFavoriteProblemsAddIcon);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteProblemsAddIcon, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteProblemsAddIcon);
+					click(pom.getInstanceSetting().setFavoriteProblemsAddIcon);
+				}
+
+				visbility(driver, pom.getInstanceSetting().setFavoriteProblemsIcd, 30);
+				sendkeys(pom.getInstanceSetting().setFavoriteProblemsIcd, "test");
+				sleep(2000);
+				click(pom.getInstanceSetting().setFavoriteProblemsIcd);
+				try {
+
+					Problems.$favproblemsIcdCode();
 				} catch (Exception e) {
 
 					e.printStackTrace();
 				}
-				WebElement problemTextBox = driver
-						.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::input[2])[1]"));
-				visbility(driver, problemTextBox, 40);
-				sendkeys(problemTextBox, "Problems");
-				WebElement saveProblem = driver
-						.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::button[2])[1]"));
-				visbility(driver, saveProblem, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(saveProblem));
-				click(saveProblem);
-				sleep(2500);
-				WebElement editProblem = driver
-						.findElement(By.xpath("(//span[text()='Malignant neoplasm of testis'])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(editProblem));
-				click(editProblem);
-				sleep(2000);
-				WebElement deleteProblem = driver
-						.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::span[2])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(deleteProblem));
-				click(deleteProblem);
-				WebElement closeProblemIcon = driver
-						.findElement(By.xpath("(//div[@id='ProblemsFavKpop2']//following::span[1])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(closeProblemIcon));
-				click(closeProblemIcon);
-				sleep(2500);
-				while (true) {
-					try {
-						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
-						break;
-					} catch (Exception e) {
 
-					}
+				visbility(driver, pom.getInstanceSetting().setFavoriteProblemsDiscription, 30);
+				sendkeys(pom.getInstanceSetting().setFavoriteProblemsDiscription, "Problems");
+				elementClickable(pom.getInstanceSetting().setFavoriteProblemsSave);
+				click(pom.getInstanceSetting().setFavoriteProblemsSave);
+				sleep(1000);
+				try {
+					visbility(driver, pom.getInstanceProblems().editFavorite, 30);
+					elementClickable(pom.getInstanceProblems().editFavorite);
+					click(pom.getInstanceProblems().editFavorite);
+				} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+					visbility(driver, pom.getInstanceProblems().editFavorite, 30);
+					elementClickable(pom.getInstanceProblems().editFavorite);
+					click(pom.getInstanceProblems().editFavorite);
 				}
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoriteProblemsDelete, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteProblemsDelete);
+					click(pom.getInstanceSetting().setFavoriteProblemsDelete);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteProblemsDelete, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteProblemsDelete);
+					click(pom.getInstanceSetting().setFavoriteProblemsDelete);
+				}
+
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoriteProblemsClose, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteProblemsClose);
+					click(pom.getInstanceSetting().setFavoriteProblemsClose);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteProblemsClose, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteProblemsClose);
+					click(pom.getInstanceSetting().setFavoriteProblemsClose);
+				}
+
+				elementClickable(pom.getInstanceSetting().setFavoritesClick);
+				click(pom.getInstanceSetting().setFavoritesClick);
 			} else if (w.getText().trim().equals("Visit Reason")) {
 
 				visbility(driver, w, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(w));
+				elementClickable(w);
 				click(w);
 				try {
-					WebElement VisitReasonAddIcon = driver
-							.findElement(By.xpath("(//div[@id='Visit_ReasonFavKpop2']//following::span[5])[1]"));
-					visbility(driver, VisitReasonAddIcon, 40);
-					elementClickable(VisitReasonAddIcon);
-					click(VisitReasonAddIcon);
-				} catch (ElementClickInterceptedException e) {
-					WebElement VisitReasonAddIcon = driver
-							.findElement(By.xpath("(//div[@id='Visit_ReasonFavKpop2']//following::span[5])[1]"));
-					visbility(driver, VisitReasonAddIcon, 40);
-					elementClickable(VisitReasonAddIcon);
-					click(VisitReasonAddIcon);
+
+					visbility(driver, pom.getInstanceSetting().setFavoriteVisitReasonAddIcon, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteVisitReasonAddIcon);
+					click(pom.getInstanceSetting().setFavoriteVisitReasonAddIcon);
+				} catch (Exception e) {
+
+					visbility(driver, pom.getInstanceSetting().setFavoriteVisitReasonAddIcon, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteVisitReasonAddIcon);
+					click(pom.getInstanceSetting().setFavoriteVisitReasonAddIcon);
 				}
 				ww.until(ExpectedConditions
 						.elementToBeClickable(pom.getInstanceSetting().selectAppointmentTypeVisitReasonSetFav));
 				click(pom.getInstanceSetting().selectAppointmentTypeVisitReasonSetFav);
-				List<WebElement> $TypeDropdown = driver
-						.findElements(By.xpath("(//button[@id='admissionVal_dropdown'])[1]//following::ul[1]/li/a"));
 
-				for (WebElement Element : $TypeDropdown) {
+				for (WebElement Element : pom.getInstanceSetting().setFavoriteVisitReasonTypeDrop) {
 					System.out.println(Element.getText());
 					if (Element.getText().equals("Emergency") && Element.isDisplayed()) {
+						visbility(driver, Element, 30);
+						elementClickable(Element);
 						click(Element);
 						break;
 					}
 
 				}
-				WebElement VisitReasonDiscription = driver
-						.findElement(By.xpath("//div[@id='Visit_ReasonPellVal']/div[2]"));
-				visbility(driver, VisitReasonDiscription, 40);
-				sendkeys(VisitReasonDiscription, "VisitReason");
 
-				WebElement saveVisitReason = driver
-						.findElement(By.xpath("//div[@id='Visit_ReasonKpop2']/div[2]/div[2]/button[2]"));
-				ww.until(ExpectedConditions.elementToBeClickable(saveVisitReason));
-				click(saveVisitReason);
-				sleep(2500);
-				WebElement editVisitReason = driver.findElement(By.xpath("(//div[text()='VisitReason'])[1]"));
-				visbility(driver, editVisitReason, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(editVisitReason));
-				click(editVisitReason);
-				WebElement deleteVisitReason = driver
-						.findElement(By.xpath("(//div[@id='Visit_ReasonKpop2']//following::span[2])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(deleteVisitReason));
-				click(deleteVisitReason);
+				visbility(driver, pom.getInstanceSetting().setFavoriteVisitReasonDiscription, 40);
+				sendkeys(pom.getInstanceSetting().setFavoriteVisitReasonDiscription, "VisitReason");
 
-				WebElement closeVisitReason = driver
-						.findElement(By.xpath("(//div[@id='Visit_ReasonFavKpop2']//following::span[1])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(closeVisitReason));
-				click(closeVisitReason);
-				sleep(2500);
-				while (true) {
-					try {
-						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
-						break;
-					} catch (Exception e) {
+				elementClickable(pom.getInstanceSetting().setFavoriteVisitReasonSave);
+				click(pom.getInstanceSetting().setFavoriteVisitReasonSave);
+				sleep(1000);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoriteVisitReasonEdit, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteVisitReasonEdit);
 
-					}
+					click(pom.getInstanceSetting().setFavoriteVisitReasonEdit);
+				} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteVisitReasonEdit, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteVisitReasonEdit);
+
+					click(pom.getInstanceSetting().setFavoriteVisitReasonEdit);
 				}
+
+				elementClickable(pom.getInstanceSetting().setFavoriteVisitReasondelete);
+				click(pom.getInstanceSetting().setFavoriteVisitReasondelete);
+				elementClickable(pom.getInstanceSetting().setFavoriteVisitReasonClose);
+				click(pom.getInstanceSetting().setFavoriteVisitReasonClose);
+
+				elementClickable(pom.getInstanceSetting().setFavoritesClick);
+				click(pom.getInstanceSetting().setFavoritesClick);
+
 			} else if (w.getText().trim().equals("Procedure")) {
 
 				visbility(driver, w, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(w));
+				elementClickable(w);
 				click(w);
-				WebElement PreocedureSetFavAddIcon = driver
-						.findElement(By.xpath("(//div[@id='ProcedureFavKpop2']//following::span[5])[1]"));
-				visbility(driver, PreocedureSetFavAddIcon, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(PreocedureSetFavAddIcon));
-				click(PreocedureSetFavAddIcon);
-
-				WebElement SetfavprocedureCodeTypeDropdown = driver.findElement(By.xpath("//select[@id='codeType']"));
-				visbility(driver, SetfavprocedureCodeTypeDropdown, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(SetfavprocedureCodeTypeDropdown));
-				click(SetfavprocedureCodeTypeDropdown);
-
-				dropDown("text", SetfavprocedureCodeTypeDropdown, "SNOMED CT");
-
-				WebElement SetfavProcedureIcdBox = driver
-						.findElement(By.xpath("(//div[@id='ProcedureKpop2']//following::input[1])[1]"));
-				visbility(driver, SetfavProcedureIcdBox, 40);
-				sendkeys(SetfavProcedureIcdBox, "test");
-
-				List<WebElement> prcddropdwn;
-				;
-				while (true) {
-					try {
-						prcddropdwn = driver.findElements(By.xpath(
-								"//div[@id='addfav-div']/div/div/div[4]//following::div[1]//following::ul[1]/li/a/div/small/em"));
-						if (prcddropdwn.size() > 5) {
-							break;
-						}
-					} catch (Exception e) {
-
-					}
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoriteProcedureAddIcon, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteProcedureAddIcon);
+					click(pom.getInstanceSetting().setFavoriteProcedureAddIcon);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteProcedureAddIcon, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteProcedureAddIcon);
+					click(pom.getInstanceSetting().setFavoriteProcedureAddIcon);
 				}
-				for (WebElement web : prcddropdwn) {
+
+				visbility(driver, pom.getInstanceProcedure().favoriteCodeType, 40);
+
+				dropDown("text", pom.getInstanceProcedure().favoriteCodeType, "SNOMED CT");
+
+				visbility(driver, pom.getInstanceProcedure().favoriteIcd, 40);
+				sendkeys(pom.getInstanceProcedure().favoriteIcd, "test");
+
+				while (true) {
+
+					if (pom.getInstanceSetting().setFavoriteProcedureIcdList.size() > 5) {
+						break;
+					}
+
+				}
+				for (WebElement web : pom.getInstanceSetting().setFavoriteProcedureIcdList) {
 
 					if (web.getText().trim().equals("SNOMED : 134287002")) {
-						// System.out.println("procedure met..");
+
 						visbility(driver, web, 60);
-						javascriptclick(web);
+						elementClickable(web);
+						click(web);
 						break;
 
 					}
 
 				}
 
-				WebElement SetFavProcedureTextbox = driver
-						.findElement(By.xpath("(//div[@id='ProcedureKpop2']//following::input[2])[1]"));
-				visbility(driver, SetFavProcedureTextbox, 40);
-				sendkeys(SetFavProcedureTextbox, "procedure");
+				visbility(driver, pom.getInstanceProcedure().favoriteProcedure, 40);
+				sendkeys(pom.getInstanceProcedure().favoriteProcedure, "procedure");
+				elementClickable(pom.getInstanceSetting().setFavoriteProcedureSave);
 
-				WebElement saveSetFavProcedure = driver
-						.findElement(By.xpath("(//div[@id='ProcedureKpop2']//following::button[2])[1]"));
-				visbility(driver, saveSetFavProcedure, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(saveSetFavProcedure));
-				click(saveSetFavProcedure);
-				sleep(2500);
-
-				WebElement editSetFavProcedure = driver.findElement(
-						By.xpath("(//div[text()='134287002: Cytomegalovirus antigen test (procedure)'])[1]"));
-				visbility(driver, editSetFavProcedure, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(editSetFavProcedure));
-				click(editSetFavProcedure);
-
-				WebElement deleteProcedureSetFav = driver
-						.findElement(By.xpath("(//div[@id='ProcedureKpop2']//following::span[2])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(deleteProcedureSetFav));
-				click(deleteProcedureSetFav);
-
-				WebElement closeSetFavProcedure = driver
-						.findElement(By.xpath("(//div[@id='ProcedureFavKpop2']//following::span[1])[1]"));
-				visbility(driver, closeSetFavProcedure, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(closeSetFavProcedure));
-				click(closeSetFavProcedure);
-				sleep(2500);
-				while (true) {
-					try {
-						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
-						break;
-					} catch (Exception e) {
-
-					}
+				click(pom.getInstanceSetting().setFavoriteProcedureSave);
+				sleep(1000);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoriteProcedureEdit, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteProcedureEdit);
+					click(pom.getInstanceSetting().setFavoriteProcedureEdit);
+				} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteProcedureEdit, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteProcedureEdit);
+					click(pom.getInstanceSetting().setFavoriteProcedureEdit);
 				}
-
+				elementClickable(pom.getInstanceSetting().setFavoriteProcedureDelete);
+				click(pom.getInstanceSetting().setFavoriteProcedureDelete);
+				visbility(driver, pom.getInstanceSetting().setFavoriteProcedureClose, 40);
+				elementClickable(pom.getInstanceSetting().setFavoriteProcedureClose);
+				click(pom.getInstanceSetting().setFavoriteProcedureClose);
+				try {
+					elementClickable(pom.getInstanceSetting().setFavoritesClick);
+					click(pom.getInstanceSetting().setFavoritesClick);
+				} catch (Exception e) {
+					elementClickable(pom.getInstanceSetting().setFavoritesClick);
+					click(pom.getInstanceSetting().setFavoritesClick);
+				}
 			} else if (w.getText().trim().equals("Medications")) {
 				visbility(driver, w, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(w));
+				elementClickable(w);
 				click(w);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoriteMedicationAddIcon, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteMedicationAddIcon);
+					click(pom.getInstanceSetting().setFavoriteMedicationAddIcon);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteMedicationAddIcon, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteMedicationAddIcon);
+					click(pom.getInstanceSetting().setFavoriteMedicationAddIcon);
+				}
 
-				WebElement MedicationAddIcon = driver
-						.findElement(By.xpath("(//div[@id='MedicationsFavKpop2']//following::span[5])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(MedicationAddIcon));
-				click(MedicationAddIcon);
-
-				WebElement MedicationIcdBoxSetfav = driver
-						.findElement(By.xpath("(//div[@id='MedicationsKpop2']//following::input[1])[1]"));
-				visbility(driver, MedicationIcdBoxSetfav, 40);
-				sendkeys(MedicationIcdBoxSetfav, "100");
-				// 00);
-				visbility(driver, MedicationIcdBoxSetfav, 40);
-
-				sendkeys(MedicationIcdBoxSetfav, "9");
-				List<WebElement> $med$drop$down$;
+				visbility(driver, pom.getInstanceSetting().setFavoriteMedicationIcd, 40);
+				sendkeys(pom.getInstanceSetting().setFavoriteMedicationIcd, "1009");
 
 				while (true) {
 					try {
-						$med$drop$down$ = driver.findElements(By.xpath(
-								"//div[@id='MedicationsKpop2']/div[2]/div[3]//following::ul[2]/li/a/div/small/em"));
-						if ($med$drop$down$.size() > 5) {
+
+						if (pom.getInstanceSetting().setFavoriteMedicationIcdList.size() > 5) {
 							break;
 						}
 					} catch (Exception e) {
-
+						e.printStackTrace();
 					}
 				}
 
-				for (WebElement we : $med$drop$down$) {
+				for (WebElement we : pom.getInstanceSetting().setFavoriteMedicationIcdList) {
 					System.out.println(we.getText());
 					if (we.getText().trim().equals("RXNORM : 1009145")) {
-						System.out.println("med cond met");
+						// System.out.println("med cond met");
 						visbility(driver, we, 60);
 						elementClickable(we);
 						click(we);
@@ -5087,216 +5128,189 @@ public class Local_Host extends Base {
 					}
 
 				}
-
-				WebElement savemedicationSetFav = driver
-						.findElement(By.xpath("(//div[@id='MedicationsKpop2']//following::button[3])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(savemedicationSetFav));
-				click(savemedicationSetFav);
-				sleep(2500);
-				if (ur.equals("https://www.75health.com/login.jsp")) {
-					WebElement editmedicationSetFav = driver.findElement(By.xpath(
-							"(//div[text()='amphetamine aspartate 1.875 MG / amphetamine sulfate 1.875 MG / dextroamphetamine saccharate 1.875 MG / dextroamphetamine sulfate 1.875 MG Oral Tablet 1.875 MG / 1.875 MG / 1.875 MG / 1.875 MG'])[1]"));
-					visbility(driver, editmedicationSetFav, 50);
-					elementClickable(editmedicationSetFav);
-					click(editmedicationSetFav);
-				} else if (ur.equals("https://localhost:8443/")) {
-					WebElement editmedicationSetFav = driver.findElement(By.xpath(
-							"(//div[text()='Amphetamine aspartate 1.875 MG / Amphetamine Sulfate 1.875 MG / Dextroamphetamine saccharate 1.875 MG / Dextroamphetamine Sulfate 1.875 MG Oral Tablet 1.875 MG / 1.875 MG / 1.875 MG / 1.875 MG'])[1]"));
-					visbility(driver, editmedicationSetFav, 50);
-					elementClickable(editmedicationSetFav);
-					click(editmedicationSetFav);
-
-				}
-
-				WebElement deletemedsetfav = driver
-						.findElement(By.xpath("(//div[@id='MedicationsKpop2']//following::span[2])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(deletemedsetfav));
-				click(deletemedsetfav);
-
-				WebElement closemedicationSetFav = driver
-						.findElement(By.xpath("(//div[@id='MedicationsFavKpop2']//following::span[1])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(closemedicationSetFav));
-				click(closemedicationSetFav);
-				sleep(2500);
-				while (true) {
+				elementClickable(pom.getInstanceSetting().setFavoriteMedicationSave);
+				click(pom.getInstanceSetting().setFavoriteMedicationSave);
+				if (url.equals("https://www.75health.com/login.jsp")) {
 					try {
-						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
-						break;
-					} catch (Exception e) {
+						visbility(driver, pom.getInstanceSetting().setFavoriteMedicationEdit, 30);
+						elementClickable(pom.getInstanceSetting().setFavoriteMedicationEdit);
+						click(pom.getInstanceSetting().setFavoriteMedicationEdit);
+					} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+						visbility(driver, pom.getInstanceSetting().setFavoriteMedicationEdit, 30);
+						elementClickable(pom.getInstanceSetting().setFavoriteMedicationEdit);
+						click(pom.getInstanceSetting().setFavoriteMedicationEdit);
+					}
+				} else if (url.equals("https://localhost:8443/")) {
 
+					try {
+						visbility(driver, pom.getInstanceSetting().setFavoriteMedicationEditLh, 30);
+						elementClickable(pom.getInstanceSetting().setFavoriteMedicationEditLh);
+						click(pom.getInstanceSetting().setFavoriteMedicationEditLh);
+					} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+						visbility(driver, pom.getInstanceSetting().setFavoriteMedicationEditLh, 30);
+						elementClickable(pom.getInstanceSetting().setFavoriteMedicationEditLh);
+						click(pom.getInstanceSetting().setFavoriteMedicationEditLh);
 					}
 				}
+				elementClickable(pom.getInstanceSetting().setFavoriteMedicationDelete);
+				click(pom.getInstanceSetting().setFavoriteMedicationDelete);
+				elementClickable(pom.getInstanceSetting().setFavoriteMedicationClose);
+				click(pom.getInstanceSetting().setFavoriteMedicationClose);
+				elementClickable(pom.getInstanceSetting().setFavoritesClick);
+				click(pom.getInstanceSetting().setFavoritesClick);
+
 			} else if (w.getText().trim().equals("Test Order")) {
 
+				visbility(driver, w, 60);
+				elementClickable(w);
+				click(w);
+
 				try {
-					visbility(driver, w, 60);
-					elementClickable(w);
-					click(w);
-				} catch (ElementClickInterceptedException e) {
-					visbility(driver, w, 60);
-					elementClickable(w);
-					click(w);
+					visbility(driver, pom.getInstanceSetting().setFavoriteTestOrderAddIcon, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteTestOrderAddIcon);
+					click(pom.getInstanceSetting().setFavoriteTestOrderAddIcon);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteTestOrderAddIcon, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteTestOrderAddIcon);
+					click(pom.getInstanceSetting().setFavoriteTestOrderAddIcon);
 				}
-				WebElement TestOrderAddIcon = driver
-						.findElement(By.xpath("(//div[@id='Test_OrderFavKpop2']//following::span[5])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(TestOrderAddIcon));
-				click(TestOrderAddIcon);
 
-				WebElement TestOrderIcdBoxSetfav = driver
-						.findElement(By.xpath("(//div[@id='Test_OrderKpop2']//following::input[1])[1]"));
-				visbility(driver, TestOrderIcdBoxSetfav, 40);
-				sendkeys(TestOrderIcdBoxSetfav, "test");
+				visbility(driver, pom.getInstanceSetting().setFavoriteTestOrderIcd, 40);
+				sendkeys(pom.getInstanceSetting().setFavoriteTestOrderIcd, "test");
 
-				WebElement saveTestOrderSetFav = driver
-						.findElement(By.xpath("(//div[@id='Test_OrderKpop2']//following::button[2])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(saveTestOrderSetFav));
-				click(saveTestOrderSetFav);
-				sleep(2500);
-				WebElement editTestOrderSetFav = driver.findElement(By.xpath("(//div[text()='test'])[1]"));
-				visbility(driver, editTestOrderSetFav, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(editTestOrderSetFav));
-				click(editTestOrderSetFav);
-
-				WebElement deleteTestOrdersetfav = driver
-						.findElement(By.xpath("(//div[@id='Test_OrderKpop2']//following::span[2])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(deleteTestOrdersetfav));
-				click(deleteTestOrdersetfav);
-
-				WebElement closeTestOrderSetFav = driver
-						.findElement(By.xpath("(//div[@id='Test_OrderFavKpop2']//following::span[1])[1]"));
-				visbility(driver, closeTestOrderSetFav, 50);
-				ww.until(ExpectedConditions.elementToBeClickable(closeTestOrderSetFav));
-				click(closeTestOrderSetFav);
-				sleep(2500);
 				while (true) {
-					try {
-						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
+					if (pom.getInstanceSetting().setFavoriteTestOrderIcdList.size() >= 1) {
 						break;
-					} catch (Exception e) {
-
 					}
 				}
+
+				for (WebElement test : pom.getInstanceSetting().setFavoriteTestOrderIcdList) {
+
+					if (test.getText().trim().equals("test")) {
+						visbility(driver, test, 40);
+						elementClickable(test);
+						click(test);
+						break;
+					}
+				}
+
+				elementClickable(pom.getInstanceSetting().setFavoriteTestOrderSave);
+				click(pom.getInstanceSetting().setFavoriteTestOrderSave);
+				sleep(1000);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoriteTestOrderEdit, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteTestOrderEdit);
+					click(pom.getInstanceSetting().setFavoriteTestOrderEdit);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteTestOrderEdit, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteTestOrderEdit);
+					click(pom.getInstanceSetting().setFavoriteTestOrderEdit);
+				}
+
+				elementClickable(pom.getInstanceSetting().setFavoriteTestOrderDelete);
+				click(pom.getInstanceSetting().setFavoriteTestOrderDelete);
+
+				visbility(driver, pom.getInstanceSetting().setFavoriteTestOrderClose, 50);
+				elementClickable(pom.getInstanceSetting().setFavoriteTestOrderClose);
+				click(pom.getInstanceSetting().setFavoriteTestOrderClose);
+				elementClickable(pom.getInstanceSetting().setFavoritesClick);
+				click(pom.getInstanceSetting().setFavoritesClick);
+
 			} else if (w.getText().trim().equals("Vaccine")) {
 
+				visbility(driver, w, 60);
+				elementClickable(w);
+				click(w);
 				try {
-					visbility(driver, w, 60);
-					elementClickable(w);
-					click(w);
-				} catch (ElementClickInterceptedException e) {
-					visbility(driver, w, 60);
-					elementClickable(w);
-					click(w);
+					visbility(driver, pom.getInstanceSetting().setFavoriteVaccineAddIcon, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteVaccineAddIcon);
+					click(pom.getInstanceSetting().setFavoriteVaccineAddIcon);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteVaccineAddIcon, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteVaccineAddIcon);
+					click(pom.getInstanceSetting().setFavoriteVaccineAddIcon);
 				}
 
-				WebElement VaccineAddIcon = driver
-						.findElement(By.xpath("(//div[@id='VaccineFavKpop2']//following::span[5])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(VaccineAddIcon));
-				click(VaccineAddIcon);
+				visbility(driver, pom.getInstanceSetting().setFavoriteVaccineIcd, 30);
+				sendkeys(pom.getInstanceSetting().setFavoriteVaccineIcd, "vacc");
 
-				WebElement vaccineIcdTextBox = driver
-						.findElement(By.xpath("(//div[@id='VaccineKpop2']//following::input[1])[1]"));
-				visbility(driver, vaccineIcdTextBox, 40);
-				sendkeys(vaccineIcdTextBox, "vacc");
-
-				List<WebElement> vc4;
 				while (true) {
 
-					vc4 = driver.findElements(By.xpath(
-							//// div[@id='VaccineKpop2']/div[1]/div[1]//following::input[2]//following::button[1]//following::ul[2]/li/a/span[2]
+					if (pom.getInstanceVaccine().favoriteIcdList.size() >= 5) {
 
-							"//div[@id='VaccineKpop2']/div[1]/div[1]//following::input[2]//following::button[1]//following::ul[1]/li/a/span[2]"));
-
-					if (vc4.size() >= 5) {
-						System.out.println(vc4.size());
 						break;
 					}
 				}
 
-				for (WebElement web : vc4) {
-					System.out.println(web.getText());
+				for (WebElement web : pom.getInstanceVaccine().favoriteIcdList) {
 
 					if (web.getText().trim().equals("vaccinia (smallpox) diluted")) {
+						visbility(driver, web, 30);
+						elementClickable(web);
 						web.click();
 						break;
 					}
 
 				}
+				visbility(driver, pom.getInstanceSetting().setFavoriteVaccineDiscription, 30);
+				sendkeys(pom.getInstanceSetting().setFavoriteVaccineDiscription, "vaccine");
 
-				WebElement VaccDisBoxSetfav = driver
-						.findElement(By.xpath("(//div[@id='VaccineKpop2']//following::input[2])[1]"));
-				visbility(driver, VaccDisBoxSetfav, 40);
-				sendkeys(VaccDisBoxSetfav, "vaccine");
-
-				WebElement saveVaccineSetFav = driver
-						.findElement(By.xpath("(//div[@id='VaccineKpop2']//following::button[2])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(saveVaccineSetFav));
-				click(saveVaccineSetFav);
-				sleep(2500);
-				WebElement editVaccSetFav = driver
-						.findElement(By.xpath("(//div[text()='105: vaccinia (smallpox) diluted'])[1]"));
-				visbility(driver, editVaccSetFav, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(editVaccSetFav));
-				click(editVaccSetFav);
-
-				WebElement deleteVaccsetfav = driver
-						.findElement(By.xpath("(//div[@id='VaccineKpop2']//following::span[2])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(deleteVaccsetfav));
-				click(deleteVaccsetfav);
-
-				WebElement closeVaccSetFav = driver
-						.findElement(By.xpath("(//div[@id='VaccineFavKpop2']//following::span[1])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(closeVaccSetFav));
-				click(closeVaccSetFav);
-				sleep(2500);
-				while (true) {
-					try {
-						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
-						break;
-					} catch (Exception e) {
-
-					}
-				}
-			} else if (w.getText().trim().equals("Goals")) {
+				elementClickable(pom.getInstanceVaccine().favoriteSave);
+				click(pom.getInstanceVaccine().favoriteSave);
 
 				try {
-					visbility(driver, w, 60);
-					elementClickable(w);
-					click(w);
-				} catch (ElementClickInterceptedException e) {
-					visbility(driver, w, 60);
-					elementClickable(w);
-					click(w);
+					visbility(driver, pom.getInstanceSetting().setFavoriteVaccineEdit, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteVaccineEdit);
+					click(pom.getInstanceSetting().setFavoriteVaccineEdit);
+				} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteVaccineEdit, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteVaccineEdit);
+					click(pom.getInstanceSetting().setFavoriteVaccineEdit);
 				}
 
-				WebElement GoalsAddIcon = driver
-						.findElement(By.xpath("(//div[@id='GoalsFavKpop2']//following::span[5])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(GoalsAddIcon));
-				click(GoalsAddIcon);
+				elementClickable(pom.getInstanceSetting().setFavoriteVaccinedelete);
+				click(pom.getInstanceSetting().setFavoriteVaccinedelete);
+				elementClickable(pom.getInstanceSetting().setFavoriteVaccineClose);
+				click(pom.getInstanceSetting().setFavoriteVaccineClose);
 
-				WebElement GoalsTextBox = driver.findElement(By.xpath("//div[@id='GoalsPellVal']/div[2]"));
-				visbility(driver, GoalsTextBox, 40);
-				sendkeys(GoalsTextBox, "goals");
+				elementClickable(pom.getInstanceSetting().setFavoritesClick);
+				click(pom.getInstanceSetting().setFavoritesClick);
+			} else if (w.getText().trim().equals("Goals")) {
 
-				WebElement saveGoalSetFav = driver
-						.findElement(By.xpath("//div[@id='GoalsPellVal']/div[2]//following::button[2]"));
-				ww.until(ExpectedConditions.elementToBeClickable(saveGoalSetFav));
-				click(saveGoalSetFav);
-				sleep(2500);
-				WebElement editGoalSetFav = driver.findElement(By.xpath("(//div[text()='goals'])[1]"));
-				visbility(driver, editGoalSetFav, 40);
-				ww.until(ExpectedConditions.elementToBeClickable(editGoalSetFav));
-				click(editGoalSetFav);
+				visbility(driver, w, 60);
+				elementClickable(w);
+				click(w);
 
-				WebElement deleteGoalssetfav = driver
-						.findElement(By.xpath("(//div[@id='GoalsKpop2']//following::span[2])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(deleteGoalssetfav));
-				click(deleteGoalssetfav);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoriteGoalsAddIcon, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteGoalsAddIcon);
+					click(pom.getInstanceSetting().setFavoriteGoalsAddIcon);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteGoalsAddIcon, 30);
+					elementClickable(pom.getInstanceSetting().setFavoriteGoalsAddIcon);
+					click(pom.getInstanceSetting().setFavoriteGoalsAddIcon);
+				}
+				visbility(driver, pom.getInstanceSetting().setFavoriteGoalDiscription, 30);
+				sendkeys(pom.getInstanceSetting().setFavoriteGoalDiscription, "goals");
 
-				WebElement closeGoalsSetFav = driver
-						.findElement(By.xpath("(//div[@id='GoalsFavKpop2']//following::span[1])[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(closeGoalsSetFav));
-				click(closeGoalsSetFav);
-				sleep(2500);
+				elementClickable(pom.getInstanceSetting().setFavoriteGoalSave);
+				click(pom.getInstanceSetting().setFavoriteGoalSave);
+				sleep(1000);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoriteGoalEdit, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteGoalEdit);
+					click(pom.getInstanceSetting().setFavoriteGoalEdit);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoriteGoalEdit, 40);
+					elementClickable(pom.getInstanceSetting().setFavoriteGoalEdit);
+					click(pom.getInstanceSetting().setFavoriteGoalEdit);
+				}
+
+				elementClickable(pom.getInstanceSetting().setFavoriteGoalDelete);
+				click(pom.getInstanceSetting().setFavoriteGoalDelete);
+				elementClickable(pom.getInstanceSetting().setFavoriteGoalClose);
+				click(pom.getInstanceSetting().setFavoriteGoalClose);
+
 				while (true) {
 					try {
 						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
@@ -5308,6 +5322,7 @@ public class Local_Host extends Base {
 			}
 
 		}
+
 		// driver.navigate().refresh();
 		sleep(2500);
 		// Hospital codes... // Item/service code...
@@ -5500,212 +5515,170 @@ public class Local_Host extends Base {
 		 */
 
 		// forms...
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
+			visbility(driver, pom.getInstanceSetting().customForm, 60);
+			click(pom.getInstanceSetting().customForm);
+			sleep(5000);
 
-		WebElement f1 = driver.findElement(By.xpath("//button[@id='form-script']"));
+			visbility(driver, pom.getInstanceSetting().addNewform, 60);
+			actions("click", pom.getInstanceSetting().addNewform);
 
-		visbility(driver, f1, 60);
-		click(f1);// .click();
-		sleep(5000);
+			sleep(4000);
 
-		List<WebElement> numberofformspresent = driver
-				.findElements(By.xpath("//div[@id='FormsKpop2']/div[2]/div/div[1]/div[1]/span[2]"));
+			visbility(driver, pom.getInstanceSetting().formTitleDiscription, 60);
+			String form = RandomStringUtils.randomAlphabetic(30);
+			sendkeys(pom.getInstanceSetting().formTitleDiscription, form);
 
-		int ffs = numberofformspresent.size();
-		System.out.println(ffs);
+			for (WebElement web : pom.getInstanceSetting().fromdropDown) {
 
-		for (WebElement web : numberofformspresent) {
+				if (web.getText().trim().equals("Checkbox Group")) {
 
-			if (web.getText().isEmpty()) {
+					Actions ac = new Actions(driver);
+					ac.dragAndDrop(web, pom.getInstanceSetting().dropForm).build().perform();
 
-				continue;
+					visbility(driver, pom.getInstanceSetting().formClearLabel, 60);
+					clear(pom.getInstanceSetting().formClearLabel);
+
+					visbility(driver, pom.getInstanceSetting().formClearLabel, 60);
+					sendkeys(pom.getInstanceSetting().formClearLabel, "Kaaspro Enterprise");
+
+					visbility(driver, pom.getInstanceSetting().saveForm, 60);
+					click(pom.getInstanceSetting().saveForm);
+
+					sleep(3000);
+
+					break;
+				}
+
 			}
-
-			else if (web.getText().trim().equals("form800")) {
-
-				System.out.println("condition met the form");
-
-				visbility(driver, web, 60);
-				web.click();
-				WebElement jsp = driver.findElement(By.xpath("(//span[@id='del-form'])[1]"));
-				visbility(driver, jsp, 60);
-				javascriptclick(jsp);
-				driver.navigate().refresh();
-				WebElement jspq = driver.findElement(By.xpath("//button[@id='form-script']"));
-				visbility(driver, jspq, 60);
-				javascriptclick(jspq);
-
-				break;
-			}
+			refresh();
 
 		}
-
-		WebElement addfrm = driver.findElement(By.xpath("//div[@id='FormsKpop2']/div[1]/span"));
-		visbility(driver, addfrm, 60);
-		actions("click", addfrm);
-
-		sleep(4000);
-		WebElement f2 = driver.findElement(By.xpath("(//label[text()='Form Title*'])[1]//following::input[1]"));
-		visbility(driver, f2, 60);
-		sendkeys(f2, "form800");
-
-		List<WebElement> drk = driver.findElements(By.xpath("(//div[@id='build-wrap'])[1]/div[1]/div[2]/ul/li"));
-
-		for (WebElement web : drk) {
-
-			if (web.getText().trim().equals("Checkbox Group")) {
-
-				WebElement drop = driver.findElement(
-						By.xpath("(//div[contains(@data-content,'Drag a field from the right to this area')])[1]/ul"));
-
-				Actions ac = new Actions(driver);
-				ac.dragAndDrop(web, drop).build().perform();
-				WebElement f3 = driver.findElement(By.xpath("//label[text()='Label']//following::div[1]/input"));
-				visbility(driver, f3, 60);
-				clear(f3);
-				WebElement f4 = driver.findElement(By.xpath("//label[text()='Label']//following::div[1]/input"));
-				visbility(driver, f4, 60);
-				sendkeys(f4, "Kaaspro Enterprise");
-				WebElement f5 = driver.findElement(
-						By.xpath("(//div[@id='build-wrap'])[1]/div[1]/div[2]/ul//following::div[1]/button"));
-				visbility(driver, f5, 60);
-				click(f5);
-
-				sleep(3000);
-
-				break;
-			}
-
-		}
-
 		sleep(3000); // edit preference....
 
-		WebElement s10 = driver.findElement(By.xpath("//button[@id='edit-print-preference']"));
-		visbility(driver, s10, 60);
-		ww.until(ExpectedConditions.elementToBeClickable(s10));
-		click(s10);
+		visbility(driver, pom.getInstanceSetting().printSettingsClick, 60);
+		elementClickable(pom.getInstanceSetting().printSettingsClick);
+		click(pom.getInstanceSetting().printSettingsClick);
 		sleep(3000);
-		WebElement s11 = driver.findElement(By.xpath("(//div[@id='setupPrintPreference']//following::button[2])"));
-		visbility(driver, s11, 60);
-		ww.until(ExpectedConditions.elementToBeClickable(s11));
-		click(s11);
+
+		visbility(driver, pom.getInstanceSetting().cancelPrintpreference, 60);
+		elementClickable(pom.getInstanceSetting().cancelPrintpreference);
+		click(pom.getInstanceSetting().cancelPrintpreference);
 		sleep(3000);
-		WebElement s12 = driver.findElement(By.xpath("//button[@title='Reset All Your Setting']"));
-		visbility(driver, s12, 60);
-		ww.until(ExpectedConditions.elementToBeClickable(s12));
-		click(s12);
+
+		visbility(driver, pom.getInstanceSetting().resetSettingClick, 60);
+		elementClickable(pom.getInstanceSetting().resetSettingClick);
+		click(pom.getInstanceSetting().resetSettingClick);
 		sleep(2000);
-		WebElement df = driver.findElement(By.xpath("(//span[text()='Reset All Settings'])[1]//following::button[2]"));
-		visbility(driver, df, 60);
-		ww.until(ExpectedConditions.elementToBeClickable(df));
-		javascriptclick(df);
+
+		visbility(driver, pom.getInstanceSetting().confirmResetSetting, 60);
+		elementClickable(pom.getInstanceSetting().confirmResetSetting);
+		javascriptclick(pom.getInstanceSetting().confirmResetSetting);
 
 		sleep(3000);
 
 		// notification
 
-		WebElement notify = driver.findElement(By.xpath("//button[@id='custom-notify']"));
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
 
-		boolean b = true;
-		while (b) {
+			boolean b = true;
+			while (b) {
 
-			if (!notify.isDisplayed()) {
-				WebElement uip = driver
-						.findElement(By.xpath("//input[@id='all-notification-mess']//following::span[1]"));
+				if (!pom.getInstanceSetting().customizeMessage.isDisplayed()) {
 
-				elementClickable(uip);
-				actions("click", uip);
-				ww.until(ExpectedConditions.elementToBeClickable(notify));
-				javascriptclick(notify);
-				WebElement sd = driver.findElement(By.xpath("(//span[@class='slider1 round1'])[4]"));
-				ScriptExecutor(sd);
-				sleep(2000);
-				js.executeScript("window.scrollBy(0,0)");
+					elementClickable(pom.getInstanceSetting().customizeToggle);
+					actions("click", pom.getInstanceSetting().customizeToggle);
+					ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceSetting().customizeMessage));
+					javascriptclick(pom.getInstanceSetting().customizeMessage);
+					// WebElement sd = driver.findElement(By.xpath("(//span[@class='slider1
+					// round1'])[4]"));
+					ScriptExecutor(pom.getInstanceSetting().abovePrefernceToggle);
+					sleep(2000);
+					j.executeScript("window.scrollBy(0,0)");
 
-			}
-
-			b = false;
-		}
-		sleep(1500);
-		while (true) {
-			try {
-				if (pom.getInstanceSetting().clickSettings.isDisplayed()) {
-					click(pom.getInstanceSetting().clickSettings);
-					break;
 				}
-			} catch (Exception e) {
 
+				b = false;
 			}
+			sleep(1500);
+			while (true) {
+				try {
+					if (pom.getInstanceSetting().clickSettings.isDisplayed()) {
+						click(pom.getInstanceSetting().clickSettings);
+						break;
+					}
+				} catch (Exception e) {
+
+				}
+			}
+
+			// notify ehr complte...
+
+			ScriptExecutor(pom.getInstanceSetting().notifyEhrToggle);
+
+			actions("click", pom.getInstanceSetting().notifyEhrToggle);
+
 		}
-
-		// notify ehr complte...
-		WebElement ntfyehr = driver.findElement(By
-
-				.xpath("//span[text()='Notify user when EHR is completed.']//parent::div//parent::div[1]/label/input"));
-		ScriptExecutor(ntfyehr);
-		// ww.until(ExpectedConditions.elementToBeClickable(ntfyehr));
-		actions("click", ntfyehr);
 
 		// set interval time for emial...
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")
+				| ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("dr")) {
 
-		WebElement rr = driver.findElement(By
-				.xpath("//span[text()='Set interval for receiving emails.']//parent::div//parent::div[1]/label/input"));
-		// ww.until(ExpectedConditions.elementToBeClickable(rr));
-		actions("click", rr);
-
+			actions("click", pom.getInstanceSetting().setIntervalToggle);
+		}
 		// Audit Report...
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
+			sleep(3000);
+			visbility(driver, pom.getInstanceSetting().clickSettings, 60);
+			click(pom.getInstanceSetting().clickSettings);
+			WebDriverWait wait = new WebDriverWait(driver, 60);
+			driver.navigate().refresh();
+			sleep(3000);
+			elementClickable(pom.getInstanceSetting().auditReport);
 
-		sleep(3000);
-		visbility(driver, pom.getInstanceSetting().clickSettings, 60);
-		click(pom.getInstanceSetting().clickSettings);
-		WebDriverWait wait = new WebDriverWait(driver, 60);
-		driver.navigate().refresh();
-		sleep(3000);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@onclick='setting.audit()']")));
-		WebElement rqqa = driver.findElement(By.xpath("//button[@onclick='setting.audit()']"));
-		ScriptExecutor(rqqa);
-		visbility(driver, rqqa, 60);
-		javascriptclick(rqqa);
-		sleep(3000);
-		WebElement s13 = driver.findElement(By.xpath("(//input[@id='patientPartyName'])[1]"));
-		visbility(driver, s13, 60);
-		sendkeys(s13, kpid);
-		sleep(3000);
-		List<WebElement> patdr = driver
-				.findElements(By.xpath("//div[@id='vvid']//following::ul[1]/li/a/table/tbody/tr[1]/td[2]"));
-		for (WebElement we : patdr) {
+			ScriptExecutor(pom.getInstanceSetting().auditReport);
+			visbility(driver, pom.getInstanceSetting().auditReport, 60);
+			javascriptclick(pom.getInstanceSetting().auditReport);
+			sleep(3000);
 
-			if (we.getText().contains(kpid)) {
-				visbility(driver, we, 60);
-				we.click();
-				break;
+			visbility(driver, pom.getInstanceSetting().AuditReportPatientSerachField, 60);
+			sendkeys(pom.getInstanceSetting().AuditReportPatientSerachField, kpid);
+			sleep(3000);
+
+			for (WebElement we : pom.getInstanceSetting().AuditReportPatientDropdown) {
+
+				if (we.getText().contains(kpid)) {
+					visbility(driver, we, 60);
+					elementClickable(we);
+					we.click();
+					break;
+				}
+
 			}
 
+			sleep(3000);
+
+			visbility(driver, pom.getInstanceSetting().selectDate, 60);
+			dropDown("text", pom.getInstanceSetting().selectDate, "All");
+			sleep(4000);
+
+			visbility(driver, pom.getInstanceSetting().selectType, 60);
+			dropDown("text", pom.getInstanceSetting().selectType, "Allergy");
+			sleep(3000);
+			navigateback(1);
+			/*
+			 * WebElement s14 =
+			 * driver.findElement(By.xpath("//button[@id='advanceSearching']"));
+			 * visbility(driver, s14, 60); elementClickable(s14); click(s14);
+			 */
+			driver.navigate().refresh();
+
+			sleep(3000);
+			visbility(driver, pom.getInstanceSetting().clickSettings, 60);
+			elementClickable(pom.getInstanceSetting().clickSettings);
+			click(pom.getInstanceSetting().clickSettings);
+			sleep(2000);
 		}
-
-		sleep(3000);
-
-		WebElement seldate = driver.findElement(By.xpath("//select[@id='byDate']"));
-		visbility(driver, seldate, 60);
-		dropDown("text", seldate, "All");
-		sleep(4000);
-		WebElement selmod = driver.findElement(By.xpath("//select[@id='auditEventModule']"));
-		visbility(driver, selmod, 60);
-		dropDown("text", selmod, "Allergy");
-		sleep(3000);
-		navigateback(1);
-		/*
-		 * WebElement s14 =
-		 * driver.findElement(By.xpath("//button[@id='advanceSearching']"));
-		 * visbility(driver, s14, 60); elementClickable(s14); click(s14);
-		 */
-		driver.navigate().refresh();
-
-		sleep(3000);
-		visbility(driver, pom.getInstanceSetting().clickSettings, 60);
-		elementClickable(pom.getInstanceSetting().clickSettings);
-		click(pom.getInstanceSetting().clickSettings);
-		sleep(2000);
-
 		// Dashboard
 		WebElement dashboard;
 
@@ -5732,17 +5705,29 @@ public class Local_Host extends Base {
 					elementClickable(st);
 					click(st);
 					sleep(2000);
-					visbility(driver, dashboard, 50);
-					elementClickable(dashboard);
-					click(dashboard);
+					try {
+						visbility(driver, dashboard, 50);
+						elementClickable(dashboard);
+						click(dashboard);
+					} catch (ElementClickInterceptedException e) {
+						visbility(driver, dashboard, 50);
+						elementClickable(dashboard);
+						click(dashboard);
+					}
 				} else if (st.getText().trim().equals("Dashboard")) {
 					visbility(driver, st, 50);
 					elementClickable(st);
 					click(st);
 					sleep(2000);
-					visbility(driver, dashboard, 50);
-					elementClickable(dashboard);
-					click(dashboard);
+					try {
+						visbility(driver, dashboard, 50);
+						elementClickable(dashboard);
+						click(dashboard);
+					} catch (ElementClickInterceptedException e) {
+						visbility(driver, dashboard, 50);
+						elementClickable(dashboard);
+						click(dashboard);
+					}
 				} else if (st.getText().trim().equals("Quick Tour")) {
 					visbility(driver, st, 50);
 					elementClickable(st);
@@ -5752,14 +5737,30 @@ public class Local_Host extends Base {
 					elementClickable(cncltr);
 					sleep(2000);
 					click(cncltr);
+					sleep(2000);
+					try {
+						visbility(driver, dashboard, 50);
+						elementClickable(dashboard);
+						click(dashboard);
+					} catch (ElementClickInterceptedException e) {
+						visbility(driver, dashboard, 50);
+						elementClickable(dashboard);
+						click(dashboard);
+					}
 				} else if (st.getText().trim().equals("Settings")) {
 					visbility(driver, st, 50);
 					elementClickable(st);
 					click(st);
 					sleep(2000);
-					visbility(driver, dashboard, 50);
-					elementClickable(dashboard);
-					click(dashboard);
+					try {
+						visbility(driver, dashboard, 50);
+						elementClickable(dashboard);
+						click(dashboard);
+					} catch (ElementClickInterceptedException e) {
+						visbility(driver, dashboard, 50);
+						elementClickable(dashboard);
+						click(dashboard);
+					}
 				} else if (st.getText().trim().equals("Migration Services")) {
 					visbility(driver, st, 50);
 					elementClickable(st);
@@ -5771,9 +5772,15 @@ public class Local_Host extends Base {
 					elementClickable(clmgr);
 					click(clmgr);
 					sleep(2000);
-					visbility(driver, dashboard, 50);
-					elementClickable(dashboard);
-					click(dashboard);
+					try {
+						visbility(driver, dashboard, 50);
+						elementClickable(dashboard);
+						click(dashboard);
+					} catch (ElementClickInterceptedException e) {
+						visbility(driver, dashboard, 50);
+						elementClickable(dashboard);
+						click(dashboard);
+					}
 				} else if (st.getText().trim().equals("Sign out")) {
 					visbility(driver, st, 50);
 					elementClickable(st);

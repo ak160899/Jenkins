@@ -25,6 +25,9 @@ public class Vitals {
 
 	@FindBy(xpath = "//div[@id='vital']/div[1]/div[1]/div/div[2]/div[1]")
 	public WebElement vitalsSaltIcon;
+	
+	@FindBy(xpath = "(//span[text()='55 kilograms'])[1]")
+	public WebElement edit;
 
 	@FindBy(xpath = "(//select[@id='unit'])[2]")
 	public WebElement selectHeightUnit;

@@ -1176,8 +1176,8 @@ public class Dr_userLogin extends Base {
 
 				} else if (tagnames.equals("diagnosis")) {
 
-					Problems pro = new Problems(driver);
-					pro.Addproblems();
+					
+					Problems.Addproblems();
 
 				} else if (tagnames.equals("symptom")) {
 
@@ -2211,7 +2211,7 @@ public class Dr_userLogin extends Base {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		Problems pro = new Problems(driver);
+		Problems pro = new Problems();
 		// pro.getPastProblem();
 		Symptoms s = new Symptoms(driver);
 		s.getPastSymptom();
@@ -4605,8 +4605,8 @@ public class Dr_userLogin extends Base {
 				visbility(driver, ProblemsIcdBox, 40);
 				sendkeys(ProblemsIcdBox, "test");
 				try {
-					Problems problem = new Problems(driver);
-					problem.$favproblemsIcdCode();
+					
+					Problems.$favproblemsIcdCode();
 				} catch (Exception e) {
 
 					e.printStackTrace();

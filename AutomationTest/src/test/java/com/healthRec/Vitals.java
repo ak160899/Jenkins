@@ -15,10 +15,18 @@ public class Vitals extends LaunchBrowser {
 	public static void vitalsFeature() throws InterruptedException {
 		log = Logger.getLogger(Vitals.class);
 
-		visbility(driver, pom.getInstanceVitals().getVitalsAddIcon, 40);
-		elementClickable(pom.getInstanceVitals().getVitalsAddIcon);
-		click(pom.getInstanceVitals().getVitalsAddIcon);
-		log.info("vitals add icon clicked");
+		while (true) {
+			if (pom.getInstanceVitals().getVitalsAddIcon.isDisplayed()) {
+				visbility(driver, pom.getInstanceVitals().getVitalsAddIcon, 40);
+				elementClickable(pom.getInstanceVitals().getVitalsAddIcon);
+				click(pom.getInstanceVitals().getVitalsAddIcon);
+				log.info("vitals add icon clicked");
+				break;
+			} else if (!pom.getInstanceVitals().getVitalsAddIcon.isDisplayed()) {
+				actions("move to element", pom.getInstanceVitals().getVitalsAddIcon);
+			}
+		}
+
 		visbility(driver, pom.getInstanceVitals().weight, 30);
 		sendkeys(pom.getInstanceVitals().weight, "55");
 		log.info("weight entered");
@@ -40,16 +48,15 @@ public class Vitals extends LaunchBrowser {
 		click(pom.getInstanceVitals().saveVitals);
 		log.info("vitals saved");
 		try {
-			WebElement edicon = driver.findElement(By.xpath("(//span[text()='55 kilograms'])[1]"));
-			visbility(driver, edicon, 40);
-			elementClickable(edicon);
-			click(edicon);
+
+			visbility(driver, pom.getInstanceVitals().edit, 40);
+			elementClickable(pom.getInstanceVitals().edit);
+			click(pom.getInstanceVitals().edit);
 			log.info("vitals edit clicked");
-		} catch (StaleElementReferenceException e) {
-			WebElement edicon = driver.findElement(By.xpath("(//span[text()='55 kilograms'])[1]"));
-			visbility(driver, edicon, 40);
-			elementClickable(edicon);
-			click(edicon);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceVitals().edit, 40);
+			elementClickable(pom.getInstanceVitals().edit);
+			click(pom.getInstanceVitals().edit);
 			log.info("vitals edit clicked");
 		}
 

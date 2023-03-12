@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite, 2 failed tests</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -59,7 +59,7 @@
                 </li>
                 <li>
                   <a href="#" class="navigator-link " panel-name="group-Suite">
-                    <span>2 groups</span>
+                    <span>4 groups</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -91,7 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods, 1 failed,   1 passed</span>
+                    <span class="method-stats">4 methods, 2 failed,   2 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title failed">Failed methods</span>
@@ -102,7 +102,12 @@
                     <div class="method-list-content failed suite-Suite">
                       <span>
                         <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="runner.Local_Host" hash-for-method="HealthRec">HealthRec</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="runner.Local_Host" hash-for-method="Settings">Settings</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="failed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="runner.Local_Host" hash-for-method="TeleDoctor">TeleDoctor</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Suite -->
@@ -116,7 +121,12 @@
                     <div class="method-list-content passed suite-Suite">
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="runner.Local_Host" hash-for-method="HomeModule">HomeModule</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="runner.Local_Host" hash-for-method="PatientModule">PatientModule</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="runner.Local_Host" hash-for-method="calendar">calendar</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -139,27 +149,47 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="HealthRec">
-                  </a> <!-- HealthRec -->
-                  <span class="method-name">HealthRec</span>
-                  <div class="stack-trace">org.openqa.selenium.ElementNotInteractableException: element not interactable: [object HTMLSpanElement] has no size and location
-  (Session info: chrome=110.0.5481.178)
+                  <a name="Settings">
+                  </a> <!-- Settings -->
+                  <span class="method-name">Settings</span>
+                  <div class="stack-trace">org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element &lt;td colspan=&quot;3&quot; class=&quot;left-menu-text&quot;&gt;...&lt;/td&gt; is not clickable at point (118, 614). Other element would receive the click: &lt;div id=&quot;bootstrap-alert&quot; style=&quot; width: 15em;bottom:-10px; */border:3px solid red&quot; class=&quot;col-xs-12 alert alert-info&quot;&gt;...&lt;/div&gt;
+  (Session info: chrome=111.0.5563.64)
 Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
 System info: host: &apos;LAPTOP-Q33L4MJO&apos;, ip: &apos;192.168.29.33&apos;, os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_331&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 110.0.5481.178, chrome: {chromedriverVersion: 110.0.5481.77 (65ed616c6e8e..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:51674}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Session ID: b4ea6fdfc598876d5697ea236622ad3d
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.64, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:56813}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1b8f63795ba51f4be2be0859466ee276
 	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
 	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
 	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
 	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-	at org.openqa.selenium.remote.RemoteWebDriver.perform(RemoteWebDriver.java:618)
-	at org.openqa.selenium.interactions.Actions$BuiltAction.perform(Actions.java:639)
-	at org.base.Base.actions(Base.java:355)
-	at runner.Local_Host.HealthRec(Local_Host.java:3243)
-... Removed 29 stack frames
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:285)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:84)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at com.sun.proxy.$Proxy8.click(Unknown Source)
+	at org.base.Base.click(Base.java:77)
+	at runner.Local_Host.Settings(Local_Host.java:4210)
+... Removed 32 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="TeleDoctor">
+                  </a> <!-- TeleDoctor -->
+                  <span class="method-name">TeleDoctor</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: [[ChromeDriver: chrome on WINDOWS (1b8f63795ba51f4be2be0859466ee276)] -&gt; xpath: //button[@title=&apos;Unlink patient from hospital&apos;]] (tried for 55 second(s) with 500 milliseconds interval)
+Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
+System info: host: &apos;LAPTOP-Q33L4MJO&apos;, ip: &apos;192.168.29.33&apos;, os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_331&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.64, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:56813}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1b8f63795ba51f4be2be0859466ee276
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)
+	at runner.Local_Host.TeleDoctor(Local_Host.java:3935)
+... Removed 25 stack frames
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
@@ -173,9 +203,16 @@ Session ID: b4ea6fdfc598876d5697ea236622ad3d
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="HomeModule">
-                  </a> <!-- HomeModule -->
-                  <span class="method-name">HomeModule</span>
+                  <a name="PatientModule">
+                  </a> <!-- PatientModule -->
+                  <span class="method-name">PatientModule</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="calendar">
+                  </a> <!-- calendar -->
+                  <span class="method-name">calendar</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -194,8 +231,10 @@ Session ID: b4ea6fdfc598876d5697ea236622ad3d
     &lt;groups&gt;
       &lt;run&gt;
         &lt;include name=&quot;before&quot;/&gt;
-        &lt;include name=&quot;home&quot;/&gt;
-        &lt;include name=&quot;healthrec&quot;/&gt;
+        &lt;include name=&quot;patient&quot;/&gt;
+        &lt;include name=&quot;calendar&quot;/&gt;
+        &lt;include name=&quot;teledoctor&quot;/&gt;
+        &lt;include name=&quot;settings&quot;/&gt;
       &lt;/run&gt;
     &lt;/groups&gt;
     &lt;classes&gt;
@@ -224,18 +263,34 @@ Session ID: b4ea6fdfc598876d5697ea236622ad3d
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="test-group">
-              <span class="test-group-name">healthrec</span>
+              <span class="test-group-name">calendar</span>
               <br/>
               <div class="method-in-group">
-                <span class="method-in-group-name">HealthRec</span>
+                <span class="method-in-group-name">calendar</span>
                 <br/>
               </div> <!-- method-in-group -->
             </div> <!-- test-group -->
             <div class="test-group">
-              <span class="test-group-name">home</span>
+              <span class="test-group-name">patient</span>
               <br/>
               <div class="method-in-group">
-                <span class="method-in-group-name">HomeModule</span>
+                <span class="method-in-group-name">PatientModule</span>
+                <br/>
+              </div> <!-- method-in-group -->
+            </div> <!-- test-group -->
+            <div class="test-group">
+              <span class="test-group-name">settings</span>
+              <br/>
+              <div class="method-in-group">
+                <span class="method-in-group-name">Settings</span>
+                <br/>
+              </div> <!-- method-in-group -->
+            </div> <!-- test-group -->
+            <div class="test-group">
+              <span class="test-group-name">teledoctor</span>
+              <br/>
+              <div class="method-in-group">
+                <span class="method-in-group-name">TeleDoctor</span>
                 <br/>
               </div> <!-- method-in-group -->
             </div> <!-- test-group -->
@@ -255,20 +310,28 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(2);
+data.addRows(4);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'HealthRec')
+data.setCell(0, 1, 'calendar')
 data.setCell(0, 2, 'runner.Local_Host')
-data.setCell(0, 3, 383845);
+data.setCell(0, 3, 111135);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'HomeModule')
+data.setCell(1, 1, 'TeleDoctor')
 data.setCell(1, 2, 'runner.Local_Host')
-data.setCell(1, 3, 26844);
+data.setCell(1, 3, 59019);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'PatientModule')
+data.setCell(2, 2, 'runner.Local_Host')
+data.setCell(2, 3, 27153);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'Settings')
+data.setCell(3, 2, 'runner.Local_Host')
+data.setCell(3, 3, 2652);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 6 minutes</span>
+              <span class="suite-total-time">Total running time: 3 minutes</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -283,23 +346,19 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">6 ignored methods</span>
+            <span class="header-content">4 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
               <span class="ignored-class-name">runner.Local_Host</span>
               <div class="ignored-methods-div">
-                <span class="ignored-method-name">calendar</span>
+                <span class="ignored-method-name">HomeModule</span>
                 <br/>
-                <span class="ignored-method-name">PatientModule</span>
+                <span class="ignored-method-name">HealthRec</span>
                 <br/>
                 <span class="ignored-method-name">BillingModule</span>
                 <br/>
                 <span class="ignored-method-name">Message</span>
-                <br/>
-                <span class="ignored-method-name">Settings</span>
-                <br/>
-                <span class="ignored-method-name">TeleDoctor</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -312,19 +371,29 @@ return data;
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
               <div class="chronological-class-name">runner.Local_Host</div> <!-- chronological-class-name -->
-              <div class="configuration-class before">
-                <span class="method-name">LaunchBrwoser</span>
+              <div class="configuration-suite before">
+                <span class="method-name">openConnection</span>
                 <span class="method-start">0 ms</span>
-              </div> <!-- configuration-class before -->
+              </div> <!-- configuration-suite before -->
               <div class="test-method">
-                <span class="method-name">HomeModule</span>
-                <span class="method-start">27483 ms</span>
+                <span class="method-name">PatientModule</span>
+                <span class="method-start">93942 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">calendar</span>
+                <span class="method-start">121099 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">HealthRec</span>
-                <span class="method-start">54333 ms</span>
+                <span class="method-name">TeleDoctor</span>
+                <span class="method-start">232234 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">Settings</span>
+                <span class="method-start">291327 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

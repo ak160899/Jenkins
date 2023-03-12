@@ -26,11 +26,11 @@ public class LaunchBrowser extends Base {
 	public static WebDriver driver;
 	public String kpid;
 	public static String url;
-	static Calendars cal;
-	String $current;
+	public static Calendars cal;
+	public String $current;
 	public static org.apache.log4j.Logger log;
 
-	@BeforeSuite
+	@BeforeSuite(groups = "before")
 	public static Map<String, Object> openConnection() throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		log = org.apache.log4j.Logger.getLogger(LaunchBrowser.class);
@@ -97,8 +97,16 @@ public class LaunchBrowser extends Base {
 			}
 		}
 
+		while (true) {
+			if (driver.getCurrentUrl().equals("https://localhost:8443/health/#home")) {
+				break;
+			} else if (driver.getCurrentUrl().equals("https://www.75health.com/health/#home")) {
+				break;
+			}
+		}
+
 		implicitWait(70, TimeUnit.SECONDS);
-		
+
 		return result;
 	}
 
