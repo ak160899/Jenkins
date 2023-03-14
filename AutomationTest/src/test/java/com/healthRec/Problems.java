@@ -24,8 +24,7 @@ public class Problems extends LaunchBrowser {
 
 			if (pom.getInstanceProblems().addIcon.isDisplayed()) {
 				visbility(driver, pom.getInstanceProblems().addIcon, 30);
-				elementClickable(pom.getInstanceProblems().addIcon);
-				click(pom.getInstanceProblems().addIcon);
+				clickIntercept(pom.getInstanceProblems().addIcon, 30);
 				break;
 			} else if (!pom.getInstanceProblems().addIcon.isDisplayed()) {
 				actions("move to element", pom.getInstanceProblems().addIcon);
@@ -39,22 +38,18 @@ public class Problems extends LaunchBrowser {
 		try {
 			WebElement icdCode = driver.findElement(By.xpath("//small[text()='ICD10 : Q35.7 | SNOMED : --']"));
 			visbility(driver, icdCode, 60);
-			elementClickable(icdCode);
-			click(icdCode);
-		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+			clickIntercept(icdCode, 30);
+		} catch (StaleElementReferenceException e) {
 			WebElement icdCode = driver.findElement(By.xpath("//small[text()='ICD10 : Q35.7 | SNOMED : --']"));
 			visbility(driver, icdCode, 60);
-			elementClickable(icdCode);
-			click(icdCode);
+			clickIntercept(icdCode, 30);
 		}
-		elementClickable(pom.getInstanceProblems().save);
-		click(pom.getInstanceProblems().save);
+		clickIntercept(pom.getInstanceProblems().save, 30);
 
 		for (WebElement save : pom.getInstanceProblems().saveMore) {
 			if (save.getText().trim().equals("Save")) {
 				visbility(driver, save, 60);
-				elementClickable(save);
-				click(save);
+				clickIntercept(save, 30);
 				break;
 			}
 
@@ -62,28 +57,22 @@ public class Problems extends LaunchBrowser {
 		try {
 			WebElement edit = driver.findElement(By.xpath("//div[text()='Cleft uvula']"));
 			visbility(driver, edit, 60);
-			elementClickable(edit);
-
-			click(edit);
-		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+			clickIntercept(edit, 30);
+		} catch (StaleElementReferenceException e) {
 			WebElement edit = driver.findElement(By.xpath("//div[text()='Cleft uvula']"));
 			visbility(driver, edit, 60);
-			elementClickable(edit);
-			click(edit);
+			clickIntercept(edit, 30);
 		}
 		try {
 			visbility(driver, pom.getInstanceProblems().removeProblem, 30);
-			elementClickable(pom.getInstanceProblems().removeProblem);
-			click(pom.getInstanceProblems().removeProblem);
+			clickIntercept(pom.getInstanceProblems().removeProblem, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceProblems().removeProblem, 30);
-			elementClickable(pom.getInstanceProblems().removeProblem);
-			click(pom.getInstanceProblems().removeProblem);
+			clickIntercept(pom.getInstanceProblems().removeProblem, 30);
 		}
 		addFavoritedisbox();
 		problemIcdCode();
-		elementClickable(pom.getInstanceProblems().save);
-		click(pom.getInstanceProblems().save);
+		clickIntercept(pom.getInstanceProblems().save, 30);
 
 		for (WebElement w : pom.getInstanceProblems().saveMore) {
 			if (w.getText().trim().equals("Save")) {
@@ -99,12 +88,8 @@ public class Problems extends LaunchBrowser {
 	}
 
 	public void getPastProblem() {
-		try {
-			sleep(2000);
-		} catch (InterruptedException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+
+		sleep(2000);
 
 		for (int i = 1; i <= 8; i++) {
 			try {
@@ -119,12 +104,8 @@ public class Problems extends LaunchBrowser {
 
 			}
 		}
-		try {
-			sleep(2000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
+		sleep(2000);
 
 		try {
 			WebElement $yescure$ = driver
@@ -150,12 +131,9 @@ public class Problems extends LaunchBrowser {
 
 			}
 		}
-		try {
-			sleep(1500);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
+		sleep(1500);
+
 		List<WebElement> ellipsedrpprlb = driver.findElements(
 				By.xpath("//div[contains(@title,'SALT Problems')]//following::div[3]//following::ul[1]/li"));
 
@@ -168,12 +146,9 @@ public class Problems extends LaunchBrowser {
 			}
 
 		}
-		try {
-			sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		sleep(2000);
+
 		//
 
 		for (int i = 1; i <= 8; i++) {
@@ -190,12 +165,9 @@ public class Problems extends LaunchBrowser {
 
 			}
 		}
-		try {
-			sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		sleep(2000);
+
 		WebElement clse = driver
 				.findElement(By.xpath("(//span[text()='Past Cured Problems'])[1]//parent::div/span[1]"));
 		visbility(driver, clse, 25);
@@ -208,8 +180,7 @@ public class Problems extends LaunchBrowser {
 		while (true) {
 			if (pom.getInstanceProblems().favoriteIcon.isDisplayed()) {
 				visbility(driver, pom.getInstanceProblems().favoriteIcon, 30);
-				elementClickable(pom.getInstanceProblems().favoriteIcon);
-				click(pom.getInstanceProblems().favoriteIcon);
+				clickIntercept(pom.getInstanceProblems().favoriteIcon, 30);
 				break;
 			} else if (!pom.getInstanceProblems().favoriteIcon.isDisplayed()) {
 				actions("move to element", pom.getInstanceProblems().favoriteIcon);
@@ -218,13 +189,11 @@ public class Problems extends LaunchBrowser {
 
 		try {
 			visbility(driver, pom.getInstanceProblems().addNewFavorite, 30);
-			elementClickable(pom.getInstanceProblems().addNewFavorite);
-			click(pom.getInstanceProblems().addNewFavorite);
+			clickIntercept(pom.getInstanceProblems().addNewFavorite, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceProblems().addNewFavorite, 30);
-			elementClickable(pom.getInstanceProblems().addNewFavorite);
-			click(pom.getInstanceProblems().addNewFavorite);
+			clickIntercept(pom.getInstanceProblems().addNewFavorite, 30);
 		}
 
 		addFavoritedisbox();
@@ -261,9 +230,9 @@ public class Problems extends LaunchBrowser {
 
 			if (web.getText().trim().equals("ICD10 : C62 | SNOMED : --") && web.isDisplayed()) {
 				visbility(driver, web, 40);
-				elementClickable(web);
+
 				value = true;
-				web.click();
+				clickIntercept(web, 30);
 				break;
 			}
 
@@ -279,22 +248,17 @@ public class Problems extends LaunchBrowser {
 
 		try {
 			visbility(driver, pom.getInstanceProblems().editFavorite, 30);
-			elementClickable(pom.getInstanceProblems().editFavorite);
-			click(pom.getInstanceProblems().editFavorite);
-
-		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+			clickIntercept(pom.getInstanceProblems().editFavorite, 30);
+		} catch (StaleElementReferenceException e) {
 			visbility(driver, pom.getInstanceProblems().editFavorite, 30);
-			elementClickable(pom.getInstanceProblems().editFavorite);
-			click(pom.getInstanceProblems().editFavorite);
+			clickIntercept(pom.getInstanceProblems().editFavorite, 30);
 		}
 		try {
 			visbility(driver, pom.getInstanceProblems().removeFavoriteCode, 30);
-			elementClickable(pom.getInstanceProblems().removeFavoriteCode);
-			click(pom.getInstanceProblems().removeFavoriteCode);
+			clickIntercept(pom.getInstanceProblems().removeFavoriteCode, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceProblems().removeFavoriteCode, 30);
-			elementClickable(pom.getInstanceProblems().removeFavoriteCode);
-			click(pom.getInstanceProblems().removeFavoriteCode);
+			clickIntercept(pom.getInstanceProblems().removeFavoriteCode, 30);
 		}
 
 		addFavoritedisbox();
@@ -304,22 +268,18 @@ public class Problems extends LaunchBrowser {
 
 		try {
 			visbility(driver, pom.getInstanceProblems().addThisFavorite, 30);
-			elementClickable(pom.getInstanceProblems().addThisFavorite);
-			click(pom.getInstanceProblems().addThisFavorite);
+			clickIntercept(pom.getInstanceProblems().addThisFavorite, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceProblems().addThisFavorite, 30);
-			elementClickable(pom.getInstanceProblems().addThisFavorite);
-			click(pom.getInstanceProblems().addThisFavorite);
+			clickIntercept(pom.getInstanceProblems().addThisFavorite, 30);
 		}
 
 		try {
 			visbility(driver, pom.getInstanceProblems().closeFavorite, 30);
-			elementClickable(pom.getInstanceProblems().closeFavorite);
-			click(pom.getInstanceProblems().closeFavorite);
+			clickIntercept(pom.getInstanceProblems().closeFavorite, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceProblems().closeFavorite, 30);
-			elementClickable(pom.getInstanceProblems().closeFavorite);
-			click(pom.getInstanceProblems().closeFavorite);
+			clickIntercept(pom.getInstanceProblems().closeFavorite, 30);
 		}
 		sleep(2000);
 

@@ -6,16 +6,16 @@
       <run>
         <include name="before"/>
         <include name="patient"/>
-        <include name="calendar"/>
+        <include name="billing"/>
         <include name="teledoctor"/>
-        <include name="settings"/>
       </run>
     </groups>
     <classes>
       <class name="runner.Local_Host">
         <methods>
+          <include name="PatientModule"/>
+          <include name="BillingModule"/>
           <include name="openConnection"/>
-          <include name="Settings"/>
           <include name="TeleDoctor"/>
         </methods>
       </class> <!-- runner.Local_Host -->

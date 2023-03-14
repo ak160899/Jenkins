@@ -109,6 +109,12 @@ public class ConfigReader {
 
 	}
 
+	public String getPackageDetails() {
+
+		String pack = p.getProperty("package");
+		return pack;
+	}
+
 	public String getBrowser() {
 		String $browser = p.getProperty("browser");
 		return $browser;

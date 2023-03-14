@@ -139,7 +139,7 @@ public class Settings {
 
 	// manage user
 
-	@FindBy(xpath = "(//button[@onclick='Page.goBack()'])[1]")
+	@FindBy(xpath = "(//button[@onclick='setting.userList()'])[1]")
 	public WebElement manageuser;
 
 	@FindBy(xpath = "(//button[@id='new'])[1]")
@@ -171,6 +171,34 @@ public class Settings {
 
 	@FindBy(xpath = "(//div[@class='selected-flag'])[4]//following::ul[1]/li/span[2]")
 	public List<WebElement> manageUserPhoneFlagDrop;
+	
+//manage branding
+	
+	@FindBy(id = "org-name")
+	public WebElement manageBrandingOrgNameDiscription;
+	
+	@FindBy(xpath = "//button[@onclick='setting.brand()']")
+	public WebElement manageBrandingClick;
+	
+	@FindBy(xpath = "//div[@id='setOrgName']/button")
+	public WebElement manageBrandingSetName;
+	
+	
+	@FindBy(id = "select-email-preview")
+	public WebElement manageBrandingEmailPreview;
+	
+	@FindBy(xpath = "//button[@id='select-email-preview']//following::ul[1]/li/a")
+	public List<WebElement> manageBrandingEmailPreviewDropdown;
+	
+	@FindBy(xpath = "//button[@onclick='Health.emailPreview()']")
+	public WebElement  manageBrandingPreviewClick;
+	
+	@FindBy(id = "cancel-btn")
+	public WebElement manageBrandingCancelWindow;
+	//
+	
+	
+	
 
 	// Auto Logout
 

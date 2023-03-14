@@ -126,26 +126,20 @@ public class Procedure extends LaunchBrowser {
 		while (true) {
 			if (pom.getInstanceProcedure().ellipses.isDisplayed()) {
 				visbility(driver, pom.getInstanceProcedure().ellipses, 30);
-				elementClickable(pom.getInstanceProcedure().ellipses);
-				click(pom.getInstanceProcedure().ellipses);
+				clickIntercept(pom.getInstanceProcedure().ellipses, 30);
 				break;
 			} else if (!pom.getInstanceProcedure().ellipses.isDisplayed()) {
 				actions("move to element", pom.getInstanceProcedure().ellipses);
 			}
 		}
-		try {
-			sleep(2000);
-		} catch (InterruptedException e) {
 
-			e.printStackTrace();
-		}
+		sleep(2000);
 
 		for (WebElement we : pom.getInstanceProcedure().ellipsesList) {
 
 			if (we.getText().trim().equals("Past Procedure")) {
 				visbility(driver, we, 60);
-				elementClickable(we);
-				click(we);
+				clickIntercept(we, 30);
 				break;
 			}
 
@@ -154,25 +148,21 @@ public class Procedure extends LaunchBrowser {
 		try {
 
 			visbility(driver, pom.getInstanceProcedure().addPast, 30);
-			elementClickable(pom.getInstanceProcedure().addPast);
-			click(pom.getInstanceProcedure().addPast);
+			clickIntercept(pom.getInstanceProcedure().addPast, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceProcedure().addPast, 30);
-			elementClickable(pom.getInstanceProcedure().addPast);
-			click(pom.getInstanceProcedure().addPast);
+			clickIntercept(pom.getInstanceProcedure().addPast, 30);
 		}
 
 		try {
 
 			visbility(driver, pom.getInstanceProcedure().closePast, 30);
-			elementClickable(pom.getInstanceProcedure().closePast);
-			click(pom.getInstanceProcedure().closePast);
+			clickIntercept(pom.getInstanceProcedure().closePast, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceProcedure().closePast, 30);
-			elementClickable(pom.getInstanceProcedure().closePast);
-			click(pom.getInstanceProcedure().closePast);
+			clickIntercept(pom.getInstanceProcedure().closePast, 30);
 		}
 
 	}

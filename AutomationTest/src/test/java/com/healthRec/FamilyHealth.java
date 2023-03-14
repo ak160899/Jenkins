@@ -67,18 +67,12 @@ public class FamilyHealth extends LaunchBrowser {
 			}
 		}
 
-		try {
-			sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		sleep(3000);
 
 	}
 
 	public static void familyHealthIcd() {
 		boolean check = false;
-		
 
 		try {
 
@@ -99,8 +93,7 @@ public class FamilyHealth extends LaunchBrowser {
 				System.out.println(web.getText());
 				if (web.getText().equals("ICD10 : F40.2 | SNOMED : 247810008") && web.isDisplayed()) {
 					visbility(driver, web, 60);
-					elementClickable(web);
-					click(web);
+					clickIntercept(web, 30);
 					System.out.println("FAMILY HEALTH ");
 					check = true;
 					break;

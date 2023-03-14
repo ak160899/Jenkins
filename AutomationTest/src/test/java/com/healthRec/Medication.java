@@ -147,7 +147,7 @@ public class Medication extends Base {
 				WebElement $med_cr$ = driver.findElement(By.xpath("(//span[text()='RXNORM :  1009145  '])[1]"));
 				if ($med_cr$.isDisplayed()) {
 					visbility(driver, $med_cr$, 60);
-					javascriptclick($med_cr$);
+					clickIntercept($med_cr$, 30);
 					break;
 				}
 			} catch (Exception e) {
@@ -161,7 +161,7 @@ public class Medication extends Base {
 						.findElement(By.xpath("(//span[text()='RXNORM :  1009145  '])[1]//following::div[20]/span[1]"));
 				if ($curemed$.isDisplayed()) {
 					visbility(driver, $curemed$, 60);
-					javascriptclick($curemed$);
+					clickIntercept($curemed$, 30);
 					break;
 				}
 			} catch (Exception e) {
@@ -170,17 +170,17 @@ public class Medication extends Base {
 		}
 		sleep(1000);
 
-		for (int i = 1; i <= 8; i++) {
+		while (true) {
 			WebElement $medEllipse$ = null;
-			try {
-				$medEllipse$ = driver.findElement(
-						By.xpath("//div[@title='Show my favorite Medications list for selection']//following::div[2]"));
-				actions("move to element", $medEllipse$);
-				if ($medEllipse$.isDisplayed()) {
-					click($medEllipse$);
-					break;
-				}
-			} catch (Exception e) {
+
+			$medEllipse$ = driver.findElement(
+					By.xpath("//div[@title='Show my favorite Medications list for selection']//following::div[2]"));
+			actions("move to element", $medEllipse$);
+			if ($medEllipse$.isDisplayed()) {
+				clickIntercept($medEllipse$, 30);
+				break;
+
+			} else if (!$medEllipse$.isDisplayed()) {
 				actions("move to element", $medEllipse$);
 			}
 		}
@@ -190,7 +190,7 @@ public class Medication extends Base {
 		for (WebElement web : $medellipseList$) {
 
 			if (web.getText().trim().equals("Past Ended Medication")) {
-				click(web);
+				clickIntercept(web, 30);
 				break;
 			}
 
@@ -201,11 +201,11 @@ public class Medication extends Base {
 				WebElement $addToEhr$ = driver
 						.findElement(By.xpath("(//span[@title='Click to add this medication'])[2]"));
 				if ($addToEhr$.isDisplayed()) {
-					click($addToEhr$);
+					clickIntercept($addToEhr$, 30);
 					break;
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 		}
 		sleep(1500);
@@ -213,7 +213,7 @@ public class Medication extends Base {
 		WebElement $clsoemed$ = driver
 				.findElement(By.xpath("(//span[text()='Past Ended Medication'])[1]//parent::div/span[1]"));
 		visbility(driver, $clsoemed$, 60);
-		javascriptclick($clsoemed$);
+		clickIntercept($clsoemed$, 30);
 
 	}
 }

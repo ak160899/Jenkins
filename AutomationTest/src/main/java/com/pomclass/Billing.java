@@ -1,5 +1,7 @@
 package com.pomclass;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,6 +55,12 @@ public class Billing {
 	
 	@FindBy(xpath = "(//button[@id='accept-btn'])[21]")
 	public WebElement confirmFinalise;
+	
+	@FindBy(xpath = "//div[@id='discount-side']/div[3]/div/div/div[2]/div[4]/div/ul/li/a")
+	public List<WebElement> discountDropDown;
+	
+	@FindBy(xpath = "//div[@id='dmain']/div[4]/div[2]//following::div[2]//following::ul[3]/li/a/table/tbody/tr/td[2]")
+	public List<WebElement> searchPatientDropdown;
 	
 	@FindBy(xpath = "(//button[@id='cancel-btn'])[20]")
 	public WebElement cancelBill;

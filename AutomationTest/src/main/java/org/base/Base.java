@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -77,6 +78,32 @@ public class Base {
 		element.click();
 
 	}
+
+	public static WebElement clickableAtpoint(WebDriver driver, WebElement element, long timeout) {
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		return wait.until(ExpectedConditions.elementToBeClickable(element));
+
+	}
+
+	public static void clickIntercept(WebElement elem, long timeouts) {
+		try {
+		clickableAtpoint(wd, elem, timeouts);
+
+		elem.click();
+		}catch (ElementClickInterceptedException e) {
+			e.printStackTrace();
+			for(long i=0;i<timeouts;i++) {
+				 try {
+					 sleep(1000);
+					 elem.click();
+					 break;
+				 }catch (ElementClickInterceptedException h) {
+					h.printStackTrace();
+				}
+			}
+		}
+	}
+
 	// send keys...
 
 	public static void sendkeys(WebElement values, String input) {
@@ -116,8 +143,13 @@ public class Base {
 	}
 
 	// thread.sleep...
-	public static void sleep(int x) throws InterruptedException {
-		Thread.sleep(x);
+	public static void sleep(int x)  {
+		try {
+			Thread.sleep(x);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

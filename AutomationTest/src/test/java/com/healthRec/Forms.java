@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.Launch.LaunchBrowser;
+import org.apache.commons.lang.RandomStringUtils;
 import org.base.Base;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,14 +17,15 @@ import org.testng.annotations.Test;
 
 public class Forms extends LaunchBrowser {
 
+	String frm;
+
 	public void $addForm(WebDriver driver) throws Throwable {
 
 		while (true) {
 
 			if (pom.getInstanceform().addIcon.isDisplayed()) {
 				visbility(driver, pom.getInstanceform().addIcon, 30);
-				elementClickable(pom.getInstanceform().addIcon);
-				click(pom.getInstanceform().addIcon);
+				clickIntercept(pom.getInstanceform().addIcon, 30);
 				break;
 			} else if (!pom.getInstanceform().addIcon.isDisplayed()) {
 				actions("move to element", pom.getInstanceform().addIcon);
@@ -63,12 +65,12 @@ public class Forms extends LaunchBrowser {
 
 		if (result == false) {
 
-			$addNewForm("hsdahjahjh");
-			$addFormToEhr("hsdahjahjh");
+			$addNewForm();
+			$addFormToEhr();
 			sleep(6000);
 			WebElement ytt = driver.findElement(By.xpath("//div[@id='FormsKpop2']/div[1]/div[2]/span"));
-			javascriptclick(ytt);
-			$delForm("hsdahjahjh");
+			clickIntercept(ytt, 30);
+			$delForm();
 
 		}
 
@@ -87,12 +89,12 @@ public class Forms extends LaunchBrowser {
 			visbility(driver, js, 60);
 			javascriptclick(js);
 
-			$addNewForm($frmName);
-			$addFormToEhr($frmName);
+			$addNewForm();
+			$addFormToEhr();
 			sleep(6000);
 			WebElement ytt = driver.findElement(By.xpath("//div[@id='FormsKpop2']/div[1]/div[2]/span"));
 			javascriptclick(ytt);
-			$delForm($frmName);
+			$delForm();
 
 		}
 
@@ -100,7 +102,7 @@ public class Forms extends LaunchBrowser {
 
 	}
 
-	public void $addNewForm(String key) {
+	public void $addNewForm() {
 
 		for (int i = 1; i <= 8; i++) {
 			try {
@@ -113,17 +115,15 @@ public class Forms extends LaunchBrowser {
 
 			}
 		}
-		try {
-			sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		sleep(2000);
+
+		frm = RandomStringUtils.randomAlphabetic(30);
 		for (int i = 1; i <= 5; i++) {
 			try {
 				WebElement x9 = driver.findElement(By.xpath("(//label[text()='Form Title*'])[2]//following::input[1]"));
 				visbility(driver, x9, 60);
-				sendkeys(x9, key);
+				sendkeys(x9, frm + "53463645");
 				break;
 			} catch (Exception e) {
 
@@ -148,20 +148,16 @@ public class Forms extends LaunchBrowser {
 						.click();
 			}
 		}
-		try {
-			sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		sleep(2000);
 
 	}
 
-	public void $addFormToEhr(String s) {
+	public void $addFormToEhr() {
 
 		try {
 			implicitWait(30, TimeUnit.SECONDS);
-			WebElement addit = driver.findElement(By.xpath("//span[text()='" + s + "']//following::div[1]/span"));
+			WebElement addit = driver.findElement(By.xpath("//span[text()='" + frm + "']//following::div[1]/span"));
 			visbility(driver, addit, 60);
 
 			elementClickable(addit);
@@ -169,7 +165,7 @@ public class Forms extends LaunchBrowser {
 
 		} catch (Exception e) {
 			implicitWait(30, TimeUnit.SECONDS);
-			WebElement addit = driver.findElement(By.xpath("//span[text()='" + s + "']//following::div[1]/span"));
+			WebElement addit = driver.findElement(By.xpath("//span[text()='" + frm + "']//following::div[1]/span"));
 			visbility(driver, addit, 60);
 			elementClickable(addit);
 			click(addit);
@@ -177,12 +173,12 @@ public class Forms extends LaunchBrowser {
 
 	}
 
-	public void $delForm(String s) {
+	public void $delForm() {
 		boolean $frmcnd = false;
 		// System.out.println("fUNCTION STARTS");
 		WebElement ffr = null;
 		try {
-			ffr = driver.findElement(By.xpath("//span[text()='" + s + "']//following::div[1]/div"));
+			ffr = driver.findElement(By.xpath("//span[text()='" + frm + "']//following::div[1]/div"));
 			if (ffr.isDisplayed()) {
 				System.out.println("HELLO");
 				$frmcnd = true;
@@ -191,7 +187,7 @@ public class Forms extends LaunchBrowser {
 			} else {
 				actions("move to element", ffr);
 				System.out.println("BEFORE FUNCTION CALL");
-				$delForm(s);
+				$delForm();
 				System.out.println("funcion call ");
 			}
 		} catch (Exception e) {
@@ -204,7 +200,7 @@ public class Forms extends LaunchBrowser {
 				System.out.println($frmcnd);
 				try {
 					WebElement delfr = driver
-							.findElement(By.xpath("(//span[text()='" + s + "'])[2]//following::div[1]/span[1]"));
+							.findElement(By.xpath("(//span[text()='" + frm + "'])[2]//following::div[1]/span[1]"));
 					if (delfr.isDisplayed()) {
 						click(delfr);
 						break;

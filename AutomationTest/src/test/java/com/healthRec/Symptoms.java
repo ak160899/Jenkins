@@ -90,32 +90,27 @@ public class Symptoms extends LaunchBrowser {
 
 		try {
 			visbility(driver, pom.getInstanceSymptom().curePast, 30);
-			elementClickable(pom.getInstanceSymptom().curePast);
-			click(pom.getInstanceSymptom().curePast);
+			clickIntercept(pom.getInstanceSymptom().curePast, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceSymptom().curePast, 30);
-			elementClickable(pom.getInstanceSymptom().curePast);
-			click(pom.getInstanceSymptom().curePast);
+			clickIntercept(pom.getInstanceSymptom().curePast, 30);
 		}
 
 		sleep(1500);
 		try {
 			visbility(driver, pom.getInstanceSymptom().yesCure, 30);
-			elementClickable(pom.getInstanceSymptom().yesCure);
-			click(pom.getInstanceSymptom().yesCure);
+			clickIntercept(pom.getInstanceSymptom().yesCure, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceSymptom().yesCure, 30);
-			elementClickable(pom.getInstanceSymptom().yesCure);
-			click(pom.getInstanceSymptom().yesCure);
+			clickIntercept(pom.getInstanceSymptom().yesCure, 30);
 		}
 
 		while (true) {
 
 			if (pom.getInstanceSymptom().ellipses.isDisplayed()) {
 				visbility(driver, pom.getInstanceSymptom().ellipses, 30);
-				elementClickable(pom.getInstanceSymptom().ellipses);
-				click(pom.getInstanceSymptom().ellipses);
+				clickIntercept(pom.getInstanceSymptom().ellipses, 30);
 				break;
 			} else if (!pom.getInstanceSymptom().ellipses.isDisplayed()) {
 				actions("move to element", pom.getInstanceSymptom().ellipses);
@@ -126,7 +121,8 @@ public class Symptoms extends LaunchBrowser {
 
 			if (web.getText().trim().equals("Past Cured Symptom")) {
 
-				web.click();
+				visbility(driver, web, 30);
+				clickIntercept(web, 30);
 				break;
 			}
 
@@ -134,22 +130,18 @@ public class Symptoms extends LaunchBrowser {
 
 		try {
 			visbility(driver, pom.getInstanceSymptom().addPast, 40);
-			elementClickable(pom.getInstanceSymptom().addPast);
-			click(pom.getInstanceSymptom().addPast);
+			clickIntercept(pom.getInstanceSymptom().addPast, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceSymptom().addPast, 40);
-			elementClickable(pom.getInstanceSymptom().addPast);
-			click(pom.getInstanceSymptom().addPast);
+			clickIntercept(pom.getInstanceSymptom().addPast, 30);
 		}
 
 		try {
 			visbility(driver, pom.getInstanceSymptom().closePast, 30);
-			elementClickable(pom.getInstanceSymptom().closePast);
-			click(pom.getInstanceSymptom().closePast);
+			clickIntercept(pom.getInstanceSymptom().closePast, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceSymptom().closePast, 30);
-			elementClickable(pom.getInstanceSymptom().closePast);
-			click(pom.getInstanceSymptom().closePast);
+			clickIntercept(pom.getInstanceSymptom().closePast, 30);
 		}
 
 	}

@@ -46,7 +46,7 @@ public class Calendars extends Base {
 		}
 		implicitWait(60, TimeUnit.SECONDS);
 
-		//driver.navigate().refresh();
+		driver.navigate().refresh();
 
 		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
 
@@ -296,11 +296,11 @@ public class Calendars extends Base {
 				if (ss.equals("https://localhost:8443/health/#home")
 						|| ss.equals("https://www.75health.com/health/#home")) {
 					driver.navigate().back();
-					//driver.navigate().refresh();
+					driver.navigate().refresh();
 					break;
 				}
 				click(pom.getInstanceCalendar().clickCalendar);
-				//driver.navigate().refresh();
+				driver.navigate().refresh();
 				break;
 			} catch (Exception e) {
 

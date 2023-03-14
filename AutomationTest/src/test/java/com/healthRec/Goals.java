@@ -79,33 +79,28 @@ public class Goals extends LaunchBrowser {
 
 		try {
 			visbility(driver, pom.getInstanceGoal().curePast, 30);
-			elementClickable(pom.getInstanceGoal().curePast);
-			click(pom.getInstanceGoal().curePast);
+			clickIntercept(pom.getInstanceGoal().curePast, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceGoal().curePast, 30);
-			elementClickable(pom.getInstanceGoal().curePast);
-			click(pom.getInstanceGoal().curePast);
+			clickIntercept(pom.getInstanceGoal().curePast, 30);
 
 		}
 
 		try {
 			visbility(driver, pom.getInstanceGoal().yesCure, 30);
-			elementClickable(pom.getInstanceGoal().yesCure);
-			click(pom.getInstanceGoal().yesCure);
+			clickIntercept(pom.getInstanceGoal().yesCure, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceGoal().yesCure, 30);
-			elementClickable(pom.getInstanceGoal().yesCure);
-			click(pom.getInstanceGoal().yesCure);
+			clickIntercept(pom.getInstanceGoal().yesCure, 30);
 		}
 
 		while (true) {
 
 			if (pom.getInstanceGoal().ellipses.isDisplayed()) {
 				visbility(driver, pom.getInstanceGoal().ellipses, 30);
-				elementClickable(pom.getInstanceGoal().ellipses);
-				click(pom.getInstanceGoal().ellipses);
+				clickIntercept(pom.getInstanceGoal().ellipses, 30);
 				break;
 			} else if (!pom.getInstanceGoal().ellipses.isDisplayed()) {
 				actions("move to element", pom.getInstanceGoal().ellipses);
@@ -115,31 +110,26 @@ public class Goals extends LaunchBrowser {
 		for (WebElement web : pom.getInstanceGoal().ellipsesList) {
 			if (web.getText().trim().equals("Past Completed Goals")) {
 				visbility(driver, web, 30);
-				elementClickable(web);
-				click(web);
+				clickIntercept(web, 30);
 			}
 
 		}
 
 		try {
 			visbility(driver, pom.getInstanceGoal().addPast, 30);
-			elementClickable(pom.getInstanceGoal().addPast);
-			click(pom.getInstanceGoal().addPast);
+			clickIntercept(pom.getInstanceGoal().addPast, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceGoal().addPast, 30);
-			elementClickable(pom.getInstanceGoal().addPast);
-			click(pom.getInstanceGoal().addPast);
+			clickIntercept(pom.getInstanceGoal().addPast, 30);
 		}
 
 		try {
 			visbility(driver, pom.getInstanceGoal().closePast, 30);
-			elementClickable(pom.getInstanceGoal().closePast);
-			click(pom.getInstanceGoal().closePast);
+			clickIntercept(pom.getInstanceGoal().closePast, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceGoal().closePast, 30);
-			elementClickable(pom.getInstanceGoal().closePast);
-			click(pom.getInstanceGoal().closePast);
+			clickIntercept(pom.getInstanceGoal().closePast, 30);
 		}
 		sleep(2000);
 

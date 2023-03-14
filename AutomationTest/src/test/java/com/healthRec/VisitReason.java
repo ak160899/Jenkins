@@ -21,8 +21,7 @@ public class VisitReason extends LaunchBrowser {
 		while (true) {
 			if (pom.getInstanceVistReason().AddIcon.isDisplayed()) {
 				visbility(driver, pom.getInstanceVistReason().AddIcon, 40);
-				elementClickable(pom.getInstanceVistReason().AddIcon);
-				click(pom.getInstanceVistReason().AddIcon);
+				clickIntercept(pom.getInstanceVistReason().AddIcon, 30);
 				break;
 			} else {
 				if (!pom.getInstanceVistReason().AddIcon.isDisplayed()) {
@@ -34,34 +33,30 @@ public class VisitReason extends LaunchBrowser {
 
 		try {
 			visbility(driver, pom.getInstanceCalendar().selectAppointmentType, 60);
-			click(pom.getInstanceCalendar().selectAppointmentType);
+			clickIntercept(pom.getInstanceCalendar().selectAppointmentType, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceCalendar().selectAppointmentType, 60);
-			click(pom.getInstanceCalendar().selectAppointmentType);
+			clickIntercept(pom.getInstanceCalendar().selectAppointmentType, 30);
 		}
 
 		for (WebElement chooseAppType : pom.getInstanceVistReason().appointmentTypeDropDown) {
 			if (chooseAppType.getText().equals("Emergency") && chooseAppType.isDisplayed()) {
-				click(chooseAppType);
+				clickIntercept(chooseAppType, 30);
 				break;
 			}
 		}
 
 		visbility(driver, pom.getInstanceVistReason().discription, 30);
 		sendkeys(pom.getInstanceVistReason().discription, "cold");
-
-		elementClickable(pom.getInstanceVistReason().save);
-		click(pom.getInstanceVistReason().save);
-		WebElement edit;
+		clickIntercept(pom.getInstanceVistReason().save, 30);
+		sleep(2000);
 		try {
 			visbility(driver, pom.getInstanceVistReason().edit, 30);
-			elementClickable(pom.getInstanceVistReason().edit);
-			click(pom.getInstanceVistReason().edit);
+			clickIntercept(pom.getInstanceVistReason().edit, 30);
 		} catch (StaleElementReferenceException e) {
 			visbility(driver, pom.getInstanceVistReason().edit, 30);
-			elementClickable(pom.getInstanceVistReason().edit);
-			click(pom.getInstanceVistReason().edit);
+			clickIntercept(pom.getInstanceVistReason().edit, 30);
 
 		}
 
@@ -72,8 +67,7 @@ public class VisitReason extends LaunchBrowser {
 		elementClickable(pom.getInstanceVistReason().discription);
 		click(pom.getInstanceVistReason().discription);
 
-		elementClickable(pom.getInstanceVistReason().save);
-		click(pom.getInstanceVistReason().save);
+		clickIntercept(pom.getInstanceVistReason().save, 30);
 
 	}
 

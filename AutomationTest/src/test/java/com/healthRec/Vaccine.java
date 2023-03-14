@@ -99,24 +99,21 @@ public class Vaccine extends LaunchBrowser {
 		while (true) {
 			if (pom.getInstanceVaccine().ellipses.isDisplayed()) {
 				visbility(driver, pom.getInstanceVaccine().ellipses, 30);
-				elementClickable(pom.getInstanceVaccine().ellipses);
-				click(pom.getInstanceVaccine().ellipses);
+				clickIntercept(pom.getInstanceVaccine().ellipses, 30);
 				break;
 			} else if (!pom.getInstanceVaccine().ellipses.isDisplayed()) {
 				actions("move to element", pom.getInstanceVaccine().ellipses);
+				sleep(1500);
 			}
 		}
-		sleep(1500);
 
 		for (WebElement web : pom.getInstanceVaccine().ellipsesList) {
 
 			if (web.getText().trim().equals("Past Taken Vaccine")) {
 				visbility(driver, web, 30);
-				elementClickable(web);
+				clickIntercept(web, 30);
 
-				click(web);
-
-				System.out.println("cliked ellipse past vacc");
+				// System.out.println("cliked ellipse past vacc");
 			}
 
 		}
@@ -124,24 +121,19 @@ public class Vaccine extends LaunchBrowser {
 		try {
 
 			visbility(driver, pom.getInstanceVaccine().addThisVaccine, 40);
-			elementClickable(pom.getInstanceVaccine().addThisVaccine);
-			click(pom.getInstanceVaccine().addThisVaccine);
+			clickIntercept(pom.getInstanceVaccine().addThisVaccine, 30);
 		} catch (Exception e) {
 
 			visbility(driver, pom.getInstanceVaccine().addThisVaccine, 40);
-			elementClickable(pom.getInstanceVaccine().addThisVaccine);
-			click(pom.getInstanceVaccine().addThisVaccine);
+			clickIntercept(pom.getInstanceVaccine().addThisVaccine, 30);
 		}
 
-		sleep(1500);
 		try {
 			visbility(driver, pom.getInstanceVaccine().cancelPastTaken, 30);
-			elementClickable(pom.getInstanceVaccine().cancelPastTaken);
-			click(pom.getInstanceVaccine().cancelPastTaken);
+			clickIntercept(pom.getInstanceVaccine().cancelPastTaken, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceVaccine().cancelPastTaken, 30);
-			elementClickable(pom.getInstanceVaccine().cancelPastTaken);
-			click(pom.getInstanceVaccine().cancelPastTaken);
+			clickIntercept(pom.getInstanceVaccine().cancelPastTaken, 30);
 		}
 
 	}

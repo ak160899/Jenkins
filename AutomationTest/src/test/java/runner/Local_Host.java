@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import com.healthRec.*;
 import org.Launch.LaunchBrowser;
+import org.apache.commons.compress.archivers.sevenz.CLI;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
@@ -42,12 +43,8 @@ import com.pomclass.VisitReason;
 
 public class Local_Host extends LaunchBrowser {
 
-	static Logger log;
-
 	@Test(priority = 0, groups = "home")
 	public void HomeModule() throws Exception {
-		log = Logger.getLogger(Local_Host.class);
-		BasicConfigurator.configure();
 
 		try {
 
@@ -131,29 +128,13 @@ public class Local_Host extends LaunchBrowser {
 	}
 
 	@Test(priority = 1, groups = "patient")
-	public void PatientModule() throws InterruptedException {
+	public static void PatientModule() throws InterruptedException {
 
-		try {
-			visbility(driver, pom.getInstanceNewPatient().$patienmod, 50);
-			elementClickable(pom.getInstanceNewPatient().$patienmod);
-			click(pom.getInstanceNewPatient().$patienmod);
-		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
-			visbility(driver, pom.getInstanceNewPatient().$patienmod, 50);
-			elementClickable(pom.getInstanceNewPatient().$patienmod);
-			click(pom.getInstanceNewPatient().$patienmod);
-		}
+		clickIntercept(pom.getInstanceNewPatient().$patienmod, 1000);
+
 		implicitWait(60, TimeUnit.SECONDS);
 
-		try {
-			visbility(driver, pom.getInstanceNewPatient().addNewPatient, 60);
-			elementClickable(pom.getInstanceNewPatient().addNewPatient);
-			click(pom.getInstanceNewPatient().addNewPatient);
-
-		} catch (Exception e) {
-			visbility(driver, pom.getInstanceNewPatient().addNewPatient, 60);
-			elementClickable(pom.getInstanceNewPatient().addNewPatient);
-			click(pom.getInstanceNewPatient().addNewPatient);
-		}
+		clickIntercept(pom.getInstanceNewPatient().addNewPatient, 1000);
 
 		visbility(driver, pom.getInstanceNewPatient().firstName, 60);
 		sendkeys(pom.getInstanceNewPatient().firstName, "sam");
@@ -188,7 +169,6 @@ public class Local_Host extends LaunchBrowser {
 			}
 		}
 
-		// String numericRand = RandomStringUtils.randomNumeric(5);
 		visbility(driver, pom.getInstanceHomeModule().phoneNumberField, 40);
 		sendkeys(pom.getInstanceHomeModule().phoneNumberField, "95518" + generateRandom("number"));
 
@@ -208,17 +188,7 @@ public class Local_Host extends LaunchBrowser {
 			kpid = es.getText();
 		}
 
-		try {
-			visbility(driver, pom.getInstanceNewPatient().$patienmod, 40);
-			elementClickable(pom.getInstanceNewPatient().$patienmod);
-			click(pom.getInstanceNewPatient().$patienmod);
-
-		} catch (Exception e) {
-			visbility(driver, pom.getInstanceNewPatient().$patienmod, 40);
-			elementClickable(pom.getInstanceNewPatient().$patienmod);
-			click(pom.getInstanceNewPatient().$patienmod);
-			System.out.println(e);
-		}
+		clickIntercept(pom.getInstanceNewPatient().$patienmod, 30);
 
 		try {
 			WebElement s = driver.findElement(By.xpath("(//input[@id='patientPartyName'])[2]"));
@@ -231,13 +201,11 @@ public class Local_Host extends LaunchBrowser {
 		}
 		try {
 			WebElement kp = driver.findElement(By.xpath("//div[text()=" + "'" + kpid + "']"));
-			elementClickable(kp);
-			click(kp);
+			clickIntercept(kp, 30);
 
 		} catch (ElementClickInterceptedException | StaleElementReferenceException e) {
 			WebElement kp = driver.findElement(By.xpath("//div[text()=" + "'" + kpid + "']"));
-			elementClickable(kp);
-			click(kp);
+			clickIntercept(kp, 30);
 		}
 
 		sleep(2000);
@@ -291,15 +259,7 @@ public class Local_Host extends LaunchBrowser {
 
 		// contact info
 
-		try {
-
-			elementClickable(pom.getInstanceNewPatient().addContactIcon);
-			click(pom.getInstanceNewPatient().addContactIcon);
-
-		} catch (ElementClickInterceptedException e) {
-			elementClickable(pom.getInstanceNewPatient().addContactIcon);
-			click(pom.getInstanceNewPatient().addContactIcon);
-		}
+		clickIntercept(pom.getInstanceNewPatient().addContactIcon, 1000);
 
 		visbility(driver, pom.getInstanceNewPatient().Addressline1, 40);
 		sendkeys(pom.getInstanceNewPatient().Addressline1, "no.224 watson");
@@ -334,45 +294,21 @@ public class Local_Host extends LaunchBrowser {
 
 		sendkeys(pom.getInstanceNewPatient().zipCode, "600110");
 
-		elementClickable(pom.getInstanceNewPatient().saveContactInfo);
-		click(pom.getInstanceNewPatient().saveContactInfo);
+		clickIntercept(pom.getInstanceNewPatient().saveContactInfo, 30);
 
 		// alternate contact info...
 
-		try {
-			visbility(driver, pom.getInstanceNewPatient().AlternateContactIcon, 40);
-			elementClickable(pom.getInstanceNewPatient().AlternateContactIcon);
-			click(pom.getInstanceNewPatient().AlternateContactIcon);
+		clickIntercept(pom.getInstanceNewPatient().AlternateContactIcon, 30);
 
-		} catch (ElementClickInterceptedException e) {
-			visbility(driver, pom.getInstanceNewPatient().AlternateContactIcon, 40);
-			elementClickable(pom.getInstanceNewPatient().AlternateContactIcon);
-			click(pom.getInstanceNewPatient().AlternateContactIcon);
-
-		}
 		visbility(driver, pom.getInstanceNewPatient().alternateContactFullName, 40);
 		sendkeys(pom.getInstanceNewPatient().alternateContactFullName, "Kaaspro");
 
-		/* while (true) { */
-		try {
-			// if (pom.getInstanceNewPatient().selectFlag.isDisplayed()) {
-			visbility(driver, pom.getInstanceNewPatient().selectFlag, 40);
-			elementClickable(pom.getInstanceNewPatient().selectFlag);
-			click(pom.getInstanceNewPatient().selectFlag);
-			// break;
-			// }
-		} catch (Exception e) {
-			visbility(driver, pom.getInstanceNewPatient().selectFlag, 40);
-			elementClickable(pom.getInstanceNewPatient().selectFlag);
-			click(pom.getInstanceNewPatient().selectFlag);
-			System.out.println(e);
-		}
-		// }
+		clickIntercept(pom.getInstanceNewPatient().selectFlag, 30);
 
 		for (WebElement w : pom.getInstanceNewPatient().$countrycode) {
 
 			if (w.getText().equals("+91")) {
-				click(w);
+				clickIntercept(w, 30);
 				break;
 			}
 
@@ -380,23 +316,13 @@ public class Local_Host extends LaunchBrowser {
 		visbility(driver, pom.getInstanceNewPatient().alternateContactPhNumber, 0);
 		sendkeys(pom.getInstanceNewPatient().alternateContactPhNumber, "9098674534");
 
-		elementClickable(pom.getInstanceNewPatient().alternatecontactSaveicon);
-		click(pom.getInstanceNewPatient().alternatecontactSaveicon);
+		clickIntercept(pom.getInstanceNewPatient().alternatecontactSaveicon, 30);
 
 		sleep(2000);
 
 		// patient info..
 
-		try {
-			visbility(driver, pom.getInstanceNewPatient().addPatientInfoIcon, 40);
-			elementClickable(pom.getInstanceNewPatient().addPatientInfoIcon);
-			click(pom.getInstanceNewPatient().addPatientInfoIcon);
-
-		} catch (ElementClickInterceptedException e) {
-			visbility(driver, pom.getInstanceNewPatient().addPatientInfoIcon, 40);
-			elementClickable(pom.getInstanceNewPatient().addPatientInfoIcon);
-			click(pom.getInstanceNewPatient().addPatientInfoIcon);
-		}
+		clickIntercept(pom.getInstanceNewPatient().addPatientInfoIcon, 30);
 
 		visbility(driver, pom.getInstanceNewPatient().addOccupation, 30);
 		sendkeys(pom.getInstanceNewPatient().addOccupation, "Software tester");
@@ -409,52 +335,25 @@ public class Local_Host extends LaunchBrowser {
 			elementClickable(pom.getInstanceNewPatient().savePatientinfo);
 			click(pom.getInstanceNewPatient().savePatientinfo);
 		}
-		try {
-			visbility(driver, pom.getInstanceNewPatient().$patienmod, 40);
-			elementClickable(pom.getInstanceNewPatient().$patienmod);
-			click(pom.getInstanceNewPatient().$patienmod);
+		clickIntercept(pom.getInstanceNewPatient().$patienmod, 30);
+		clickIntercept(pom.getInstanceNewPatient().patientmodReport, 30);
 
-		} catch (ElementClickInterceptedException e) {
-			visbility(driver, pom.getInstanceNewPatient().$patienmod, 40);
-			elementClickable(pom.getInstanceNewPatient().$patienmod);
-			click(pom.getInstanceNewPatient().$patienmod);
-		}
+		visbility(driver, pom.getInstanceNewPatient().patientReportSerachNametxtBox, 40);
+		sendkeys(pom.getInstanceNewPatient().patientReportSerachNametxtBox, "Kaaspro");
 
-		// driver.navigate().to("https://localhost:8443/health/#list_patient");
-		// driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
-
-		try {
-			visbility(driver, pom.getInstanceNewPatient().patientmodReport, 40);
-			elementClickable(pom.getInstanceNewPatient().patientmodReport);
-			click(pom.getInstanceNewPatient().patientmodReport);
-		} catch (ElementClickInterceptedException e) {
-			visbility(driver, pom.getInstanceNewPatient().patientmodReport, 40);
-			elementClickable(pom.getInstanceNewPatient().patientmodReport);
-			click(pom.getInstanceNewPatient().patientmodReport);
-		}
-
-		try {
-			visbility(driver, pom.getInstanceNewPatient().patientReportSerachNametxtBox, 40);
-			sendkeys(pom.getInstanceNewPatient().patientReportSerachNametxtBox, "Kaaspro");
-		} catch (ElementClickInterceptedException e) {
-			visbility(driver, pom.getInstanceNewPatient().patientReportSerachNametxtBox, 40);
-			sendkeys(pom.getInstanceNewPatient().patientReportSerachNametxtBox, "Kaaspro");
-		}
-
-		while (true) {
-			try {
-				if (pom.getInstanceNewPatient().ellipses.isDisplayed()) {
-					click(pom.getInstanceNewPatient().ellipses);
-					break;
-				}
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		}
+		/*
+		 * while (true) { try {
+		 */
+		/* if (pom.getInstanceNewPatient().ellipses.isDisplayed()) { */
+		visbility(driver, pom.getInstanceNewPatient().ellipses, 30);
+		clickIntercept(pom.getInstanceNewPatient().ellipses, 30);
+		/*
+		 * break; } } catch (Exception e) { System.out.println(e); } }
+		 */
 		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
 			for (WebElement t : pom.getInstanceNewPatient().ellipsesOptions) {
 				if (t.getText().trim().equals("Import") && t.isDisplayed()) {
-					click(t);
+					clickIntercept(t, 30);
 					break;
 				}
 
@@ -464,24 +363,15 @@ public class Local_Host extends LaunchBrowser {
 
 			for (WebElement w : pom.getInstanceNewPatient().$ccdImport) {
 				if (w.getText().trim().equals("CCD Import") && w.isDisplayed()) {
-					click(w);
+					clickIntercept(w, 30);
 					break;
 				}
 
 			}
-			while (true) {
-				try {
 
-					if (pom.getInstanceNewPatient().$closeCcdImport.isDisplayed()) {
-						click(pom.getInstanceNewPatient().$closeCcdImport);
-						break;
-					}
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-			}
+			clickIntercept(pom.getInstanceNewPatient().$closeCcdImport, 30);
+
 		}
-
 	}
 
 	@Test(priority = 2, groups = "healthrec")
@@ -495,15 +385,15 @@ public class Local_Host extends LaunchBrowser {
 			driver.navigate().to("https://www.75health.com/health/#list_ehr");
 		}
 
+		// clickIntercept(pom.getInstanceHealthRec().clickHealthRec, 30);
+
 		sleep(3000);
 		implicitWait(60, TimeUnit.SECONDS);
 		while (true) {
 			try {
 				WebElement remv = driver
 						.findElement(By.xpath("(//div[@id='ehr-search']/div[2]//following::input[1])[1]"));
-				visbility(driver, remv, 60);
-
-				javascriptclick(remv);
+				clickIntercept(remv, 30);
 				break;
 			} catch (Exception e) {
 
@@ -524,40 +414,40 @@ public class Local_Host extends LaunchBrowser {
 			if (web.getText().trim().equals(kpid)) {
 
 				visbility(driver, web, 60);
-				clickble(driver, web, 60);
-
-				web.click();
+				clickIntercept(web, 30);
 				break;
 			}
 
 		}
 		sleep(2000);
-		try {
-			WebElement r7 = driver.findElement(By.id("newMedicalRecordButton"));
-			visbility(driver, r7, 60);
-			elementClickable(r7);
-			r7.click();
-		} catch (ElementClickInterceptedException e) {
-			WebElement r7 = driver.findElement(By.id("newMedicalRecordButton"));
-			visbility(driver, r7, 60);
-			elementClickable(r7);
-			r7.click();
-		}
 
-		try {
-			visbility(driver, pom.getInstanceHealthRec().ehrEllipses, 60);
-			clickble(driver, pom.getInstanceHealthRec().ehrEllipses, 60);
-			actions("click", pom.getInstanceHealthRec().ehrEllipses);
-		} catch (Exception e) {
-			visbility(driver, pom.getInstanceHealthRec().ehrEllipses, 60);
-			clickble(driver, pom.getInstanceHealthRec().ehrEllipses, 60);
-			actions("click", pom.getInstanceHealthRec().ehrEllipses);
-		}
+		/* try { */
+		WebElement r7 = driver.findElement(By.id("newMedicalRecordButton"));
+		visbility(driver, r7, 60);
+		clickIntercept(r7, 30);
+		/*
+		 * } catch (ElementClickInterceptedException e) { WebElement r7 =
+		 * driver.findElement(By.id("newMedicalRecordButton")); visbility(driver, r7,
+		 * 60); elementClickable(r7); r7.click(); }
+		 */
+
+		/*
+		 * try { visbility(driver, pom.getInstanceHealthRec().ehrEllipses, 60);
+		 * clickble(driver, pom.getInstanceHealthRec().ehrEllipses, 60);
+		 * actions("click", pom.getInstanceHealthRec().ehrEllipses);
+		 */
+		clickIntercept(pom.getInstanceHealthRec().ehrEllipses, 30);
+		/*
+		 * } catch (Exception e) { visbility(driver,
+		 * pom.getInstanceHealthRec().ehrEllipses, 60); clickble(driver,
+		 * pom.getInstanceHealthRec().ehrEllipses, 60); actions("click",
+		 * pom.getInstanceHealthRec().ehrEllipses); }
+		 */
 
 		for (WebElement web : pom.getInstanceHealthRec().ehrEllipsesList) {
 			if (web.getText().trim().equals("Reset Setting")) {
 				visbility(driver, web, 60);
-				web.click();
+				clickIntercept(web, 30);
 				break;
 			}
 
@@ -726,9 +616,10 @@ public class Local_Host extends LaunchBrowser {
 
 					while (true) {
 						if (pom.getInstanceAllerygy().addIcon.isDisplayed()) {
+
 							visbility(driver, pom.getInstanceAllerygy().addIcon, 30);
-							elementClickable(pom.getInstanceAllerygy().addIcon);
-							click(pom.getInstanceAllerygy().addIcon);
+
+							clickIntercept(pom.getInstanceAllerygy().addIcon, 30);
 							break;
 						} else {
 							if (!pom.getInstanceAllerygy().addIcon.isDisplayed()) {
@@ -738,8 +629,8 @@ public class Local_Host extends LaunchBrowser {
 					}
 
 					visbility(driver, pom.getInstanceAllerygy().selectAllergyType, 30);
-					elementClickable(pom.getInstanceAllerygy().selectAllergyType);
-					click(pom.getInstanceAllerygy().selectAllergyType);
+
+					clickIntercept(pom.getInstanceAllerygy().selectAllergyType, 30);
 					dropDown("text", pom.getInstanceAllerygy().selectAllergyType, "Food Allergy");
 					visbility(driver, pom.getInstanceAllerygy().allergenDiscription, 30);
 					sendkeys(pom.getInstanceAllerygy().allergenDiscription, "food1");
@@ -747,30 +638,23 @@ public class Local_Host extends LaunchBrowser {
 					visbility(driver, pom.getInstanceAllerygy().reactionDiscription, 30);
 					sendkeys(pom.getInstanceAllerygy().reactionDiscription, "stomach pain");
 
-					elementClickable(pom.getInstanceAllerygy().more);
-					click(pom.getInstanceAllerygy().more);
+					clickIntercept(pom.getInstanceAllerygy().more, 30);
 
 					for (WebElement w : pom.getInstanceAllerygy().chooseFromDropdown) {
 						if (w.getText().trim().equals("Show Severity")) {
-							w.click();
+							clickIntercept(w, 30);
 							break;
 						}
 
 					}
-					sleep(2000);
-					try {
-						elementClickable(pom.getInstanceAllerygy().more);
-						click(pom.getInstanceAllerygy().more);
-					} catch (ElementClickInterceptedException e) {
-						elementClickable(pom.getInstanceAllerygy().more);
-						click(pom.getInstanceAllerygy().more);
-					}
+
+					clickIntercept(pom.getInstanceAllerygy().more, 30);
 
 					for (WebElement w : pom.getInstanceAllerygy().chooseFromDropdown) {
 						if (w.getText().trim().equals("Show Status")) {
 							visbility(driver, w, 30);
-							elementClickable(w);
-							click(w);
+							clickIntercept(w, 30);
+
 							break;
 						}
 
@@ -780,19 +664,17 @@ public class Local_Host extends LaunchBrowser {
 
 					dropDown("text", pom.getInstanceAllerygy().severityDiscription, "Mild");
 
-					sleep(2000);
+					// sleep(2000);
 					visbility(driver, pom.getInstanceAllerygy().statusDiscription, 30);
 
 					dropDown("text", pom.getInstanceAllerygy().statusDiscription, "Inactive");
 
-					elementClickable(pom.getInstanceAllerygy().saveButton);
-					click(pom.getInstanceAllerygy().saveButton);
+					clickIntercept(pom.getInstanceAllerygy().saveButton, 30);
 
 					for (WebElement w : pom.getInstanceAllerygy().saveDropdown) {
 						if (w.getText().trim().equals("Save")) {
-							visbility(driver, w, 60);
-							elementClickable(w);
-							click(w);
+							visbility(driver, w, 30);
+							clickIntercept(w, 30);
 							break;
 						}
 
@@ -800,13 +682,11 @@ public class Local_Host extends LaunchBrowser {
 					try {
 						WebElement edit = driver.findElement(By.xpath("//span[text()='food1']"));
 						visbility(driver, edit, 60);
-						elementClickable(edit);
-						click(edit);
-					} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+						clickIntercept(edit, 30);
+					} catch (StaleElementReferenceException e) {
 						WebElement edit = driver.findElement(By.xpath("//span[text()='food1']"));
-						visbility(driver, edit, 60);
-						elementClickable(edit);
-						click(edit);
+
+						clickIntercept(edit, 30);
 					}
 
 					visbility(driver, pom.getInstanceAllerygy().allergenDiscription, 40);
@@ -815,17 +695,16 @@ public class Local_Host extends LaunchBrowser {
 					sleep(2000);
 					WebElement scq = driver.findElement(By.xpath("//div[text()='Strawberry ']"));
 					visbility(driver, scq, 60);
-					elementClickable(scq);
-					actions("click", scq);
 
-					elementClickable(pom.getInstanceAllerygy().saveButton);
-					click(pom.getInstanceAllerygy().saveButton);
+					clickIntercept(scq, 30);
+
+					clickIntercept(pom.getInstanceAllerygy().saveButton, 30);
 
 					for (WebElement w : pom.getInstanceAllerygy().saveDropdown) {
 						if (w.getText().trim().equals("Save")) {
 							visbility(driver, w, 60);
-							elementClickable(w);
-							click(w);
+
+							clickIntercept(w, 30);
 							break;
 						}
 
@@ -836,9 +715,10 @@ public class Local_Host extends LaunchBrowser {
 					// Social history....
 					while (true) {
 						if (pom.getInstanceSocialHistory().addIcon.isDisplayed()) {
+
 							visbility(driver, pom.getInstanceSocialHistory().addIcon, 30);
-							elementClickable(pom.getInstanceSocialHistory().addIcon);
-							click(pom.getInstanceSocialHistory().addIcon);
+
+							clickIntercept(pom.getInstanceSocialHistory().addIcon, 30);
 							break;
 
 						} else {
@@ -854,35 +734,32 @@ public class Local_Host extends LaunchBrowser {
 					visbility(driver, pom.getInstanceSocialHistory().discription, 30);
 					sendkeys(pom.getInstanceSocialHistory().discription, "social histry");
 
-					elementClickable(pom.getInstanceSocialHistory().save);
-					click(pom.getInstanceSocialHistory().save);
+					clickIntercept(pom.getInstanceSocialHistory().save, 30);
 					try {
 						WebElement jj = driver.findElement(By.xpath("//div[text()='( Alcohol )']"));
 						visbility(driver, jj, 60);
 
-						elementClickable(jj);
-						click(jj);
+						clickIntercept(jj, 30);
 					} catch (StaleElementReferenceException e) {
 						WebElement jj = driver.findElement(By.xpath("//div[text()='( Alcohol )']"));
 						visbility(driver, jj, 60);
+						clickIntercept(jj, 30);
 
-						elementClickable(jj);
-						click(jj);
 					}
 					visbility(driver, pom.getInstanceSocialHistory().discription, 30);
 					clear(pom.getInstanceSocialHistory().discription);
 
 					sendkeys(pom.getInstanceSocialHistory().discription, "KAASPRO ENTERPRISES");
-					elementClickable(pom.getInstanceSocialHistory().save);
-					click(pom.getInstanceSocialHistory().save);
+
+					clickIntercept(pom.getInstanceSocialHistory().save, 30);
 
 					// Family Health...
 
 					while (true) {
 						if (pom.getInstanceFamilyHaelth().addIcon.isDisplayed()) {
 							visbility(driver, pom.getInstanceFamilyHaelth().addIcon, 30);
-							elementClickable(pom.getInstanceFamilyHaelth().addIcon);
-							click(pom.getInstanceFamilyHaelth().addIcon);
+
+							clickIntercept(pom.getInstanceFamilyHaelth().addIcon, 30);
 							break;
 						} else {
 							if (!pom.getInstanceFamilyHaelth().addIcon.isDisplayed()) {
@@ -900,28 +777,27 @@ public class Local_Host extends LaunchBrowser {
 
 					FamilyHealth.familyHealthIcd();
 
-					elementClickable(pom.getInstanceFamilyHaelth().save);
-					click(pom.getInstanceFamilyHaelth().save);
+					clickIntercept(pom.getInstanceFamilyHaelth().save, 30);
 
 					for (WebElement w : pom.getInstanceFamilyHaelth().saveDropdown) {
 
 						if (w.getText().trim().equals("Save")) {
 							visbility(driver, w, 60);
-							w.click();
+							clickIntercept(w, 30);
+
 							break;
 						}
 
 					}
 
-					sleep(3000);
 					// Alert...
 					WebElement $alert$;
 					while (true) {
 
 						if (pom.getInstanceAlert().addIcon.isDisplayed()) {
 							visbility(driver, pom.getInstanceAlert().addIcon, 30);
-							elementClickable(pom.getInstanceAlert().addIcon);
-							click(pom.getInstanceAlert().addIcon);
+
+							clickIntercept(pom.getInstanceAlert().addIcon, 30);
 							break;
 						} else {
 							if (!pom.getInstanceAlert().addIcon.isDisplayed()) {
@@ -933,33 +809,30 @@ public class Local_Host extends LaunchBrowser {
 					visbility(driver, pom.getInstanceAlert().discription, 30);
 					sendkeys(pom.getInstanceAlert().discription, "hello");
 
-					elementClickable(pom.getInstanceAlert().visbility);
-					click(pom.getInstanceAlert().visbility);
+					clickIntercept(pom.getInstanceAlert().visbility, 30);
 
 					for (WebElement web : pom.getInstanceAlert().visbilityDropDown) {
 
 						if (web.getText().trim().equals("Everyone")) {
 							visbility(driver, web, 30);
-							click(web);
+							clickIntercept(web, 30);
+
 							break;
 						}
 
 					}
-					elementClickable(pom.getInstanceAlert().save);
-					click(pom.getInstanceAlert().save);
-					sleep(1500);
+
+					clickIntercept(pom.getInstanceAlert().save, 30);
 
 					try {
 						visbility(driver, pom.getInstanceAlert().edit, 40);
 
-						elementClickable(pom.getInstanceAlert().edit);
-						click(pom.getInstanceAlert().edit);
+						clickIntercept(pom.getInstanceAlert().edit, 30);
 
-					} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+					} catch (StaleElementReferenceException e) {
 						System.out.println("stale");
 						visbility(driver, pom.getInstanceAlert().edit, 40);
-						elementClickable(pom.getInstanceAlert().edit);
-						click(pom.getInstanceAlert().edit);
+						clickIntercept(pom.getInstanceAlert().edit, 30);
 
 					}
 
@@ -967,8 +840,7 @@ public class Local_Host extends LaunchBrowser {
 					clear(pom.getInstanceAlert().discription);
 					sendkeys(pom.getInstanceAlert().discription, "wELCOME");
 
-					elementClickable(pom.getInstanceAlert().save);
-					click(pom.getInstanceAlert().save);
+					clickIntercept(pom.getInstanceAlert().save, 30);
 
 				} else if (tagnames.equals("vaccine")) {
 
@@ -976,8 +848,8 @@ public class Local_Host extends LaunchBrowser {
 
 						if (pom.getInstanceVaccine().addIcon.isDisplayed()) {
 							visbility(driver, pom.getInstanceVaccine().addIcon, 30);
-							elementClickable(pom.getInstanceVaccine().addIcon);
-							click(pom.getInstanceVaccine().addIcon);
+
+							clickIntercept(pom.getInstanceVaccine().addIcon, 30);
 							break;
 						} else if (!pom.getInstanceVaccine().addIcon.isDisplayed()) {
 							actions("move to element", pom.getInstanceVaccine().addIcon);
@@ -994,26 +866,24 @@ public class Local_Host extends LaunchBrowser {
 					sendkeys(pom.getInstanceVaccine().vaccineName, "TT");
 
 					visbility(driver, pom.getInstanceVaccine().save, 30);
-					elementClickable(pom.getInstanceVaccine().save);
-					click(pom.getInstanceVaccine().save);
+					clickIntercept(pom.getInstanceVaccine().save, 30);
 
 					try {
 
 						visbility(driver, pom.getInstanceVaccine().edit, 40);
-						elementClickable(pom.getInstanceVaccine().edit);
-						click(pom.getInstanceVaccine().edit);
-					} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+
+						clickIntercept(pom.getInstanceVaccine().edit, 30);
+					} catch (StaleElementReferenceException e) {
 						visbility(driver, pom.getInstanceVaccine().edit, 40);
-						elementClickable(pom.getInstanceVaccine().edit);
-						click(pom.getInstanceVaccine().edit);
+						clickIntercept(pom.getInstanceVaccine().edit, 30);
 					}
 
 					visbility(driver, pom.getInstanceVaccine().vaccineName, 30);
 					clear(pom.getInstanceVaccine().vaccineName);
 					sendkeys(pom.getInstanceVaccine().vaccineName, "TT INJECTION");
 
-					elementClickable(pom.getInstanceVaccine().save);
-					click(pom.getInstanceVaccine().save);
+					// elementClickable(pom.getInstanceVaccine().save);
+					clickIntercept(pom.getInstanceVaccine().save, 30);
 
 				} else if (tagnames.equals("implantable-devices")) {
 
@@ -1021,8 +891,8 @@ public class Local_Host extends LaunchBrowser {
 
 						if (pom.getInstanceImplantableDevice().addIcon.isDisplayed()) {
 							visbility(driver, pom.getInstanceImplantableDevice().addIcon, 30);
-							elementClickable(pom.getInstanceImplantableDevice().addIcon);
-							click(pom.getInstanceImplantableDevice().addIcon);
+
+							clickIntercept(pom.getInstanceImplantableDevice().addIcon, 30);
 							break;
 						} else if (!pom.getInstanceImplantableDevice().addIcon.isDisplayed()) {
 
@@ -1033,8 +903,7 @@ public class Local_Host extends LaunchBrowser {
 					visbility(driver, pom.getInstanceImplantableDevice().udi, 30);
 					sendkeys(pom.getInstanceImplantableDevice().udi, "(01)00844588003288");
 
-					elementClickable(pom.getInstanceImplantableDevice().verifyButton);
-					click(pom.getInstanceImplantableDevice().verifyButton);
+					clickIntercept(pom.getInstanceImplantableDevice().verifyButton, 30);
 
 					while (true) {
 						if (pom.getInstanceImplantableDevice().verifiedTick.isDisplayed()) {
@@ -1045,28 +914,25 @@ public class Local_Host extends LaunchBrowser {
 					visbility(driver, pom.getInstanceImplantableDevice().note, 30);
 					sendkeys(pom.getInstanceImplantableDevice().note, "hello123");
 
-					elementClickable(pom.getInstanceImplantableDevice().save);
-					click(pom.getInstanceImplantableDevice().save);
-					sleep(2000);
+					clickIntercept(pom.getInstanceImplantableDevice().save, 30);
+
 					try {
 						WebElement edit = driver
 								.findElement(By.xpath("//div[text()='Coated femoral stem prosthesis, modular']"));
 						visbility(driver, edit, 60);
-						elementClickable(edit);
-						click(edit);
-					} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+						clickIntercept(edit, 30);
+					} catch (StaleElementReferenceException e) {
 						WebElement edit = driver
 								.findElement(By.xpath("//div[text()='Coated femoral stem prosthesis, modular']"));
 						visbility(driver, edit, 60);
-						elementClickable(edit);
-						click(edit);
+						clickIntercept(edit, 30);
+
 					}
 					visbility(driver, pom.getInstanceImplantableDevice().note, 30);
 					clear(pom.getInstanceImplantableDevice().note);
 					sendkeys(pom.getInstanceImplantableDevice().note, "JUst Rise up..");
 
-					elementClickable(pom.getInstanceImplantableDevice().save);
-					click(pom.getInstanceImplantableDevice().save);
+					clickIntercept(pom.getInstanceImplantableDevice().save, 30);
 
 				} else if (tagnames.equals("amendment")) {
 
@@ -1075,8 +941,7 @@ public class Local_Host extends LaunchBrowser {
 						if (pom.getInstanceAmendment().addIcon.isDisplayed()) {
 
 							visbility(driver, pom.getInstanceAmendment().addIcon, 30);
-							elementClickable(pom.getInstanceAmendment().addIcon);
-							click(pom.getInstanceAmendment().addIcon);
+							clickIntercept(pom.getInstanceAmendment().addIcon, 30);
 							break;
 						} else if (!pom.getInstanceAmendment().addIcon.isDisplayed()) {
 							actions("move to element", pom.getInstanceAmendment().addIcon);
@@ -1093,29 +958,23 @@ public class Local_Host extends LaunchBrowser {
 					dropDown("text", pom.getInstanceAmendment().selectStatus, "Accept");
 					visbility(driver, pom.getInstanceAmendment().reasonDiscription, 30);
 					sendkeys(pom.getInstanceAmendment().reasonDiscription, "whats up...");
-					elementClickable(pom.getInstanceAmendment().save);
-					click(pom.getInstanceAmendment().save);
+
+					clickIntercept(pom.getInstanceAmendment().save, 30);
 
 					try {
 						WebElement ac = driver.findElement(By.xpath("//div[text()='Accepted : whats up...']"));
 						visbility(driver, ac, 60);
-						elementClickable(ac);
-						click(ac);
-					} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+						clickIntercept(ac, 30);
+					} catch (StaleElementReferenceException e) {
 						WebElement ac = driver.findElement(By.xpath("//div[text()='Accepted : whats up...']"));
 						visbility(driver, ac, 60);
-						elementClickable(ac);
-						click(ac);
+						clickIntercept(ac, 30);
 					}
-					sleep(2000);
 
 					visbility(driver, pom.getInstanceAmendment().reasonDiscription, 30);
 					clear(pom.getInstanceAmendment().reasonDiscription);
 					sendkeys(pom.getInstanceAmendment().reasonDiscription, "warrior");
-
-					elementClickable(pom.getInstanceAmendment().save);
-					click(pom.getInstanceAmendment().save);
-					sleep(3000);
+					clickIntercept(pom.getInstanceAmendment().save, 30);
 
 				} else if (tagnames.equals("diagnosis")) {
 
@@ -1126,8 +985,7 @@ public class Local_Host extends LaunchBrowser {
 					while (true) {
 						if (pom.getInstanceSymptom().addicon.isDisplayed()) {
 							visbility(driver, pom.getInstanceSymptom().addicon, 30);
-							elementClickable(pom.getInstanceSymptom().addicon);
-							click(pom.getInstanceSymptom().addicon);
+							clickIntercept(pom.getInstanceSymptom().addicon, 30);
 							break;
 						} else if (!pom.getInstanceSymptom().addicon.isDisplayed()) {
 							actions("move to element", pom.getInstanceSymptom().addicon);
@@ -1135,7 +993,6 @@ public class Local_Host extends LaunchBrowser {
 					}
 					visbility(driver, pom.getInstanceSymptom().icd, 30);
 					sendkeys(pom.getInstanceSymptom().icd, "test");
-					implicitWait(30, TimeUnit.SECONDS);
 
 					while (true) {
 						try {
@@ -1150,39 +1007,33 @@ public class Local_Host extends LaunchBrowser {
 					for (WebElement web : pom.getInstanceSymptom().icdList) {
 						if (web.getText().trim().equals("R76.1: Abnormal reaction to tuberculin test")) {
 							visbility(driver, web, 60);
-							elementClickable(web);
-							click(web);
+							clickIntercept(web, 30);
 							break;
 						}
 
 					}
 					visbility(driver, pom.getInstanceSymptom().symptoms, 30);
 					sendkeys(pom.getInstanceSymptom().symptoms, "fever");
-					elementClickable(pom.getInstanceSymptom().save);
-					click(pom.getInstanceSymptom().save);
+
+					clickIntercept(pom.getInstanceSymptom().save, 30);
+
 					try {
 						WebElement a8 = driver.findElement(
 								By.xpath("//div[contains(text(),'R76.1: Abnormal reaction to tuberculin test')]"));
 						visbility(driver, a8, 40);
-						elementClickable(a8);
-						click(a8);
-					} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+						clickIntercept(a8, 30);
+					} catch (StaleElementReferenceException e) {
 						WebElement a8 = driver.findElement(
 								By.xpath("//div[contains(text(),'R76.1: Abnormal reaction to tuberculin test')]"));
 						visbility(driver, a8, 40);
-						elementClickable(a8);
-						click(a8);
+						clickIntercept(a8, 30);
 
 					}
 
 					visbility(driver, pom.getInstanceSymptom().symptoms, 40);
 					clear(pom.getInstanceSymptom().symptoms);
 					sendkeys(pom.getInstanceSymptom().symptoms, "covid");
-
-					elementClickable(pom.getInstanceSymptom().save);
-					click(pom.getInstanceSymptom().save);
-
-					sleep(4000);
+					clickIntercept(pom.getInstanceSymptom().save, 30);
 
 				} else if (tagnames.equals("procedure")) {
 
@@ -1190,8 +1041,7 @@ public class Local_Host extends LaunchBrowser {
 
 						if (pom.getInstanceProcedure().addIcon.isDisplayed()) {
 							visbility(driver, pom.getInstanceProcedure().addIcon, 40);
-							elementClickable(pom.getInstanceProcedure().addIcon);
-							click(pom.getInstanceProcedure().addIcon);
+							clickIntercept(pom.getInstanceProcedure().addIcon, 30);
 							break;
 						} else if (!pom.getInstanceProcedure().addIcon.isDisplayed()) {
 							actions("move to element", pom.getInstanceProcedure().addIcon);
@@ -1218,8 +1068,7 @@ public class Local_Host extends LaunchBrowser {
 						if (web.getText().trim().equals("SNOMED : 134287002")) {
 
 							visbility(driver, web, 40);
-							elementClickable(web);
-							click(web);
+							clickIntercept(web, 30);
 							break;
 
 						}
@@ -1227,13 +1076,12 @@ public class Local_Host extends LaunchBrowser {
 					}
 					visbility(driver, pom.getInstanceProcedure().procedure, 40);
 					sendkeys(pom.getInstanceProcedure().procedure, "gdgdg");
-					elementClickable(pom.getInstanceProcedure().save);
-					click(pom.getInstanceProcedure().save);
+					clickIntercept(pom.getInstanceProcedure().save, 30);
 
 					for (WebElement w : pom.getInstanceProcedure().saveMore) {
 						if (w.getText().trim().equals("Save")) {
 							visbility(driver, w, 60);
-							w.click();
+							clickIntercept(w, 30);
 
 							break;
 						}
@@ -1241,23 +1089,21 @@ public class Local_Host extends LaunchBrowser {
 					}
 
 					try {
-						// System.out.println("ENTER PROCEUER EDIT {try}");
-						WebElement edit = driver.findElement(
-								By.xpath("//div[text()='134287002: Cytomegalovirus antigen test (procedure)']"));
-						visbility(driver, edit, 60);
-						elementClickable(edit);
-						click(edit);
 
-					} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
-						// System.out.println("ENTER PROCEUER EDIT{catch}");
 						WebElement edit = driver.findElement(
 								By.xpath("//div[text()='134287002: Cytomegalovirus antigen test (procedure)']"));
 						visbility(driver, edit, 60);
-						elementClickable(edit);
-						click(edit);
-						// System.out.println("CLICKED EDIT PRO");
+						clickIntercept(edit, 30);
+
+					} catch (StaleElementReferenceException e) {
+
+						WebElement edit = driver.findElement(
+								By.xpath("//div[text()='134287002: Cytomegalovirus antigen test (procedure)']"));
+						visbility(driver, edit, 60);
+						clickIntercept(edit, 30);
+
 					}
-					// System.out.println("edit procedure");
+
 					sleep(2500);
 					try {
 						// System.out.println("1234");
@@ -1271,13 +1117,13 @@ public class Local_Host extends LaunchBrowser {
 						clear(pom.getInstanceProcedure().procedure);
 						sendkeys(pom.getInstanceProcedure().procedure, "LARA");
 					}
-					elementClickable(pom.getInstanceProcedure().save);
-					click(pom.getInstanceProcedure().save);
+
+					clickIntercept(pom.getInstanceProcedure().save, 30);
 
 					for (WebElement w : pom.getInstanceProcedure().saveMore) {
 						if (w.getText().trim().equals("Save")) {
 							visbility(driver, w, 60);
-							w.click();
+							clickIntercept(w, 30);
 							break;
 						}
 
@@ -1288,8 +1134,7 @@ public class Local_Host extends LaunchBrowser {
 
 						if (pom.getInstanceGoal().addicon.isDisplayed()) {
 							visbility(driver, pom.getInstanceGoal().addicon, 40);
-							elementClickable(pom.getInstanceGoal().addicon);
-							click(pom.getInstanceGoal().addicon);
+							clickIntercept(pom.getInstanceGoal().addicon, 30);
 							break;
 						} else if (!pom.getInstanceGoal().addicon.isDisplayed()) {
 							actions("move to element", pom.getInstanceGoal().addicon);
@@ -1297,61 +1142,46 @@ public class Local_Host extends LaunchBrowser {
 					}
 					visbility(driver, pom.getInstanceGoal().enterGoal, 30);
 					sendkeys(pom.getInstanceGoal().enterGoal, "goal1");
-					sleep(3000);
+					// sleep(3000);
 					try {
 						visbility(driver, pom.getInstanceGoal().DateField, 30);
-						elementClickable(pom.getInstanceGoal().DateField);
-						click(pom.getInstanceGoal().DateField);
-						;
+						clickIntercept(pom.getInstanceGoal().DateField, 30);
+
 						System.out.println("DATE CLICKED");
 					} catch (Exception e) {
 						System.out.println("DATE CLICKED{catch}");
 						visbility(driver, pom.getInstanceGoal().DateField, 30);
-						System.out.println("vis");
-						elementClickable(pom.getInstanceGoal().DateField);
-						System.out.println("clickable");
-						click(pom.getInstanceGoal().DateField);
-						System.out.println("clcik");
+						clickIntercept(pom.getInstanceGoal().DateField, 30);
 
 					}
 					visbility(driver, pom.getInstanceGoal().selectMonth, 30);
 					dropDown("index", pom.getInstanceGoal().selectMonth, "09");
 
 					visbility(driver, pom.getInstanceGoal().chooseDate, 30);
-					elementClickable(pom.getInstanceGoal().chooseDate);
-					click(pom.getInstanceGoal().chooseDate);
-
-					elementClickable(pom.getInstanceGoal().save);
-					click(pom.getInstanceGoal().save);
+					clickIntercept(pom.getInstanceGoal().chooseDate, 30);
+					clickIntercept(pom.getInstanceGoal().save, 30);
 
 					try {
 
 						visbility(driver, pom.getInstanceGoal().edit, 60);
-						elementClickable(pom.getInstanceGoal().edit);
-						click(pom.getInstanceGoal().edit);
-					} catch (Exception e) {
+						clickIntercept(pom.getInstanceGoal().edit, 30);
+					} catch (StaleElementReferenceException e) {
 						System.out.println("GOALS STALE");
 						visbility(driver, pom.getInstanceGoal().edit, 60);
-						elementClickable(pom.getInstanceGoal().edit);
-						click(pom.getInstanceGoal().edit);
+						clickIntercept(pom.getInstanceGoal().edit, 30);
 					}
 
 					visbility(driver, pom.getInstanceGoal().enterGoal, 30);
 					clear(pom.getInstanceGoal().enterGoal);
 					sendkeys(pom.getInstanceGoal().enterGoal, "HELLO THIS IS GOALS MODULE.");
-
-					elementClickable(pom.getInstanceGoal().save);
-					click(pom.getInstanceGoal().save);
-
-					sleep(4000);
+					clickIntercept(pom.getInstanceGoal().save, 30);
 
 				} else if (tagnames.equals("directives")) {
 
 					while (true) {
 						if (pom.getInstanceAdvanceDirective().addIcon.isDisplayed()) {
 							visbility(driver, pom.getInstanceAdvanceDirective().addIcon, 30);
-							elementClickable(pom.getInstanceAdvanceDirective().addIcon);
-							click(pom.getInstanceAdvanceDirective().addIcon);
+							clickIntercept(pom.getInstanceAdvanceDirective().addIcon, 30);
 							break;
 						} else if (!pom.getInstanceAdvanceDirective().addIcon.isDisplayed()) {
 							actions("move to element", pom.getInstanceAdvanceDirective().addIcon);
@@ -1363,38 +1193,31 @@ public class Local_Host extends LaunchBrowser {
 
 					visbility(driver, pom.getInstanceAdvanceDirective().assesment, 30);
 					sendkeys(pom.getInstanceAdvanceDirective().assesment, "lets hope");
+					clickIntercept(pom.getInstanceAdvanceDirective().save, 30);
 
-					elementClickable(pom.getInstanceAdvanceDirective().save);
-					click(pom.getInstanceAdvanceDirective().save);
 					try {
 						WebElement edit = driver.findElement(By.xpath("//div[text()='lets hope']"));
 						visbility(driver, edit, 30);
-						elementClickable(edit);
-						click(edit);
+						clickIntercept(edit, 30);
 
 					} catch (StaleElementReferenceException e) {
 						WebElement edit = driver.findElement(By.xpath("//div[text()='lets hope']"));
 
 						visbility(driver, edit, 30);
-						elementClickable(edit);
-						click(edit);
+						clickIntercept(edit, 30);
 
 					}
 
 					visbility(driver, pom.getInstanceAdvanceDirective().assesment, 30);
 					sendkeys(pom.getInstanceAdvanceDirective().assesment, "Advance directives");
-
-					elementClickable(pom.getInstanceAdvanceDirective().save);
-					click(pom.getInstanceAdvanceDirective().save);
-					sleep(3000);
+					clickIntercept(pom.getInstanceAdvanceDirective().save, 30);
 
 				} else if (tagnames.equals("status-module")) {
 
 					while (true) {
 						if (pom.getInstanceStatus().addIcon.isDisplayed()) {
 							visbility(driver, pom.getInstanceStatus().addIcon, 30);
-							elementClickable(pom.getInstanceStatus().addIcon);
-							click(pom.getInstanceStatus().addIcon);
+							clickIntercept(pom.getInstanceStatus().addIcon, 30);
 							break;
 						} else if (!pom.getInstanceStatus().addIcon.isDisplayed()) {
 							actions("move to element", pom.getInstanceStatus().addIcon);
@@ -1421,46 +1244,25 @@ public class Local_Host extends LaunchBrowser {
 					for (WebElement we : pom.getInstanceStatus().icdList) {
 						if (we.getText().trim().equals("134374006: Hearing test bilateral abnormality")) {
 							visbility(driver, we, 60);
-							elementClickable(we);
-							click(we);
+							clickIntercept(we, 30);
 							break;
 						}
 
 					}
-
-					elementClickable(pom.getInstanceStatus().save);
-					click(pom.getInstanceStatus().save);
+					clickIntercept(pom.getInstanceStatus().save, 30);
 
 					try {
 						WebElement $editstatus$ = driver.findElement(
 								By.xpath("(//div[text()='134374006: Hearing test bilateral abnormality'])[1]"));
 						visbility(driver, $editstatus$, 60);
-						elementClickable($editstatus$);
-						click($editstatus$);
+						clickIntercept($editstatus$, 30);
 						visbility(driver, pom.getInstanceStatus().removeStatus, 30);
-						elementClickable(pom.getInstanceStatus().removeStatus);
-						click(pom.getInstanceStatus().removeStatus);
-					} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+						clickIntercept(pom.getInstanceStatus().removeStatus, 30);
+					} catch (StaleElementReferenceException e) {
 						WebElement $editstatus$ = driver.findElement(
 								By.xpath("(//div[text()='134374006: Hearing test bilateral abnormality'])[1]"));
-						try {
-							visbility(driver, $editstatus$, 60);
-							elementClickable($editstatus$);
-							click($editstatus$);
-						} catch (ElementClickInterceptedException t) {
-							visbility(driver, $editstatus$, 60);
-							elementClickable($editstatus$);
-							click($editstatus$);
-						}
-						try {
-							visbility(driver, pom.getInstanceStatus().removeStatus, 30);
-							elementClickable(pom.getInstanceStatus().removeStatus);
-							click(pom.getInstanceStatus().removeStatus);
-						} catch (ElementClickInterceptedException d) {
-							visbility(driver, pom.getInstanceStatus().removeStatus, 30);
-							elementClickable(pom.getInstanceStatus().removeStatus);
-							click(pom.getInstanceStatus().removeStatus);
-						}
+						clickIntercept($editstatus$, 30);
+						clickIntercept(pom.getInstanceStatus().removeStatus, 30);
 					}
 
 					visbility(driver, pom.getInstanceStatus().icd, 30);
@@ -1479,24 +1281,19 @@ public class Local_Host extends LaunchBrowser {
 					for (WebElement we : pom.getInstanceStatus().icdList) {
 						if (we.getText().trim().equals("370534002: Yang deficiency")) {
 							visbility(driver, we, 60);
-							elementClickable(we);
-							click(we);
+							clickIntercept(we, 30);
 							break;
 						}
 
 					}
-
-					elementClickable(pom.getInstanceStatus().save);
-					click(pom.getInstanceStatus().save);
-					sleep(3000);
+					clickIntercept(pom.getInstanceStatus().save, 30);
 
 				} else if (tagnames.equals("test-order")) {
 
 					while (true) {
 						if (pom.getInstanceTestOrder().addIcon.isDisplayed()) {
 							visbility(driver, pom.getInstanceTestOrder().addIcon, 30);
-							elementClickable(pom.getInstanceTestOrder().addIcon);
-							click(pom.getInstanceTestOrder().addIcon);
+							clickIntercept(pom.getInstanceTestOrder().addIcon, 30);
 							break;
 						} else if (!pom.getInstanceTestOrder().addIcon.isDisplayed()) {
 							actions("move to element", pom.getInstanceTestOrder().addIcon);
@@ -1523,8 +1320,7 @@ public class Local_Host extends LaunchBrowser {
 					for (WebElement web : pom.getInstanceTestOrder().icdList) {
 						if (web.getText().trim().equals("test")) {
 							visbility(driver, web, 30);
-							elementClickable(web);
-							click(web);
+							clickIntercept(web, 30);
 						}
 
 					}
@@ -1556,29 +1352,25 @@ public class Local_Host extends LaunchBrowser {
 						 * }
 						 */
 
-					elementClickable(pom.getInstanceTestOrder().more);
-					click(pom.getInstanceTestOrder().more);
+					clickIntercept(pom.getInstanceTestOrder().more, 30);
 
 					for (WebElement w : pom.getInstanceTestOrder().moreDropdown) {
 
 						if (w.getText().trim().equals("Show Notes")) {
 							visbility(driver, w, 30);
-							elementClickable(w);
-							click(w);
+							clickIntercept(w, 30);
 							break;
 						}
 
 					}
 					visbility(driver, pom.getInstanceTestOrder().notes, 40);
 					sendkeys(pom.getInstanceTestOrder().notes, "ERROR");
+					clickIntercept(pom.getInstanceTestOrder().save, 30);
 
-					elementClickable(pom.getInstanceTestOrder().save);
-					click(pom.getInstanceTestOrder().save);
 					for (WebElement w : pom.getInstanceTestOrder().saveMore) {
 						if (w.getText().trim().equals("Save")) {
 							visbility(driver, w, 30);
-							elementClickable(w);
-							w.click();
+							clickIntercept(w, 30);
 							break;
 						}
 
@@ -1587,33 +1379,22 @@ public class Local_Host extends LaunchBrowser {
 					try {
 						WebElement edit = driver.findElement(By.xpath("(//div[text()='ERROR'])[1]"));
 						visbility(driver, edit, 30);
-						elementClickable(edit);
-						click(edit);
+						clickIntercept(edit, 30);
 
 					} catch (StaleElementReferenceException e) {
 						WebElement edit = driver.findElement(By.xpath("(//div[text()='ERROR'])[1]"));
-						try {
-							visbility(driver, edit, 30);
-							click(edit);
-							click(edit);
-						} catch (ElementClickInterceptedException r) {
-							visbility(driver, edit, 30);
-							click(edit);
-							click(edit);
-						}
+						clickIntercept(edit, 30);
 					}
 
 					visbility(driver, pom.getInstanceTestOrder().notes, 30);
 					clear(pom.getInstanceTestOrder().notes);
 					sendkeys(pom.getInstanceTestOrder().notes, "Test order..");
+					clickIntercept(pom.getInstanceTestOrder().save, 30);
 
-					elementClickable(pom.getInstanceTestOrder().save);
-					click(pom.getInstanceTestOrder().save);
 					for (WebElement w : pom.getInstanceTestOrder().saveMore) {
 						if (w.getText().trim().equals("Save")) {
 							visbility(driver, w, 30);
-							elementClickable(w);
-							w.click();
+							clickIntercept(w, 30);
 							break;
 						}
 
@@ -1625,8 +1406,7 @@ public class Local_Host extends LaunchBrowser {
 
 						if (pom.getInstanceMedication().addIcon.isDisplayed()) {
 							visbility(driver, pom.getInstanceMedication().addIcon, 40);
-							elementClickable(pom.getInstanceMedication().addIcon);
-							click(pom.getInstanceMedication().addIcon);
+							clickIntercept(pom.getInstanceMedication().addIcon, 30);
 							break;
 						} else if (!pom.getInstanceMedication().addIcon.isDisplayed()) {
 							actions("move to element", pom.getInstanceMedication().addIcon);
@@ -1645,22 +1425,18 @@ public class Local_Host extends LaunchBrowser {
 					for (WebElement web : pom.getInstanceMedication().directionDropDown) {
 						if (web.getText().trim().equals("q12h - Every twelve hours")) {
 							visbility(driver, web, 60);
-							elementClickable(web);
-							click(web);
+							clickIntercept(web, 30);
 							break;
 						}
 
 					}
-
-					elementClickable(pom.getInstanceMedication().save);
-					click(pom.getInstanceMedication().save);
+					clickIntercept(pom.getInstanceMedication().save, 30);
 
 					for (WebElement w : pom.getInstanceMedication().saveDropdown) {
 
 						if (w.getText().trim().equals("Save")) {
 							visbility(driver, w, 60);
-							elementClickable(w);
-							w.click();
+							clickIntercept(w, 30);
 							break;
 						}
 
@@ -1668,23 +1444,12 @@ public class Local_Host extends LaunchBrowser {
 
 					try {
 						visbility(driver, pom.getInstanceMedication().edit, 30);
-						elementClickable(pom.getInstanceMedication().edit);
-						click(pom.getInstanceMedication().edit);
-						sleep(2000);
+						clickIntercept(pom.getInstanceMedication().edit, 30);
 					} catch (StaleElementReferenceException e) {
 						visbility(driver, pom.getInstanceMedication().edit, 30);
-						elementClickable(pom.getInstanceMedication().edit);
-						click(pom.getInstanceMedication().edit);
+						clickIntercept(pom.getInstanceMedication().edit, 30);
 					}
-					try {
-						visbility(driver, pom.getInstanceMedication().removeMedication, 30);
-						elementClickable(pom.getInstanceMedication().removeMedication);
-						click(pom.getInstanceMedication().removeMedication);
-					} catch (ElementClickInterceptedException e) {
-						visbility(driver, pom.getInstanceMedication().removeMedication, 30);
-						elementClickable(pom.getInstanceMedication().removeMedication);
-						click(pom.getInstanceMedication().removeMedication);
-					}
+					clickIntercept(pom.getInstanceMedication().removeMedication, 30);
 
 					visbility(driver, pom.getInstanceMedication().drugName, 30);
 					sendkeys(pom.getInstanceMedication().drugName, "1009");
@@ -1705,8 +1470,7 @@ public class Local_Host extends LaunchBrowser {
 						if (we.getText().trim().equals("RXNORM : 1009145")) {
 
 							visbility(driver, we, 60);
-							elementClickable(we);
-							click(we);
+							clickIntercept(we, 30);
 							break;
 
 						}
@@ -1720,35 +1484,30 @@ public class Local_Host extends LaunchBrowser {
 					for (WebElement web : pom.getInstanceMedication().directionDropDown) {
 						if (web.getText().trim().equals("q12h - Every twelve hours")) {
 							visbility(driver, web, 60);
-							elementClickable(web);
-							web.click();
+							clickIntercept(web, 30);
 							break;
 						}
 
 					}
-
-					elementClickable(pom.getInstanceMedication().save);
-					click(pom.getInstanceMedication().save);
+					clickIntercept(pom.getInstanceMedication().save, 30);
 
 					for (WebElement w : pom.getInstanceMedication().saveDropdown) {
 
 						if (w.getText().trim().equals("Save")) {
 							visbility(driver, w, 60);
-							elementClickable(w);
-							w.click();
+							clickIntercept(w, 30);
 							break;
 						}
 
 					}
 
-					sleep(3000);
+					sleep(2000);
 				} else if (tagnames.equals("delivery-note")) {
 
 					while (true) {
 						if (pom.getInstanceNotes().addIcon.isDisplayed()) {
 							visbility(driver, pom.getInstanceNotes().addIcon, 30);
-							elementClickable(pom.getInstanceNotes().addIcon);
-							click(pom.getInstanceNotes().addIcon);
+							clickIntercept(pom.getInstanceNotes().addIcon, 30);
 							break;
 						} else if (!pom.getInstanceNotes().addIcon.isDisplayed()) {
 							actions("move to element", pom.getInstanceNotes().addIcon);
@@ -1757,23 +1516,21 @@ public class Local_Host extends LaunchBrowser {
 
 					visbility(driver, pom.getInstanceNotes().enterNote, 30);
 					sendkeys(pom.getInstanceNotes().enterNote, "hell");
-					elementClickable(pom.getInstanceNotes().save);
-					click(pom.getInstanceNotes().save);
+					clickIntercept(pom.getInstanceNotes().save, 30);
+
 					sleep(1500);
 					try {
 						visbility(driver, pom.getInstanceNotes().edit, 30);
-						elementClickable(pom.getInstanceNotes().edit);
-						click(pom.getInstanceNotes().edit);
+						clickIntercept(pom.getInstanceNotes().edit, 30);
+
 					} catch (StaleElementReferenceException e) {
 						visbility(driver, pom.getInstanceNotes().edit, 30);
-						elementClickable(pom.getInstanceNotes().edit);
-						click(pom.getInstanceNotes().edit);
+						clickIntercept(pom.getInstanceNotes().edit, 30);
 					}
 
 					visbility(driver, pom.getInstanceNotes().enterNote, 30);
 					sendkeys(pom.getInstanceNotes().enterNote, "NOTES--MMM");
-					elementClickable(pom.getInstanceNotes().save);
-					click(pom.getInstanceNotes().save);
+					clickIntercept(pom.getInstanceNotes().save, 30);
 
 				} else if (tagnames.equals("physical-examination")) {
 
@@ -1781,8 +1538,7 @@ public class Local_Host extends LaunchBrowser {
 
 						if (pom.getInstancePhysicalExam().addIcon.isDisplayed()) {
 							visbility(driver, pom.getInstancePhysicalExam().addIcon, 30);
-							elementClickable(pom.getInstancePhysicalExam().addIcon);
-							click(pom.getInstancePhysicalExam().addIcon);
+							clickIntercept(pom.getInstancePhysicalExam().addIcon, 30);
 							break;
 						} else if (!pom.getInstancePhysicalExam().addIcon.isDisplayed()) {
 							actions("move to element", pom.getInstancePhysicalExam().addIcon);
@@ -1795,17 +1551,15 @@ public class Local_Host extends LaunchBrowser {
 					sendkeys(pom.getInstancePhysicalExam().finding, "hw are you");
 
 					try {
-						elementClickable(pom.getInstancePhysicalExam().more);
-						click(pom.getInstancePhysicalExam().more);
+						clickIntercept(pom.getInstancePhysicalExam().more, 30);
+
 					} catch (Exception e) {
-						elementClickable(pom.getInstancePhysicalExam().more);
-						click(pom.getInstancePhysicalExam().more);
+						clickIntercept(pom.getInstancePhysicalExam().more, 30);
 					}
 					for (WebElement w : pom.getInstancePhysicalExam().moreDropDown) {
 						if (w.getText().trim().equals("Show Notes")) {
 							visbility(driver, w, 60);
-							elementClickable(w);
-							w.click();
+							clickIntercept(w, 30);
 							break;
 						}
 
@@ -1813,24 +1567,20 @@ public class Local_Host extends LaunchBrowser {
 
 					visbility(driver, pom.getInstancePhysicalExam().notes, 30);
 					sendkeys(pom.getInstancePhysicalExam().notes, "lets goo");
-					elementClickable(pom.getInstancePhysicalExam().save);
-					click(pom.getInstancePhysicalExam().save);
+					clickIntercept(pom.getInstancePhysicalExam().save, 30);
+
 					try {
 						visbility(driver, pom.getInstancePhysicalExam().edit, 30);
-						elementClickable(pom.getInstancePhysicalExam().edit);
-						click(pom.getInstancePhysicalExam().edit);
+						clickIntercept(pom.getInstancePhysicalExam().edit, 30);
 					} catch (StaleElementReferenceException e) {
 						visbility(driver, pom.getInstancePhysicalExam().edit, 30);
-						elementClickable(pom.getInstancePhysicalExam().edit);
-						click(pom.getInstancePhysicalExam().edit);
+						clickIntercept(pom.getInstancePhysicalExam().edit, 30);
 					}
 
 					visbility(driver, pom.getInstancePhysicalExam().notes, 30);
 					clear(pom.getInstancePhysicalExam().notes);
 					sendkeys(pom.getInstancePhysicalExam().notes, "physical condition");
-
-					elementClickable(pom.getInstancePhysicalExam().save);
-					click(pom.getInstancePhysicalExam().save);
+					clickIntercept(pom.getInstancePhysicalExam().save, 30);
 
 				} else if (tagnames.equals("custom-form")) {
 
@@ -1847,8 +1597,7 @@ public class Local_Host extends LaunchBrowser {
 					while (true) {
 						if (pom.getInstanceAttachFile().addIcon.isDisplayed()) {
 							visbility(driver, pom.getInstanceAttachFile().addIcon, 30);
-							elementClickable(pom.getInstanceAttachFile().addIcon);
-							click(pom.getInstanceAttachFile().addIcon);
+							clickIntercept(pom.getInstanceAttachFile().addIcon, 30);
 							break;
 						} else if (!pom.getInstanceAttachFile().addIcon.isDisplayed()) {
 							actions("move to element", pom.getInstanceAttachFile().addIcon);
@@ -1860,26 +1609,21 @@ public class Local_Host extends LaunchBrowser {
 
 					visbility(driver, pom.getInstanceAttachFile().link, 30);
 					sendkeys(pom.getInstanceAttachFile().link, "https://www.75health.com/");
-
-					elementClickable(pom.getInstanceAttachFile().save);
-					click(pom.getInstanceAttachFile().save);
+					clickIntercept(pom.getInstanceAttachFile().save, 30);
 
 					try {
 						visbility(driver, pom.getInstanceAttachFile().edit, 30);
-						elementClickable(pom.getInstanceAttachFile().edit);
-						click(pom.getInstanceAttachFile().edit);
+						clickIntercept(pom.getInstanceAttachFile().edit, 30);
 
 					} catch (StaleElementReferenceException e) {
 						visbility(driver, pom.getInstanceAttachFile().edit, 30);
-						elementClickable(pom.getInstanceAttachFile().edit);
-						click(pom.getInstanceAttachFile().edit);
+						clickIntercept(pom.getInstanceAttachFile().edit, 30);
 					}
 
 					visbility(driver, pom.getInstanceAttachFile().link, 30);
 					clear(pom.getInstanceAttachFile().link);
 					sendkeys(pom.getInstanceAttachFile().link, "https://www.75health.com/");
-					elementClickable(pom.getInstanceAttachFile().save);
-					click(pom.getInstanceAttachFile().save);
+					clickIntercept(pom.getInstanceAttachFile().save, 30);
 
 					sleep(3000);
 				} else if (tagnames.equals("inpatient")) {
@@ -1887,8 +1631,7 @@ public class Local_Host extends LaunchBrowser {
 					while (true) {
 						if (pom.getInstanceInpatient().addIcon.isDisplayed()) {
 							visbility(driver, pom.getInstanceInpatient().addIcon, 30);
-							elementClickable(pom.getInstanceInpatient().addIcon);
-							click(pom.getInstanceInpatient().addIcon);
+							clickIntercept(pom.getInstanceInpatient().addIcon, 30);
 							break;
 						} else if (!pom.getInstanceInpatient().addIcon.isDisplayed()) {
 							actions("move to element", pom.getInstanceInpatient().addIcon);
@@ -1901,19 +1644,17 @@ public class Local_Host extends LaunchBrowser {
 					dropDown("text", pom.getInstanceInpatient().selectYear, "2022");
 
 					visbility(driver, pom.getInstanceInpatient().chooseDate, 30);
-					elementClickable(pom.getInstanceInpatient().chooseDate);
-					click(pom.getInstanceInpatient().chooseDate);
+					clickIntercept(pom.getInstanceInpatient().chooseDate, 30);
 
 					sleep(2000);
-					elementClickable(pom.getInstanceInpatient().dischargeIdField);
-					click(pom.getInstanceInpatient().dischargeIdField);
+					clickIntercept(pom.getInstanceInpatient().dischargeIdField, 30);
+
 					visbility(driver, pom.getInstanceInpatient().selectMonth, 40);
 					dropDown("index", pom.getInstanceInpatient().selectMonth, "10");
 					visbility(driver, pom.getInstanceInpatient().selectYear, 40);
 					dropDown("text", pom.getInstanceInpatient().selectYear, "2022");
 					visbility(driver, pom.getInstanceInpatient().chooseDate, 30);
-					elementClickable(pom.getInstanceInpatient().chooseDate);
-					click(pom.getInstanceInpatient().chooseDate);
+					clickIntercept(pom.getInstanceInpatient().chooseDate, 30);
 
 					visbility(driver, pom.getInstanceInpatient().selectType, 40);
 					dropDown("text", pom.getInstanceInpatient().selectType, "Urgent");
@@ -1921,8 +1662,7 @@ public class Local_Host extends LaunchBrowser {
 					sendkeys(pom.getInstanceInpatient().roomNo, "777");
 					visbility(driver, pom.getInstanceInpatient().discharge, 30);
 					sendkeys(pom.getInstanceInpatient().discharge, "okay");
-					elementClickable(pom.getInstanceInpatient().save);
-					click(pom.getInstanceInpatient().save);
+					clickIntercept(pom.getInstanceInpatient().save, 30);
 
 					sleep(3000);
 
@@ -1966,17 +1706,14 @@ public class Local_Host extends LaunchBrowser {
 		}
 
 		implicitWait(30, TimeUnit.SECONDS);
-		sleep(2000);
 
 		visbility(driver, pom.getInstanceHealthRec().generateBill, 30);
-		elementClickable(pom.getInstanceHealthRec().generateBill);
-		click(pom.getInstanceHealthRec().generateBill);
+		clickIntercept(pom.getInstanceHealthRec().generateBill, 30);
 
 		for (WebElement we : pom.getInstanceHealthRec().genratebillDropdown) {
 			if (we.getText().trim().equals("Generate Bill from EHR")) {
 				visbility(driver, we, 60);
-				elementClickable(we);
-				click(we);
+				clickIntercept(we, 30);
 				break;
 			}
 
@@ -1992,16 +1729,9 @@ public class Local_Host extends LaunchBrowser {
 			driver.navigate().to("https://www.75health.com/health/#list_ehr");
 		}
 
-		while (true) {
-			try {
-				driver.findElement(By.id("newMedicalRecordButton")).click();
-				break;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		visbility(driver, pom.getInstanceHealthRec().clickAddIconHealthRec, 30);
+		clickIntercept(pom.getInstanceHealthRec().clickAddIconHealthRec, 30);
 
-		sleep(3000);
 		// past cured...
 
 		Vaccine vac = new Vaccine(driver);
@@ -2096,8 +1826,7 @@ public class Local_Host extends LaunchBrowser {
 		while (true) {
 			if (pom.getInstanceVistReason().favoriteIcon.isDisplayed()) {
 				visbility(driver, pom.getInstanceVistReason().favoriteIcon, 40);
-				elementClickable(pom.getInstanceVistReason().favoriteIcon);
-				click(pom.getInstanceVistReason().favoriteIcon);
+				clickIntercept(pom.getInstanceVistReason().favoriteIcon, 30);
 				break;
 			} else if (!pom.getInstanceVistReason().favoriteIcon.isDisplayed()) {
 				actions("move to element", pom.getInstanceVistReason().favoriteIcon);
@@ -2108,31 +1837,29 @@ public class Local_Host extends LaunchBrowser {
 		try {
 
 			visbility(driver, pom.getInstanceVistReason().addNewFavorite, 30);
-			elementClickable(pom.getInstanceVistReason().addNewFavorite);
-			click(pom.getInstanceVistReason().addNewFavorite);
+			clickIntercept(pom.getInstanceVistReason().addNewFavorite, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceVistReason().addNewFavorite, 30);
-			elementClickable(pom.getInstanceVistReason().addNewFavorite);
-			click(pom.getInstanceVistReason().addNewFavorite);
+			clickIntercept(pom.getInstanceVistReason().addNewFavorite, 30);
 
 		}
 
 		try {
 
 			visbility(driver, pom.getInstanceCalendar().selectAppointmentType, 40);
-			click(pom.getInstanceCalendar().selectAppointmentType);
-			System.out.println("ELEMENT CLICKED IN VISIT");
+			clickIntercept(pom.getInstanceCalendar().selectAppointmentType, 30);
+
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceCalendar().selectAppointmentType, 40);
-			click(pom.getInstanceCalendar().selectAppointmentType);
+			clickIntercept(pom.getInstanceCalendar().selectAppointmentType, 30);
 		}
 
 		for (WebElement Element : pom.getInstanceVistReason().selectFavoriteAppointmnetType) {
 			System.out.println(Element.getText());
 			if (Element.getText().equals("Emergency")) {
 
-				click(Element);
+				clickIntercept(Element, 30);
 				break;
 			}
 
@@ -2140,37 +1867,32 @@ public class Local_Host extends LaunchBrowser {
 
 		visbility(driver, pom.getInstanceVistReason().favoriteDiscription, 60);
 		sendkeys(pom.getInstanceVistReason().favoriteDiscription, "favorite visit reason");
-		elementClickable(pom.getInstanceVistReason().FavoriteSave);
-		click(pom.getInstanceVistReason().FavoriteSave);
-		sleep(1500);
+		clickIntercept(pom.getInstanceVistReason().FavoriteSave, 30);
 		try {
 
 			visbility(driver, pom.getInstanceVistReason().editFavorite, 30);
-			elementClickable(pom.getInstanceVistReason().editFavorite);
-			click(pom.getInstanceVistReason().editFavorite);
+			clickIntercept(pom.getInstanceVistReason().editFavorite, 30);
 
-		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+		} catch (StaleElementReferenceException e) {
 			visbility(driver, pom.getInstanceVistReason().editFavorite, 30);
-			elementClickable(pom.getInstanceVistReason().editFavorite);
-			click(pom.getInstanceVistReason().editFavorite);
+			clickIntercept(pom.getInstanceVistReason().editFavorite, 30);
 		}
 
 		try {
 
 			visbility(driver, pom.getInstanceCalendar().selectAppointmentType, 40);
-			click(pom.getInstanceCalendar().selectAppointmentType);
-			System.out.println("ELEMENT CLICKED IN VISIT");
+			clickIntercept(pom.getInstanceCalendar().selectAppointmentType, 30);
+			// System.out.println("ELEMENT CLICKED IN VISIT");
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceCalendar().selectAppointmentType, 40);
-			click(pom.getInstanceCalendar().selectAppointmentType);
+			clickIntercept(pom.getInstanceCalendar().selectAppointmentType, 30);
 		}
 
 		for (WebElement Element : pom.getInstanceVistReason().selectFavoriteAppointmnetType) {
 			System.out.println(Element.getText());
 			if (Element.getText().equals("Emergency")) {
 				visbility(driver, Element, 30);
-				elementClickable(Element);
-				click(Element);
+				clickIntercept(Element, 30);
 				break;
 			}
 
@@ -2178,27 +1900,23 @@ public class Local_Host extends LaunchBrowser {
 
 		visbility(driver, pom.getInstanceVistReason().favoriteDiscription, 30);
 		sendkeys(pom.getInstanceVistReason().favoriteDiscription, "favorite visit reason");
-
-		elementClickable(pom.getInstanceVistReason().FavoriteSave);
-		click(pom.getInstanceVistReason().FavoriteSave);
+		clickIntercept(pom.getInstanceVistReason().FavoriteSave, 30);
 
 		try {
 
 			visbility(driver, pom.getInstanceVistReason().addThisFavorite, 30);
-			elementClickable(pom.getInstanceVistReason().addThisFavorite);
-			click(pom.getInstanceVistReason().addThisFavorite);
+			clickIntercept(pom.getInstanceVistReason().addThisFavorite, 30);
 
-		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+		} catch (StaleElementReferenceException e) {
 			visbility(driver, pom.getInstanceVistReason().addThisFavorite, 30);
-			elementClickable(pom.getInstanceVistReason().addThisFavorite);
-			click(pom.getInstanceVistReason().addThisFavorite);
+			clickIntercept(pom.getInstanceVistReason().addThisFavorite, 30);
 		}
 		try {
 			elementClickable(pom.getInstanceVistReason().closeFavorite);
-			click(pom.getInstanceVistReason().closeFavorite);
+			clickIntercept(pom.getInstanceVistReason().closeFavorite, 30);
 		} catch (ElementClickInterceptedException e) {
 			elementClickable(pom.getInstanceVistReason().closeFavorite);
-			click(pom.getInstanceVistReason().closeFavorite);
+			clickIntercept(pom.getInstanceVistReason().closeFavorite, 30);
 		}
 
 		sleep(2000);
@@ -2211,8 +1929,7 @@ public class Local_Host extends LaunchBrowser {
 
 			if (pom.getInstanceVaccine().favoriteicon.isDisplayed()) {
 				visbility(driver, pom.getInstanceVaccine().favoriteicon, 30);
-				elementClickable(pom.getInstanceVaccine().favoriteicon);
-				click(pom.getInstanceVaccine().favoriteicon);
+				clickIntercept(pom.getInstanceVaccine().favoriteicon, 30);
 				break;
 			} else if (!pom.getInstanceVaccine().favoriteicon.isDisplayed()) {
 				actions("move to element", pom.getInstanceVaccine().favoriteicon);
@@ -2221,12 +1938,10 @@ public class Local_Host extends LaunchBrowser {
 
 		try {
 			visbility(driver, pom.getInstanceVaccine().addNewFavorite, 30);
-			elementClickable(pom.getInstanceVaccine().addNewFavorite);
-			click(pom.getInstanceVaccine().addNewFavorite);
+			clickIntercept(pom.getInstanceVaccine().addNewFavorite, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceVaccine().addNewFavorite, 30);
-			elementClickable(pom.getInstanceVaccine().addNewFavorite);
-			click(pom.getInstanceVaccine().addNewFavorite);
+			clickIntercept(pom.getInstanceVaccine().addNewFavorite, 30);
 		}
 
 		visbility(driver, pom.getInstanceVaccine().favoriteVaccineCvx, 30);
@@ -2235,16 +1950,15 @@ public class Local_Host extends LaunchBrowser {
 		while (true) {
 
 			if (pom.getInstanceVaccine().favoriteIcdList.size() >= 5) {
-				// System.out.println(vc4.size());
+
 				break;
 			}
 		}
 
 		for (WebElement web : pom.getInstanceVaccine().favoriteIcdList) {
-			// System.out.println(web.getText());
 
 			if (web.getText().trim().equals("vaccinia (smallpox) diluted")) {
-				web.click();
+				clickIntercept(web, 30);
 				break;
 			}
 
@@ -2252,30 +1966,23 @@ public class Local_Host extends LaunchBrowser {
 
 		visbility(driver, pom.getInstanceVaccine().vaccineName, 30);
 		sendkeys(pom.getInstanceVaccine().vaccineName, "vacine favorite");
-
-		elementClickable(pom.getInstanceVaccine().favoriteSave);
-		click(pom.getInstanceVaccine().favoriteSave);
-		sleep(1500);
+		clickIntercept(pom.getInstanceVaccine().favoriteSave, 30);
 		try {
 
 			visbility(driver, pom.getInstanceVaccine().editFavorite, 30);
-			elementClickable(pom.getInstanceVaccine().editFavorite);
-			click(pom.getInstanceVaccine().editFavorite);
+			clickIntercept(pom.getInstanceVaccine().editFavorite, 30);
 
-		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+		} catch (StaleElementReferenceException e) {
 			visbility(driver, pom.getInstanceVaccine().editFavorite, 30);
-			elementClickable(pom.getInstanceVaccine().editFavorite);
-			click(pom.getInstanceVaccine().editFavorite);
+			clickIntercept(pom.getInstanceVaccine().editFavorite, 30);
 		}
 
 		try {
 			visbility(driver, pom.getInstanceVaccine().removeFavoriteIcd, 30);
-			elementClickable(pom.getInstanceVaccine().removeFavoriteIcd);
-			click(pom.getInstanceVaccine().removeFavoriteIcd);
+			clickIntercept(pom.getInstanceVaccine().removeFavoriteIcd, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceVaccine().removeFavoriteIcd, 30);
-			elementClickable(pom.getInstanceVaccine().removeFavoriteIcd);
-			click(pom.getInstanceVaccine().removeFavoriteIcd);
+			clickIntercept(pom.getInstanceVaccine().removeFavoriteIcd, 30);
 		}
 
 		visbility(driver, pom.getInstanceVaccine().favoriteVaccineCvx, 30);
@@ -2293,8 +2000,7 @@ public class Local_Host extends LaunchBrowser {
 			if (we.getText().trim().equals("vaccinia immune globulin")) {
 
 				visbility(driver, we, 40);
-				elementClickable(we);
-				click(we);
+				clickIntercept(we, 30);
 
 				break;
 			}
@@ -2304,30 +2010,25 @@ public class Local_Host extends LaunchBrowser {
 		visbility(driver, pom.getInstanceVaccine().vaccineName, 30);
 		clear(pom.getInstanceVaccine().vaccineName);
 		sendkeys(pom.getInstanceVaccine().vaccineName, "vacine module");
-		elementClickable(pom.getInstanceVaccine().favoriteSave);
-		click(pom.getInstanceVaccine().favoriteSave);
+		clickIntercept(pom.getInstanceVaccine().favoriteSave, 30);
 
 		try {
 
 			visbility(driver, pom.getInstanceVaccine().addThisFavorite, 30);
-			elementClickable(pom.getInstanceVaccine().addThisFavorite);
-			click(pom.getInstanceVaccine().addThisFavorite);
+			clickIntercept(pom.getInstanceVaccine().addThisFavorite, 30);
 
 		} catch (Exception e) {
 
 			visbility(driver, pom.getInstanceVaccine().addThisFavorite, 30);
-			elementClickable(pom.getInstanceVaccine().addThisFavorite);
-			click(pom.getInstanceVaccine().addThisFavorite);
+			clickIntercept(pom.getInstanceVaccine().addThisFavorite, 30);
 		}
 
 		try {
 			visbility(driver, pom.getInstanceVaccine().closeFavorite, 30);
-			elementClickable(pom.getInstanceVaccine().closeFavorite);
-			click(pom.getInstanceVaccine().closeFavorite);
+			clickIntercept(pom.getInstanceVaccine().closeFavorite, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceVaccine().closeFavorite, 30);
-			elementClickable(pom.getInstanceVaccine().closeFavorite);
-			click(pom.getInstanceVaccine().closeFavorite);
+			clickIntercept(pom.getInstanceVaccine().closeFavorite, 30);
 		}
 
 		// $$$$$$$$$symptoms$$$$$
@@ -2336,8 +2037,7 @@ public class Local_Host extends LaunchBrowser {
 
 			if (pom.getInstanceSymptom().favoriteIcon.isDisplayed()) {
 				visbility(driver, pom.getInstanceSymptom().favoriteIcon, 30);
-				elementClickable(pom.getInstanceSymptom().favoriteIcon);
-				click(pom.getInstanceSymptom().favoriteIcon);
+				clickIntercept(pom.getInstanceSymptom().favoriteIcon, 30);
 				break;
 			} else if (!pom.getInstanceSymptom().favoriteIcon.isDisplayed()) {
 				actions("move to element", pom.getInstanceSymptom().favoriteIcon);
@@ -2347,13 +2047,11 @@ public class Local_Host extends LaunchBrowser {
 		try {
 
 			visbility(driver, pom.getInstanceSymptom().addNewFavorite, 30);
-			elementClickable(pom.getInstanceSymptom().addNewFavorite);
-			click(pom.getInstanceSymptom().addNewFavorite);
+			clickIntercept(pom.getInstanceSymptom().addNewFavorite, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceSymptom().addNewFavorite, 30);
-			elementClickable(pom.getInstanceSymptom().addNewFavorite);
-			click(pom.getInstanceSymptom().addNewFavorite);
+			clickIntercept(pom.getInstanceSymptom().addNewFavorite, 30);
 		}
 
 		visbility(driver, pom.getInstanceSymptom().favoriteicd, 30);
@@ -2372,8 +2070,7 @@ public class Local_Host extends LaunchBrowser {
 		for (WebElement web : pom.getInstanceSymptom().favoriteicdList) {
 			if (web.getText().trim().equals("R76.1: Abnormal reaction to tuberculin test")) {
 				visbility(driver, web, 60);
-				elementClickable(web);
-				click(web);
+				clickIntercept(web, 30);
 
 				break;
 			}
@@ -2382,30 +2079,24 @@ public class Local_Host extends LaunchBrowser {
 
 		visbility(driver, pom.getInstanceSymptom().favoriteSymptom, 30);
 		sendkeys(pom.getInstanceSymptom().favoriteSymptom, "symptoms favorite");
+		clickIntercept(pom.getInstanceSymptom().favoriteSave, 30);
 
-		elementClickable(pom.getInstanceSymptom().favoriteSave);
-		click(pom.getInstanceSymptom().favoriteSave);
-		sleep(1500);
 		try {
 
 			visbility(driver, pom.getInstanceSymptom().editFavorite, 40);
-			elementClickable(pom.getInstanceSymptom().editFavorite);
-			click(pom.getInstanceSymptom().editFavorite);
+			clickIntercept(pom.getInstanceSymptom().editFavorite, 30);
 
-		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+		} catch (StaleElementReferenceException e) {
 			visbility(driver, pom.getInstanceSymptom().editFavorite, 40);
-			elementClickable(pom.getInstanceSymptom().editFavorite);
-			click(pom.getInstanceSymptom().editFavorite);
+			clickIntercept(pom.getInstanceSymptom().editFavorite, 30);
 		}
 
 		try {
 			visbility(driver, pom.getInstanceSymptom().removeFavoriteIcd, 30);
-			elementClickable(pom.getInstanceSymptom().removeFavoriteIcd);
-			click(pom.getInstanceSymptom().removeFavoriteIcd);
+			clickIntercept(pom.getInstanceSymptom().removeFavoriteIcd, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceSymptom().removeFavoriteIcd, 30);
-			elementClickable(pom.getInstanceSymptom().removeFavoriteIcd);
-			click(pom.getInstanceSymptom().removeFavoriteIcd);
+			clickIntercept(pom.getInstanceSymptom().removeFavoriteIcd, 30);
 		}
 
 		visbility(driver, pom.getInstanceSymptom().favoriteicd, 30);
@@ -2424,8 +2115,7 @@ public class Local_Host extends LaunchBrowser {
 		for (WebElement web : pom.getInstanceSymptom().favoriteicdList) {
 			if (web.getText().trim().equals("R85.81: Anal high risk human papillomavirus (HPV) DNA test positive")) {
 				visbility(driver, web, 60);
-				elementClickable(web);
-				click(web);
+				clickIntercept(web, 30);
 				break;
 			}
 
@@ -2433,28 +2123,22 @@ public class Local_Host extends LaunchBrowser {
 		visbility(driver, pom.getInstanceSymptom().favoriteSymptom, 30);
 		clear(pom.getInstanceSymptom().favoriteSymptom);
 		sendkeys(pom.getInstanceSymptom().favoriteSymptom, "symptoms favorite kpop2");
-
-		elementClickable(pom.getInstanceSymptom().favoriteSave);
-		click(pom.getInstanceSymptom().favoriteSave);
+		clickIntercept(pom.getInstanceSymptom().favoriteSave, 30);
 
 		try {
 			visbility(driver, pom.getInstanceSymptom().addThisFavorite, 30);
-			elementClickable(pom.getInstanceSymptom().addThisFavorite);
-			click(pom.getInstanceSymptom().addThisFavorite);
+			clickIntercept(pom.getInstanceSymptom().addThisFavorite, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceSymptom().addThisFavorite, 30);
-			elementClickable(pom.getInstanceSymptom().addThisFavorite);
-			click(pom.getInstanceSymptom().addThisFavorite);
+			clickIntercept(pom.getInstanceSymptom().addThisFavorite, 30);
 		}
 
 		try {
 			visbility(driver, pom.getInstanceSymptom().closeFavorite, 30);
-			elementClickable(pom.getInstanceSymptom().closeFavorite);
-			click(pom.getInstanceSymptom().closeFavorite);
+			clickIntercept(pom.getInstanceSymptom().closeFavorite, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceSymptom().closeFavorite, 30);
-			elementClickable(pom.getInstanceSymptom().closeFavorite);
-			click(pom.getInstanceSymptom().closeFavorite);
+			clickIntercept(pom.getInstanceSymptom().closeFavorite, 30);
 		}
 
 		// $$$$$$procedure$$$$
@@ -2462,8 +2146,7 @@ public class Local_Host extends LaunchBrowser {
 		while (true) {
 			if (pom.getInstanceProcedure().favoriteIcon.isDisplayed()) {
 				visbility(driver, pom.getInstanceProcedure().favoriteIcon, 40);
-				elementClickable(pom.getInstanceProcedure().favoriteIcon);
-				click(pom.getInstanceProcedure().favoriteIcon);
+				clickIntercept(pom.getInstanceProcedure().favoriteIcon, 30);
 				break;
 			} else if (!pom.getInstanceProcedure().favoriteIcon.isDisplayed()) {
 				actions("move to element", pom.getInstanceProcedure().favoriteIcon);
@@ -2473,13 +2156,11 @@ public class Local_Host extends LaunchBrowser {
 		try {
 
 			visbility(driver, pom.getInstanceProcedure().addNewFavorite, 30);
-			elementClickable(pom.getInstanceProcedure().addNewFavorite);
-			click(pom.getInstanceProcedure().addNewFavorite);
+			clickIntercept(pom.getInstanceProcedure().addNewFavorite, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceProcedure().addNewFavorite, 30);
-			elementClickable(pom.getInstanceProcedure().addNewFavorite);
-			click(pom.getInstanceProcedure().addNewFavorite);
+			clickIntercept(pom.getInstanceProcedure().addNewFavorite, 30);
 		}
 
 		visbility(driver, pom.getInstanceProcedure().favoriteCodeType, 30);
@@ -2503,8 +2184,7 @@ public class Local_Host extends LaunchBrowser {
 			if (web.getText().trim().equals("SNOMED : 134287002")) {
 
 				visbility(driver, web, 60);
-				elementClickable(web);
-				click(web);
+				clickIntercept(web, 30);
 
 				break;
 
@@ -2514,42 +2194,34 @@ public class Local_Host extends LaunchBrowser {
 
 		visbility(driver, pom.getInstanceProcedure().favoriteProcedure, 60);
 		sendkeys(pom.getInstanceProcedure().favoriteProcedure, "procedure favorite");
-
-		elementClickable(pom.getInstanceProcedure().favoriteSave);
-		click(pom.getInstanceProcedure().favoriteSave);
+		clickIntercept(pom.getInstanceProcedure().favoriteSave, 30);
 
 		for (WebElement web : pom.getInstanceProcedure().favoriteSaveMore) {
 			if (web.getText().trim().equals("Save")) {
 				visbility(driver, web, 60);
-				elementClickable(web);
-				click(web);
+				clickIntercept(web, 30);
 
 				break;
 			}
 
 		}
-		sleep(1500);
+
 		try {
 
 			visbility(driver, pom.getInstanceProcedure().editFavorite, 30);
-			elementClickable(pom.getInstanceProcedure().editFavorite);
-			click(pom.getInstanceProcedure().editFavorite);
-
-		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+			clickIntercept(pom.getInstanceProcedure().editFavorite, 30);
+		} catch (StaleElementReferenceException e) {
 
 			visbility(driver, pom.getInstanceProcedure().editFavorite, 30);
-			elementClickable(pom.getInstanceProcedure().editFavorite);
-			click(pom.getInstanceProcedure().editFavorite);
+			clickIntercept(pom.getInstanceProcedure().editFavorite, 30);
 		}
 
 		try {
 			visbility(driver, pom.getInstanceProcedure().removeFavoriteCode, 30);
-			elementClickable(pom.getInstanceProcedure().removeFavoriteCode);
-			click(pom.getInstanceProcedure().removeFavoriteCode);
+			clickIntercept(pom.getInstanceProcedure().removeFavoriteCode, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceProcedure().removeFavoriteCode, 30);
-			elementClickable(pom.getInstanceProcedure().removeFavoriteCode);
-			click(pom.getInstanceProcedure().removeFavoriteCode);
+			clickIntercept(pom.getInstanceProcedure().removeFavoriteCode, 30);
 
 		}
 
@@ -2571,8 +2243,7 @@ public class Local_Host extends LaunchBrowser {
 			if (web.getText().trim().equals("Platelet adhesiveness test (procedure)")) {
 
 				visbility(driver, web, 60);
-				elementClickable(web);
-				click(web);
+				clickIntercept(web, 30);
 
 				break;
 
@@ -2582,15 +2253,12 @@ public class Local_Host extends LaunchBrowser {
 
 		visbility(driver, pom.getInstanceProcedure().favoriteProcedure, 30);
 		sendkeys(pom.getInstanceProcedure().favoriteProcedure, "procedure kpop2 favorite");
-
-		elementClickable(pom.getInstanceProcedure().favoriteSave);
-		click(pom.getInstanceProcedure().favoriteSave);
+		clickIntercept(pom.getInstanceProcedure().favoriteSave, 30);
 
 		for (WebElement web : pom.getInstanceProcedure().favoriteSaveMore) {
 			if (web.getText().trim().equals("Save")) {
 				visbility(driver, web, 60);
-				elementClickable(web);
-				click(web);
+				clickIntercept(web, 30);
 				break;
 			}
 
@@ -2598,23 +2266,19 @@ public class Local_Host extends LaunchBrowser {
 
 		try {
 			visbility(driver, pom.getInstanceProcedure().addThisFavorite, 30);
-			elementClickable(pom.getInstanceProcedure().addThisFavorite);
-			click(pom.getInstanceProcedure().addThisFavorite);
+			clickIntercept(pom.getInstanceProcedure().addThisFavorite, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceProcedure().addThisFavorite, 30);
-			elementClickable(pom.getInstanceProcedure().addThisFavorite);
-			click(pom.getInstanceProcedure().addThisFavorite);
+			clickIntercept(pom.getInstanceProcedure().addThisFavorite, 30);
 		}
 
 		try {
 			visbility(driver, pom.getInstanceProcedure().closeFavorite, 30);
-			elementClickable(pom.getInstanceProcedure().closeFavorite);
-			click(pom.getInstanceProcedure().closeFavorite);
+			clickIntercept(pom.getInstanceProcedure().closeFavorite, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceProcedure().closeFavorite, 30);
-			elementClickable(pom.getInstanceProcedure().closeFavorite);
-			click(pom.getInstanceProcedure().closeFavorite);
+			clickIntercept(pom.getInstanceProcedure().closeFavorite, 30);
 		}
 		sleep(2000);
 		//
@@ -2624,8 +2288,7 @@ public class Local_Host extends LaunchBrowser {
 		while (true) {
 			if (pom.getInstanceGoal().favoriteIcon.isDisplayed()) {
 				visbility(driver, pom.getInstanceGoal().favoriteIcon, 30);
-				elementClickable(pom.getInstanceGoal().favoriteIcon);
-				click(pom.getInstanceGoal().favoriteIcon);
+				clickIntercept(pom.getInstanceGoal().favoriteIcon, 30);
 				break;
 			} else if (!pom.getInstanceGoal().favoriteIcon.isDisplayed()) {
 				actions("move to element", pom.getInstanceGoal().favoriteIcon);
@@ -2635,52 +2298,42 @@ public class Local_Host extends LaunchBrowser {
 		try {
 
 			visbility(driver, pom.getInstanceGoal().addNewFavorite, 30);
-			elementClickable(pom.getInstanceGoal().addNewFavorite);
-			click(pom.getInstanceGoal().addNewFavorite);
+			clickIntercept(pom.getInstanceGoal().addNewFavorite, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceGoal().addNewFavorite, 30);
-			elementClickable(pom.getInstanceGoal().addNewFavorite);
-			click(pom.getInstanceGoal().addNewFavorite);
+			clickIntercept(pom.getInstanceGoal().addNewFavorite, 30);
 		}
 
 		try {
 			visbility(driver, pom.getInstanceGoal().favoritePellContent, 30);
-			elementClickable(pom.getInstanceGoal().favoritePellContent);
-			click(pom.getInstanceGoal().favoritePellContent);
+			clickIntercept(pom.getInstanceGoal().favoritePellContent, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceGoal().favoritePellContent, 30);
-			elementClickable(pom.getInstanceGoal().favoritePellContent);
-			click(pom.getInstanceGoal().favoritePellContent);
+			clickIntercept(pom.getInstanceGoal().favoritePellContent, 30);
 		}
 		visbility(driver, pom.getInstanceGoal().favoriteDiscription, 30);
 		sendkeys(pom.getInstanceGoal().favoriteDiscription, "GOALS MODULE FAVORITE");
+		clickIntercept(pom.getInstanceGoal().favoritesave, 30);
 
-		elementClickable(pom.getInstanceGoal().favoritesave);
-		click(pom.getInstanceGoal().favoritesave);
 		sleep(1500);
 		try {
 
 			visbility(driver, pom.getInstanceGoal().addThisFavorite, 30);
-			elementClickable(pom.getInstanceGoal().addThisFavorite);
-			click(pom.getInstanceGoal().addThisFavorite);
-
-		} catch (ElementClickInterceptedException | StaleElementReferenceException e) {
+			clickIntercept(pom.getInstanceGoal().addThisFavorite, 30);
+		} catch (StaleElementReferenceException e) {
 			visbility(driver, pom.getInstanceGoal().addThisFavorite, 30);
-			elementClickable(pom.getInstanceGoal().addThisFavorite);
-			click(pom.getInstanceGoal().addThisFavorite);
+			clickIntercept(pom.getInstanceGoal().addThisFavorite, 30);
 		}
 		sleep(1500);
 		try {
 
 			visbility(driver, pom.getInstanceGoal().closeFavorite, 30);
-			elementClickable(pom.getInstanceGoal().closeFavorite);
-			click(pom.getInstanceGoal().closeFavorite);
+			clickIntercept(pom.getInstanceGoal().closeFavorite, 30);
 
 		} catch (ElementClickInterceptedException e) {
 			visbility(driver, pom.getInstanceGoal().closeFavorite, 30);
-			elementClickable(pom.getInstanceGoal().closeFavorite);
-			click(pom.getInstanceGoal().closeFavorite);
+			clickIntercept(pom.getInstanceGoal().closeFavorite, 30);
 		}
 
 		// $$$$$status
@@ -2688,8 +2341,7 @@ public class Local_Host extends LaunchBrowser {
 		while (true) {
 			if (pom.getInstanceStatus().favoriteicon.isDisplayed()) {
 				visbility(driver, pom.getInstanceStatus().favoriteicon, 30);
-				elementClickable(pom.getInstanceStatus().favoriteicon);
-				click(pom.getInstanceStatus().favoriteicon);
+				clickIntercept(pom.getInstanceStatus().favoriteicon, 30);
 				break;
 			} else if (!pom.getInstanceStatus().favoriteicon.isDisplayed()) {
 				actions("move to element", pom.getInstanceStatus().favoriteicon);
@@ -2699,13 +2351,11 @@ public class Local_Host extends LaunchBrowser {
 		try {
 
 			visbility(driver, pom.getInstanceStatus().addNewFavorite, 30);
-			elementClickable(pom.getInstanceStatus().addNewFavorite);
-			click(pom.getInstanceStatus().addNewFavorite);
+			clickIntercept(pom.getInstanceStatus().addNewFavorite, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceStatus().addNewFavorite, 30);
-			elementClickable(pom.getInstanceStatus().addNewFavorite);
-			click(pom.getInstanceStatus().addNewFavorite);
+			clickIntercept(pom.getInstanceStatus().addNewFavorite, 30);
 		}
 
 		visbility(driver, pom.getInstanceStatus().favoritesStatusType, 30);
@@ -2728,39 +2378,33 @@ public class Local_Host extends LaunchBrowser {
 		for (WebElement we : pom.getInstanceStatus().favoriteicdList) {
 			if (we.getText().trim().equals("134374006: Hearing test bilateral abnormality (finding)")) {
 				visbility(driver, we, 60);
-				elementClickable(we);
-				click(we);
+				clickIntercept(we, 30);
 
 				break;
 			}
 
 		}
+		clickIntercept(pom.getInstanceStatus().favoriteSave, 30);
 
-		elementClickable(pom.getInstanceStatus().favoriteSave);
-		click(pom.getInstanceStatus().favoriteSave);
 		sleep(1500);
 		try {
 
 			visbility(driver, pom.getInstanceStatus().editFavorite, 30);
-			elementClickable(pom.getInstanceStatus().editFavorite);
-			click(pom.getInstanceStatus().editFavorite);
+			clickIntercept(pom.getInstanceStatus().editFavorite, 30);
 
-		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+		} catch (StaleElementReferenceException e) {
 			visbility(driver, pom.getInstanceStatus().editFavorite, 30);
-			elementClickable(pom.getInstanceStatus().editFavorite);
-			click(pom.getInstanceStatus().editFavorite);
+			clickIntercept(pom.getInstanceStatus().editFavorite, 30);
 
 		}
 
 		try {
 			visbility(driver, pom.getInstanceStatus().removeFavoriteCode, 60);
-			elementClickable(pom.getInstanceStatus().removeFavoriteCode);
-			click(pom.getInstanceStatus().removeFavoriteCode);
+			clickIntercept(pom.getInstanceStatus().removeFavoriteCode, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceStatus().removeFavoriteCode, 60);
-			elementClickable(pom.getInstanceStatus().removeFavoriteCode);
-			click(pom.getInstanceStatus().removeFavoriteCode);
+			clickIntercept(pom.getInstanceStatus().removeFavoriteCode, 30);
 		}
 		visbility(driver, pom.getInstanceStatus().favoriteIcd, 30);
 
@@ -2780,38 +2424,32 @@ public class Local_Host extends LaunchBrowser {
 		for (WebElement we : pom.getInstanceStatus().favoriteicdList) {
 			if (we.getText().trim().equals("134376008: Hearing test right abnormality (finding)")) {
 				visbility(driver, we, 60);
-				elementClickable(we);
-				click(we);
-
+				clickIntercept(we, 30);
 				break;
 			}
 
 		}
-		elementClickable(pom.getInstanceStatus().favoriteSave);
-		click(pom.getInstanceStatus().favoriteSave);
+
+		clickIntercept(pom.getInstanceStatus().favoriteSave, 30);
 
 		try {
 
 			visbility(driver, pom.getInstanceStatus().addThisFavorite, 30);
-			elementClickable(pom.getInstanceStatus().addThisFavorite);
-			click(pom.getInstanceStatus().addThisFavorite);
+			clickIntercept(pom.getInstanceStatus().addThisFavorite, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceStatus().addThisFavorite, 30);
-			elementClickable(pom.getInstanceStatus().addThisFavorite);
-			click(pom.getInstanceStatus().addThisFavorite);
+			clickIntercept(pom.getInstanceStatus().addThisFavorite, 30);
 		}
 
 		try {
 
 			visbility(driver, pom.getInstanceStatus().closeFavorite, 30);
-			elementClickable(pom.getInstanceStatus().closeFavorite);
-			click(pom.getInstanceStatus().closeFavorite);
+			clickIntercept(pom.getInstanceStatus().closeFavorite, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceStatus().closeFavorite, 30);
-			elementClickable(pom.getInstanceStatus().closeFavorite);
-			click(pom.getInstanceStatus().closeFavorite);
+			clickIntercept(pom.getInstanceStatus().closeFavorite, 30);
 		}
 
 		// $$$$$$problems$$$$$$$
@@ -2917,8 +2555,7 @@ public class Local_Host extends LaunchBrowser {
 
 			if (pom.getInstanceAdvanceDirective().favoriteIcon.isDisplayed()) {
 				visbility(driver, pom.getInstanceAdvanceDirective().favoriteIcon, 30);
-				elementClickable(pom.getInstanceAdvanceDirective().favoriteIcon);
-				click(pom.getInstanceAdvanceDirective().favoriteIcon);
+				clickIntercept(pom.getInstanceAdvanceDirective().favoriteIcon, 30);
 				break;
 			} else if (!pom.getInstanceAdvanceDirective().favoriteIcon.isDisplayed()) {
 				actions("move to element", pom.getInstanceAdvanceDirective().favoriteIcon);
@@ -2927,13 +2564,11 @@ public class Local_Host extends LaunchBrowser {
 		}
 		try {
 			visbility(driver, pom.getInstanceAdvanceDirective().addNewFavorite, 30);
-			elementClickable(pom.getInstanceAdvanceDirective().addNewFavorite);
-			click(pom.getInstanceAdvanceDirective().addNewFavorite);
+			clickIntercept(pom.getInstanceAdvanceDirective().addNewFavorite, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceAdvanceDirective().addNewFavorite, 30);
-			elementClickable(pom.getInstanceAdvanceDirective().addNewFavorite);
-			click(pom.getInstanceAdvanceDirective().addNewFavorite);
+			clickIntercept(pom.getInstanceAdvanceDirective().addNewFavorite, 30);
 
 		}
 
@@ -2941,47 +2576,38 @@ public class Local_Host extends LaunchBrowser {
 		dropDown("text", pom.getInstanceAdvanceDirective().favoriteStatusType, "Assessment");
 		visbility(driver, pom.getInstanceAdvanceDirective().favoriteDiscription, 40);
 		sendkeys(pom.getInstanceAdvanceDirective().favoriteDiscription, "Advance directives");
-		elementClickable(pom.getInstanceAdvanceDirective().favoriteSave);
-		click(pom.getInstanceAdvanceDirective().favoriteSave);
+		clickIntercept(pom.getInstanceAdvanceDirective().favoriteSave, 30);
+
 		sleep(1500);
 		try {
 			visbility(driver, pom.getInstanceAdvanceDirective().editFavorite, 30);
-			elementClickable(pom.getInstanceAdvanceDirective().editFavorite);
+			clickIntercept(pom.getInstanceAdvanceDirective().editFavorite, 30);
 
-			click(pom.getInstanceAdvanceDirective().editFavorite);
-
-		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+		} catch (StaleElementReferenceException e) {
 			visbility(driver, pom.getInstanceAdvanceDirective().editFavorite, 30);
-			elementClickable(pom.getInstanceAdvanceDirective().editFavorite);
-
-			click(pom.getInstanceAdvanceDirective().editFavorite);
+			clickIntercept(pom.getInstanceAdvanceDirective().editFavorite, 30);
 		}
 
 		visbility(driver, pom.getInstanceAdvanceDirective().favoriteDiscription, 40);
 		clear(pom.getInstanceAdvanceDirective().favoriteDiscription);
 		sendkeys(pom.getInstanceAdvanceDirective().favoriteDiscription, "Advance directives");
-		elementClickable(pom.getInstanceAdvanceDirective().favoriteSave);
-		click(pom.getInstanceAdvanceDirective().favoriteSave);
+		clickIntercept(pom.getInstanceAdvanceDirective().favoriteSave, 30);
 
 		try {
 			visbility(driver, pom.getInstanceAdvanceDirective().addThisFavorite, 30);
-			elementClickable(pom.getInstanceAdvanceDirective().addThisFavorite);
-			click(pom.getInstanceAdvanceDirective().addThisFavorite);
+			clickIntercept(pom.getInstanceAdvanceDirective().addThisFavorite, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceAdvanceDirective().addThisFavorite, 30);
-			elementClickable(pom.getInstanceAdvanceDirective().addThisFavorite);
-			click(pom.getInstanceAdvanceDirective().addThisFavorite);
+			clickIntercept(pom.getInstanceAdvanceDirective().addThisFavorite, 30);
 		}
 
 		try {
 			visbility(driver, pom.getInstanceAdvanceDirective().closeFavorite, 30);
-			elementClickable(pom.getInstanceAdvanceDirective().closeFavorite);
-			click(pom.getInstanceAdvanceDirective().closeFavorite);
+			clickIntercept(pom.getInstanceAdvanceDirective().closeFavorite, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceAdvanceDirective().closeFavorite, 30);
-			elementClickable(pom.getInstanceAdvanceDirective().closeFavorite);
-			click(pom.getInstanceAdvanceDirective().closeFavorite);
+			clickIntercept(pom.getInstanceAdvanceDirective().closeFavorite, 30);
 		}
 
 		// $$$$notes
@@ -2989,8 +2615,7 @@ public class Local_Host extends LaunchBrowser {
 		while (true) {
 			if (pom.getInstanceNotes().favoriteIcon.isDisplayed()) {
 				visbility(driver, pom.getInstanceNotes().favoriteIcon, 40);
-				elementClickable(pom.getInstanceNotes().favoriteIcon);
-				click(pom.getInstanceNotes().favoriteIcon);
+				clickIntercept(pom.getInstanceNotes().favoriteIcon, 30);
 				break;
 			} else if (!pom.getInstanceNotes().favoriteIcon.isDisplayed()) {
 				actions("move to element", pom.getInstanceNotes().favoriteIcon);
@@ -2999,58 +2624,54 @@ public class Local_Host extends LaunchBrowser {
 
 		try {
 			visbility(driver, pom.getInstanceNotes().addNewFavorite, 40);
-			elementClickable(pom.getInstanceNotes().addNewFavorite);
-			click(pom.getInstanceNotes().addNewFavorite);
+			clickIntercept(pom.getInstanceNotes().addNewFavorite, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceNotes().addNewFavorite, 40);
-			elementClickable(pom.getInstanceNotes().addNewFavorite);
-			click(pom.getInstanceNotes().addNewFavorite);
+			clickIntercept(pom.getInstanceNotes().addNewFavorite, 30);
 		}
 
 		visbility(driver, pom.getInstanceNotes().favoriteDiscription, 30);
 		sendkeys(pom.getInstanceNotes().favoriteDiscription, "Notes module");
-		elementClickable(pom.getInstanceNotes().favoriteSave);
-		click(pom.getInstanceNotes().favoriteSave);
-		sleep(1500);
+		clickIntercept(pom.getInstanceNotes().favoriteSave, 30);
 		try {
 
 			visbility(driver, pom.getInstanceNotes().editFavorite, 30);
-			elementClickable(pom.getInstanceNotes().editFavorite);
-			click(pom.getInstanceNotes().editFavorite);
+			clickIntercept(pom.getInstanceNotes().editFavorite, 30);
 
-		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+		} catch (StaleElementReferenceException e) {
 			visbility(driver, pom.getInstanceNotes().editFavorite, 30);
-			elementClickable(pom.getInstanceNotes().editFavorite);
-			click(pom.getInstanceNotes().editFavorite);
+			clickIntercept(pom.getInstanceNotes().editFavorite, 30);
 		}
-
-		visbility(driver, pom.getInstanceNotes().favoriteDiscription, 30);
-		clear(pom.getInstanceNotes().favoriteDiscription);
-		sendkeys(pom.getInstanceNotes().favoriteDiscription, "Notes");
-
-		elementClickable(pom.getInstanceNotes().favoriteSave);
-		click(pom.getInstanceNotes().favoriteSave);
-
+		try {
+			visbility(driver, pom.getInstanceNotes().favoriteDiscription, 30);
+			clear(pom.getInstanceNotes().favoriteDiscription);
+			sendkeys(pom.getInstanceNotes().favoriteDiscription, "Notes");
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceNotes().favoriteDiscription, 30);
+			clear(pom.getInstanceNotes().favoriteDiscription);
+			sendkeys(pom.getInstanceNotes().favoriteDiscription, "Notes");
+		}
+		try {
+			clickIntercept(pom.getInstanceNotes().favoriteSave, 30);
+		} catch (Exception e) {
+			clickIntercept(pom.getInstanceNotes().favoriteSave, 30);
+		}
 		try {
 
 			visbility(driver, pom.getInstanceNotes().addThisFavorite, 30);
-			elementClickable(pom.getInstanceNotes().addThisFavorite);
-			click(pom.getInstanceNotes().addThisFavorite);
+			clickIntercept(pom.getInstanceNotes().addThisFavorite, 30);
 
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceNotes().addThisFavorite, 30);
-			elementClickable(pom.getInstanceNotes().addThisFavorite);
-			click(pom.getInstanceNotes().addThisFavorite);
+			clickIntercept(pom.getInstanceNotes().addThisFavorite, 30);
 		}
 
 		try {
 			visbility(driver, pom.getInstanceNotes().closeFavorite, 30);
-			elementClickable(pom.getInstanceNotes().closeFavorite);
-			click(pom.getInstanceNotes().closeFavorite);
+			clickIntercept(pom.getInstanceNotes().closeFavorite, 30);
 		} catch (ElementClickInterceptedException e) {
 			visbility(driver, pom.getInstanceNotes().closeFavorite, 30);
-			elementClickable(pom.getInstanceNotes().closeFavorite);
-			click(pom.getInstanceNotes().closeFavorite);
+			clickIntercept(pom.getInstanceNotes().closeFavorite, 30);
 		}
 
 		// $$$physical exam
@@ -3058,8 +2679,7 @@ public class Local_Host extends LaunchBrowser {
 
 			if (pom.getInstancePhysicalExam().favoriteIcon.isDisplayed()) {
 				visbility(driver, pom.getInstancePhysicalExam().favoriteIcon, 40);
-				elementClickable(pom.getInstancePhysicalExam().favoriteIcon);
-				click(pom.getInstancePhysicalExam().favoriteIcon);
+				clickIntercept(pom.getInstancePhysicalExam().favoriteIcon, 30);
 				break;
 			} else if (!pom.getInstancePhysicalExam().favoriteIcon.isDisplayed()) {
 				actions("move to element", pom.getInstancePhysicalExam().favoriteIcon);
@@ -3068,12 +2688,10 @@ public class Local_Host extends LaunchBrowser {
 
 		try {
 			visbility(driver, pom.getInstancePhysicalExam().addNewFavorite, 40);
-			elementClickable(pom.getInstancePhysicalExam().addNewFavorite);
-			click(pom.getInstancePhysicalExam().addNewFavorite);
+			clickIntercept(pom.getInstancePhysicalExam().addNewFavorite, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstancePhysicalExam().addNewFavorite, 40);
-			elementClickable(pom.getInstancePhysicalExam().addNewFavorite);
-			click(pom.getInstancePhysicalExam().addNewFavorite);
+			clickIntercept(pom.getInstancePhysicalExam().addNewFavorite, 30);
 		}
 
 		visbility(driver, pom.getInstancePhysicalExam().organItem, 30);
@@ -3083,18 +2701,15 @@ public class Local_Host extends LaunchBrowser {
 		sendkeys(pom.getInstancePhysicalExam().finding, "hw are you");
 		visbility(driver, pom.getInstancePhysicalExam().favoriteNotes, 30);
 		sendkeys(pom.getInstancePhysicalExam().favoriteNotes, "Physical Examination modules");
+		clickIntercept(pom.getInstancePhysicalExam().favoriteSave, 30);
 
-		elementClickable(pom.getInstancePhysicalExam().favoriteSave);
-		click(pom.getInstancePhysicalExam().favoriteSave);
 		sleep(1500);
 		try {
 			visbility(driver, pom.getInstancePhysicalExam().editFavorite, 30);
-			elementClickable(pom.getInstancePhysicalExam().editFavorite);
-			click(pom.getInstancePhysicalExam().editFavorite);
-		} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+			clickIntercept(pom.getInstancePhysicalExam().editFavorite, 30);
+		} catch (StaleElementReferenceException e) {
 			visbility(driver, pom.getInstancePhysicalExam().editFavorite, 30);
-			elementClickable(pom.getInstancePhysicalExam().editFavorite);
-			click(pom.getInstancePhysicalExam().editFavorite);
+			clickIntercept(pom.getInstancePhysicalExam().editFavorite, 30);
 		}
 
 		visbility(driver, pom.getInstancePhysicalExam().organItem, 30);
@@ -3104,48 +2719,39 @@ public class Local_Host extends LaunchBrowser {
 		visbility(driver, pom.getInstancePhysicalExam().finding, 30);
 		clear(pom.getInstancePhysicalExam().finding);
 		sendkeys(pom.getInstancePhysicalExam().finding, "hw are you");
-
-		elementClickable(pom.getInstancePhysicalExam().favoriteSave);
-		click(pom.getInstancePhysicalExam().favoriteSave);
+		clickIntercept(pom.getInstancePhysicalExam().favoriteSave, 30);
 
 		try {
 			visbility(driver, pom.getInstancePhysicalExam().addThisFavorite, 30);
-			elementClickable(pom.getInstancePhysicalExam().addThisFavorite);
-			click(pom.getInstancePhysicalExam().addThisFavorite);
+			clickIntercept(pom.getInstancePhysicalExam().addThisFavorite, 30);
 		} catch (Exception e) {
 			visbility(driver, pom.getInstancePhysicalExam().addThisFavorite, 30);
-			elementClickable(pom.getInstancePhysicalExam().addThisFavorite);
-			click(pom.getInstancePhysicalExam().addThisFavorite);
+			clickIntercept(pom.getInstancePhysicalExam().addThisFavorite, 30);
 		}
 		sleep(2000);
 		try {
 			visbility(driver, pom.getInstancePhysicalExam().closeFavorite, 30);
-			elementClickable(pom.getInstancePhysicalExam().closeFavorite);
-			click(pom.getInstancePhysicalExam().closeFavorite);
+			clickIntercept(pom.getInstancePhysicalExam().closeFavorite, 30);
 
 		} catch (ElementClickInterceptedException e) {
 			visbility(driver, pom.getInstancePhysicalExam().closeFavorite, 30);
-			elementClickable(pom.getInstancePhysicalExam().closeFavorite);
-			click(pom.getInstancePhysicalExam().closeFavorite);
+			clickIntercept(pom.getInstancePhysicalExam().closeFavorite, 30);
 		}
 		sleep(2000);
 
 		j.executeScript("window.scrollBy(0,-750)", "");
 		try {
 			visbility(driver, pom.getInstanceHealthRec().ehrEllipses, 30);
-			elementClickable(pom.getInstanceHealthRec().ehrEllipses);
-			click(pom.getInstanceHealthRec().ehrEllipses);
+			clickIntercept(pom.getInstanceHealthRec().ehrEllipses, 30);
 		} catch (Exception e) {
-			visbility(driver, pom.getInstanceHealthRec().ehrEllipses, 40);
-			elementClickable(pom.getInstanceHealthRec().ehrEllipses);
-			click(pom.getInstanceHealthRec().ehrEllipses);
+			visbility(driver, pom.getInstanceHealthRec().ehrEllipses, 30);
+			clickIntercept(pom.getInstanceHealthRec().ehrEllipses, 30);
 		}
 
 		for (WebElement web : pom.getInstanceHealthRec().ehrEllipsesList) {
 			if (web.getText().trim().equals("Show Timestamp")) {
 				visbility(wd, web, 30);
-				elementClickable(web);
-				web.click();
+				clickIntercept(web, 30);
 				break;
 			}
 
@@ -3157,18 +2763,21 @@ public class Local_Host extends LaunchBrowser {
 		for (int i = 1; i <= 5; i++) {
 			try {
 				WebElement createfollowup = driver.findElement(By.xpath("(//button[@id='followUpAdd'])[1]/div[1]"));
-				ww.until(ExpectedConditions.elementToBeClickable(createfollowup));
-				actions("click", createfollowup);
+
+				clickIntercept(createfollowup, 30);
 				break;
 			} catch (Exception e) {
-				// TODO: handle exception
+				WebElement createfollowup = driver.findElement(By.xpath("(//button[@id='followUpAdd'])[1]/div[1]"));
+
+				clickIntercept(createfollowup, 30);
 			}
 		}
 		sleep(4000);
 		implicitWait(30, TimeUnit.SECONDS);
 		WebElement crt = driver
 				.findElement(By.xpath("//div[@id='followupEhr']/div[2]/div[3]/div[1]//following::div[2]/input"));
-		actions("click", crt);
+		clickIntercept(crt, 30);
+		// actions("click", crt);
 		sleep(2000);
 		WebElement folowypyr = driver.findElement(By.xpath("//select[@class='ui-datepicker-year']"));
 		dropDown("text", folowypyr, "2023");
@@ -3178,7 +2787,7 @@ public class Local_Host extends LaunchBrowser {
 		WebElement fixappo = driver.findElement(By.xpath("(//button[@id='fixAppointment'])[1]"));
 
 		sleep(3000);
-		javascriptclick(fixappo);
+		clickIntercept(fixappo, 30);
 
 		List<WebElement> tot = driver.findElements(By.xpath("(//div[@id='date-data'])[1]"));
 		int totaly = tot.size();
@@ -3205,7 +2814,7 @@ public class Local_Host extends LaunchBrowser {
 
 				if (checkcn.isDisplayed() == true && sm.getText().isEmpty() == true) {
 					b = true;
-					checkcn.click();
+					clickIntercept(checkcn, 30);
 					break;
 
 				}
@@ -3215,7 +2824,7 @@ public class Local_Host extends LaunchBrowser {
 				WebElement $foloupBtn = driver
 						.findElement(By.xpath("(//button[@id='followupAdmissionVal_dropdown'])[1]"));
 				visbility(driver, $foloupBtn, 40);
-				click($foloupBtn);
+				clickIntercept($foloupBtn, 30);
 				List<WebElement> $followupDropButton = driver.findElements(
 						By.xpath("(//button[@id='followupAdmissionVal_dropdown'])[1]//following::ul[1]/li/a"));
 				for (WebElement webElement : $followupDropButton) {
@@ -3223,7 +2832,7 @@ public class Local_Host extends LaunchBrowser {
 					if (webElement.getText().equals("Emergency")) {
 
 						visbility(driver, webElement, 60);
-						click(webElement);
+						clickIntercept(webElement, 30);
 					}
 
 				}
@@ -3241,9 +2850,9 @@ public class Local_Host extends LaunchBrowser {
 				WebElement delfolup = driver
 						.findElement(By.xpath("(//button[@id='fixAppointment'])[1]//following::div[1]/div[1]/span[2]"));
 				actions("move to element", delfolup);
-				actions("click", delfolup);
+				clickIntercept(delfolup, 30);
 				WebElement bckfl = driver.findElement(By.xpath("//div[@id='followupEhr']/div[1]/div/span[1]"));
-				javascriptclick(bckfl);
+				clickIntercept(bckfl, 30);
 				break;
 			}
 		}
@@ -3251,11 +2860,11 @@ public class Local_Host extends LaunchBrowser {
 		sleep(2000);
 		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
 			WebElement delehrf = driver.findElement(By.xpath("(//button[contains(@title,'Delete Health Record')])[1]"));
-			javascriptclick(delehrf);
+			clickIntercept(delehrf, 30);
 			sleep(2000);
 			WebElement zr = driver
 					.findElement(By.xpath("//span[text()='Delete Health Record']//following::div[4]/button[2]"));
-			javascriptclick(zr);
+			clickIntercept(zr, 30);
 		}
 		sleep(4000);
 	}
@@ -3282,14 +2891,14 @@ public class Local_Host extends LaunchBrowser {
 		driver.navigate().refresh();
 		implicitWait(50, TimeUnit.SECONDS);
 		sleep(3000);
-		while (true) {
-			try {
-				visbility(driver, pom.getInstanceBilling().clickCreateNewBill, 60);
-				click(pom.getInstanceBilling().clickCreateNewBill);
-				break;
-			} catch (Exception e) {
 
-			}
+		try {
+			visbility(driver, pom.getInstanceBilling().clickCreateNewBill, 60);
+			clickIntercept(pom.getInstanceBilling().clickCreateNewBill, 30);
+
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceBilling().clickCreateNewBill, 60);
+			clickIntercept(pom.getInstanceBilling().clickCreateNewBill, 30);
 		}
 
 		try {
@@ -3312,8 +2921,7 @@ public class Local_Host extends LaunchBrowser {
 		sendkeys(pom.getInstanceBilling().addQuantity, "2");
 
 		visbility(driver, pom.getInstanceBilling().saveItem, 60);
-		ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceBilling().saveItem));
-		click(pom.getInstanceBilling().saveItem);
+		clickIntercept(pom.getInstanceBilling().saveItem, 30);
 		sleep(3000);
 		/*
 		 * while (true) { try {
@@ -3323,43 +2931,30 @@ public class Local_Host extends LaunchBrowser {
 			System.out.println("ENTER TRY BLOCK BILL");
 			WebElement billingFavoritesideview = driver.findElement(By.xpath("//div[@id='assign-side']/div[1]/div"));
 			visbility(driver, billingFavoritesideview, 40);
-			ww.until(ExpectedConditions.elementToBeClickable(billingFavoritesideview));
-			click(billingFavoritesideview);
+			clickIntercept(billingFavoritesideview, 30);
 		} catch (StaleElementReferenceException e) {
 			WebElement billingFavoritesideview = driver.findElement(By.xpath("//div[@id='assign-side']/div[1]/div"));
 			visbility(driver, billingFavoritesideview, 50);
-			System.out.println("visbile billing side view");
-			ww.until(ExpectedConditions.elementToBeClickable(billingFavoritesideview));
-			click(billingFavoritesideview);
-			System.out.println("side view favorite clicked");
+			clickIntercept(billingFavoritesideview, 30);
 		}
 
 		try {
 			WebElement addiconfavorite = driver
 					.findElement(By.xpath("//div[@id='assign-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
 			visbility(driver, addiconfavorite, 40);
-			ww.until(ExpectedConditions.elementToBeClickable(addiconfavorite));
-			click(addiconfavorite);
+			clickIntercept(addiconfavorite, 30);
 		} catch (StaleElementReferenceException e) {
 			WebElement addiconfavorite = driver
 					.findElement(By.xpath("//div[@id='assign-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
 			visbility(driver, addiconfavorite, 60);
-			ww.until(ExpectedConditions.elementToBeClickable(addiconfavorite));
-			click(addiconfavorite);
+			clickIntercept(addiconfavorite, 30);
 		}
 
-		while (true) {
-			try {
+		WebElement favdes = driver
+				.findElement(By.xpath("//div[@id='assign-side']/div[3]/div/div/div[2]/div[3]/div[2]/div/input"));
+		visbility(driver, favdes, 60);
+		favdes.sendKeys("Kaaspro");
 
-				WebElement favdes = driver.findElement(
-						By.xpath("//div[@id='assign-side']/div[3]/div/div/div[2]/div[3]/div[2]/div/input"));
-				visbility(driver, favdes, 60);
-				favdes.sendKeys("Kaaspro");
-				break;
-			} catch (Exception e) {
-
-			}
-		}
 		WebElement ree = driver
 				.findElement(By.xpath("//div[@id='assign-side']/div[3]/div/div/div[2]/div[4]/div[2]/input"));
 		visbility(driver, ree, 60);
@@ -3367,268 +2962,310 @@ public class Local_Host extends LaunchBrowser {
 		WebElement savefav = driver.findElement(By.xpath(
 				"//div[@id='assign-side']/div[3]/div/div/div[2]/div[4]/div[2]//following::div[1]/div/div[4]//following::div[1]/div/button[2]"));
 		visbility(driver, savefav, 60);
-		javascriptclick(savefav);
-		// WebDriverWait wait = new WebDriverWait(driver, 30);
+		clickIntercept(savefav, 30);
+
 		sleep(2500);
-		WebElement until;
-		while (true) {
-			try {
-				until = driver.findElement(By.xpath(
-						"(//span[text()='Kaaspro']//parent::div//parent::div[1]//parent::div[1]/div[1]/span[1])[1]"));
-				break;
-			} catch (Exception e) {
 
-			}
+		try {
+			WebElement until = driver.findElement(By.xpath(
+					"(//span[text()='Kaaspro']//parent::div//parent::div[1]//parent::div[1]/div[1]/span[1])[1]"));
+
+			clickIntercept(until, 30);
+		} catch (Exception e) {
+			WebElement until = driver.findElement(By.xpath(
+					"(//span[text()='Kaaspro']//parent::div//parent::div[1]//parent::div[1]/div[1]/span[1])[1]"));
+			clickIntercept(until, 30);
+
 		}
 
-		actions("click", until);
+		try {
+
+			WebElement edi = driver.findElement(By.xpath("(//span[text()='Kaaspro'])[2]"));
+			visbility(driver, edi, 60);
+			clickIntercept(edi, 30);
+
+		} catch (Exception e) {
+			WebElement edi = driver.findElement(By.xpath("(//span[text()='Kaaspro'])[2]"));
+			visbility(driver, edi, 60);
+			clickIntercept(edi, 30);
+		}
+
 		sleep(2000);
-		while (true) {
-			try {
-				// (//span[text()='Kaaspro']//parent::div//parent::div[1]//parent::div[1]/div[2])[1]
 
-				WebElement edi = driver.findElement(By.xpath("(//span[text()='Kaaspro'])[2]"));
-				visbility(driver, edi, 60);
-				actions("click", edi);
-				break;
-			} catch (Exception e) {
+		try {
+			WebElement delfav = driver
+					.findElement(By.xpath("//div[@id='assign-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
 
-			}
+			visbility(driver, delfav, 60);
+			clickIntercept(delfav, 30);
+
+		} catch (Exception e) {
+			WebElement delfav = driver
+					.findElement(By.xpath("//div[@id='assign-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
+
+			visbility(driver, delfav, 60);
+			clickIntercept(delfav, 30);
 		}
-		sleep(2000);
-		while (true) {
-			try {
-				WebElement delfav = driver
-						.findElement(By.xpath("//div[@id='assign-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
 
-				visbility(driver, delfav, 60);
-				actions("click", delfav);
-				break;
-			} catch (Exception e) {
-
-			}
-		}
 		sleep(2500);
 		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
-			while (true) {
-				try {
-					WebElement itser = driver.findElement(By.xpath("//div[@id='item-code-side']/div[1]/div"));
-					visbility(driver, itser, 60);
 
-					actions("click", itser);
-					break;
-				} catch (Exception e) {
+			try {
+				WebElement itser = driver.findElement(By.xpath("//div[@id='item-code-side']/div[1]/div"));
+				visbility(driver, itser, 60);
 
-				}
+				clickIntercept(itser, 30);
+
+			} catch (Exception e) {
+				WebElement itser = driver.findElement(By.xpath("//div[@id='item-code-side']/div[1]/div"));
+				visbility(driver, itser, 60);
+
+				clickIntercept(itser, 30);
 			}
 
-			while (true) {
-				try {
-					WebElement additser = driver.findElement(
-							By.xpath("//div[@id='item-code-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-					visbility(driver, additser, 60);
+			try {
+				WebElement additser = driver.findElement(
+						By.xpath("//div[@id='item-code-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
+				visbility(driver, additser, 60);
 
-					javascriptclick(additser);
-					break;
-				} catch (Exception e) {
+				clickIntercept(additser, 30);
 
-				}
+			} catch (Exception e) {
+				WebElement additser = driver.findElement(
+						By.xpath("//div[@id='item-code-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
+				visbility(driver, additser, 60);
+
+				clickIntercept(additser, 30);
 			}
-			while (true) {
-				try {
-					WebElement wrr = driver
-							.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[3]/input"));
-					visbility(driver, wrr, 60);
-					sendkeys(wrr, "product001");// .sendKeys("product001");
-					break;
-				} catch (Exception e) {
 
-				}
+			try {
+				WebElement wrr = driver
+						.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[3]/input"));
+				visbility(driver, wrr, 60);
+				sendkeys(wrr, "product001");
+
+			} catch (Exception e) {
+				WebElement wrr = driver
+						.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[3]/input"));
+				visbility(driver, wrr, 60);
+				sendkeys(wrr, "product001");
 			}
+
 			WebElement err = driver
 					.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[4]/textarea"));
 			visbility(driver, err, 60);
-			sendkeys(err, "sr");// .sendKeys("sr");
+			sendkeys(err, "sr");
 			WebElement weq = driver
 					.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[5]/input"));
 			visbility(driver, weq, 60);
-			sendkeys(weq, "5");// .sendKeys("5");
-			while (true) {
-				try {
-					WebElement itersav = driver.findElement(
-							By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[7]/div/button[2]"));
-					visbility(driver, itersav, 60);
-					javascriptclick(itersav);
-					break;
-				} catch (Exception e) {
+			sendkeys(weq, "5");
 
-				}
+			try {
+				WebElement itersav = driver.findElement(
+						By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[7]/div/button[2]"));
+				visbility(driver, itersav, 60);
+				clickIntercept(itersav, 30);
+
+			} catch (Exception e) {
+				WebElement itersav = driver.findElement(
+						By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[2]/div[7]/div/button[2]"));
+				visbility(driver, itersav, 60);
+				clickIntercept(itersav, 30);
 			}
+
 			sleep(2000);
-			for (int i = 1; i <= 5; i++) {
-				try {
-					WebElement ft = driver.findElement(
-							By.xpath("//div[text()='PRODUCT001']//parent::div[1]//parent::div[1]/div[1]/span"));
-					visbility(driver, ft, 60);
 
-					javascriptclick(ft);
-					break;
-				} catch (Exception e) {
+			try {
+				WebElement ft = driver.findElement(
+						By.xpath("//div[text()='PRODUCT001']//parent::div[1]//parent::div[1]/div[1]/span"));
+				visbility(driver, ft, 60);
 
-				}
+				clickIntercept(ft, 30);
+
+			} catch (Exception e) {
+				WebElement ft = driver.findElement(
+						By.xpath("//div[text()='PRODUCT001']//parent::div[1]//parent::div[1]/div[1]/span"));
+				visbility(driver, ft, 60);
+
+				clickIntercept(ft, 30);
 			}
+
 			sleep(2000);
-			for (int i = 1; i <= 5; i++) {
-				try {
-					WebElement edititser = driver.findElement(By.xpath("//div[text()='PRODUCT001']"));
-					visbility(driver, edititser, 60);
 
-					actions("click", edititser);
-					break;
-				} catch (Exception e) {
+			try {
+				WebElement edititser = driver.findElement(By.xpath("//div[text()='PRODUCT001']"));
+				visbility(driver, edititser, 60);
 
-				}
+				clickIntercept(edititser, 30);
+
+			} catch (Exception e) {
+				WebElement edititser = driver.findElement(By.xpath("//div[text()='PRODUCT001']"));
+				visbility(driver, edititser, 60);
+
+				clickIntercept(edititser, 30);
 			}
-			for (int i = 1; i <= 5; i++) {
-				try {
-					WebElement delitser = driver
-							.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
-					visbility(driver, delitser, 60);
 
-					javascriptclick(delitser);
-					break;
-				} catch (Exception e) {
+			try {
+				WebElement delitser = driver
+						.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
+				visbility(driver, delitser, 60);
 
-				}
+				clickIntercept(delitser, 30);
+
+			} catch (Exception e) {
+				WebElement delitser = driver
+						.findElement(By.xpath("//div[@id='item-code-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
+				visbility(driver, delitser, 60);
+
+				clickIntercept(delitser, 30);
+
 			}
+
 			sleep(2000);
 
 			// service/charge tax..
-			while (true) {
-				try {
 
-					WebElement sct = driver.findElement(By.xpath("//div[@id='tax-side']/div[1]/div/span[3]"));
-					visbility(driver, sct, 60);
+			try {
 
-					actions("click", sct);
-					break;
-				} catch (Exception e) {
+				WebElement sct = driver.findElement(By.xpath("//div[@id='tax-side']/div[1]/div/span[3]"));
+				visbility(driver, sct, 60);
 
-				}
+				clickIntercept(sct, 30);
+
+			} catch (Exception e) {
+				WebElement sct = driver.findElement(By.xpath("//div[@id='tax-side']/div[1]/div/span[3]"));
+				visbility(driver, sct, 60);
+
+				clickIntercept(sct, 30);
 			}
 
-			for (int i = 1; i <= 5; i++) {
-				try {
+			try {
 
-					WebElement sctadd = driver.findElement(
-							By.xpath("//div[@id='tax-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-					visbility(driver, sctadd, 60);
+				WebElement sctadd = driver
+						.findElement(By.xpath("//div[@id='tax-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
+				visbility(driver, sctadd, 60);
 
-					javascriptclick(sctadd);
-					break;
-				} catch (Exception e) {
+				clickIntercept(sctadd, 30);
 
-				}
+			} catch (Exception e) {
+				WebElement sctadd = driver
+						.findElement(By.xpath("//div[@id='tax-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
+				visbility(driver, sctadd, 60);
+
+				clickIntercept(sctadd, 30);
 			}
+
 			WebElement tre = driver.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[2]/div[3]/input"));
 			visbility(driver, tre, 60);
-			sendkeys(tre, "service charge<>"); // .sendKeys("service charge<>");
+			sendkeys(tre, "service charge<>");
 			WebElement tp1 = driver.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[2]/div[4]/input"));
 			visbility(driver, tp1, 60);
-			sendkeys(tp1, "5");// .sendKeys("5");
-			WebElement sctsav = driver
-					.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[2]/div[6]/div/button[2]"));
-			visbility(driver, sctsav, 60);
-			for (int i = 1; i <= 5; i++) {
-				try {
-
-					javascriptclick(sctsav);
-					WebElement adsct = driver.findElement(
-							By.xpath("//div[text()='service charge<>']//parent::div[1]//parent::div[1]/div/span"));
-					visbility(driver, adsct, 60);
-
-					actions("click", adsct);
-					break;
-				} catch (Exception e) {
-
-				}
+			sendkeys(tp1, "5");
+			try {
+				WebElement sctsav = driver
+						.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[2]/div[6]/div/button[2]"));
+				visbility(driver, sctsav, 60);
+				clickIntercept(sctsav, 30);
+			} catch (Exception e) {
+				WebElement sctsav = driver
+						.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[2]/div[6]/div/button[2]"));
+				visbility(driver, sctsav, 60);
+				clickIntercept(sctsav, 30);
 			}
+
+			try {
+
+				WebElement adsct = driver.findElement(
+						By.xpath("//div[text()='service charge<>']//parent::div[1]//parent::div[1]/div/span"));
+				visbility(driver, adsct, 60);
+
+				clickIntercept(adsct, 30);
+
+			} catch (Exception e) {
+				WebElement adsct = driver.findElement(
+						By.xpath("//div[text()='service charge<>']//parent::div[1]//parent::div[1]/div/span"));
+				visbility(driver, adsct, 60);
+
+				clickIntercept(adsct, 30);
+			}
+
 			sleep(2000);
-			for (int i = 1; i <= 5; i++) {
-				try {
 
-					WebElement edsct = driver.findElement(By.xpath("//div[text()='service charge<>']"));
-					visbility(driver, edsct, 60);
+			try {
 
-					actions("click", edsct);
-					break;
-				} catch (Exception e) {
+				WebElement edsct = driver.findElement(By.xpath("//div[text()='service charge<>']"));
+				visbility(driver, edsct, 60);
 
-				}
+				clickIntercept(edsct, 30);
+
+			} catch (Exception e) {
+				WebElement edsct = driver.findElement(By.xpath("//div[text()='service charge<>']"));
+				visbility(driver, edsct, 60);
+
+				clickIntercept(edsct, 30);
 			}
-			for (int i = 1; i <= 5; i++) {
-				try {
 
-					WebElement delsct = driver
-							.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
-					visbility(driver, delsct, 60);
-					javascriptclick(delsct);
-					break;
-				} catch (Exception e) {
+			try {
 
-				}
+				WebElement delsct = driver
+						.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
+				visbility(driver, delsct, 60);
+				clickIntercept(delsct, 30);
+			} catch (Exception e) {
+				WebElement delsct = driver
+						.findElement(By.xpath("//div[@id='tax-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
+				visbility(driver, delsct, 60);
+				clickIntercept(delsct, 30);
 			}
+
 			sleep(2000);
 			// discount..
-			for (int i = 1; i <= 5; i++) {
-				try {
 
-					WebElement dis = driver.findElement(By.xpath("//div[@id='discount-side']/div[1]/div"));
-					visbility(driver, dis, 60);
+			try {
 
-					actions("click", dis);
-					break;
-				} catch (Exception e) {
+				WebElement dis = driver.findElement(By.xpath("//div[@id='discount-side']/div[1]/div"));
+				visbility(driver, dis, 60);
 
-				}
+				clickIntercept(dis, 30);
+
+			} catch (Exception e) {
+				WebElement dis = driver.findElement(By.xpath("//div[@id='discount-side']/div[1]/div"));
+				visbility(driver, dis, 60);
+
+				clickIntercept(dis, 30);
 			}
 
-			for (int i = 1; i <= 5; i++) {
-				try {
+			try {
 
-					WebElement addds = driver.findElement(
-							By.xpath("//div[@id='discount-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
-					visbility(driver, addds, 60);
+				WebElement addds = driver.findElement(
+						By.xpath("//div[@id='discount-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
+				visbility(driver, addds, 60);
 
-					javascriptclick(addds);
-					break;
-				} catch (Exception e) {
+				clickIntercept(addds, 30);
 
-				}
+			} catch (Exception e) {
+				WebElement addds = driver.findElement(
+						By.xpath("//div[@id='discount-side']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[3]"));
+				visbility(driver, addds, 60);
+
+				clickIntercept(addds, 30);
 			}
+
 			WebElement trp3 = driver
 					.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[3]/input"));
 			visbility(driver, trp3, 60);
-			sendkeys(trp3, "Discnt");// .sendKeys("Discnt");
+			sendkeys(trp3, "Discnt");
+
 			WebElement cldrpdis = driver
 					.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[4]/div/button"));
 			visbility(driver, cldrpdis, 60);
-			javascriptclick(cldrpdis);
+			clickIntercept(cldrpdis, 30);
 			List<WebElement> dispercen = null;
-			for (int i = 1; i <= 5; i++) {
-				try {
 
-					dispercen = driver.findElements(
-							By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[4]/div/ul/li/a"));
-					break;
-				} catch (Exception e) {
-
-				}
-			}
-			for (WebElement we : dispercen) {
+			for (WebElement we : pom.getInstanceBilling().discountDropDown) {
 				if (we.getText().trim().equals("Percentage Discount")) {
 					visbility(driver, we, 60);
-					we.click();
+					clickIntercept(we, 30);
 					break;
 				}
 
@@ -3636,65 +3273,75 @@ public class Local_Host extends LaunchBrowser {
 			WebElement trp6 = driver
 					.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[5]/div/input"));
 			visbility(driver, trp6, 60);
-			sendkeys(trp6, "5");// .sendKeys("5");
-			WebElement dissav = driver
-					.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[8]/div/button[2]"));
-			visbility(driver, dissav, 60);
-			javascriptclick(dissav);
+			sendkeys(trp6, "5");
+			try {
+				WebElement dissav = driver
+						.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[8]/div/button[2]"));
+				visbility(driver, dissav, 60);
+				clickIntercept(dissav, 30);
+			} catch (Exception e) {
+				WebElement dissav = driver
+						.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[2]/div[8]/div/button[2]"));
+				visbility(driver, dissav, 60);
+				clickIntercept(dissav, 30);
+			}
 			WebElement adddiscc = driver
 					.findElement(By.xpath("//div[text()='Discnt']//parent::div[1]//parent::div/div/span"));
 			visbility(driver, adddiscc, 60);
 
-			actions("click", adddiscc);
+			clickIntercept(adddiscc, 30);
 			sleep(2000);
-			for (int i = 1; i <= 5; i++) {
-				try {
-					WebElement editdis = driver.findElement(By.xpath("//div[text()='Discnt']"));
-					visbility(driver, editdis, 60);
 
-					actions("click", editdis);
-					break;
-				} catch (Exception e) {
+			try {
+				WebElement editdis = driver.findElement(By.xpath("//div[text()='Discnt']"));
+				visbility(driver, editdis, 60);
 
-				}
+				clickIntercept(editdis, 30);
+
+			} catch (Exception e) {
+				WebElement editdis = driver.findElement(By.xpath("//div[text()='Discnt']"));
+				visbility(driver, editdis, 60);
+
+				clickIntercept(editdis, 30);
 			}
 
-			for (int i = 1; i <= 5; i++) {
-				try {
-					WebElement deldis = driver
-							.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
-					visbility(driver, deldis, 60);
-					javascriptclick(deldis);
-					break;
-				} catch (Exception e) {
+			try {
+				WebElement deldis = driver
+						.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
+				visbility(driver, deldis, 60);
+				clickIntercept(deldis, 30);
 
-				}
+			} catch (Exception e) {
+				WebElement deldis = driver
+						.findElement(By.xpath("//div[@id='discount-side']/div[3]/div/div/div[1]/div[2]/span[2]"));
+				visbility(driver, deldis, 60);
+				clickIntercept(deldis, 30);
 			}
 
 		}
 		sleep(2000);
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement ee = driver.findElement(By.xpath("(//button[@id='add-payment-btn'])[1]"));
-				visbility(driver, ee, 60);
-				javascriptclick(ee);
-				break;
-			} catch (Exception e) {
 
-			}
+		try {
+			WebElement ee = driver.findElement(By.xpath("(//button[@id='add-payment-btn'])[1]"));
+			visbility(driver, ee, 60);
+			clickIntercept(ee, 30);
+
+		} catch (Exception e) {
+			WebElement ee = driver.findElement(By.xpath("(//button[@id='add-payment-btn'])[1]"));
+			visbility(driver, ee, 60);
+			clickIntercept(ee, 30);
 		}
-		// driver.findElement(By.xpath("(//button[@id='add-payment-btn'])[1]")).click();
+
 		WebElement trp8 = driver.findElement(By.xpath("(//span[@id='paymentMethodTypeSelectValue'])[2]"));
 		visbility(driver, trp8, 60);
-		click(trp8);
-		// .click();
+		clickIntercept(trp8, 30);
 		sleep(2000);
 		List<WebElement> choosepy = driver
 				.findElements(By.xpath("(//span[@id='paymentMethodTypeSelectValue'])[2]//following::ul[1]/li"));
 		for (WebElement w : choosepy) {
 			if (w.getText().trim().equals("Cash Payment")) {
 				visbility(driver, w, 60);
-				w.click();
+				clickIntercept(w, 30);
 				break;
 			}
 
@@ -3703,110 +3350,101 @@ public class Local_Host extends LaunchBrowser {
 		WebElement dsp1 = driver
 				.findElement(By.xpath("(//button[@id='paymentMethodTypeId'])[2]//following::textarea[1]"));
 		visbility(driver, dsp1, 60);
-		actions("click", dsp1);
+		clickIntercept(dsp1, 30);
 		sleep(2000);
 		dsp1.sendKeys("cash pay+++++++++");
 
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement tet = driver.findElement(By.xpath("(//button[@title='Make Payment'])[3]"));
-				visbility(driver, tet, 60);
-				j.executeScript("arguments[0].click();", tet);
-				break;
-			} catch (Exception e) {
+		try {
+			WebElement tet = driver.findElement(By.xpath("(//button[@title='Make Payment'])[3]"));
+			visbility(driver, tet, 60);
+			clickIntercept(tet, 30);
 
-			}
+		} catch (Exception e) {
+			WebElement tet = driver.findElement(By.xpath("(//button[@title='Make Payment'])[3]"));
+			visbility(driver, tet, 60);
+			clickIntercept(tet, 30);
 		}
+
 		sleep(2000);
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement fnls = driver.findElement(By.xpath("//button[@id='finalize-bill']"));
-				visbility(driver, fnls, 60);
 
-				javascriptclick(fnls);
-				break;
-			} catch (Exception e) {
+		try {
+			WebElement fnls = driver.findElement(By.xpath("//button[@id='finalize-bill']"));
+			visbility(driver, fnls, 60);
 
-			}
+			clickIntercept(fnls, 30);
+
+		} catch (Exception e) {
+			WebElement fnls = driver.findElement(By.xpath("//button[@id='finalize-bill']"));
+			visbility(driver, fnls, 60);
+
+			clickIntercept(fnls, 30);
 		}
+
 		sleep(2000);
 		WebElement dz = driver.findElement(By.xpath("(//button[@title='Finalize'])[1]"));
 		visbility(driver, dz, 60);
 
-		javascriptclick(dz);
+		clickIntercept(dz, 30);
 		sleep(2000);
 		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
 			WebElement trp7 = driver.findElement(By.xpath("//button[@id='finalize-bill']//following::button[2]"));// .click();
 			visbility(driver, trp7, 60);
-			javascriptclick(trp7);
+			clickIntercept(trp7, 30);
 			sleep(2000);
 			WebElement delbil = driver.findElement(
 					By.xpath("//center[text()='Do you like to delete Invoice?']//following::div[1]/button[2]"));
 			visbility(driver, delbil, 60);
-			javascriptclick(delbil);
+			clickIntercept(delbil, 30);
 		}
 		sleep(2000);
 
-		while (true) {
-			try {
-				click(pom.getInstanceBilling().clickBill);
-				break;
-			} catch (Exception e) {
+		clickIntercept(pom.getInstanceBilling().clickBill, 30);
 
-			}
-		}
 		driver.navigate().refresh();
 		WebElement trp9;
-		while (true) {
-			try {
 
-				trp9 = driver.findElement(By.xpath(
-						"//div[@id='bill_report']/div[1]/div[2]//following::div[1]/div[2]/div/div[2]/div[3]/div[1]/div[1]/div[1]//following::div[1]/input"));
-				visbility(driver, trp9, 60);
-				break;
-			} catch (Exception e) {
+		try {
 
-			}
+			trp9 = driver.findElement(By.xpath(
+					"//div[@id='bill_report']/div[1]/div[2]//following::div[1]/div[2]/div/div[2]/div[3]/div[1]/div[1]/div[1]//following::div[1]/input"));
+			visbility(driver, trp9, 60);
+
+		} catch (Exception e) {
+			trp9 = driver.findElement(By.xpath(
+					"//div[@id='bill_report']/div[1]/div[2]//following::div[1]/div[2]/div/div[2]/div[3]/div[1]/div[1]/div[1]//following::div[1]/input"));
+			visbility(driver, trp9, 60);
 		}
+
 		sendkeys(trp9, kpid);
-		// .sendKeys(kpid);
-		sleep(2000);
-		List<WebElement> billdrp;
-		while (true) {
-			try {
-				billdrp = driver.findElements(By.xpath(
-						"//div[@id='dmain']/div[4]/div[2]//following::div[2]//following::ul[3]/li/a/table/tbody/tr/td[2]"));
-				break;
-			} catch (Exception e) {
 
-			}
-		}
-		for (WebElement we : billdrp) {
+		sleep(2000);
+
+		for (WebElement we : pom.getInstanceBilling().searchPatientDropdown) {
 			if (we.getText().trim().equals(kpid)) {
 				visbility(driver, we, 60);
-				we.click();
+				clickIntercept(we, 30);
 				break;
 			}
 
 		}
 		visbility(driver, pom.getInstanceBilling().clickCreateNewBill, 60);
-		click(pom.getInstanceBilling().clickCreateNewBill);
+		clickIntercept(pom.getInstanceBilling().clickCreateNewBill, 30);
 
 		sleep(2000);
 		visbility(driver, pom.getInstanceBilling().addItem, 60);
-		click(pom.getInstanceBilling().addItem);
+		clickIntercept(pom.getInstanceBilling().addItem, 30);
 		sleep(2000);
 		visbility(driver, pom.getInstanceBilling().enterTheItem, 60);
-		sendkeys(pom.getInstanceBilling().enterTheItem, "dolo"); //
+		sendkeys(pom.getInstanceBilling().enterTheItem, "dolo");
 		visbility(driver, pom.getInstanceBilling().addPrice, 60);
-		sendkeys(pom.getInstanceBilling().addPrice, "10"); //
+		sendkeys(pom.getInstanceBilling().addPrice, "10");
 		visbility(driver, pom.getInstanceBilling().addQuantity, 60);
-		clear(pom.getInstanceBilling().addQuantity); //
+		clear(pom.getInstanceBilling().addQuantity);
 		visbility(driver, pom.getInstanceBilling().addQuantity, 60);
 		sendkeys(pom.getInstanceBilling().addQuantity, "2");
 		sleep(3000);
 		visbility(driver, pom.getInstanceBilling().saveItem, 60);
-		click(pom.getInstanceBilling().saveItem);
+		clickIntercept(pom.getInstanceBilling().saveItem, 30);
 		sleep(2000);
 		/*
 		 * String inc; while (true) { try { WebElement getinc =
@@ -3856,50 +3494,27 @@ public class Local_Host extends LaunchBrowser {
 
 	@Test(priority = 5, groups = "teledoctor")
 	public void TeleDoctor() throws InterruptedException {
+		clickIntercept(pom.getInstanceTeleDoctor().clickTeleDoctor, 30);
 
-		try {
-			visbility(driver, pom.getInstanceTeleDoctor().clickTeleDoctor, 60);
-			ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceTeleDoctor().clickTeleDoctor));
-			click(pom.getInstanceTeleDoctor().clickTeleDoctor);
+		WebElement np1 = driver.findElement(By.xpath("//button[@title='Create new Patinet']"));
 
-		} catch (ElementClickInterceptedException e) {
-			visbility(driver, pom.getInstanceTeleDoctor().clickTeleDoctor, 60);
-			ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceTeleDoctor().clickTeleDoctor));
-			click(pom.getInstanceTeleDoctor().clickTeleDoctor);
+		clickIntercept(np1, 30);
 
-		}
-	//	driver.navigate().refresh();
-
-		implicitWait(60, TimeUnit.SECONDS);
-
-		try {
-			WebElement np1 = driver.findElement(By.xpath("//button[@title='Create new Patinet']"));
-			visbility(driver, np1, 60);
-			ww.until(ExpectedConditions.elementToBeClickable(np1));
-			j.executeScript("arguments[0].click();", np1);
-
-		} catch (ElementClickInterceptedException e) {
-
-			WebElement np1 = driver.findElement(By.xpath("//button[@title='Create new Patinet']"));
-			visbility(driver, np1, 60);
-			ww.until(ExpectedConditions.elementToBeClickable(np1));
-			j.executeScript("arguments[0].click();", np1);
-		}
 		WebElement np2 = driver.findElement(By.id("firstname"));
 		visbility(driver, np2, 60);
-		sendkeys(np2, "Ayyyyyi");// .sendKeys("Abigazi");
+		sendkeys(np2, "Ayyyyyi");
 		WebElement np3 = driver.findElement(By.id("lastname"));
 		visbility(driver, np3, 60);
-		sendkeys(np3, "ghghgjg");// .sendKeys("Ak");
+		sendkeys(np3, "ghghgjg");
 		WebElement gn1 = driver.findElement(By.xpath("(//button[@id='gender_dropdown'])[1]"));
 		visbility(driver, gn1, 60);
-		javascriptclick(gn1);
+		clickIntercept(gn1, 30);
 
 		List<WebElement> jj = driver.findElements(By.xpath("(//ul[@id='genderDropdown'])[1]/li"));
 		for (WebElement w : jj) {
 			if (w.getText().trim().equals("Male")) {
 				visbility(driver, w, 60);
-				w.click();
+				clickIntercept(w, 30);
 				break;
 			}
 
@@ -3907,164 +3522,142 @@ public class Local_Host extends LaunchBrowser {
 
 		visbility(driver, pom.getInstanceHomeModule().emailId, 40);
 		sendkeys(pom.getInstanceHomeModule().emailId, generateRandom("letter"));
+		clickIntercept(pom.getInstanceHomeModule().selectFlagPhoneNumField, 30);
 
-		visbility(driver, pom.getInstanceHomeModule().selectFlagPhoneNumField, 50);
-		elementClickable(pom.getInstanceHomeModule().selectFlagPhoneNumField);
-		click(pom.getInstanceHomeModule().selectFlagPhoneNumField);
-
+		/*
+		 * try { visbility(driver, pom.getInstanceHomeModule().selectFlagPhoneNumField,
+		 * 50); elementClickable(pom.getInstanceHomeModule().selectFlagPhoneNumField);
+		 * click(pom.getInstanceHomeModule().selectFlagPhoneNumField); } catch
+		 * (Exception e) { visbility(driver,
+		 * pom.getInstanceHomeModule().selectFlagPhoneNumField, 50);
+		 * elementClickable(pom.getInstanceHomeModule().selectFlagPhoneNumField);
+		 * click(pom.getInstanceHomeModule().selectFlagPhoneNumField); }
+		 */
 		for (WebElement flag : pom.getInstanceHomeModule().chooseCountrycodeFlag) {
 			if (flag.getText().trim().equals("+91")) {
-				click(flag);
+				visbility(driver, flag, 30);
+				clickIntercept(flag, 30);
 				break;
 			}
 		}
 
-		// String numericRand = RandomStringUtils.randomNumeric(5);
 		visbility(driver, pom.getInstanceHomeModule().phoneNumberField, 40);
 		sendkeys(pom.getInstanceHomeModule().phoneNumberField, "95518" + generateRandom("number"));
 
 		WebElement cp1 = driver.findElement(By.xpath("//div[@id='createPatient']"));
 		visbility(driver, cp1, 60);
-		ww.until(ExpectedConditions.elementToBeClickable(cp1));
-		click(cp1);
+		clickIntercept(cp1, 30);
 
 		implicitWait(30, TimeUnit.SECONDS);
 		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
-			try {
-				ScriptExecutor(pom.getInstanceNewPatient().deletePatient);
-				ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceNewPatient().deletePatient));
-				click(pom.getInstanceNewPatient().deletePatient);
-			} catch (ElementClickInterceptedException e) {
-				ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceNewPatient().deletePatient));
-				click(pom.getInstanceNewPatient().deletePatient);
-			}
+			clickIntercept(pom.getInstanceNewPatient().deletePatient, 30);
 
-			while (true) {
-				try {
+			/*
+			 * while (true) { try {
+			 */
+			WebElement $delpat$ = driver.findElement(By.xpath("//button[text()='Delete']"));
+			clickIntercept($delpat$, 30);
+			/*
+			 * break; } catch (Exception e) { // TODO: handle exception } }
+			 */
 
-					WebElement $delpat$ = driver.findElement(By.xpath("//button[text()='Delete']"));
-					javascriptclick($delpat$);
-					break;
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-			}
+			// implicitWait(60, TimeUnit.SECONDS);
 
-			implicitWait(60, TimeUnit.SECONDS);
-
-			while (true) {
-				WebElement $addne;
-				try {
-
-					$addne = driver.findElement(By.xpath("(//BUTTON[@title='Add new Patient'])[3]"));
-
-					if ($addne.isDisplayed()) {
-						break;
-					}
-
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-			}
+			/*
+			 * while (true) { WebElement $addne; try {
+			 * 
+			 * $addne =
+			 * driver.findElement(By.xpath("(//BUTTON[@title='Add new Patient'])[3]"));
+			 * 
+			 * if ($addne.isDisplayed()) { break; }
+			 * 
+			 * } catch (Exception e) { // TODO: handle exception } }
+			 */
 		}
-		if (url.equals("https://www.75health.com/login.jsp")) {
-			driver.navigate().to("https://www.75health.com/health/#call_history");
-		} else if (url.equals("")) {
-
-		} else if (url.equals("https://localhost:8443/")) {
-			driver.navigate().to("https://localhost:8443/health/#call_history");
-		}
-
+		/*
+		 * if (url.equals("https://www.75health.com/login.jsp")) {
+		 * driver.navigate().to("https://www.75health.com/health/#call_history"); } else
+		 * if (url.equals("")) {
+		 * 
+		 * } else if (url.equals("https://localhost:8443/")) {
+		 * driver.navigate().to("https://localhost:8443/health/#call_history"); }
+		 */
 		try {
-			visbility(driver, pom.getInstanceTeleDoctor().clickTeleDoctor, 60);
-			elementClickable(pom.getInstanceTeleDoctor().clickTeleDoctor);
-			click(pom.getInstanceTeleDoctor().clickTeleDoctor);
-
-		} catch (Exception e) {
-			visbility(driver, pom.getInstanceTeleDoctor().clickTeleDoctor, 60);
-			elementClickable(pom.getInstanceTeleDoctor().clickTeleDoctor);
-			click(pom.getInstanceTeleDoctor().clickTeleDoctor);
+			clickIntercept(pom.getInstanceTeleDoctor().clickTeleDoctor, 30);
+		} catch (StaleElementReferenceException e) {
+			clickIntercept(pom.getInstanceTeleDoctor().clickTeleDoctor, 30);
 		}
+		/*
+		 * try { visbility(driver, pom.getInstanceTeleDoctor().clickTeleDoctor, 60);
+		 * elementClickable(pom.getInstanceTeleDoctor().clickTeleDoctor);
+		 * click(pom.getInstanceTeleDoctor().clickTeleDoctor);
+		 * 
+		 * } catch (Exception e) { visbility(driver,
+		 * pom.getInstanceTeleDoctor().clickTeleDoctor, 60);
+		 * elementClickable(pom.getInstanceTeleDoctor().clickTeleDoctor);
+		 * click(pom.getInstanceTeleDoctor().clickTeleDoctor); }
+		 */
 
-		while (true) {
-			try {
-				visbility(driver, pom.getInstanceTeleDoctor().searchPatient, 60);
-				sendkeys(pom.getInstanceTeleDoctor().searchPatient, kpid);
-				break;
-			} catch (Exception e) {
+		/*
+		 * while (true) { try {
+		 */
+		visbility(driver, pom.getInstanceTeleDoctor().searchPatient, 60);
+		sendkeys(pom.getInstanceTeleDoctor().searchPatient, kpid);
+		/*
+		 * break; } catch (Exception e) {
+		 * 
+		 * } }
+		 */
 
-			}
-		}
+		/*
+		 * while (true) { try {
+		 */
+		WebElement pstl = driver.findElement(By.xpath("//td[@id='nameh']//following::td[1]"));
+		visbility(driver, pstl, 60);
+		clickIntercept(pstl, 30);
+		/*
+		 * break; } catch (Exception e) {
+		 * 
+		 * } }
+		 */
 
-		while (true) {
-			try {
-				WebElement pstl = driver.findElement(By.xpath("//td[@id='nameh']//following::td[1]"));
-				visbility(driver, pstl, 60);
-				actions("click", pstl);
-				break;
-			} catch (Exception e) {
+		/*
+		 * while (true) { try {
+		 */
+		WebElement clickpatie = driver.findElement(By.xpath("(//div[@title='Click to view'])[5]/div"));
 
-			}
-		}
-
-		while (true) {
-			try {
-				WebElement clickpatie = driver.findElement(By.xpath("(//div[@title='Click to view'])[4]"));
-
-				visbility(driver, clickpatie, 60);
-				actions("click", clickpatie);
-				break;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		sleep(3000);
+		visbility(driver, clickpatie, 60);
+		clickIntercept(clickpatie, 30);
+		/*
+		 * break; } catch (Exception e) { e.printStackTrace(); } }
+		 */
 
 	}
 
 	@Test(priority = 6, groups = "message")
 	public void Message() throws InterruptedException {
 
-		try {
-			visbility(driver, pom.getInstanceMessage().clickMessage, 60);
-			ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceMessage().clickMessage));
-			click(pom.getInstanceMessage().clickMessage);
-
-		} catch (ElementClickInterceptedException e) {
-			visbility(driver, pom.getInstanceMessage().clickMessage, 60);
-			ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceMessage().clickMessage));
-			click(pom.getInstanceMessage().clickMessage);
-		}
+		clickIntercept(pom.getInstanceMessage().clickMessage, 30);
+		clickIntercept(pom.getInstanceMessage().clickComposemMessage, 30);
 
 		try {
-			visbility(driver, pom.getInstanceMessage().clickComposemMessage, 60);
-			ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceMessage().clickComposemMessage));
-			click(pom.getInstanceMessage().clickComposemMessage);
+			visbility(driver, pom.getInstanceMessage().search, 40);
+			sendkeys(pom.getInstanceMessage().search, kpid);
 
-		} catch (ElementClickInterceptedException e) {
-			visbility(driver, pom.getInstanceMessage().clickComposemMessage, 60);
-			ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceMessage().clickComposemMessage));
-			click(pom.getInstanceMessage().clickComposemMessage);
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceMessage().search, 40);
+			sendkeys(pom.getInstanceMessage().search, kpid);
 		}
-		for (int i = 1; i <= 5; i++) {
-			try {
-				sendkeys(pom.getInstanceMessage().search, kpid);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-		sleep(2000); //
 
 		for (int i = 1; i <= 5; i++) {
 			try {
 				WebElement msg = driver.findElement(By.xpath("(//td[@id='nameh'])[1]//following::td[1]"));
 				if (msg.isDisplayed()) {
-					click(msg);
+					clickIntercept(msg, 30);
 					break;
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 		}
 		visbility(driver, pom.getInstanceMessage().enterSubject, 60);
@@ -4072,179 +3665,95 @@ public class Local_Host extends LaunchBrowser {
 
 		sendkeys(pom.getInstanceMessage().enterMessage, "hello welcome to chennai");
 		visbility(driver, pom.getInstanceMessage().sendMessage, 60);
-		click(pom.getInstanceMessage().sendMessage);
-		while (true) {
-			try {
-				visbility(driver, pom.getInstanceMessage().seeSentMessage, 60);
-				click(pom.getInstanceMessage().seeSentMessage);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
+		clickIntercept(pom.getInstanceMessage().sendMessage, 30);
+		sleep(2500);
+
+		visbility(driver, pom.getInstanceMessage().seeSentMessage, 60);
+		clickIntercept(pom.getInstanceMessage().seeSentMessage, 30);
+
 		sleep(3000);
 
-		while (true) {
-			try {
-				WebElement $msgtext = driver.findElement(By.xpath("(//div[text()='hello welcome to chennai'])[1]"));
-				visbility(driver, $msgtext, 60);
-				click($msgtext);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-		for (int i = 1; i <= 7; i++) {
-			try {
-				WebElement $del = driver.findElement(By.xpath("(//span[@id='msg-del-btn'])[2]"));
-				if ($del.isDisplayed()) {
-					System.out.println("MESSAGE FIND");
-					click($del);
+		WebElement $msgtext = driver.findElement(By.xpath("(//div[text()='hello welcome to chennai'])[1]"));
+		visbility(driver, $msgtext, 60);
+		clickIntercept($msgtext, 30);
 
-					break;
-				}
+		WebElement $del = driver.findElement(By.xpath("(//span[@id='msg-del-btn'])[2]"));
 
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
+		System.out.println("MESSAGE FIND");
+		visbility(driver, $del, 30);
+		clickIntercept($del, 30);
 
-		for (int i = 1; i <= 7; i++) {
-			try {
-				WebElement $delmsgTickIcon = driver
-						.findElement(By.xpath("(//span[@id='msg-del-btn'])[2]//following::span[1]"));
-				if ($delmsgTickIcon.isDisplayed()) {
-					click($delmsgTickIcon);
-					break;
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
+		WebElement $delmsgTickIcon = driver.findElement(By.xpath("(//span[@id='msg-del-btn'])[2]//following::span[1]"));
 
-		// Favorite message kpop
+		clickIntercept($delmsgTickIcon, 30);
 
-		for (int i = 1; i <= 8; i++) {
-			try {
-				WebElement $showFavMesageKpopIcon = driver
-						.findElement(By.xpath("//div[@id='message_list']/div[1]/div[1]/div[2]/i"));
+		WebElement $showFavMesageKpopIcon = driver
+				.findElement(By.xpath("//div[@id='message_list']/div[1]/div[1]/div[2]/i"));
 
-				if ($showFavMesageKpopIcon.isDisplayed()) {
-					click($showFavMesageKpopIcon);
-					break;
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-
-		}
+		visbility(driver, $showFavMesageKpopIcon, 30);
+		clickIntercept($showFavMesageKpopIcon, 30);
 
 		WebElement $favmsgAddicon = driver
 				.findElement(By.xpath("//div[@id='MessageFavKpop2']/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
 		visbility(driver, $favmsgAddicon, 60);
-		click($favmsgAddicon);
+		clickIntercept($favmsgAddicon, 30);
 
-		for (int i = 1; i <= 7; i++) {
-			try {
-				WebElement $msgTextbox = driver.findElement(By.xpath("//textarea[@id='message1']"));
-				if ($msgTextbox.isDisplayed()) {
-					sendkeys($msgTextbox, "FAVORITE MESSAGE KPOP");
-					break;
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		WebElement $msgTextbox = driver.findElement(By.xpath("//textarea[@id='message1']"));
+		visbility(driver, $msgTextbox, 40);
+		sendkeys($msgTextbox, "FAVORITE MESSAGE KPOP");
 
-		}
 		WebElement $savefavmsg = driver.findElement(By.xpath("//textarea[@id='message1']//following::button[2]"));
 		visbility(driver, $savefavmsg, 40);
-		click($savefavmsg);
+		clickIntercept($savefavmsg, 30);
 
-		while (true) {
-			try {
-				WebElement $addfavMsgToListIcon = driver.findElement(By
-						.xpath("(//div[text()='FAVORITE MESSAGE KPOP'])[1]//parent::div[1]//parent::div[1]/div/span"));
-				if ($addfavMsgToListIcon.isDisplayed()) {
-					click($addfavMsgToListIcon);
-					break;
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+		try {
+			WebElement $addfavMsgToListIcon = driver.findElement(
+					By.xpath("(//div[text()='FAVORITE MESSAGE KPOP'])[1]//parent::div[1]//parent::div[1]/div/span"));
+			visbility(driver, $addfavMsgToListIcon, 40);
+			clickIntercept($addfavMsgToListIcon, 30);
+		} catch (StaleElementReferenceException e) {
+			WebElement $addfavMsgToListIcon = driver.findElement(
+					By.xpath("(//div[text()='FAVORITE MESSAGE KPOP'])[1]//parent::div[1]//parent::div[1]/div/span"));
+			visbility(driver, $addfavMsgToListIcon, 40);
+			clickIntercept($addfavMsgToListIcon, 30);
 		}
-		for (int i = 1; i <= 5; i++) {
-			try {
-				sendkeys(pom.getInstanceMessage().search, kpid);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-		sleep(2000); //
 
-		for (int i = 1; i <= 5; i++) {
-			try {
-				WebElement msg = driver.findElement(By.xpath("(//td[@id='nameh'])[1]//following::td[1]"));
-				if (msg.isDisplayed()) {
-					click(msg);
-					break;
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-		click(pom.getInstanceMessage().sendMessage);
+		visbility(driver, pom.getInstanceMessage().search, 40);
+		sendkeys(pom.getInstanceMessage().search, kpid);
+
+		sleep(2000);
+
+		WebElement msg = driver.findElement(By.xpath("(//td[@id='nameh'])[1]//following::td[1]"));
+		visbility(driver, msg, 30);
+		clickIntercept(msg, 30);
+
+		clickIntercept(pom.getInstanceMessage().sendMessage, 30);
 
 	}
 
 	@Test(priority = 7, groups = "settings")
 	public void Settings() throws InterruptedException, IOException {
 
-		try {
-			visbility(driver, pom.getInstanceSetting().clickSettings, 40);
-			elementClickable(pom.getInstanceSetting().clickSettings);
-			click(pom.getInstanceSetting().clickSettings);
-		} catch (Exception e) {
-			visbility(driver, pom.getInstanceSetting().clickSettings, 40);
-			elementClickable(pom.getInstanceSetting().clickSettings);
-			click(pom.getInstanceSetting().clickSettings);
-		}
-		try {
+		visbility(driver, pom.getInstanceSetting().clickSettings, 40);
+		clickIntercept(pom.getInstanceSetting().clickSettings, 30);
 
-			visbility(driver, pom.getInstanceSetting().manageYorAccount, 40);
-			elementClickable(pom.getInstanceSetting().manageYorAccount);
-			click(pom.getInstanceSetting().manageYorAccount);
+		visbility(driver, pom.getInstanceSetting().manageYorAccount, 40);
+		clickIntercept(pom.getInstanceSetting().manageYorAccount, 30);
 
-		} catch (ElementClickInterceptedException | StaleElementReferenceException e) {
-			visbility(driver, pom.getInstanceSetting().manageYorAccount, 40);
-			elementClickable(pom.getInstanceSetting().manageYorAccount);
-			click(pom.getInstanceSetting().manageYorAccount);
-		}
-		sleep(2000);
-		try {
-			visbility(driver, pom.getInstanceSetting().basicInfoEditIcon, 40);
-			elementClickable(pom.getInstanceSetting().basicInfoEditIcon);
-			click(pom.getInstanceSetting().basicInfoEditIcon);
-			// log.info("basic info edit clicked");
-		} catch (ElementClickInterceptedException e) {
-			visbility(driver, pom.getInstanceSetting().basicInfoEditIcon, 40);
-			elementClickable(pom.getInstanceSetting().basicInfoEditIcon);
-			click(pom.getInstanceSetting().basicInfoEditIcon);
-			// log.info("basic info edit clicked");
-		}
+		clickIntercept(pom.getInstanceSetting().basicInfoEditIcon, 30);
+
 		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
 			visbility(driver, pom.getInstanceSetting().hosipitalName, 40);
 			clear(pom.getInstanceSetting().hosipitalName);
 			sendkeys(pom.getInstanceSetting().hosipitalName, "75health organisation");
-			elementClickable(pom.getInstanceSetting().basicInfoTitle);
-			click(pom.getInstanceSetting().basicInfoTitle);
+			clickIntercept(pom.getInstanceSetting().basicInfoTitle, 30);
 
 			for (WebElement choose : pom.getInstanceSetting().basicInfoTitleDropdown) {
 				if (choose.getText().trim().equals("Dr")) {
 
 					visbility(driver, choose, 60);
-					elementClickable(choose);
-					click(choose);
+					clickIntercept(choose, 30);
+
 					break;
 				}
 
@@ -4259,37 +3768,35 @@ public class Local_Host extends LaunchBrowser {
 		clear(pom.getInstanceSetting().lastName);
 		sendkeys(pom.getInstanceSetting().lastName, "Automation Acc");
 		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
-			elementClickable(pom.getInstanceSetting().basicInfoAdminstatus);
-			click(pom.getInstanceSetting().basicInfoAdminstatus);
+
+			clickIntercept(pom.getInstanceSetting().basicInfoAdminstatus, 30);
 
 			for (WebElement status : pom.getInstanceSetting().basicInfoAdminstatusDropdown) {
 				if (status.getText().trim().equals("ACTIVE")) {
 					visbility(driver, status, 40);
-					elementClickable(status);
-					click(status);
+					clickIntercept(status, 30);
+
 					break;
 				}
 
 			}
 
-			elementClickable(pom.getInstanceSetting().basicInfoSmsNotication);
-			click(pom.getInstanceSetting().basicInfoSmsNotication);
+			clickIntercept(pom.getInstanceSetting().basicInfoSmsNotication, 30);
 
 			for (WebElement web : pom.getInstanceSetting().basicInfoSmsNoticationDropdown) {
 				if (web.getText().trim().equals("ON")) {
 					visbility(driver, web, 60);
-					elementClickable(web);
-					click(web);
+					clickIntercept(web, 30);
+
 					break;
 				}
 
 			}
+			clickIntercept(pom.getInstanceSetting().basicInfoSave, 30);
 
-			elementClickable(pom.getInstanceSetting().basicInfoSave);
-			click(pom.getInstanceSetting().basicInfoSave);
 		} else {
-			elementClickable(pom.getInstanceSetting().basicInfoSavedrLogin);
-			click(pom.getInstanceSetting().basicInfoSavedrLogin);
+
+			clickIntercept(pom.getInstanceSetting().basicInfoSavedrLogin, 30);
 		}
 		log.info("basic info saved");
 		sleep(1000);
@@ -4298,8 +3805,8 @@ public class Local_Host extends LaunchBrowser {
 		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
 			try {
 				visbility(driver, pom.getInstanceSetting().conatctInfoEditIcon, 40);
-				elementClickable(pom.getInstanceSetting().conatctInfoEditIcon);
-				click(pom.getInstanceSetting().conatctInfoEditIcon);
+				clickIntercept(pom.getInstanceSetting().conatctInfoEditIcon, 30);
+
 			} catch (Exception e) {
 				visbility(driver, pom.getInstanceSetting().conatctInfoEditIcon, 40);
 				elementClickable(pom.getInstanceSetting().conatctInfoEditIcon);
@@ -4363,8 +3870,11 @@ public class Local_Host extends LaunchBrowser {
 			try {
 
 				visbility(driver, pom.getInstanceSetting().specialtyAddIcon, 40);
-				elementClickable(pom.getInstanceSetting().specialtyAddIcon);
-				click(pom.getInstanceSetting().specialtyAddIcon);
+				clickIntercept(pom.getInstanceSetting().specialtyAddIcon, 30);
+				/*
+				 * elementClickable(pom.getInstanceSetting().specialtyAddIcon);
+				 * click(pom.getInstanceSetting().specialtyAddIcon);
+				 */
 			} catch (Exception e) {
 				visbility(driver, pom.getInstanceSetting().specialtyAddIcon, 40);
 				elementClickable(pom.getInstanceSetting().specialtyAddIcon);
@@ -4374,8 +3884,11 @@ public class Local_Host extends LaunchBrowser {
 			try {
 
 				visbility(driver, pom.getInstanceSetting().specialtyAddIcondrLogin, 40);
-				elementClickable(pom.getInstanceSetting().specialtyAddIcondrLogin);
-				click(pom.getInstanceSetting().specialtyAddIcondrLogin);
+				clickIntercept(pom.getInstanceSetting().specialtyAddIcondrLogin, 30);
+				/*
+				 * elementClickable(pom.getInstanceSetting().specialtyAddIcondrLogin);
+				 * click(pom.getInstanceSetting().specialtyAddIcondrLogin);
+				 */
 			} catch (Exception e) {
 				visbility(driver, pom.getInstanceSetting().specialtyAddIcondrLogin, 40);
 				elementClickable(pom.getInstanceSetting().specialtyAddIcondrLogin);
@@ -4399,8 +3912,11 @@ public class Local_Host extends LaunchBrowser {
 		// patient info
 		try {
 			visbility(driver, pom.getInstanceSetting().patientInfoeditIcon, 30);
-			elementClickable(pom.getInstanceSetting().patientInfoeditIcon);
-			click(pom.getInstanceSetting().patientInfoeditIcon);
+			clickIntercept(pom.getInstanceSetting().patientInfoeditIcon, 30);
+			/*
+			 * elementClickable(pom.getInstanceSetting().patientInfoeditIcon);
+			 * click(pom.getInstanceSetting().patientInfoeditIcon);
+			 */
 		} catch (Exception e) {
 			visbility(driver, pom.getInstanceSetting().patientInfoeditIcon, 30);
 			elementClickable(pom.getInstanceSetting().patientInfoeditIcon);
@@ -4437,19 +3953,14 @@ public class Local_Host extends LaunchBrowser {
 		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
 			elementClickable(pom.getInstanceSetting().patientInfoSave);
 			click(pom.getInstanceSetting().patientInfoSave);
-		} else {
+		} else if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("dr")
+				| ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("user")) {
 			elementClickable(pom.getInstanceSetting().patientInfoSavedrLogin);
 			click(pom.getInstanceSetting().patientInfoSavedrLogin);
 		}
 
-		try {
-			javascriptclick(pom.getInstanceSetting().managerYouraccBack);
-
-			System.out.println("Try");
-		} catch (Exception e) {
-			javascriptclick(pom.getInstanceSetting().managerYouraccBack);
-		}
-
+		navigateback(1);
+		log.info("back t0 settings");
 		/*
 		 * WebElement trp9 =
 		 * driver.findElement(By.xpath("//button[@onclick='setting.changep()']"));
@@ -4481,12 +3992,12 @@ public class Local_Host extends LaunchBrowser {
 		// Manage users...
 		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
 			try {
-				visbility(driver, pom.getInstanceSetting().manageuser, 30);
-				elementClickable(pom.getInstanceSetting().manageuser);
-				click(pom.getInstanceSetting().manageuser);
+				visbility(driver, pom.getInstanceSetting().manageuser, 40);
+				clickIntercept(pom.getInstanceSetting().manageuser, 30);
+
 				log.info("manage user clicked");
 			} catch (Exception e) {
-				visbility(driver, pom.getInstanceSetting().manageuser, 30);
+				visbility(driver, pom.getInstanceSetting().manageuser, 40);
 				elementClickable(pom.getInstanceSetting().manageuser);
 				click(pom.getInstanceSetting().manageuser);
 				log.info("manage user clicked");
@@ -4494,8 +4005,8 @@ public class Local_Host extends LaunchBrowser {
 			try {
 
 				visbility(driver, pom.getInstanceSetting().manageuserAddNewUser, 60);
-				elementClickable(pom.getInstanceSetting().manageuserAddNewUser);
-				click(pom.getInstanceSetting().manageuserAddNewUser);
+				clickIntercept(pom.getInstanceSetting().manageuserAddNewUser, 30);
+
 			} catch (ElementClickInterceptedException e) {
 
 				visbility(driver, pom.getInstanceSetting().manageuserAddNewUser, 60);
@@ -4539,14 +4050,15 @@ public class Local_Host extends LaunchBrowser {
 			 * 
 			 * sendkeys(pom.getInstanceSetting().manageUserPhonefield, "23" + numeric);
 			 */
-			try {
-				elementClickable(pom.getInstanceSetting().createuser);
-				click(pom.getInstanceSetting().createuser);
-			} catch (Exception e) {
-				elementClickable(pom.getInstanceSetting().createuser);
-				click(pom.getInstanceSetting().createuser);
-			}
-			sleep(2500);
+			/*
+			 * try { elementClickable(pom.getInstanceSetting().createuser);
+			 * click(pom.getInstanceSetting().createuser); } catch (Exception e) {
+			 * elementClickable(pom.getInstanceSetting().createuser);
+			 * click(pom.getInstanceSetting().createuser); }
+			 */
+			clickIntercept(pom.getInstanceSetting().createuser, 30);
+
+			// sleep(2500);
 
 			while (true) {
 				if (driver.getCurrentUrl().equals("https://localhost:8443/health/#user")) {
@@ -4567,103 +4079,168 @@ public class Local_Host extends LaunchBrowser {
 				driver.navigate().to("https://www.test.75health.com/health/#setting");
 			}
 		}
+
+		// manage Branding (enterprise)
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().getPackageDetails()
+				.equalsIgnoreCase("premium70")) {
+			visbility(driver, pom.getInstanceSetting().manageBrandingClick, 40);
+			clickIntercept(pom.getInstanceSetting().manageBrandingClick, 30);
+
+			visbility(driver, pom.getInstanceSetting().manageBrandingOrgNameDiscription, 30);
+			clear(pom.getInstanceSetting().manageBrandingOrgNameDiscription);
+			sendkeys(pom.getInstanceSetting().manageBrandingOrgNameDiscription, "75 Health Organisation");
+
+			clickIntercept(pom.getInstanceSetting().manageBrandingSetName, 30);
+
+			clickIntercept(pom.getInstanceSetting().manageBrandingEmailPreview, 30);
+
+			for (WebElement mb : pom.getInstanceSetting().manageBrandingEmailPreviewDropdown) {
+				System.out.println(mb);
+
+				if (mb.getText().trim().equals("Patient Account Creation")
+						| mb.getText().trim().equals("Patient Account Re-Activation")
+						| mb.getText().trim().equals("Doctor appointment send patient")
+						| mb.getText().trim().equals("Doctor appointment cancel")
+						| mb.getText().trim().equals("Doctor appointment reject")
+						| mb.getText().trim().equals("Appointment request send patient")
+						| mb.getText().trim().equals("Patient referral notification")
+						| mb.getText().trim().equals("Patient lab detail email")
+						| mb.getText().trim().equals("Patient pharmacy detail email")
+						| mb.getText().trim().equals("Completed health record")) {
+					visbility(driver, mb, 40);
+					clickIntercept(mb, 30);
+
+					sleep(2000);
+
+					clickIntercept(pom.getInstanceSetting().manageBrandingPreviewClick, 30);
+					sleep(2000);
+					clickIntercept(pom.getInstanceSetting().manageBrandingCancelWindow, 30);
+					sleep(2000);
+					clickIntercept(pom.getInstanceSetting().manageBrandingEmailPreview, 30);
+				}
+
+			}
+			navigateback(1);
+		}
 		for (WebElement w : pom.getInstanceSetting().autoLogoutDrop) {
 
 			if (w.getText().trim().equals("2 Hour")) {
 				visbility(driver, w, 60);
-				elementClickable(w);
-				click(w);
+				clickIntercept(w, 30);
+				/*
+				 * elementClickable(w); click(w);
+				 */
 				break;
 			}
 
 		}
 		sleep(1000);
 		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
-			try {
-				elementClickable(pom.getInstanceSetting().hospitalServiceChargeTaxclick);
-				click(pom.getInstanceSetting().hospitalServiceChargeTaxclick);
-			} catch (Exception e) {
-				elementClickable(pom.getInstanceSetting().hospitalServiceChargeTaxclick);
-				click(pom.getInstanceSetting().hospitalServiceChargeTaxclick);
-			}
+			/*
+			 * try {
+			 * elementClickable(pom.getInstanceSetting().hospitalServiceChargeTaxclick);
+			 */
+			clickIntercept(pom.getInstanceSetting().hospitalServiceChargeTaxclick, 30);
+			/*
+			 * } catch (Exception e) {
+			 * elementClickable(pom.getInstanceSetting().hospitalServiceChargeTaxclick);
+			 * click(pom.getInstanceSetting().hospitalServiceChargeTaxclick); }
+			 */
 
 			visbility(driver, pom.getInstanceSetting().hospitalServiceChargeTaxdropclick, 40);
-			elementClickable(pom.getInstanceSetting().hospitalServiceChargeTaxdropclick);
-			click(pom.getInstanceSetting().hospitalServiceChargeTaxdropclick);
+			/*
+			 * elementClickable(pom.getInstanceSetting().hospitalServiceChargeTaxdropclick);
+			 */
+			clickIntercept(pom.getInstanceSetting().hospitalServiceChargeTaxdropclick, 30);
 
-			try {
+			/* try { */
 
-				visbility(driver, pom.getInstanceSetting().hospitalTaxAddnewTax, 30);
-				elementClickable(pom.getInstanceSetting().hospitalTaxAddnewTax);
-				click(pom.getInstanceSetting().hospitalTaxAddnewTax);
-			} catch (Exception e) {
-				visbility(driver, pom.getInstanceSetting().hospitalTaxAddnewTax, 30);
-				elementClickable(pom.getInstanceSetting().hospitalTaxAddnewTax);
-				click(pom.getInstanceSetting().hospitalTaxAddnewTax);
-			}
+			visbility(driver, pom.getInstanceSetting().hospitalTaxAddnewTax, 30);
+			/* elementClickable(pom.getInstanceSetting().hospitalTaxAddnewTax); */
+			clickIntercept(pom.getInstanceSetting().hospitalTaxAddnewTax, 30);
+			/*
+			 * } catch (Exception e) { visbility(driver,
+			 * pom.getInstanceSetting().hospitalTaxAddnewTax, 30);
+			 * elementClickable(pom.getInstanceSetting().hospitalTaxAddnewTax);
+			 * click(pom.getInstanceSetting().hospitalTaxAddnewTax); }
+			 */
 			visbility(driver, pom.getInstanceSetting().hospitalTaxdiscription, 30);
 			sendkeys(pom.getInstanceSetting().hospitalTaxdiscription, "DK");
 
 			visbility(driver, pom.getInstanceSetting().hospitalTaxPercentage, 30);
 			sendkeys(pom.getInstanceSetting().hospitalTaxPercentage, "5");
-			try {
-				elementClickable(pom.getInstanceSetting().hospitaltaxSave);
-				click(pom.getInstanceSetting().hospitaltaxSave);
-			} catch (Exception e) {
-				elementClickable(pom.getInstanceSetting().hospitaltaxSave);
-				click(pom.getInstanceSetting().hospitaltaxSave);
-			}
+			/* try { */
+			/*
+			 * elementClickable(pom.getInstanceSetting().hospitaltaxSave);
+			 * click(pom.getInstanceSetting().hospitaltaxSave);
+			 */
+			clickIntercept(pom.getInstanceSetting().hospitaltaxSave, 30);
+			/*
+			 * } catch (Exception e) {
+			 * elementClickable(pom.getInstanceSetting().hospitaltaxSave);
+			 * click(pom.getInstanceSetting().hospitaltaxSave); }
+			 */
 			try {
 				visbility(driver, pom.getInstanceSetting().editHospitalTax, 30);
-				elementClickable(pom.getInstanceSetting().editHospitalTax);
-				click(pom.getInstanceSetting().editHospitalTax);
+				clickIntercept(pom.getInstanceSetting().editHospitalTax, 30);
+				/*
+				 * elementClickable(pom.getInstanceSetting().editHospitalTax);
+				 * click(pom.getInstanceSetting().editHospitalTax);
+				 */
 			} catch (Exception e) {
 				visbility(driver, pom.getInstanceSetting().editHospitalTax, 30);
-				elementClickable(pom.getInstanceSetting().editHospitalTax);
-				click(pom.getInstanceSetting().editHospitalTax);
+				clickIntercept(pom.getInstanceSetting().editHospitalTax, 30);
 			}
 
 			try {
 				visbility(driver, pom.getInstanceSetting().deleteHospitalTAX, 30);
-				elementClickable(pom.getInstanceSetting().deleteHospitalTAX);
-				click(pom.getInstanceSetting().deleteHospitalTAX);
+				clickIntercept(pom.getInstanceSetting().deleteHospitalTAX, 30);
 			} catch (Exception e) {
 				visbility(driver, pom.getInstanceSetting().deleteHospitalTAX, 30);
-				elementClickable(pom.getInstanceSetting().deleteHospitalTAX);
-				click(pom.getInstanceSetting().deleteHospitalTAX);
+				clickIntercept(pom.getInstanceSetting().deleteHospitalTAX, 30);
 			}
 
-			try {
-				visbility(driver, pom.getInstanceSetting().closeHospitalTax, 30);
-				elementClickable(pom.getInstanceSetting().closeHospitalTax);
-				click(pom.getInstanceSetting().closeHospitalTax);
-			} catch (Exception e) {
-				visbility(driver, pom.getInstanceSetting().closeHospitalTax, 30);
-				elementClickable(pom.getInstanceSetting().closeHospitalTax);
-				click(pom.getInstanceSetting().closeHospitalTax);
-			}
+			/* try { */
+			visbility(driver, pom.getInstanceSetting().closeHospitalTax, 30);
+			clickIntercept(pom.getInstanceSetting().closeHospitalTax, 30);
+			/*
+			 * elementClickable(pom.getInstanceSetting().closeHospitalTax);
+			 * javascriptclick(pom.getInstanceSetting().closeHospitalTax);
+			 */
+			/*
+			 * } catch (Exception e) { visbility(driver,
+			 * pom.getInstanceSetting().closeHospitalTax, 30);
+			 * elementClickable(pom.getInstanceSetting().closeHospitalTax);
+			 * javascriptclick(pom.getInstanceSetting().closeHospitalTax); }
+			 */
 		}
+		sleep(2500);
 		// cds
 
-		try {
-			visbility(driver, pom.getInstanceSetting().cdsClick, 30);
-			elementClickable(pom.getInstanceSetting().cdsClick);
-			click(pom.getInstanceSetting().cdsClick);
-		} catch (Exception e) {
-			visbility(driver, pom.getInstanceSetting().cdsClick, 30);
-			elementClickable(pom.getInstanceSetting().cdsClick);
-			click(pom.getInstanceSetting().cdsClick);
-		}
+		/* try { */
+		visbility(driver, pom.getInstanceSetting().cdsClick, 30);
+		/* elementClickable(pom.getInstanceSetting().cdsClick); */
+		clickIntercept(pom.getInstanceSetting().cdsClick, 30);
 
-		try {
-			visbility(driver, pom.getInstanceSetting().addnewCds, 30);
-			elementClickable(pom.getInstanceSetting().addnewCds);
-			click(pom.getInstanceSetting().addnewCds);
-		} catch (Exception e) {
-			visbility(driver, pom.getInstanceSetting().addnewCds, 30);
-			elementClickable(pom.getInstanceSetting().addnewCds);
-			click(pom.getInstanceSetting().addnewCds);
-		}
+		/*
+		 * click(pom.getInstanceSetting().cdsClick); } catch (Exception e) {
+		 * visbility(driver, pom.getInstanceSetting().cdsClick, 30);
+		 * elementClickable(pom.getInstanceSetting().cdsClick);
+		 * click(pom.getInstanceSetting().cdsClick); }
+		 */
+
+		/* try { */
+		visbility(driver, pom.getInstanceSetting().addnewCds, 30);
+		clickIntercept(pom.getInstanceSetting().addnewCds, 30);
+		/*
+		 * elementClickable(pom.getInstanceSetting().addnewCds);
+		 * click(pom.getInstanceSetting().addnewCds);
+		 */
+		/*
+		 * } catch (Exception e) { visbility(driver, pom.getInstanceSetting().addnewCds,
+		 * 30); elementClickable(pom.getInstanceSetting().addnewCds);
+		 * click(pom.getInstanceSetting().addnewCds); }
+		 */
 
 		visbility(driver, pom.getInstanceSetting().enterCds, 30);
 		sendkeys(pom.getInstanceSetting().enterCds, "Akash");
@@ -4681,68 +4258,82 @@ public class Local_Host extends LaunchBrowser {
 		click(pom.getInstanceSetting().CdsicdList);
 
 		visbility(driver, pom.getInstanceSetting().cdsCheckbox, 30);
-		elementClickable(pom.getInstanceSetting().cdsCheckbox);
-		click(pom.getInstanceSetting().cdsCheckbox);
+		clickIntercept(pom.getInstanceSetting().cdsCheckbox, 30);
+		/*
+		 * elementClickable(pom.getInstanceSetting().cdsCheckbox);
+		 * click(pom.getInstanceSetting().cdsCheckbox);
+		 */
 
-		elementClickable(pom.getInstanceSetting().saveCds);
-		click(pom.getInstanceSetting().saveCds);
+		/*
+		 * elementClickable(pom.getInstanceSetting().saveCds);
+		 * click(pom.getInstanceSetting().saveCds);
+		 */
+		clickIntercept(pom.getInstanceSetting().saveCds, 30);
 
 		sleep(3000);
 
-		try {
-			visbility(driver, pom.getInstanceSetting().clickSettings, 40);
-			elementClickable(pom.getInstanceSetting().clickSettings);
-			click(pom.getInstanceSetting().clickSettings);
-		} catch (Exception e) {
-			visbility(driver, pom.getInstanceSetting().clickSettings, 40);
-			elementClickable(pom.getInstanceSetting().clickSettings);
-			click(pom.getInstanceSetting().clickSettings);
-		}
+		/* try { */
+		visbility(driver, pom.getInstanceSetting().clickSettings, 40);
+		// elementClickable(pom.getInstanceSetting().clickSettings);
+		clickIntercept(pom.getInstanceSetting().clickSettings, 30);
+		/*
+		 * } catch (Exception e) { visbility(driver,
+		 * pom.getInstanceSetting().clickSettings, 40);
+		 * elementClickable(pom.getInstanceSetting().clickSettings);
+		 * click(pom.getInstanceSetting().clickSettings); }
+		 */
 		sleep(1000);
 		ScriptExecutor(pom.getInstanceSetting().cdsClick);
 
 		// Set Favorities..
 
-		try {
-			visbility(driver, pom.getInstanceSetting().setFavoritesClick, 40);
-			elementClickable(pom.getInstanceSetting().setFavoritesClick);
-			click(pom.getInstanceSetting().setFavoritesClick);
-		} catch (Exception e) {
-			visbility(driver, pom.getInstanceSetting().setFavoritesClick, 40);
-			elementClickable(pom.getInstanceSetting().setFavoritesClick);
-			click(pom.getInstanceSetting().setFavoritesClick);
-		}
+		/* try { */
+		visbility(driver, pom.getInstanceSetting().setFavoritesClick, 40);
+		clickIntercept(pom.getInstanceSetting().setFavoritesClick, 30);
+		/*
+		 * elementClickable(pom.getInstanceSetting().setFavoritesClick);
+		 * click(pom.getInstanceSetting().setFavoritesClick);
+		 * 
+		 * } catch (Exception e) { visbility(driver,
+		 * pom.getInstanceSetting().setFavoritesClick, 40);
+		 * elementClickable(pom.getInstanceSetting().setFavoritesClick);
+		 * click(pom.getInstanceSetting().setFavoritesClick); }
+		 */
 
 		for (WebElement w : pom.getInstanceSetting().setFavoriteListDrop) {
 			if (w.getText().trim().equals("Item/service")) {
 
 				visbility(driver, w, 60);
-				elementClickable(w);
-				click(w);
+				clickIntercept(w, 30);
 
 				try {
 					visbility(driver, pom.getInstanceSetting().setfavoritesItemServiceAddIcon, 30);
-					elementClickable(pom.getInstanceSetting().setfavoritesItemServiceAddIcon);
-					click(pom.getInstanceSetting().setfavoritesItemServiceAddIcon);
+					clickIntercept(pom.getInstanceSetting().setfavoritesItemServiceAddIcon, 30);
+					/*
+					 * elementClickable(pom.getInstanceSetting().setfavoritesItemServiceAddIcon);
+					 * click(pom.getInstanceSetting().setfavoritesItemServiceAddIcon);
+					 */
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setfavoritesItemServiceAddIcon, 30);
-					elementClickable(pom.getInstanceSetting().setfavoritesItemServiceAddIcon);
-					click(pom.getInstanceSetting().setfavoritesItemServiceAddIcon);
+					clickIntercept(pom.getInstanceSetting().setfavoritesItemServiceAddIcon, 30);
 				}
 
 				visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceDiscription, 60);
 				sendkeys(pom.getInstanceSetting().setFavoritesItemServiceDiscription, "test");
 				visbility(driver, pom.getInstanceSetting().setFavoritesItemServicePrice, 40);
 				sendkeys(pom.getInstanceSetting().setFavoritesItemServicePrice, "5");
-				elementClickable(pom.getInstanceSetting().setFavoritesItemServiceSave);
-				click(pom.getInstanceSetting().setFavoritesItemServiceSave);
+				/*
+				 * elementClickable(pom.getInstanceSetting().setFavoritesItemServiceSave);
+				 * click(pom.getInstanceSetting().setFavoritesItemServiceSave);
+				 */
+				clickIntercept(pom.getInstanceSetting().setFavoritesItemServiceSave, 30);
 				sleep(1000);
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceEdit, 40);
-					elementClickable(pom.getInstanceSetting().setFavoritesItemServiceEdit);
-					click(pom.getInstanceSetting().setFavoritesItemServiceEdit);
+					/* elementClickable(pom.getInstanceSetting().setFavoritesItemServiceEdit); */
+					clickIntercept(pom.getInstanceSetting().setFavoritesItemServiceEdit, 30);
 
-				} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+				} catch (StaleElementReferenceException e) {
 					visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceEdit, 40);
 					elementClickable(pom.getInstanceSetting().setFavoritesItemServiceEdit);
 					click(pom.getInstanceSetting().setFavoritesItemServiceEdit);
@@ -4750,89 +4341,82 @@ public class Local_Host extends LaunchBrowser {
 
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceDelete, 30);
-					elementClickable(pom.getInstanceSetting().setFavoritesItemServiceDelete);
-					click(pom.getInstanceSetting().setFavoritesItemServiceDelete);
+					clickIntercept(pom.getInstanceSetting().setFavoritesItemServiceDelete, 30);
+					/*
+					 * elementClickable(pom.getInstanceSetting().setFavoritesItemServiceDelete);
+					 * click(pom.getInstanceSetting().setFavoritesItemServiceDelete);
+					 */
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceDelete, 30);
-					elementClickable(pom.getInstanceSetting().setFavoritesItemServiceDelete);
-					click(pom.getInstanceSetting().setFavoritesItemServiceDelete);
+					clickIntercept(pom.getInstanceSetting().setFavoritesItemServiceDelete, 30);
 				}
 
 				try {
-					elementClickable(pom.getInstanceSetting().setFavoritesItemServiceClose);
-					click(pom.getInstanceSetting().setFavoritesItemServiceClose);
+					/*
+					 * elementClickable(pom.getInstanceSetting().setFavoritesItemServiceClose);
+					 * click(pom.getInstanceSetting().setFavoritesItemServiceClose);
+					 */
+					clickIntercept(pom.getInstanceSetting().setFavoritesItemServiceClose, 30);
 				} catch (Exception e) {
-					elementClickable(pom.getInstanceSetting().setFavoritesItemServiceClose);
-					click(pom.getInstanceSetting().setFavoritesItemServiceClose);
+					clickIntercept(pom.getInstanceSetting().setFavoritesItemServiceClose, 30);
 				}
 
-				elementClickable(pom.getInstanceSetting().setFavoritesClick);
-				click(pom.getInstanceSetting().setFavoritesClick);
+				clickIntercept(pom.getInstanceSetting().setFavoritesClick, 30);
 
 			} else if (w.getText().trim().contentEquals("Message")) {
 				visbility(driver, w, 40);
-				elementClickable(w);
-				click(w);
+				clickIntercept(w, 30);
 
 				try {
 
 					visbility(driver, pom.getInstanceSetting().setFavoritesMessageAddIcon, 30);
-					elementClickable(pom.getInstanceSetting().setFavoritesMessageAddIcon);
-					click(pom.getInstanceSetting().setFavoritesMessageAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageAddIcon, 30);
+
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoritesMessageAddIcon, 30);
-					elementClickable(pom.getInstanceSetting().setFavoritesMessageAddIcon);
-					click(pom.getInstanceSetting().setFavoritesMessageAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageAddIcon, 30);
 				}
 				visbility(driver, pom.getInstanceSetting().setFavoritesMessageDiscription, 30);
 				sendkeys(pom.getInstanceSetting().setFavoritesMessageDiscription, "hello");
-				elementClickable(pom.getInstanceSetting().setFavoritesMessageSave);
-				click(pom.getInstanceSetting().setFavoritesMessageSave);
+
+				clickIntercept(pom.getInstanceSetting().setFavoritesMessageSave, 30);
 				sleep(1000);
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoritesMessageEdit, 30);
-					elementClickable(pom.getInstanceSetting().setFavoritesMessageEdit);
-					click(pom.getInstanceSetting().setFavoritesMessageEdit);
-				} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageEdit, 30);
+				} catch (StaleElementReferenceException e) {
 					visbility(driver, pom.getInstanceSetting().setFavoritesMessageEdit, 30);
-					elementClickable(pom.getInstanceSetting().setFavoritesMessageEdit);
-					click(pom.getInstanceSetting().setFavoritesMessageEdit);
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageEdit, 30);
 				}
 
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoritesMessageDelete, 30);
-					elementClickable(pom.getInstanceSetting().setFavoritesMessageDelete);
-					click(pom.getInstanceSetting().setFavoritesMessageDelete);
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageDelete, 30);
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoritesMessageDelete, 30);
-					elementClickable(pom.getInstanceSetting().setFavoritesMessageDelete);
-					click(pom.getInstanceSetting().setFavoritesMessageDelete);
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageDelete, 30);
 				}
 
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoritesMessageClose, 40);
-					elementClickable(pom.getInstanceSetting().setFavoritesMessageClose);
-					click(pom.getInstanceSetting().setFavoritesMessageClose);
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageClose, 30);
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoritesMessageClose, 40);
-					elementClickable(pom.getInstanceSetting().setFavoritesMessageClose);
-					click(pom.getInstanceSetting().setFavoritesMessageClose);
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageClose, 30);
 				}
 
 			} else if (w.getText().trim().equals("Symptoms")) {
 
 				visbility(driver, w, 40);
-				elementClickable(w);
-				click(w);
+				clickIntercept(w, 30);
 
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoritesSymptomsAddIcon, 30);
-					elementClickable(pom.getInstanceSetting().setFavoritesSymptomsAddIcon);
-					click(pom.getInstanceSetting().setFavoritesSymptomsAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoritesSymptomsAddIcon, 30);
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoritesSymptomsAddIcon, 30);
-					elementClickable(pom.getInstanceSetting().setFavoritesSymptomsAddIcon);
-					click(pom.getInstanceSetting().setFavoritesSymptomsAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoritesSymptomsAddIcon, 30);
 				}
 
 				visbility(driver, pom.getInstanceSetting().setFavoritesSymptomsIcd, 30);
@@ -4840,11 +4424,7 @@ public class Local_Host extends LaunchBrowser {
 
 				while (true) {
 					try {
-						/*
-						 * symptomsdrop = driver.findElements(By.xpath(
-						 * "//div[@id='addfav-div']/div/div/div[4]//following::div[1]//following::ul[1]/li/a/div"
-						 * ));
-						 */
+
 						if (pom.getInstanceSymptom().favoriteicdList.size() > 5) {
 							break;
 						}
@@ -4855,8 +4435,7 @@ public class Local_Host extends LaunchBrowser {
 				for (WebElement web : pom.getInstanceSymptom().favoriteicdList) {
 					if (web.getText().trim().equals("R76.1: Abnormal reaction to tuberculin test")) {
 						visbility(driver, web, 60);
-						elementClickable(web);
-						click(web);
+						clickIntercept(web, 30);
 						break;
 					}
 
@@ -4864,60 +4443,58 @@ public class Local_Host extends LaunchBrowser {
 
 				visbility(driver, pom.getInstanceSetting().setFavoritesSymotomsdiscription, 30);
 				sendkeys(pom.getInstanceSetting().setFavoritesSymotomsdiscription, "Symptoms");
-				elementClickable(pom.getInstanceSetting().setFavoritesSymptomsSave);
-				click(pom.getInstanceSetting().setFavoritesSymptomsSave);
+
+				clickIntercept(pom.getInstanceSetting().setFavoritesSymptomsSave, 30);
 				sleep(1000);
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoritesSymptomsedit, 30);
-					elementClickable(pom.getInstanceSetting().setFavoritesSymptomsedit);
-					click(pom.getInstanceSetting().setFavoritesSymptomsedit);
-				} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+					clickIntercept(pom.getInstanceSetting().setFavoritesSymptomsedit, 30);
+					/*
+					 * elementClickable(pom.getInstanceSetting().setFavoritesSymptomsedit);
+					 * click(pom.getInstanceSetting().setFavoritesSymptomsedit);
+					 */
+				} catch (StaleElementReferenceException e) {
 					visbility(driver, pom.getInstanceSetting().setFavoritesSymptomsedit, 30);
-					elementClickable(pom.getInstanceSetting().setFavoritesSymptomsedit);
-					click(pom.getInstanceSetting().setFavoritesSymptomsedit);
+					clickIntercept(pom.getInstanceSetting().setFavoritesSymptomsedit, 30);
 				}
 
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteSymtomsDelete, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteSymtomsDelete);
-					click(pom.getInstanceSetting().setFavoriteSymtomsDelete);
+					clickIntercept(pom.getInstanceSetting().setFavoriteSymtomsDelete, 30);
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteSymtomsDelete, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteSymtomsDelete);
-					click(pom.getInstanceSetting().setFavoriteSymtomsDelete);
+					clickIntercept(pom.getInstanceSetting().setFavoriteSymtomsDelete, 30);
 				}
 
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteSymtomsClose, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteSymtomsClose);
-					click(pom.getInstanceSetting().setFavoriteSymtomsClose);
+					clickIntercept(pom.getInstanceSetting().setFavoriteSymtomsClose, 30);
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteSymtomsClose, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteSymtomsClose);
-					click(pom.getInstanceSetting().setFavoriteSymtomsClose);
+					clickIntercept(pom.getInstanceSetting().setFavoriteSymtomsClose, 30);
 				}
 
-				elementClickable(pom.getInstanceSetting().setFavoritesClick);
-				click(pom.getInstanceSetting().setFavoritesClick);
+				clickIntercept(pom.getInstanceSetting().setFavoritesClick, 30);
 			} else if (w.getText().trim().equals("Problems")) {
 
 				visbility(driver, w, 40);
-				elementClickable(w);
-				click(w);
+				clickIntercept(w, 30);
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteProblemsAddIcon, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteProblemsAddIcon);
-					click(pom.getInstanceSetting().setFavoriteProblemsAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoriteProblemsAddIcon, 30);
+					/*
+					 * elementClickable(pom.getInstanceSetting().setFavoriteProblemsAddIcon);
+					 * click(pom.getInstanceSetting().setFavoriteProblemsAddIcon);
+					 */
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteProblemsAddIcon, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteProblemsAddIcon);
-					click(pom.getInstanceSetting().setFavoriteProblemsAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoriteProblemsAddIcon, 30);
 				}
 
 				visbility(driver, pom.getInstanceSetting().setFavoriteProblemsIcd, 30);
 				sendkeys(pom.getInstanceSetting().setFavoriteProblemsIcd, "test");
 				sleep(2000);
-				click(pom.getInstanceSetting().setFavoriteProblemsIcd);
+				clickIntercept(pom.getInstanceSetting().setFavoriteProblemsIcd, 30);
 				try {
 
 					Problems.$favproblemsIcdCode();
@@ -4928,66 +4505,64 @@ public class Local_Host extends LaunchBrowser {
 
 				visbility(driver, pom.getInstanceSetting().setFavoriteProblemsDiscription, 30);
 				sendkeys(pom.getInstanceSetting().setFavoriteProblemsDiscription, "Problems");
-				elementClickable(pom.getInstanceSetting().setFavoriteProblemsSave);
-				click(pom.getInstanceSetting().setFavoriteProblemsSave);
+
+				clickIntercept(pom.getInstanceSetting().setFavoriteProblemsSave, 30);
 				sleep(1000);
 				try {
 					visbility(driver, pom.getInstanceProblems().editFavorite, 30);
-					elementClickable(pom.getInstanceProblems().editFavorite);
-					click(pom.getInstanceProblems().editFavorite);
-				} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+
+					clickIntercept(pom.getInstanceProblems().editFavorite, 30);
+				} catch (StaleElementReferenceException e) {
 					visbility(driver, pom.getInstanceProblems().editFavorite, 30);
-					elementClickable(pom.getInstanceProblems().editFavorite);
-					click(pom.getInstanceProblems().editFavorite);
+					clickIntercept(pom.getInstanceProblems().editFavorite, 30);
 				}
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteProblemsDelete, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteProblemsDelete);
-					click(pom.getInstanceSetting().setFavoriteProblemsDelete);
+					clickIntercept(pom.getInstanceSetting().setFavoriteProblemsDelete, 30);
+					/*
+					 * elementClickable(pom.getInstanceSetting().setFavoriteProblemsDelete);
+					 * click(pom.getInstanceSetting().setFavoriteProblemsDelete);
+					 */
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteProblemsDelete, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteProblemsDelete);
-					click(pom.getInstanceSetting().setFavoriteProblemsDelete);
+					clickIntercept(pom.getInstanceSetting().setFavoriteProblemsDelete, 30);
 				}
 
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteProblemsClose, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteProblemsClose);
-					click(pom.getInstanceSetting().setFavoriteProblemsClose);
+					clickIntercept(pom.getInstanceSetting().setFavoriteProblemsClose, 30);
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteProblemsClose, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteProblemsClose);
-					click(pom.getInstanceSetting().setFavoriteProblemsClose);
+					clickIntercept(pom.getInstanceSetting().setFavoriteProblemsClose, 30);
 				}
 
-				elementClickable(pom.getInstanceSetting().setFavoritesClick);
-				click(pom.getInstanceSetting().setFavoritesClick);
+				clickIntercept(pom.getInstanceSetting().setFavoritesClick, 30);
 			} else if (w.getText().trim().equals("Visit Reason")) {
 
 				visbility(driver, w, 40);
-				elementClickable(w);
-				click(w);
+				clickIntercept(w, 30);
 				try {
 
 					visbility(driver, pom.getInstanceSetting().setFavoriteVisitReasonAddIcon, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteVisitReasonAddIcon);
-					click(pom.getInstanceSetting().setFavoriteVisitReasonAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoriteVisitReasonAddIcon, 30);
+					/*
+					 * elementClickable(pom.getInstanceSetting().setFavoriteVisitReasonAddIcon);
+					 * click(pom.getInstanceSetting().setFavoriteVisitReasonAddIcon);
+					 */
 				} catch (Exception e) {
 
 					visbility(driver, pom.getInstanceSetting().setFavoriteVisitReasonAddIcon, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteVisitReasonAddIcon);
-					click(pom.getInstanceSetting().setFavoriteVisitReasonAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoriteVisitReasonAddIcon, 30);
 				}
 				ww.until(ExpectedConditions
 						.elementToBeClickable(pom.getInstanceSetting().selectAppointmentTypeVisitReasonSetFav));
-				click(pom.getInstanceSetting().selectAppointmentTypeVisitReasonSetFav);
+				clickIntercept(pom.getInstanceSetting().selectAppointmentTypeVisitReasonSetFav, 30);
 
 				for (WebElement Element : pom.getInstanceSetting().setFavoriteVisitReasonTypeDrop) {
 					System.out.println(Element.getText());
 					if (Element.getText().equals("Emergency") && Element.isDisplayed()) {
 						visbility(driver, Element, 30);
-						elementClickable(Element);
-						click(Element);
+						clickIntercept(Element, 30);
 						break;
 					}
 
@@ -4996,42 +4571,33 @@ public class Local_Host extends LaunchBrowser {
 				visbility(driver, pom.getInstanceSetting().setFavoriteVisitReasonDiscription, 40);
 				sendkeys(pom.getInstanceSetting().setFavoriteVisitReasonDiscription, "VisitReason");
 
-				elementClickable(pom.getInstanceSetting().setFavoriteVisitReasonSave);
-				click(pom.getInstanceSetting().setFavoriteVisitReasonSave);
+				clickIntercept(pom.getInstanceSetting().setFavoriteVisitReasonSave, 30);
 				sleep(1000);
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteVisitReasonEdit, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteVisitReasonEdit);
 
-					click(pom.getInstanceSetting().setFavoriteVisitReasonEdit);
-				} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+					clickIntercept(pom.getInstanceSetting().setFavoriteVisitReasonEdit, 30);
+				} catch (StaleElementReferenceException e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteVisitReasonEdit, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteVisitReasonEdit);
-
-					click(pom.getInstanceSetting().setFavoriteVisitReasonEdit);
+					clickIntercept(pom.getInstanceSetting().setFavoriteVisitReasonEdit, 30);
 				}
 
-				elementClickable(pom.getInstanceSetting().setFavoriteVisitReasondelete);
-				click(pom.getInstanceSetting().setFavoriteVisitReasondelete);
-				elementClickable(pom.getInstanceSetting().setFavoriteVisitReasonClose);
-				click(pom.getInstanceSetting().setFavoriteVisitReasonClose);
+				clickIntercept(pom.getInstanceSetting().setFavoriteVisitReasondelete, 30);
 
-				elementClickable(pom.getInstanceSetting().setFavoritesClick);
-				click(pom.getInstanceSetting().setFavoritesClick);
+				clickIntercept(pom.getInstanceSetting().setFavoriteVisitReasonClose, 30);
+
+				clickIntercept(pom.getInstanceSetting().setFavoritesClick, 30);
 
 			} else if (w.getText().trim().equals("Procedure")) {
 
 				visbility(driver, w, 40);
-				elementClickable(w);
-				click(w);
+				clickIntercept(w, 30);
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteProcedureAddIcon, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteProcedureAddIcon);
-					click(pom.getInstanceSetting().setFavoriteProcedureAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoriteProcedureAddIcon, 30);
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteProcedureAddIcon, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteProcedureAddIcon);
-					click(pom.getInstanceSetting().setFavoriteProcedureAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoriteProcedureAddIcon, 30);
 				}
 
 				visbility(driver, pom.getInstanceProcedure().favoriteCodeType, 40);
@@ -5053,8 +4619,7 @@ public class Local_Host extends LaunchBrowser {
 					if (web.getText().trim().equals("SNOMED : 134287002")) {
 
 						visbility(driver, web, 60);
-						elementClickable(web);
-						click(web);
+						clickIntercept(web, 30);
 						break;
 
 					}
@@ -5063,43 +4628,36 @@ public class Local_Host extends LaunchBrowser {
 
 				visbility(driver, pom.getInstanceProcedure().favoriteProcedure, 40);
 				sendkeys(pom.getInstanceProcedure().favoriteProcedure, "procedure");
-				elementClickable(pom.getInstanceSetting().setFavoriteProcedureSave);
 
-				click(pom.getInstanceSetting().setFavoriteProcedureSave);
+				clickIntercept(pom.getInstanceSetting().setFavoriteProcedureSave, 30);
 				sleep(1000);
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteProcedureEdit, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteProcedureEdit);
-					click(pom.getInstanceSetting().setFavoriteProcedureEdit);
-				} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+					clickIntercept(pom.getInstanceSetting().setFavoriteProcedureEdit, 30);
+				} catch (StaleElementReferenceException e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteProcedureEdit, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteProcedureEdit);
-					click(pom.getInstanceSetting().setFavoriteProcedureEdit);
+					clickIntercept(pom.getInstanceSetting().setFavoriteProcedureEdit, 30);
 				}
-				elementClickable(pom.getInstanceSetting().setFavoriteProcedureDelete);
-				click(pom.getInstanceSetting().setFavoriteProcedureDelete);
+
+				clickIntercept(pom.getInstanceSetting().setFavoriteProcedureDelete, 30);
 				visbility(driver, pom.getInstanceSetting().setFavoriteProcedureClose, 40);
-				elementClickable(pom.getInstanceSetting().setFavoriteProcedureClose);
-				click(pom.getInstanceSetting().setFavoriteProcedureClose);
-				try {
-					elementClickable(pom.getInstanceSetting().setFavoritesClick);
-					click(pom.getInstanceSetting().setFavoritesClick);
-				} catch (Exception e) {
-					elementClickable(pom.getInstanceSetting().setFavoritesClick);
-					click(pom.getInstanceSetting().setFavoritesClick);
-				}
+
+				clickIntercept(pom.getInstanceSetting().setFavoriteProcedureClose, 30);
+				clickIntercept(pom.getInstanceSetting().setFavoritesClick, 30);
+
 			} else if (w.getText().trim().equals("Medications")) {
 				visbility(driver, w, 60);
-				elementClickable(w);
-				click(w);
+				clickIntercept(w, 30);
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteMedicationAddIcon, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteMedicationAddIcon);
-					click(pom.getInstanceSetting().setFavoriteMedicationAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoriteMedicationAddIcon, 30);
+					/*
+					 * elementClickable(pom.getInstanceSetting().setFavoriteMedicationAddIcon);
+					 * click(pom.getInstanceSetting().setFavoriteMedicationAddIcon);
+					 */
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteMedicationAddIcon, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteMedicationAddIcon);
-					click(pom.getInstanceSetting().setFavoriteMedicationAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoriteMedicationAddIcon, 30);
 				}
 
 				visbility(driver, pom.getInstanceSetting().setFavoriteMedicationIcd, 40);
@@ -5119,60 +4677,52 @@ public class Local_Host extends LaunchBrowser {
 				for (WebElement we : pom.getInstanceSetting().setFavoriteMedicationIcdList) {
 					System.out.println(we.getText());
 					if (we.getText().trim().equals("RXNORM : 1009145")) {
-						// System.out.println("med cond met");
+
 						visbility(driver, we, 60);
-						elementClickable(we);
-						click(we);
+						clickIntercept(we, 30);
 						break;
 
 					}
 
 				}
-				elementClickable(pom.getInstanceSetting().setFavoriteMedicationSave);
-				click(pom.getInstanceSetting().setFavoriteMedicationSave);
+
+				clickIntercept(pom.getInstanceSetting().setFavoriteMedicationSave, 30);
 				if (url.equals("https://www.75health.com/login.jsp")) {
 					try {
 						visbility(driver, pom.getInstanceSetting().setFavoriteMedicationEdit, 30);
-						elementClickable(pom.getInstanceSetting().setFavoriteMedicationEdit);
-						click(pom.getInstanceSetting().setFavoriteMedicationEdit);
-					} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+						clickIntercept(pom.getInstanceSetting().setFavoriteMedicationEdit, 30);
+					} catch (StaleElementReferenceException e) {
 						visbility(driver, pom.getInstanceSetting().setFavoriteMedicationEdit, 30);
-						elementClickable(pom.getInstanceSetting().setFavoriteMedicationEdit);
-						click(pom.getInstanceSetting().setFavoriteMedicationEdit);
+						clickIntercept(pom.getInstanceSetting().setFavoriteMedicationEdit, 30);
 					}
 				} else if (url.equals("https://localhost:8443/")) {
 
 					try {
 						visbility(driver, pom.getInstanceSetting().setFavoriteMedicationEditLh, 30);
-						elementClickable(pom.getInstanceSetting().setFavoriteMedicationEditLh);
-						click(pom.getInstanceSetting().setFavoriteMedicationEditLh);
-					} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+						clickIntercept(pom.getInstanceSetting().setFavoriteMedicationEditLh, 30);
+					} catch (StaleElementReferenceException e) {
 						visbility(driver, pom.getInstanceSetting().setFavoriteMedicationEditLh, 30);
-						elementClickable(pom.getInstanceSetting().setFavoriteMedicationEditLh);
-						click(pom.getInstanceSetting().setFavoriteMedicationEditLh);
+						clickIntercept(pom.getInstanceSetting().setFavoriteMedicationEditLh, 30);
 					}
 				}
-				elementClickable(pom.getInstanceSetting().setFavoriteMedicationDelete);
-				click(pom.getInstanceSetting().setFavoriteMedicationDelete);
-				elementClickable(pom.getInstanceSetting().setFavoriteMedicationClose);
-				click(pom.getInstanceSetting().setFavoriteMedicationClose);
-				elementClickable(pom.getInstanceSetting().setFavoritesClick);
-				click(pom.getInstanceSetting().setFavoritesClick);
+
+				clickIntercept(pom.getInstanceSetting().setFavoriteMedicationDelete, 30);
+
+				clickIntercept(pom.getInstanceSetting().setFavoriteMedicationClose, 30);
+
+				clickIntercept(pom.getInstanceSetting().setFavoritesClick, 30);
 
 			} else if (w.getText().trim().equals("Test Order")) {
 
 				visbility(driver, w, 60);
-				elementClickable(w);
-				click(w);
+				clickIntercept(w, 30);
 
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteTestOrderAddIcon, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteTestOrderAddIcon);
-					click(pom.getInstanceSetting().setFavoriteTestOrderAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoriteTestOrderAddIcon, 30);
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteTestOrderAddIcon, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteTestOrderAddIcon);
-					click(pom.getInstanceSetting().setFavoriteTestOrderAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoriteTestOrderAddIcon, 30);
 				}
 
 				visbility(driver, pom.getInstanceSetting().setFavoriteTestOrderIcd, 40);
@@ -5188,47 +4738,39 @@ public class Local_Host extends LaunchBrowser {
 
 					if (test.getText().trim().equals("test")) {
 						visbility(driver, test, 40);
-						elementClickable(test);
-						click(test);
+						clickIntercept(test, 30);
 						break;
 					}
 				}
 
-				elementClickable(pom.getInstanceSetting().setFavoriteTestOrderSave);
-				click(pom.getInstanceSetting().setFavoriteTestOrderSave);
+				clickIntercept(pom.getInstanceSetting().setFavoriteTestOrderSave, 30);
 				sleep(1000);
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteTestOrderEdit, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteTestOrderEdit);
-					click(pom.getInstanceSetting().setFavoriteTestOrderEdit);
+					clickIntercept(pom.getInstanceSetting().setFavoriteTestOrderEdit, 30);
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteTestOrderEdit, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteTestOrderEdit);
-					click(pom.getInstanceSetting().setFavoriteTestOrderEdit);
+					clickIntercept(pom.getInstanceSetting().setFavoriteTestOrderEdit, 30);
 				}
 
-				elementClickable(pom.getInstanceSetting().setFavoriteTestOrderDelete);
-				click(pom.getInstanceSetting().setFavoriteTestOrderDelete);
+				clickIntercept(pom.getInstanceSetting().setFavoriteTestOrderDelete, 30);
 
 				visbility(driver, pom.getInstanceSetting().setFavoriteTestOrderClose, 50);
-				elementClickable(pom.getInstanceSetting().setFavoriteTestOrderClose);
-				click(pom.getInstanceSetting().setFavoriteTestOrderClose);
-				elementClickable(pom.getInstanceSetting().setFavoritesClick);
-				click(pom.getInstanceSetting().setFavoritesClick);
+
+				clickIntercept(pom.getInstanceSetting().setFavoriteTestOrderClose, 30);
+
+				clickIntercept(pom.getInstanceSetting().setFavoritesClick, 30);
 
 			} else if (w.getText().trim().equals("Vaccine")) {
 
 				visbility(driver, w, 60);
-				elementClickable(w);
-				click(w);
+				clickIntercept(w, 30);
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteVaccineAddIcon, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteVaccineAddIcon);
-					click(pom.getInstanceSetting().setFavoriteVaccineAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoriteVaccineAddIcon, 30);
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteVaccineAddIcon, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteVaccineAddIcon);
-					click(pom.getInstanceSetting().setFavoriteVaccineAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoriteVaccineAddIcon, 30);
 				}
 
 				visbility(driver, pom.getInstanceSetting().setFavoriteVaccineIcd, 30);
@@ -5246,8 +4788,7 @@ public class Local_Host extends LaunchBrowser {
 
 					if (web.getText().trim().equals("vaccinia (smallpox) diluted")) {
 						visbility(driver, web, 30);
-						elementClickable(web);
-						web.click();
+						clickIntercept(web, 30);
 						break;
 					}
 
@@ -5255,70 +4796,57 @@ public class Local_Host extends LaunchBrowser {
 				visbility(driver, pom.getInstanceSetting().setFavoriteVaccineDiscription, 30);
 				sendkeys(pom.getInstanceSetting().setFavoriteVaccineDiscription, "vaccine");
 
-				elementClickable(pom.getInstanceVaccine().favoriteSave);
-				click(pom.getInstanceVaccine().favoriteSave);
+				clickIntercept(pom.getInstanceVaccine().favoriteSave, 30);
 
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteVaccineEdit, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteVaccineEdit);
-					click(pom.getInstanceSetting().setFavoriteVaccineEdit);
-				} catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+					clickIntercept(pom.getInstanceSetting().setFavoriteVaccineEdit, 30);
+				} catch (StaleElementReferenceException e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteVaccineEdit, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteVaccineEdit);
-					click(pom.getInstanceSetting().setFavoriteVaccineEdit);
+					clickIntercept(pom.getInstanceSetting().setFavoriteVaccineEdit, 30);
 				}
 
-				elementClickable(pom.getInstanceSetting().setFavoriteVaccinedelete);
-				click(pom.getInstanceSetting().setFavoriteVaccinedelete);
-				elementClickable(pom.getInstanceSetting().setFavoriteVaccineClose);
-				click(pom.getInstanceSetting().setFavoriteVaccineClose);
+				clickIntercept(pom.getInstanceSetting().setFavoriteVaccinedelete, 30);
 
-				elementClickable(pom.getInstanceSetting().setFavoritesClick);
-				click(pom.getInstanceSetting().setFavoritesClick);
+				clickIntercept(pom.getInstanceSetting().setFavoriteVaccineClose, 30);
+
+				clickIntercept(pom.getInstanceSetting().setFavoritesClick, 30);
 			} else if (w.getText().trim().equals("Goals")) {
 
 				visbility(driver, w, 60);
-				elementClickable(w);
-				click(w);
+				clickIntercept(w, 30);
 
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteGoalsAddIcon, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteGoalsAddIcon);
-					click(pom.getInstanceSetting().setFavoriteGoalsAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoriteGoalsAddIcon, 30);
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteGoalsAddIcon, 30);
-					elementClickable(pom.getInstanceSetting().setFavoriteGoalsAddIcon);
-					click(pom.getInstanceSetting().setFavoriteGoalsAddIcon);
+					clickIntercept(pom.getInstanceSetting().setFavoriteGoalsAddIcon, 30);
 				}
 				visbility(driver, pom.getInstanceSetting().setFavoriteGoalDiscription, 30);
 				sendkeys(pom.getInstanceSetting().setFavoriteGoalDiscription, "goals");
 
-				elementClickable(pom.getInstanceSetting().setFavoriteGoalSave);
-				click(pom.getInstanceSetting().setFavoriteGoalSave);
+				clickIntercept(pom.getInstanceSetting().setFavoriteGoalSave, 30);
 				sleep(1000);
 				try {
 					visbility(driver, pom.getInstanceSetting().setFavoriteGoalEdit, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteGoalEdit);
-					click(pom.getInstanceSetting().setFavoriteGoalEdit);
+					clickIntercept(pom.getInstanceSetting().setFavoriteGoalEdit, 30);
 				} catch (Exception e) {
 					visbility(driver, pom.getInstanceSetting().setFavoriteGoalEdit, 40);
-					elementClickable(pom.getInstanceSetting().setFavoriteGoalEdit);
-					click(pom.getInstanceSetting().setFavoriteGoalEdit);
+					clickIntercept(pom.getInstanceSetting().setFavoriteGoalEdit, 30);
 				}
 
-				elementClickable(pom.getInstanceSetting().setFavoriteGoalDelete);
-				click(pom.getInstanceSetting().setFavoriteGoalDelete);
-				elementClickable(pom.getInstanceSetting().setFavoriteGoalClose);
-				click(pom.getInstanceSetting().setFavoriteGoalClose);
+				clickIntercept(pom.getInstanceSetting().setFavoriteGoalDelete, 30);
 
-				while (true) {
-					try {
-						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
-						break;
-					} catch (Exception e) {
+				clickIntercept(pom.getInstanceSetting().setFavoriteGoalClose, 30);
 
-					}
-				}
+				/*
+				 * while (true) { try {
+				 * driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click(
+				 * ); break; } catch (Exception e) {
+				 * 
+				 * } }
+				 */
 			}
 
 		}
@@ -5517,11 +5045,12 @@ public class Local_Host extends LaunchBrowser {
 		// forms...
 		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
 			visbility(driver, pom.getInstanceSetting().customForm, 60);
-			click(pom.getInstanceSetting().customForm);
+			clickIntercept(pom.getInstanceSetting().customForm, 30);
 			sleep(5000);
 
 			visbility(driver, pom.getInstanceSetting().addNewform, 60);
-			actions("click", pom.getInstanceSetting().addNewform);
+			clickIntercept(pom.getInstanceSetting().addNewform, 30);
+			// actions("click", pom.getInstanceSetting().addNewform);
 
 			sleep(4000);
 
@@ -5543,7 +5072,7 @@ public class Local_Host extends LaunchBrowser {
 					sendkeys(pom.getInstanceSetting().formClearLabel, "Kaaspro Enterprise");
 
 					visbility(driver, pom.getInstanceSetting().saveForm, 60);
-					click(pom.getInstanceSetting().saveForm);
+					clickIntercept(pom.getInstanceSetting().saveForm, 30);
 
 					sleep(3000);
 
@@ -5554,26 +5083,23 @@ public class Local_Host extends LaunchBrowser {
 			refresh();
 
 		}
-		sleep(3000); // edit preference....
+		// sleep(3000); // edit preference....
 
 		visbility(driver, pom.getInstanceSetting().printSettingsClick, 60);
-		elementClickable(pom.getInstanceSetting().printSettingsClick);
-		click(pom.getInstanceSetting().printSettingsClick);
+		clickIntercept(pom.getInstanceSetting().printSettingsClick, 30);
 		sleep(3000);
 
 		visbility(driver, pom.getInstanceSetting().cancelPrintpreference, 60);
-		elementClickable(pom.getInstanceSetting().cancelPrintpreference);
-		click(pom.getInstanceSetting().cancelPrintpreference);
-		sleep(3000);
+		clickIntercept(pom.getInstanceSetting().cancelPrintpreference, 30);
+
+		// sleep(3000);
 
 		visbility(driver, pom.getInstanceSetting().resetSettingClick, 60);
-		elementClickable(pom.getInstanceSetting().resetSettingClick);
-		click(pom.getInstanceSetting().resetSettingClick);
-		sleep(2000);
+		clickIntercept(pom.getInstanceSetting().resetSettingClick, 30);
+		// sleep(2000);
 
 		visbility(driver, pom.getInstanceSetting().confirmResetSetting, 60);
-		elementClickable(pom.getInstanceSetting().confirmResetSetting);
-		javascriptclick(pom.getInstanceSetting().confirmResetSetting);
+		clickIntercept(pom.getInstanceSetting().confirmResetSetting, 30);
 
 		sleep(3000);
 
@@ -5588,10 +5114,9 @@ public class Local_Host extends LaunchBrowser {
 
 					elementClickable(pom.getInstanceSetting().customizeToggle);
 					actions("click", pom.getInstanceSetting().customizeToggle);
-					ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceSetting().customizeMessage));
-					javascriptclick(pom.getInstanceSetting().customizeMessage);
-					// WebElement sd = driver.findElement(By.xpath("(//span[@class='slider1
-					// round1'])[4]"));
+
+					clickIntercept(pom.getInstanceSetting().customizeMessage, 30);
+
 					ScriptExecutor(pom.getInstanceSetting().abovePrefernceToggle);
 					sleep(2000);
 					j.executeScript("window.scrollBy(0,0)");
@@ -5604,11 +5129,11 @@ public class Local_Host extends LaunchBrowser {
 			while (true) {
 				try {
 					if (pom.getInstanceSetting().clickSettings.isDisplayed()) {
-						click(pom.getInstanceSetting().clickSettings);
+						clickIntercept(pom.getInstanceSetting().clickSettings, 30);
 						break;
 					}
 				} catch (Exception e) {
-
+					e.printStackTrace();
 				}
 			}
 
@@ -5628,17 +5153,15 @@ public class Local_Host extends LaunchBrowser {
 		}
 		// Audit Report...
 		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
-			sleep(3000);
-			visbility(driver, pom.getInstanceSetting().clickSettings, 60);
-			click(pom.getInstanceSetting().clickSettings);
-			WebDriverWait wait = new WebDriverWait(driver, 60);
-			driver.navigate().refresh();
-			sleep(3000);
-			elementClickable(pom.getInstanceSetting().auditReport);
 
-			ScriptExecutor(pom.getInstanceSetting().auditReport);
+			visbility(driver, pom.getInstanceSetting().clickSettings, 60);
+			clickIntercept(pom.getInstanceSetting().clickSettings, 30);
+
+			driver.navigate().refresh();
+
+			// ScriptExecutor(pom.getInstanceSetting().auditReport);
 			visbility(driver, pom.getInstanceSetting().auditReport, 60);
-			javascriptclick(pom.getInstanceSetting().auditReport);
+			clickIntercept(pom.getInstanceSetting().auditReport, 30);
 			sleep(3000);
 
 			visbility(driver, pom.getInstanceSetting().AuditReportPatientSerachField, 60);
@@ -5649,8 +5172,7 @@ public class Local_Host extends LaunchBrowser {
 
 				if (we.getText().contains(kpid)) {
 					visbility(driver, we, 60);
-					elementClickable(we);
-					we.click();
+					clickIntercept(we, 30);
 					break;
 				}
 
@@ -5673,11 +5195,9 @@ public class Local_Host extends LaunchBrowser {
 			 */
 			driver.navigate().refresh();
 
-			sleep(3000);
 			visbility(driver, pom.getInstanceSetting().clickSettings, 60);
-			elementClickable(pom.getInstanceSetting().clickSettings);
-			click(pom.getInstanceSetting().clickSettings);
-			sleep(2000);
+			clickIntercept(pom.getInstanceSetting().clickSettings, 30);
+
 		}
 		// Dashboard
 		WebElement dashboard;
@@ -5685,14 +5205,12 @@ public class Local_Host extends LaunchBrowser {
 		try {
 			dashboard = driver.findElement(By.xpath("(//div[@id='option-setting'])[1]/div/img"));
 			visbility(driver, dashboard, 50);
-			elementClickable(dashboard);
-			click(dashboard);
+			clickIntercept(dashboard, 30);
 
 		} catch (Exception e) {
 			dashboard = driver.findElement(By.xpath("(//div[@id='option-setting'])[1]/div/img"));
 			visbility(driver, dashboard, 50);
-			elementClickable(dashboard);
-			click(dashboard);
+			clickIntercept(dashboard, 30);
 		}
 		List<WebElement> ths = driver
 				.findElements(By.xpath("(//div[@id='option-setting'])[1]/div/img//following::ul[1]/li"));
@@ -5702,89 +5220,40 @@ public class Local_Host extends LaunchBrowser {
 			for (WebElement st : ths) {
 				if (st.getText().trim().equals("Home")) {
 					visbility(driver, st, 50);
-					elementClickable(st);
-					click(st);
+					clickIntercept(st, 30);
 					sleep(2000);
-					try {
-						visbility(driver, dashboard, 50);
-						elementClickable(dashboard);
-						click(dashboard);
-					} catch (ElementClickInterceptedException e) {
-						visbility(driver, dashboard, 50);
-						elementClickable(dashboard);
-						click(dashboard);
-					}
+					clickIntercept(dashboard, 30);
 				} else if (st.getText().trim().equals("Dashboard")) {
 					visbility(driver, st, 50);
-					elementClickable(st);
-					click(st);
+					clickIntercept(st, 30);
 					sleep(2000);
-					try {
-						visbility(driver, dashboard, 50);
-						elementClickable(dashboard);
-						click(dashboard);
-					} catch (ElementClickInterceptedException e) {
-						visbility(driver, dashboard, 50);
-						elementClickable(dashboard);
-						click(dashboard);
-					}
+					clickIntercept(dashboard, 30);
 				} else if (st.getText().trim().equals("Quick Tour")) {
 					visbility(driver, st, 50);
-					elementClickable(st);
-					click(st);
+					clickIntercept(st, 30);
 					WebElement cncltr = driver.findElement(By.xpath("(//li[text()='NO, CANCEL TOUR'])[1]"));
 					visbility(driver, cncltr, 50);
-					elementClickable(cncltr);
+					clickIntercept(cncltr, 30);
 					sleep(2000);
-					click(cncltr);
-					sleep(2000);
-					try {
-						visbility(driver, dashboard, 50);
-						elementClickable(dashboard);
-						click(dashboard);
-					} catch (ElementClickInterceptedException e) {
-						visbility(driver, dashboard, 50);
-						elementClickable(dashboard);
-						click(dashboard);
-					}
+					clickIntercept(dashboard, 30);
 				} else if (st.getText().trim().equals("Settings")) {
 					visbility(driver, st, 50);
-					elementClickable(st);
-					click(st);
+					clickIntercept(st, 30);
 					sleep(2000);
-					try {
-						visbility(driver, dashboard, 50);
-						elementClickable(dashboard);
-						click(dashboard);
-					} catch (ElementClickInterceptedException e) {
-						visbility(driver, dashboard, 50);
-						elementClickable(dashboard);
-						click(dashboard);
-					}
+					clickIntercept(dashboard, 30);
 				} else if (st.getText().trim().equals("Migration Services")) {
 					visbility(driver, st, 50);
-					elementClickable(st);
-					click(st);
+					clickIntercept(st, 30);
 					WebElement clmgr = driver
 							.findElement(By.xpath("//h4[text()='Migration Services']//parent::div/button"));
 					sleep(2000);
 					visbility(driver, clmgr, 50);
-					elementClickable(clmgr);
-					click(clmgr);
+					clickIntercept(clmgr, 30);
 					sleep(2000);
-					try {
-						visbility(driver, dashboard, 50);
-						elementClickable(dashboard);
-						click(dashboard);
-					} catch (ElementClickInterceptedException e) {
-						visbility(driver, dashboard, 50);
-						elementClickable(dashboard);
-						click(dashboard);
-					}
+					clickIntercept(dashboard, 30);
 				} else if (st.getText().trim().equals("Sign out")) {
 					visbility(driver, st, 50);
-					elementClickable(st);
-					click(st);
+					clickIntercept(st, 30);
 
 					break;
 				}
@@ -5792,7 +5261,6 @@ public class Local_Host extends LaunchBrowser {
 			}
 			break;
 		}
-
 	}
 
 }

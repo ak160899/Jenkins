@@ -24,7 +24,7 @@ public class LaunchBrowser extends Base {
 	public static JavascriptExecutor j;
 	public static WebDriverWait ww;
 	public static WebDriver driver;
-	public String kpid;
+	public static String kpid;
 	public static String url;
 	public static Calendars cal;
 	public String $current;
