@@ -85,19 +85,40 @@ public class Base {
 
 	}
 
+	public static void elementVisiblity(WebDriver driver, WebElement elem, long timeout) {
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+
+		try {
+			wait.until(ExpectedConditions.visibilityOf(elem));
+		} catch (Exception e) {
+			e.printStackTrace();
+			for (long i = 0; i < timeout; i++) {
+				try {
+					sleep(1000);
+					wait.until(ExpectedConditions.visibilityOf(elem));
+				} catch (Exception h) {
+					h.printStackTrace();
+				}
+
+			}
+		}
+
+	}
+
 	public static void clickIntercept(WebElement elem, long timeouts) {
 		try {
-		clickableAtpoint(wd, elem, timeouts);
 
-		elem.click();
-		}catch (ElementClickInterceptedException e) {
+			clickableAtpoint(wd, elem, timeouts);
+
+			elem.click();
+		} catch (ElementClickInterceptedException e) {
 			e.printStackTrace();
-			for(long i=0;i<timeouts;i++) {
-				 try {
-					 sleep(1000);
-					 elem.click();
-					 break;
-				 }catch (ElementClickInterceptedException h) {
+			for (long i = 0; i < timeouts; i++) {
+				try {
+					sleep(1000);
+					elem.click();
+					break;
+				} catch (ElementClickInterceptedException h) {
 					h.printStackTrace();
 				}
 			}
@@ -143,7 +164,7 @@ public class Base {
 	}
 
 	// thread.sleep...
-	public static void sleep(int x)  {
+	public static void sleep(int x) {
 		try {
 			Thread.sleep(x);
 		} catch (InterruptedException e) {

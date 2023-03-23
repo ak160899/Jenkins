@@ -130,10 +130,11 @@ public class Procedure extends LaunchBrowser {
 				break;
 			} else if (!pom.getInstanceProcedure().ellipses.isDisplayed()) {
 				actions("move to element", pom.getInstanceProcedure().ellipses);
+				sleep(2000);
 			}
 		}
 
-		sleep(2000);
+		// sleep(2000);
 
 		for (WebElement we : pom.getInstanceProcedure().ellipsesList) {
 

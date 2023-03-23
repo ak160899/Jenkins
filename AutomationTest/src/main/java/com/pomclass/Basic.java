@@ -23,6 +23,10 @@ public class Basic {
 
 	@FindBy(id = "upgrade_btn")
 	public WebElement upgradeDetails;
+	
+	
+	@FindBy(id="editPlanBtn")
+	public WebElement editPlanButton;
 
 	public Basic(WebDriver driver) {
 		this.driver = driver;

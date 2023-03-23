@@ -133,7 +133,7 @@ public class Settings {
 
 	@FindBy(xpath = "(//button[@id='save-btn'])[1]")
 	public WebElement patientInfoSave;
-	
+
 	@FindBy(xpath = "(//button[@id='save-btn'])[2]")
 	public WebElement patientInfoSavedrLogin;
 
@@ -171,41 +171,37 @@ public class Settings {
 
 	@FindBy(xpath = "(//div[@class='selected-flag'])[4]//following::ul[1]/li/span[2]")
 	public List<WebElement> manageUserPhoneFlagDrop;
-	
+
 //manage branding
-	
+
 	@FindBy(id = "org-name")
 	public WebElement manageBrandingOrgNameDiscription;
-	
+
 	@FindBy(xpath = "//button[@onclick='setting.brand()']")
 	public WebElement manageBrandingClick;
-	
+
 	@FindBy(xpath = "//div[@id='setOrgName']/button")
 	public WebElement manageBrandingSetName;
-	
-	
+
 	@FindBy(id = "select-email-preview")
 	public WebElement manageBrandingEmailPreview;
-	
+
 	@FindBy(xpath = "//button[@id='select-email-preview']//following::ul[1]/li/a")
 	public List<WebElement> manageBrandingEmailPreviewDropdown;
-	
+
 	@FindBy(xpath = "//button[@onclick='Health.emailPreview()']")
-	public WebElement  manageBrandingPreviewClick;
-	
+	public WebElement manageBrandingPreviewClick;
+
 	@FindBy(id = "cancel-btn")
 	public WebElement manageBrandingCancelWindow;
 	//
-	
-	
-	
 
 	// Auto Logout
 
 	@FindBy(xpath = "//button[@id='auto-logout-time']")
 	public WebElement autoLogoutclick;
 
-	@FindBy(xpath = "//ul[@id='logoutt']/li")
+	@FindBy(xpath = "//button[@id='auto-logout-time']//following::ul[1]/li")
 	public List<WebElement> autoLogoutDrop;
 
 	//
@@ -423,6 +419,8 @@ public class Settings {
 	@FindBy(xpath = "(//div[text()='Amphetamine aspartate 1.875 MG / Amphetamine Sulfate 1.875 MG / Dextroamphetamine saccharate 1.875 MG / Dextroamphetamine Sulfate 1.875 MG Oral Tablet 1.875 MG / 1.875 MG / 1.875 MG / 1.875 MG'])[1]")
 	public WebElement setFavoriteMedicationEditLh;
 
+	@FindBy(xpath = "(//span[text()='Amphetamine aspartate 1.875 MG / Amphetamine Sulfate 1.875 MG / Dextroamphetamine saccharate 1.875 MG / Dextroamphetamine Sulfate 1.875 MG Oral Tablet | 1.875 MG / 1.875 MG / 1.875 MG / 1.875 MG'])[1]")
+	public WebElement setFAoriteeditTestSer;
 	@FindBy(xpath = "(//div[@id='MedicationsKpop2']//following::span[2])[1]")
 	public WebElement setFavoriteMedicationDelete;
 
@@ -633,8 +631,9 @@ public class Settings {
 	@FindBy(xpath = "//span[text()='Subscription Options']//following::button[1]")
 	public WebElement $dismissSubscribe$;
 
-	@FindBy(xpath = "//a[@id='rightCarArrow']")
+	@FindBy(xpath = "(//span[@class='glyphicon glyphicon-chevron-right'])[5]")
 	public WebElement $Carosel$;
+	//// a[@id='rightCarArrow']
 
 	@FindBy(xpath = "//button[text()='Active Users']")
 	public WebElement $activeuser$;

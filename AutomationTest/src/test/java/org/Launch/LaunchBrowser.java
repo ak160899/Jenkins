@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.patientPomClass.PageObjectManager;
 import org.slf4j.Logger;
 import org.testng.annotations.BeforeSuite;
 
@@ -28,6 +29,7 @@ public class LaunchBrowser extends Base {
 	public static String url;
 	public static Calendars cal;
 	public String $current;
+	public static PageObjectManager pm ;
 	public static org.apache.log4j.Logger log;
 
 	@BeforeSuite(groups = "before")
@@ -35,12 +37,13 @@ public class LaunchBrowser extends Base {
 		Map<String, Object> result = new HashMap<String, Object>();
 		log = org.apache.log4j.Logger.getLogger(LaunchBrowser.class);
 		BasicConfigurator.configure();
-		driver = setUp("chrome");
+		driver = setUp(ConfigManager.getconfigManager().getInstanceConfigReader().getBrowser());
 		pom = new PageObjMan(driver);
 		j = (JavascriptExecutor) driver;
 		ww = new WebDriverWait(driver, 55);
 		cal = new Calendars(driver, pom);
 		url = ConfigManager.getconfigManager().getInstanceConfigReader().getUrl();
+		pm= new PageObjectManager(driver);
 
 		result.put("driver", driver);
 		result.put("pom", pom);
@@ -101,6 +104,10 @@ public class LaunchBrowser extends Base {
 			if (driver.getCurrentUrl().equals("https://localhost:8443/health/#home")) {
 				break;
 			} else if (driver.getCurrentUrl().equals("https://www.75health.com/health/#home")) {
+				break;
+			}else if(driver.getCurrentUrl().equals("https://www.test.75health.com/health/#home")) {
+				break;
+			}else if(driver.getCurrentUrl().equals("https://www.test.75health.com/health/#list_ehr")) {
 				break;
 			}
 		}

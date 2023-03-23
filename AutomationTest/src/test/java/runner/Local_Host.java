@@ -51,13 +51,13 @@ public class Local_Host extends LaunchBrowser {
 			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 50);
 
 			elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
-			click(pom.getInstanceHomeModule().$patientCreationButton);
+			clickIntercept(pom.getInstanceHomeModule().$patientCreationButton, 30);
 			log.info("patient create button clicked");
 		} catch (ElementClickInterceptedException e) {
 
 			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 50);
 			elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
-			click(pom.getInstanceHomeModule().$patientCreationButton);
+			clickIntercept(pom.getInstanceHomeModule().$patientCreationButton, 30);
 			log.info("patient create button clicked");
 		}
 
@@ -65,7 +65,7 @@ public class Local_Host extends LaunchBrowser {
 		log.info("first name entered");
 		sendkeys(pom.getInstanceNewPatient().lastname, "n");
 		log.info("last name entered");
-		click(pom.getInstanceNewPatient().clickGenderIcon);
+		clickIntercept(pom.getInstanceNewPatient().clickGenderIcon, 30);
 		log.info("gender clicked");
 		List<WebElement> genders = driver.findElements(By.xpath("(//ul[@id='genderDropdown'])[1]/li"));
 
@@ -87,11 +87,11 @@ public class Local_Host extends LaunchBrowser {
 		log.info("email id entered");
 		visbility(driver, pom.getInstanceHomeModule().selectFlagPhoneNumField, 50);
 		elementClickable(pom.getInstanceHomeModule().selectFlagPhoneNumField);
-		click(pom.getInstanceHomeModule().selectFlagPhoneNumField);
+		clickIntercept(pom.getInstanceHomeModule().selectFlagPhoneNumField, 30);
 
 		for (WebElement flag : pom.getInstanceHomeModule().chooseCountrycodeFlag) {
 			if (flag.getText().trim().equals("+91")) {
-				click(flag);
+				clickIntercept(flag, 30);
 				break;
 			}
 		}
@@ -100,7 +100,7 @@ public class Local_Host extends LaunchBrowser {
 		sendkeys(pom.getInstanceHomeModule().phoneNumberField, "95518" + generateRandom("number"));
 		log.info("phone number entered");
 		// Acc gets Created..
-		click(pom.getInstanceNewPatient().CreatePatient);
+		clickIntercept(pom.getInstanceNewPatient().CreatePatient, 30);
 		log.info("patient created ");
 
 		while (true) {
@@ -188,6 +188,7 @@ public class Local_Host extends LaunchBrowser {
 			kpid = es.getText();
 		}
 
+		visbility(driver, pom.getInstanceNewPatient().$patienmod, 30);
 		clickIntercept(pom.getInstanceNewPatient().$patienmod, 30);
 
 		try {
@@ -199,13 +200,19 @@ public class Local_Host extends LaunchBrowser {
 			visbility(driver, s, 60);
 			s.sendKeys(kpid);
 		}
-		try {
-			WebElement kp = driver.findElement(By.xpath("//div[text()=" + "'" + kpid + "']"));
-			clickIntercept(kp, 30);
 
-		} catch (ElementClickInterceptedException | StaleElementReferenceException e) {
-			WebElement kp = driver.findElement(By.xpath("//div[text()=" + "'" + kpid + "']"));
+		// sleep(8000);
+
+		try {
+			WebElement kp = driver.findElement(By.xpath("(//div[text()=" + "'" + kpid + "'])[1]"));
+
 			clickIntercept(kp, 30);
+			System.out.println(kp);
+
+		} catch (Exception e) {
+			WebElement kp = driver.findElement(By.xpath("(//div[text()=" + "'" + kpid + "'])[1]"));
+			clickIntercept(kp, 30);
+			System.out.println(kp);
 		}
 
 		sleep(2000);
@@ -484,95 +491,89 @@ public class Local_Host extends LaunchBrowser {
 
 						if (web.getText().trim().equals("Show Allergy")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Alert")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Social History")) {
 
-							actions("click", web);
-
+							clickIntercept(web, 30);
 						} else if (web.getText().trim().equals("Show Family Health")) {
 
-							actions("click", web);
-
+							clickIntercept(web, 30);
 						} else if (web.getText().trim().equals("Show Symptoms")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Problems")) {
 
-							actions("click", web);
-
+							clickIntercept(web, 30);
 						} else if (web.getText().trim().equals("Show Vital")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Visit Reason")) {
 
-							actions("click", web);
-
+							clickIntercept(web, 30);
 						} else if (web.getText().trim().equals("Show Procedure")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Medications")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Test Order")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Note")) {
 
-							actions("click", web);
-
+							clickIntercept(web, 30);
 						} else if (web.getText().trim().equals("Show Vaccine")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Attach File")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Inpatient")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Referral")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Custom-form")) {
-
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Goals")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Amendment")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Implantable Devices")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Advance Directives")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Physical Examination")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else if (web.getText().trim().equals("Show Status")) {
 
-							actions("click", web);
+							clickIntercept(web, 30);
 
 						} else {
 
@@ -1321,6 +1322,7 @@ public class Local_Host extends LaunchBrowser {
 						if (web.getText().trim().equals("test")) {
 							visbility(driver, web, 30);
 							clickIntercept(web, 30);
+							System.out.println("Test Order ICD");
 						}
 
 					}
@@ -2876,6 +2878,7 @@ public class Local_Host extends LaunchBrowser {
 		cal.caledarModule();
 
 		$current = driver.getCurrentUrl();
+		System.out.println($current);
 		cal.$dayDrop($current);
 		cal.$calenderMod($current, kpid);
 
@@ -2885,8 +2888,8 @@ public class Local_Host extends LaunchBrowser {
 	public void BillingModule() throws InterruptedException {
 
 		visbility(driver, pom.getInstanceBilling().clickBill, 60);
-		ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceBilling().clickBill));
-		click(pom.getInstanceBilling().clickBill);
+
+		clickIntercept(pom.getInstanceBilling().clickBill, 30);
 
 		driver.navigate().refresh();
 		implicitWait(50, TimeUnit.SECONDS);
@@ -3008,7 +3011,7 @@ public class Local_Host extends LaunchBrowser {
 		}
 
 		sleep(2500);
-		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
 
 			try {
 				WebElement itser = driver.findElement(By.xpath("//div[@id='item-code-side']/div[1]/div"));
@@ -3285,11 +3288,19 @@ public class Local_Host extends LaunchBrowser {
 				visbility(driver, dissav, 60);
 				clickIntercept(dissav, 30);
 			}
-			WebElement adddiscc = driver
-					.findElement(By.xpath("//div[text()='Discnt']//parent::div[1]//parent::div/div/span"));
-			visbility(driver, adddiscc, 60);
 
-			clickIntercept(adddiscc, 30);
+			try {
+				WebElement adddiscc = driver
+						.findElement(By.xpath("//div[text()='Discnt']//parent::div[1]//parent::div/div/span"));
+				visbility(driver, adddiscc, 60);
+				clickIntercept(adddiscc, 30);
+
+			} catch (Exception e) {
+				WebElement adddiscc = driver
+						.findElement(By.xpath("//div[text()='Discnt']//parent::div[1]//parent::div/div/span"));
+				visbility(driver, adddiscc, 60);
+				clickIntercept(adddiscc, 30);
+			}
 			sleep(2000);
 
 			try {
@@ -3587,6 +3598,7 @@ public class Local_Host extends LaunchBrowser {
 		} catch (StaleElementReferenceException e) {
 			clickIntercept(pom.getInstanceTeleDoctor().clickTeleDoctor, 30);
 		}
+		refresh();
 		/*
 		 * try { visbility(driver, pom.getInstanceTeleDoctor().clickTeleDoctor, 60);
 		 * elementClickable(pom.getInstanceTeleDoctor().clickTeleDoctor);
@@ -3612,9 +3624,16 @@ public class Local_Host extends LaunchBrowser {
 		/*
 		 * while (true) { try {
 		 */
-		WebElement pstl = driver.findElement(By.xpath("//td[@id='nameh']//following::td[1]"));
-		visbility(driver, pstl, 60);
-		clickIntercept(pstl, 30);
+
+		try {
+			WebElement pstl = driver.findElement(By.xpath("//td[@id='nameh']//following::td[1]"));
+			visbility(driver, pstl, 60);
+			clickIntercept(pstl, 30);
+		} catch (StaleElementReferenceException e) {
+			WebElement pstl = driver.findElement(By.xpath("//td[@id='nameh']//following::td[1]"));
+			visbility(driver, pstl, 60);
+			clickIntercept(pstl, 30);
+		}
 		/*
 		 * break; } catch (Exception e) {
 		 * 
@@ -3623,11 +3642,19 @@ public class Local_Host extends LaunchBrowser {
 
 		/*
 		 * while (true) { try {
+		 *
 		 */
-		WebElement clickpatie = driver.findElement(By.xpath("(//div[@title='Click to view'])[5]/div"));
+		try {
+			WebElement clickpatie = driver.findElement(By.xpath("(//div[@title='Click to view'])[5]/div"));
 
-		visbility(driver, clickpatie, 60);
-		clickIntercept(clickpatie, 30);
+			visbility(driver, clickpatie, 60);
+			clickIntercept(clickpatie, 30);
+		} catch (StaleElementReferenceException e) {
+			WebElement clickpatie = driver.findElement(By.xpath("(//div[@title='Click to view'])[5]/div"));
+
+			visbility(driver, clickpatie, 60);
+			clickIntercept(clickpatie, 30);
+		}
 		/*
 		 * break; } catch (Exception e) { e.printStackTrace(); } }
 		 */
@@ -3742,7 +3769,8 @@ public class Local_Host extends LaunchBrowser {
 
 		clickIntercept(pom.getInstanceSetting().basicInfoEditIcon, 30);
 
-		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
+			System.out.println("ENTER HOSPITAL NAME");
 			visbility(driver, pom.getInstanceSetting().hosipitalName, 40);
 			clear(pom.getInstanceSetting().hosipitalName);
 			sendkeys(pom.getInstanceSetting().hosipitalName, "75health organisation");
@@ -3767,7 +3795,7 @@ public class Local_Host extends LaunchBrowser {
 		visbility(driver, pom.getInstanceSetting().lastName, 40);
 		clear(pom.getInstanceSetting().lastName);
 		sendkeys(pom.getInstanceSetting().lastName, "Automation Acc");
-		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
 
 			clickIntercept(pom.getInstanceSetting().basicInfoAdminstatus, 30);
 
@@ -3802,7 +3830,7 @@ public class Local_Host extends LaunchBrowser {
 		sleep(1000);
 
 		// Contact info..
-		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
 			try {
 				visbility(driver, pom.getInstanceSetting().conatctInfoEditIcon, 40);
 				clickIntercept(pom.getInstanceSetting().conatctInfoEditIcon, 30);
@@ -3865,7 +3893,7 @@ public class Local_Host extends LaunchBrowser {
 
 		}
 		// specailaity
-		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("admin")) {
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
 
 			try {
 
@@ -3880,7 +3908,7 @@ public class Local_Host extends LaunchBrowser {
 				elementClickable(pom.getInstanceSetting().specialtyAddIcon);
 				click(pom.getInstanceSetting().specialtyAddIcon);
 			}
-		} else if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equals("dr")) {
+		} else if (ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("dr")) {
 			try {
 
 				visbility(driver, pom.getInstanceSetting().specialtyAddIcondrLogin, 40);
@@ -4024,16 +4052,16 @@ public class Local_Host extends LaunchBrowser {
 			try {
 
 				elementClickable(pom.getInstanceSetting().manageUserType);
-				click(pom.getInstanceSetting().manageUserType);
+				clickIntercept(pom.getInstanceSetting().manageUserType, 30);
 			} catch (ElementClickInterceptedException e) {
 				elementClickable(pom.getInstanceSetting().manageUserType);
-				click(pom.getInstanceSetting().manageUserType);
+				clickIntercept(pom.getInstanceSetting().manageUserType, 30);
 			}
 			for (WebElement web : pom.getInstanceSetting().manageUserTypeDrop) {
 				if (web.getText().trim().equals("Standard User")) {
 					visbility(driver, web, 60);
 					elementClickable(web);
-					click(web);
+					clickIntercept(web, 30);
 					break;
 				}
 
@@ -4081,8 +4109,8 @@ public class Local_Host extends LaunchBrowser {
 		}
 
 		// manage Branding (enterprise)
-		if (ConfigManager.getconfigManager().getInstanceConfigReader().getPackageDetails()
-				.equalsIgnoreCase("premium70")) {
+		if (ConfigManager.getconfigManager().getInstanceConfigReader().getPackageDetails().equalsIgnoreCase("premium70")
+				&& ConfigManager.getconfigManager().getInstanceConfigReader().accountType().equalsIgnoreCase("admin")) {
 			visbility(driver, pom.getInstanceSetting().manageBrandingClick, 40);
 			clickIntercept(pom.getInstanceSetting().manageBrandingClick, 30);
 
@@ -4645,7 +4673,7 @@ public class Local_Host extends LaunchBrowser {
 				clickIntercept(pom.getInstanceSetting().setFavoriteProcedureClose, 30);
 				clickIntercept(pom.getInstanceSetting().setFavoritesClick, 30);
 
-			} else if (w.getText().trim().equals("Medications")) {
+			} else if (w.getText().trim().equals("djfhjdfhjdfh")) {
 				visbility(driver, w, 60);
 				clickIntercept(w, 30);
 				try {
@@ -4704,6 +4732,15 @@ public class Local_Host extends LaunchBrowser {
 						visbility(driver, pom.getInstanceSetting().setFavoriteMedicationEditLh, 30);
 						clickIntercept(pom.getInstanceSetting().setFavoriteMedicationEditLh, 30);
 					}
+				} else if (url.equals("https://www.test.75health.com/")) {
+					try {
+						visbility(driver, pom.getInstanceSetting().setFAoriteeditTestSer, 30);
+						clickIntercept(pom.getInstanceSetting().setFAoriteeditTestSer, 30);
+					} catch (StaleElementReferenceException e) {
+						visbility(driver, pom.getInstanceSetting().setFAoriteeditTestSer, 30);
+						clickIntercept(pom.getInstanceSetting().setFAoriteeditTestSer, 30);
+					}
+
 				}
 
 				clickIntercept(pom.getInstanceSetting().setFavoriteMedicationDelete, 30);

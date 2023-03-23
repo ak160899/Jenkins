@@ -10,6 +10,7 @@ import org.base.Base;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,51 +22,31 @@ import com.calendar.Calendars;
 import com.data.ConfigManager;
 import com.pageObjeman.PageObjMan;
 
-public class Basic_features extends Base {
-
-	public static WebDriver driver;
-	PageObjMan pom;
-	static JavascriptExecutor j;
-	WebDriverWait ww;
-	static String kpid = "";
-	public static String url;
-	static Calendars cal;
-	String $current;
-	public String ur;
-
-	@BeforeClass
-	private void LaunchBrwoser() throws Exception {
-		Map<String, Object> getConnection = LaunchBrowser.openConnection();
-
-		pom = (PageObjMan) getConnection.get("pom");
-		j = (JavascriptExecutor) getConnection.get("j");
-		ww = (WebDriverWait) getConnection.get("ww");
-		cal = (Calendars) getConnection.get("cal");
-		ur = (String) getConnection.get("url");
-
-		driver = (WebDriver) getConnection.get("driver");
-	}
+public class Basic_features extends LaunchBrowser {
 
 	@Test(priority = 0)
 	private void home() throws Exception {
 		try {
 
-			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 40);
+			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 50);
 
 			elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
-			click(pom.getInstanceHomeModule().$patientCreationButton);
-
+			clickIntercept(pom.getInstanceHomeModule().$patientCreationButton, 30);
+			log.info("patient create button clicked");
 		} catch (ElementClickInterceptedException e) {
 
-			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 40);
+			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 50);
 			elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
-			click(pom.getInstanceHomeModule().$patientCreationButton);
+			clickIntercept(pom.getInstanceHomeModule().$patientCreationButton, 30);
+			log.info("patient create button clicked");
 		}
 
 		sendkeys(pom.getInstanceNewPatient().firstName, "sam");
+		log.info("first name entered");
 		sendkeys(pom.getInstanceNewPatient().lastname, "n");
-		click(pom.getInstanceNewPatient().clickGenderIcon);
-
+		log.info("last name entered");
+		clickIntercept(pom.getInstanceNewPatient().clickGenderIcon, 30);
+		log.info("gender clicked");
 		List<WebElement> genders = driver.findElements(By.xpath("(//ul[@id='genderDropdown'])[1]/li"));
 
 		for (WebElement opt : genders) {
@@ -73,33 +54,59 @@ public class Basic_features extends Base {
 			if (opt.getText().equals("Male")) {
 
 				driver.findElement(By.xpath("(//ul[@id='genderDropdown'])[1]/li")).click();
+				log.info("gender Choosed");
 
 			}
 			break;
 		}
+
+		// String character = RandomStringUtils.randomAlphabetic(12);
+
+		visbility(driver, pom.getInstanceHomeModule().emailId, 40);
+		sendkeys(pom.getInstanceHomeModule().emailId, generateRandom("letter"));
+		log.info("email id entered");
+		visbility(driver, pom.getInstanceHomeModule().selectFlagPhoneNumField, 50);
+		elementClickable(pom.getInstanceHomeModule().selectFlagPhoneNumField);
+		clickIntercept(pom.getInstanceHomeModule().selectFlagPhoneNumField, 30);
+
+		for (WebElement flag : pom.getInstanceHomeModule().chooseCountrycodeFlag) {
+			if (flag.getText().trim().equals("+91")) {
+				clickIntercept(flag, 30);
+				break;
+			}
+		}
+
+		visbility(driver, pom.getInstanceHomeModule().phoneNumberField, 40);
+		sendkeys(pom.getInstanceHomeModule().phoneNumberField, "95518" + generateRandom("number"));
+		log.info("phone number entered");
 		// Acc gets Created..
-		click(pom.getInstanceNewPatient().CreatePatient);
+		clickIntercept(pom.getInstanceNewPatient().CreatePatient, 30);
+		log.info("patient created ");
 
-		try {
-			WebElement $patietcreateid$ = driver.findElement(By.xpath("//td[@id='val-kpid']"));
-			visbility(driver, $patietcreateid$, 40);
-			kpid = $patietcreateid$.getText();
-			System.out.println("HOME PATIENT" + kpid);
+		while (true) {
+			try {
+				WebElement $patietcreateid$ = driver.findElement(By.xpath("//td[@id='val-kpid']"));
+				if ($patietcreateid$.isDisplayed()) {
+					kpid = $patietcreateid$.getText();
+					log.info(kpid);
 
-		} catch (Exception e) {
-			WebElement $patietcreateid$ = driver.findElement(By.xpath("//td[@id='val-kpid']"));
-			visbility(driver, $patietcreateid$, 40);
-			kpid = $patietcreateid$.getText();
-			System.out.println("HOME PATIENT" + kpid);
+					break;
+				}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 		}
 
 		navigateback(2);
+		refresh();
+
 		$current = driver.getCurrentUrl();
-		cal = new Calendars(driver, pom);
+		cal.$dayDrop($current);
 		cal.$calenderMod($current, kpid);
+		log.info("Appointment booked and deleted");
 	}
 
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1)
 	private void $Ehr_features() throws InterruptedException {
 
 		driver.navigate().to("https://localhost:8443/health/#list_ehr");
@@ -116,8 +123,7 @@ public class Basic_features extends Base {
 			WebElement remv = driver.findElement(By.xpath("(//div[@id='ehr-search']/div[2]//following::input[1])[1]"));
 			visbility(driver, remv, 60);
 
-			elementClickable(remv);
-			click(remv);
+			clickIntercept(remv, 30);
 		}
 
 		List<WebElement> wwe = driver
@@ -129,7 +135,7 @@ public class Basic_features extends Base {
 				visbility(driver, web, 60);
 				elementClickable(web);
 
-				click(web);
+				clickIntercept(web, 30);
 				break;
 			}
 
@@ -138,25 +144,24 @@ public class Basic_features extends Base {
 
 		WebElement r7 = driver.findElement(By.id("newMedicalRecordButton"));
 		elementClickable(r7);
-		click(r7);
+		clickIntercept(r7, 30);
 
-		WebElement elipse = driver.findElement(By.xpath("(//span[@id='list_patient_needHelp'])[1]/span"));
-		visbility(driver, elipse, 60);
-		clickble(driver, elipse, 60);
-		click(elipse);
+		clickIntercept(pom.getInstanceHealthRec().ehrEllipses, 30);
+		/*
+		 * } catch (Exception e) { visbility(driver,
+		 * pom.getInstanceHealthRec().ehrEllipses, 60); clickble(driver,
+		 * pom.getInstanceHealthRec().ehrEllipses, 60); actions("click",
+		 * pom.getInstanceHealthRec().ehrEllipses); }
+		 */
 
-		List<WebElement> hh = driver
-				.findElements(By.xpath("(//span[@id='list_patient_needHelp'])[1]/span//following::ul[1]/li"));
-		for (WebElement web : hh) {
+		for (WebElement web : pom.getInstanceHealthRec().ehrEllipsesList) {
 			if (web.getText().trim().equals("Reset Setting")) {
 				visbility(driver, web, 60);
-				elementClickable(web);
-				click(web);
+				clickIntercept(web, 30);
 				break;
 			}
 
 		}
-
 		sleep(3000);
 		List<WebElement> rowfor = driver.findElements(By.xpath("(//div[@id='cols'])[2]/div"));
 
@@ -176,7 +181,7 @@ public class Basic_features extends Base {
 					bl = true;
 					WebElement r8 = driver.findElement(By.xpath("(//button[@id='options-img'])[1]"));
 					visbility(driver, r8, 60);
-					r8.click();
+					clickIntercept(r8, 30);
 					List<WebElement> fin = driver.findElements(By.xpath("(//ul[@id='matchKey'])[2]/li/span/a"));
 					driver.findElement(By.xpath("(//input[@id='optionsSearch'])[2]")).sendKeys("show");
 					implicitWait(60, TimeUnit.SECONDS);
@@ -225,60 +230,44 @@ public class Basic_features extends Base {
 		actions("move to element", formaddbtn);
 		visbility(driver, formaddbtn, 60);
 		elementClickable(formaddbtn);
-		click(formaddbtn);
+		clickIntercept(formaddbtn, 30);
+		visbility(driver, pom.getInstanceSelectYourPlan().acceptsubscribe, 30);
+		clickIntercept(pom.getInstanceSelectYourPlan().acceptsubscribe, 30);
 
-		WebElement clickupgradebtninfrm = driver.findElement(By.xpath("(//button[contains(@title,'Upgrade')])[3]"));
-		elementClickable(clickupgradebtninfrm);
-		click(clickupgradebtninfrm);
-
-		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
-		elementClickable(pom.getInstanceSetting().$editplan$);
-		click(pom.getInstanceSetting().$editplan$);
+		visbility(driver, pom.getInstanceBasic().editPlanButton, 40);
+		clickIntercept(pom.getInstanceBasic().editPlanButton, 30);
 		sleep(2000);
-		for (int i = 1; i <= 2; i++) {
-			try {
-				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-				actions("click", pom.getInstanceSetting().$Carosel$);
-				sleep(2500);
-			} catch (Exception e) {
-				for (int b = 1; b <= 2; b++) {
-					visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-					actions("click", pom.getInstanceSetting().$Carosel$);
-				}
-			}
-		}
+		Select_Your_plan.verifyThePremium55PaymentUi();
+		Select_Your_plan.verifyTheEnterprisePaymentUi();
+
+		Select_Your_plan.verifyThePremiumplusPayementUi();
 
 		driver.navigate().back();
+		sleep(2000);
 
 		// Attach file..
 
 		WebElement attachfileAddBtn = driver.findElement(By.xpath("//div[contains(@title,'Add Attach File')]"));
 		actions("move to element", attachfileAddBtn);
 		visbility(driver, attachfileAddBtn, 60);
-		elementClickable(attachfileAddBtn);
-		click(attachfileAddBtn);
+
+		clickIntercept(attachfileAddBtn, 30);
 
 		WebElement attdropdown = driver.findElement(By.xpath("//div[@id='Attach_FileKpop2']/div[2]/div[1]/select"));
 		dropDown("index", attdropdown, "3");
-		WebElement clickupgradebtninattach = driver.findElement(By.xpath("(//button[contains(@title,'Upgrade')])[3]"));
-		elementClickable(clickupgradebtninattach);
-		click(clickupgradebtninattach);
+		visbility(driver, pom.getInstanceSelectYourPlan().acceptsubscribe, 30);
+		clickIntercept(pom.getInstanceSelectYourPlan().acceptsubscribe, 30);
 
-		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
-		elementClickable(pom.getInstanceSetting().$editplan$);
-		click(pom.getInstanceSetting().$editplan$);
+		visbility(driver, pom.getInstanceBasic().editPlanButton, 40);
+		clickIntercept(pom.getInstanceBasic().editPlanButton, 30);
+		sleep(2000);
+		Select_Your_plan.verifyThePremium55PaymentUi();
+		Select_Your_plan.verifyTheEnterprisePaymentUi();
 
-		for (int i = 1; i <= 2; i++) {
-			try {
-				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-				actions("click", pom.getInstanceSetting().$Carosel$);
-				sleep(2500);
-			} catch (Exception e) {
-
-			}
-		}
+		Select_Your_plan.verifyThePremiumplusPayementUi();
 
 		driver.navigate().back();
+		sleep(2500);
 
 		// icd codes search ehr..
 
@@ -511,11 +500,11 @@ public class Basic_features extends Base {
 
 	}
 
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2)
 	private void $$calendarFeatures() throws Exception {
 
-		Calendars cal = new Calendars(driver, pom);
 		cal.caledarModule();
+
 		$current = driver.getCurrentUrl();
 		cal.$dayDrop($current);
 		cal.$calenderMod($current, kpid);
@@ -525,365 +514,243 @@ public class Basic_features extends Base {
 	@Test(priority = 3)
 	private void $$settings$$() throws InterruptedException {
 
-		while (true) {
-			driver.navigate().to("https://localhost:8443/health/#setting");
-			String s = "https://localhost:8443/health/#setting";
-			if (driver.getCurrentUrl().equals(s)) {
-				break;
-			}
-			driver.navigate().refresh();
-
-		}
-
+		visbility(driver, pom.getInstanceSetting().clickSettings, 40);
+		clickIntercept(pom.getInstanceSetting().clickSettings, 30);
 		// Manage your Account...
 
-		while (true) {
-			try {
+		visbility(driver, pom.getInstanceSetting().manageYorAccount, 40);
+		clickIntercept(pom.getInstanceSetting().manageYorAccount, 30);
+		visbility(driver, pom.getInstanceSetting().basicInfoEditIcon, 40);
+		clickIntercept(pom.getInstanceSetting().basicInfoEditIcon, 30);
 
-				driver.findElement(By.xpath("//button[text()='Manage your Account']")).click();
+		WebElement $smsnotifcation = driver.findElement(By.xpath("(//button[@id='smsP'])[1]"));
+		visbility(driver, $smsnotifcation, 30);
+		clickIntercept($smsnotifcation, 30);
 
-				while (true) {
-					try {
-						WebElement Basicinfo = driver.findElement(By.xpath("(//span[@title='Edit'])[2]"));
-						visbility(driver, Basicinfo, 60);
-						javascriptclick(Basicinfo);
-						break;
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-				WebElement $$smsnotifcation$ = driver.findElement(By.xpath("(//button[@id='smsP'])[1]"));
-				visbility(driver, $$smsnotifcation$, 60);
-				javascriptclick($$smsnotifcation$);
+		visbility(driver, pom.getInstanceSelectYourPlan().acceptsubscribe, 30);
+		clickIntercept(pom.getInstanceSelectYourPlan().acceptsubscribe, 30);
 
-				WebElement $$setformsupgrdaebtn$$ = driver
-						.findElement(By.xpath("(//button[contains(@title,'Upgrade')])[3]"));
-				visbility(driver, $$setformsupgrdaebtn$$, 60);
-				click($$setformsupgrdaebtn$$);
-				WebElement $click$edit$plan$ = driver.findElement(By.xpath("//button[@id='editPlanBtn']"));
-				visbility(driver, $click$edit$plan$, 60);
-				javascriptclick($click$edit$plan$);
+		sleep(2500);
+		visbility(driver, pom.getInstanceBasic().editPlanButton, 40);
+		clickIntercept(pom.getInstanceBasic().editPlanButton, 30);
+		Select_Your_plan.verifyThePremium55PaymentUi();
+		Select_Your_plan.verifyTheEnterprisePaymentUi();
+		Select_Your_plan.verifyThePremiumplusPayementUi();
+		sleep(3000);
 
-				for (int i = 1; i <= 2; i++) {
-					try {
-						visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-						actions("click", pom.getInstanceSetting().$Carosel$);
-						sleep(2500);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-				sleep(3000);
-				j.executeScript("window.scrollBy(0,350)", "");
-				sleep(4000);
-				driver.navigate().to("https://localhost:8443/health/#setting");
+		driver.navigate().to("https://localhost:8443/health/#setting");
 
-				break;
-			} catch (Exception e) {
-
-			}
-		}
 		// cds(clinical des support)
 
-		while (true) {
-			try {
+		visbility(driver, pom.getInstanceSetting().cdsClick, 30);
 
-				WebElement cdsclick = driver.findElement(By.xpath("//button[contains(text(),'Clinical Decision')]"));
-				visbility(driver, cdsclick, 60);
-				click(cdsclick);
+		clickIntercept(pom.getInstanceSetting().cdsClick, 30);
 
-				WebElement newcds = driver.findElement(By.xpath("//span[contains(text(),'New Clinical')]"));
-				visbility(driver, newcds, 60);
-				click(newcds);
+		visbility(driver, pom.getInstanceSetting().addnewCds, 30);
+		clickIntercept(pom.getInstanceSetting().addnewCds, 30);
 
-				WebElement scrolltill = driver.findElement(By.xpath("//input[@id='weight_from']"));
-				ScriptExecutor(scrolltill);
-				sleep(2000);
-				visbility(driver, scrolltill, 60);
-				WebElement s9 = driver.findElement(By.xpath("(//input[@id='problem_icd_10'])[2]"));
-				visbility(driver, s9, 60);
-				sendkeys(s9, "test");
-				sleep(5000);
-				break;
-			} catch (Exception e) {
+		sendkeys(pom.getInstanceSetting().enterCds, "Akash");
 
-			}
+		sleep(2000);
+		WebElement scrolltill = driver.findElement(By.xpath("//input[@id='weight_from']"));
+		ScriptExecutor(scrolltill);
 
-		}
+		sleep(2000);
+		visbility(driver, pom.getInstanceSetting().cdsIcd, 30);
+		sendkeys(pom.getInstanceSetting().cdsIcd, "test");
+		sleep(4500);
+
 		driver.navigate().to("https://localhost:8443/health/#setting");
 		// Set Favorities..
 
-		driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
-		sleep(3000);
-		List<WebElement> setfav1 = driver.findElements(By.xpath("//ul[@id='setfavoritesul']/li"));
-		for (WebElement w : setfav1) {
+		for (WebElement w : pom.getInstanceSetting().setFavoriteListDrop) {
 			if (w.getText().trim().equals("Item/service")) {
-				while (true) {
-					try {
-						visbility(driver, w, 60);
-						w.click();
-						break;
-					} catch (Exception e) {
 
-					}
+				visbility(driver, w, 60);
+				clickIntercept(w, 30);
+
+				try {
+					visbility(driver, pom.getInstanceSetting().setfavoritesItemServiceAddIcon, 30);
+					clickIntercept(pom.getInstanceSetting().setfavoritesItemServiceAddIcon, 30);
+					/*
+					 * elementClickable(pom.getInstanceSetting().setfavoritesItemServiceAddIcon);
+					 * click(pom.getInstanceSetting().setfavoritesItemServiceAddIcon);
+					 */
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setfavoritesItemServiceAddIcon, 30);
+					clickIntercept(pom.getInstanceSetting().setfavoritesItemServiceAddIcon, 30);
 				}
 
-				WebElement clickadditem = driver.findElement(By.xpath(
-						"//div[@id='referral']//following::div[4]/div[2]/div[1]/div/table/tbody/tr/td[4]/span[2]"));
-				visbility(driver, clickadditem, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(clickadditem));
-				click(clickadditem);
-				WebElement sdf = driver.findElement(By.xpath(
-						"(//div[contains(text(),'Type or select item/service and price')])[1]//following::input[1]"));
-				visbility(driver, sdf, 60);
-				sendkeys(sdf, "test");
-				WebElement sdf2 = driver.findElement(By.xpath(
-						"(//div[contains(text(),'Type or select item/service and price')])[1]//following::input[2]"));
-				visbility(driver, sdf2, 60);
-				sendkeys(sdf2, "5");
-				WebElement saveitem = driver.findElement(By.xpath("(//div[@id='ItemKpop2']//following::button[2])[1]"));
-				visbility(driver, saveitem, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(saveitem));
-				click(saveitem);
+				visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceDiscription, 60);
+				sendkeys(pom.getInstanceSetting().setFavoritesItemServiceDiscription, "test");
+				visbility(driver, pom.getInstanceSetting().setFavoritesItemServicePrice, 40);
+				sendkeys(pom.getInstanceSetting().setFavoritesItemServicePrice, "5");
+				/*
+				 * elementClickable(pom.getInstanceSetting().setFavoritesItemServiceSave);
+				 * click(pom.getInstanceSetting().setFavoritesItemServiceSave);
+				 */
+				clickIntercept(pom.getInstanceSetting().setFavoritesItemServiceSave, 30);
+				sleep(1000);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceEdit, 40);
+					/* elementClickable(pom.getInstanceSetting().setFavoritesItemServiceEdit); */
+					clickIntercept(pom.getInstanceSetting().setFavoritesItemServiceEdit, 30);
 
-				sleep(2000);
-				WebElement edititem = driver.findElement(By.xpath("//span[text()='test']"));
-				visbility(driver, edititem, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(edititem));
-				actions("click", edititem);
-				while (true) {
-					try {
-						WebElement deleteitem = driver
-								.findElement(By.xpath("//div[@id='ItemKpop2']/div[1]/div[2]/span[1]"));
-						if (deleteitem.isDisplayed()) {
-							click(deleteitem);
-							break;
-						}
-
-					} catch (Exception e) {
-
-					}
+				} catch (StaleElementReferenceException e) {
+					visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceEdit, 40);
+					elementClickable(pom.getInstanceSetting().setFavoritesItemServiceEdit);
+					click(pom.getInstanceSetting().setFavoritesItemServiceEdit);
 				}
 
-				WebElement itemservicebackarrow = driver
-						.findElement(By.xpath("//div[@id='ItemFavKpop2']/div[1]/div[2]/span"));
-				visbility(driver, itemservicebackarrow, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(itemservicebackarrow));
-				javascriptclick(itemservicebackarrow);
-				sleep(2500);
-				while (true) {
-					try {
-						driver.findElement(By.xpath("//button[@onclick='setfavdropdown();']")).click();
-						break;
-					} catch (Exception e) {
-
-					}
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceDelete, 30);
+					clickIntercept(pom.getInstanceSetting().setFavoritesItemServiceDelete, 30);
+					/*
+					 * elementClickable(pom.getInstanceSetting().setFavoritesItemServiceDelete);
+					 * click(pom.getInstanceSetting().setFavoritesItemServiceDelete);
+					 */
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoritesItemServiceDelete, 30);
+					clickIntercept(pom.getInstanceSetting().setFavoritesItemServiceDelete, 30);
 				}
+
+				try {
+					/*
+					 * elementClickable(pom.getInstanceSetting().setFavoritesItemServiceClose);
+					 * click(pom.getInstanceSetting().setFavoritesItemServiceClose);
+					 */
+					clickIntercept(pom.getInstanceSetting().setFavoritesItemServiceClose, 30);
+				} catch (Exception e) {
+					clickIntercept(pom.getInstanceSetting().setFavoritesItemServiceClose, 30);
+				}
+
+				clickIntercept(pom.getInstanceSetting().setFavoritesClick, 30);
+
 			} else if (w.getText().trim().contentEquals("Message")) {
-				while (true) {
-					try {
-						visbility(driver, w, 60);
-						w.click();
-						break;
-					} catch (Exception e) {
+				visbility(driver, w, 40);
+				clickIntercept(w, 30);
 
-					}
+				try {
+
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageAddIcon, 30);
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageAddIcon, 30);
+
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageAddIcon, 30);
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageAddIcon, 30);
+				}
+				visbility(driver, pom.getInstanceSetting().setFavoritesMessageDiscription, 30);
+				sendkeys(pom.getInstanceSetting().setFavoritesMessageDiscription, "hello");
+
+				clickIntercept(pom.getInstanceSetting().setFavoritesMessageSave, 30);
+				sleep(1000);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageEdit, 30);
+
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageEdit, 30);
+				} catch (StaleElementReferenceException e) {
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageEdit, 30);
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageEdit, 30);
 				}
 
-				WebElement addnewfavmessage = driver
-						.findElement(By.xpath("(//div[@id='message'])[1]/div[1]/div//following::td[4]/span[2]"));
-				visbility(driver, addnewfavmessage, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(addnewfavmessage));
-				javascriptclick(addnewfavmessage);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageDelete, 30);
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageDelete, 30);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageDelete, 30);
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageDelete, 30);
+				}
 
-				WebElement msf = driver.findElement(By.xpath("//textarea[@id='message1']"));
-
-				visbility(driver, msf, 60);
-				sendkeys(msf, "hello");
-				WebElement savemesssage = driver
-						.findElement(By.xpath("//textarea[@id='message1']//following::button[2]"));
-				visbility(driver, savemesssage, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(savemesssage));
-				javascriptclick(savemesssage);
-				sleep(2500);
-				WebElement editmessage = driver.findElement(By.xpath("//div[text()='hello']"));
-				ww.until(ExpectedConditions.elementToBeClickable(editmessage));
-				actions("click", editmessage);
-				WebElement deletemessage = driver
-						.findElement(By.xpath("//div[@id='MessageKpop2']/div[1]/div[2]/span[1]"));
-				visbility(driver, deletemessage, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(deletemessage));
-				javascriptclick(deletemessage);
-
-				sleep(3000);
-				WebElement gobackmessage = driver
-						.findElement(By.xpath("(//span[text()='Favorite Message'])[1]//following::div[1]/span"));
-				visbility(driver, gobackmessage, 60);
-				ww.until(ExpectedConditions.elementToBeClickable(gobackmessage));
-				javascriptclick(gobackmessage);
-
-				sleep(3000);
+				try {
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageClose, 40);
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageClose, 30);
+				} catch (Exception e) {
+					visbility(driver, pom.getInstanceSetting().setFavoritesMessageClose, 40);
+					clickIntercept(pom.getInstanceSetting().setFavoritesMessageClose, 30);
+				}
 
 			}
 
 		}
+		sleep(2000);
 		// Set forms..
 
-		WebElement f1 = driver.findElement(By.xpath("//button[@id='form-script']"));
-		visbility(driver, f1, 60);
-		click(f1);// .click();
+		visbility(driver, pom.getInstanceSetting().customForm, 60);
+		clickIntercept(pom.getInstanceSetting().customForm, 30);
+		visbility(driver, pom.getInstanceSelectYourPlan().acceptsubscribe, 30);
+		clickIntercept(pom.getInstanceSelectYourPlan().acceptsubscribe, 30);
 
-		WebElement $$setformsupgrdaebtn$$ = driver.findElement(By.xpath("(//button[contains(@title,'Upgrade')])[3]"));
-		visbility(driver, $$setformsupgrdaebtn$$, 60);
-		click($$setformsupgrdaebtn$$);
-		while (true) {
-			try {
-
-				if (driver.getCurrentUrl().equals("https://localhost:8443/health/#allPaymentServices")) {
-
-					WebElement $click$edit$plan$ = driver.findElement(By.xpath("//button[@id='editPlanBtn']"));
-					visbility(driver, $click$edit$plan$, 60);
-					click($click$edit$plan$);
-					sleep(2000);
-					for (int i = 1; i <= 2; i++) {
-						try {
-							visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-							actions("click", pom.getInstanceSetting().$Carosel$);
-							sleep(2500);
-						} catch (Exception e) {
-							// TODO: handle exception
-						}
-					}
-					j.executeScript("window.scrollBy(0,350)", "");
-					sleep(4000);
-					driver.navigate().back();
-					break;
-
-				}
-
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-
+		sleep(2500);
+		visbility(driver, pom.getInstanceBasic().editPlanButton, 40);
+		clickIntercept(pom.getInstanceBasic().editPlanButton, 30);
+		Select_Your_plan.verifyThePremium55PaymentUi();
+		Select_Your_plan.verifyTheEnterprisePaymentUi();
+		Select_Your_plan.verifyThePremiumplusPayementUi();
+		sleep(3000);
 		// market place..
-		WebElement $marketplace$;
-		while (true) {
-			try {
 
-				$marketplace$ = driver.findElement(By.xpath("//button[text()='Market Place']"));
+		WebElement $mrktplace$ = driver.findElement(By.xpath("//button[text()='Market Place']"));
+		visbility(driver, $mrktplace$, 60);
+		clickIntercept($mrktplace$, 30);
 
-				sleep(2000);
-				visbility(driver, $marketplace$, 60);
-				click($marketplace$);
-
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-
-		}
-		driver.navigate().back();
 		sleep(2000);
 
-		try {
-			ScriptExecutor($marketplace$);
-			sleep(2500);
-		} catch (Exception e) {
-			ScriptExecutor($marketplace$);
-			sleep(2500);
-		}
+		visbility(driver, pom.getInstanceSetting().$eirsystembutton$, 30);
+		clickIntercept(pom.getInstanceSetting().$eirsystembutton$, 30);
+
+		visbility(driver, pom.getInstanceSelectYourPlan().acceptsubscribe, 30);
+		clickIntercept(pom.getInstanceSelectYourPlan().acceptsubscribe, 30);
+		visbility(driver, pom.getInstanceBasic().editPlanButton, 40);
+		clickIntercept(pom.getInstanceBasic().editPlanButton, 30);
+
+		sleep(2500);
+
+		Select_Your_plan.verifyThePremiumplusPayementUi();
 
 		// Notifications...
 
 		try {
 
-			WebElement $$edit$$notify$$message$$ = driver
-					.findElement(By.xpath("//input[@id='all-notification-mess']//following::span[1]"));
-			elementClickable($$edit$$notify$$message$$);
-			actions("click", $$edit$$notify$$message$$);
+			elementClickable(pom.getInstanceSetting().customizeToggle);
+			actions("click", pom.getInstanceSetting().customizeToggle);
 			System.out.println("clicked Notication toggle button");
 
 		} catch (Exception e) {
-			WebElement $$edit$$notify$$message$$ = driver
-					.findElement(By.xpath("(//span[@class='slider1 round1'])[10]"));
-			elementClickable($$edit$$notify$$message$$);
-			actions("click", $$edit$$notify$$message$$);
+			elementClickable(pom.getInstanceSetting().customizeToggle);
+			actions("click", pom.getInstanceSetting().customizeToggle);
 
 		}
-		WebElement $$plnupgrd$$detaisl$ = driver.findElement(By.xpath("(//button[contains(@title,'Upgrade')])[3]"));
-		visbility(driver, $$plnupgrd$$detaisl$, 60);
-		click($$plnupgrd$$detaisl$);
+		visbility(driver, pom.getInstanceSelectYourPlan().acceptsubscribe, 30);
+		clickIntercept(pom.getInstanceSelectYourPlan().acceptsubscribe, 30);
+		visbility(driver, pom.getInstanceBasic().editPlanButton, 40);
+		clickIntercept(pom.getInstanceBasic().editPlanButton, 30);
 
-		j.executeScript("window.scrollBy(0,350)", "");
-		sleep(4000);
-		WebElement $click$edit$planz$ = driver.findElement(By.xpath("//button[@id='editPlanBtn']"));
-		ScriptExecutor($click$edit$planz$);
-		visbility(driver, $click$edit$planz$, 60);
-		javascriptclick($click$edit$planz$);
-		sleep(4000);
+		Select_Your_plan.verifyThePremium55PaymentUi();
+		Select_Your_plan.verifyTheEnterprisePaymentUi();
 
-		for (int i = 1; i <= 2; i++) {
-			try {
-				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-				click(pom.getInstanceSetting().$Carosel$);
-				sleep(2500);
-			} catch (Exception e) {
-
-			}
-		}
-
+		Select_Your_plan.verifyThePremiumplusPayementUi();
 		sleep(3000);
 		driver.navigate().back();
 
 		// Audit Report...
-		while (true) {
-			try {
-				WebElement rqqa = driver.findElement(By.xpath("//button[@onclick='setting.audit()']"));
-				ScriptExecutor(rqqa);
-				visbility(driver, rqqa, 60);
-				javascriptclick(rqqa);
 
-				WebElement $$plnupgrd$$detail$ = driver
-						.findElement(By.xpath("(//button[contains(@title,'Upgrade')])[3]"));
-				visbility(driver, $$plnupgrd$$detail$, 60);
-				click($$plnupgrd$$detail$);
-				WebElement $click$edit$plan$ = driver.findElement(By.xpath("//button[@id='editPlanBtn']"));
-				visbility(driver, $click$edit$plan$, 60);
-				javascriptclick($click$edit$plan$);
-				for (int i = 1; i <= 2; i++) {
-					try {
-						visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
-						click(pom.getInstanceSetting().$Carosel$);
-						sleep(2500);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-				sleep(3000);
-				j.executeScript("window.scrollBy(0,350)", "");
-				sleep(4000);
-				driver.navigate().back();
-				break;
-			} catch (Exception e) {
+		visbility(driver, pom.getInstanceSetting().auditReport, 60);
+		clickIntercept(pom.getInstanceSetting().auditReport, 30);
+		sleep(3000);
 
-			}
-		}
+		visbility(driver, pom.getInstanceSelectYourPlan().acceptsubscribe, 30);
+		clickIntercept(pom.getInstanceSelectYourPlan().acceptsubscribe, 30);
+		visbility(driver, pom.getInstanceBasic().editPlanButton, 40);
+		clickIntercept(pom.getInstanceBasic().editPlanButton, 30);
+
+		Select_Your_plan.verifyThePremium55PaymentUi();
+		Select_Your_plan.verifyTheEnterprisePaymentUi();
+
+		Select_Your_plan.verifyThePremiumplusPayementUi();
+		sleep(3000);
+		driver.navigate().back();
 
 		// edit scenario..
-
-		while (true) {
-			try {
-				WebElement $basicfe$ = driver.findElement(By.xpath("(//span[text()='Basic'])[1]"));
-				if ($basicfe$.isDisplayed()) {
-					visbility(driver, $basicfe$, 60);
-					javascriptclick($basicfe$);
-					break;
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
 
 	}
 

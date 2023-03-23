@@ -1,5 +1,7 @@
 package com.pomclass;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +16,24 @@ public class Calendar {
 
 	@FindBy(xpath = "(//span[@class='hidden-doctor hover icon-md fa fa-times-circle'])[2]")
 	public WebElement clickXicon;
+
+	@FindBy(xpath = "(//button[@id='create-patient'])[2]")
+	public WebElement newPatientCreation;
+	
+	@FindBy(id = "first-name")
+	public WebElement firstName;
+
+	@FindBy(id = "gender_dropdown")
+	public WebElement genderClick;
+
+	@FindBy(xpath = "(//button[@id='gender_dropdown'])[3]//following::ul[1]/li/a")
+	public List<WebElement> chooseGender;
+
+	@FindBy(id = "accept-btn")
+	public WebElement createPaitent;
+
+	@FindBy(xpath = "(//input[@id='AppointmentPatientName'])[2]//following::span[2]")
+	public WebElement getPatientid;
 
 	@FindBy(xpath = "(//input[@id='doctorPartyName-cal'])[1]")
 	public WebElement serachDoctorUserName;

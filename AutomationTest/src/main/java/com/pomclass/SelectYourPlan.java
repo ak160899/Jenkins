@@ -20,15 +20,39 @@ public class SelectYourPlan {
 
 	@FindBy(xpath = "((//div[@id='AlertMessage'])//following::button[1])[1]")
 	public WebElement accept;
-	
+
+	@FindBy(xpath = "((//div[@id='AlertMessage'])//following::button[1])[2]")
+	public WebElement acceptsubscribe;
+
 	@FindBy(xpath = "(//div[@id='AlertMessage'])//following::button[2]")
 	public WebElement dismis;
-	
+
 	@FindBy(name = "postal")
 	public WebElement postalCode;
 
 	@FindBy(xpath = "//button[@id='save_btn']")
 	public WebElement activateSubscription;
+
+	@FindBy(xpath = "//span[@id='monthlyBasicCardPlan']")
+	public WebElement basicMonthlyUi;
+	
+	@FindBy(id = "monthlyPremiumCardPlan")
+	public WebElement premiumMonthlyui;
+	
+	@FindBy(id = "monthlyEnterpriseCardPlan")
+	public WebElement enterpriseUi;
+	
+	@FindBy(id = "liteCardPlan")
+	public WebElement lite;
+	
+	@FindBy(id = "monthlyPremiumPlusCardPlan")
+	public WebElement premiumplusUi;
+
+	@FindBy(id = "editPlanCloseBtn")
+	public WebElement editplanCrossIcon;
+
+	@FindBy(id = "editPlanBtn")
+	public WebElement editPlanButton;
 
 	public SelectYourPlan(WebDriver driver) {
 

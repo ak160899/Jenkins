@@ -44,7 +44,7 @@ public class PatietAppoint extends Base {
 
 				if (kp.getText().isEmpty() && tp.isDisplayed() && !tp.getText().isEmpty()) {
 
-					click(tp);
+					clickIntercept(tp, 30);
 					sleep(2000);
 					WebElement $disscriptionBox = driver
 							.findElement(By.xpath("(//textarea[@id='description'])[" + count + "]"));
@@ -54,7 +54,7 @@ public class PatietAppoint extends Base {
 						sendkeys($disscriptionBox, "HELLO DOCOTR");
 						WebElement $saveappointment = driver.findElement(By.xpath("(//button[@id='accept-btn'])[1]"));
 						visbility(driver, $saveappointment, 40);
-						javascriptclick($saveappointment);
+						clickIntercept($saveappointment, 30);
 
 						cond = true;
 						break;
@@ -79,7 +79,7 @@ public class PatietAppoint extends Base {
 					try {
 						WebElement edit = driver.findElement(By.xpath("//span[text()='HELLO DOCOTR']"));
 						if (edit.isDisplayed()) {
-							click(edit);
+							clickIntercept(edit, 30);
 							break;
 						}
 					} catch (Exception e) {
@@ -92,7 +92,7 @@ public class PatietAppoint extends Base {
 						WebElement goToehr = driver.findElement(By.id("goEhrButton"));
 						if (goToehr.isDisplayed()) {
 							elementClickable(goToehr);
-							click(goToehr);
+							clickIntercept(goToehr, 30);
 							break;
 						}
 					} catch (Exception e) {
@@ -103,20 +103,20 @@ public class PatietAppoint extends Base {
 				try {
 					WebElement back = driver.findElement(By.xpath("(//button[@id='back-btn'])[6]"));
 					visbility(driver, back, 50);
-					elementClickable(back);
-					click(back);
+
+					clickIntercept(back, 30);
 				} catch (ElementClickInterceptedException e) {
 					WebElement back = driver.findElement(By.xpath("(//button[@id='back-btn'])[6]"));
 					visbility(driver, back, 50);
-					elementClickable(back);
-					click(back);
+
+					clickIntercept(back, 30);
 				}
 
 				for (int in = 1; in <= 7; in++) {
 					try {
 						WebElement edit = driver.findElement(By.xpath("//span[text()='HELLO DOCOTR']"));
 						if (edit.isDisplayed()) {
-							click(edit);
+							clickIntercept(edit,30);
 							break;
 						}
 					} catch (Exception e) {
@@ -133,7 +133,7 @@ public class PatietAppoint extends Base {
 							WebElement delete = driver.findElement(By.xpath("(//span[@id='del-btn'])[" + count + "]"));
 							System.out.println(delete);
 							if (delete.isDisplayed()) {
-								click(delete);
+								clickIntercept(delete,30);
 								break;
 							}
 
@@ -148,7 +148,7 @@ public class PatietAppoint extends Base {
 							WebElement del = driver.findElement(By.xpath("(//span[@id='del-btn'])[2]"));
 							if (del.isDisplayed()) {
 								System.out.println("NO DIV");
-								click(del);
+								clickIntercept(del,30);
 								break;
 							}
 						} catch (Exception e) {
@@ -186,7 +186,7 @@ public class PatietAppoint extends Base {
 				WebElement $deletekpop = driver
 						.findElement(By.xpath("//div[@id='AppointmentCreateMessage']/div[2]/div[2]/button[2]"));
 				if ($deletekpop.isDisplayed()) {
-					click($deletekpop);
+					clickIntercept($deletekpop,30);
 					condition = true;
 					break;
 				}

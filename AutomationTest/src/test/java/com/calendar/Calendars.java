@@ -33,16 +33,11 @@ public class Calendars extends Base {
 
 		try {
 			visbility(driver, pom.getInstanceCalendar().clickCalendar, 50);
-			elementClickable(pom.getInstanceCalendar().clickCalendar);
-			click(pom.getInstanceCalendar().clickCalendar);
-		} catch (ElementClickInterceptedException e) {
-			visbility(driver, pom.getInstanceCalendar().clickCalendar, 50);
-			elementClickable(pom.getInstanceCalendar().clickCalendar);
-			click(pom.getInstanceCalendar().clickCalendar);
+			clickIntercept(pom.getInstanceCalendar().clickCalendar, 30);
+
 		} catch (StaleElementReferenceException e) {
 			visbility(driver, pom.getInstanceCalendar().clickCalendar, 50);
-			elementClickable(pom.getInstanceCalendar().clickCalendar);
-			click(pom.getInstanceCalendar().clickCalendar);
+			clickIntercept(pom.getInstanceCalendar().clickCalendar, 30);
 		}
 		implicitWait(60, TimeUnit.SECONDS);
 
@@ -89,7 +84,8 @@ public class Calendars extends Base {
 
 					cond = true;
 					visbility(driver, tp, 60);
-					javascriptclick(tp);
+					clickIntercept(tp, 30);
+
 					if (count >= 2) {
 						$choosePatient(count, kpid);
 					} else {
@@ -196,6 +192,9 @@ public class Calendars extends Base {
 	}
 
 	public void $bookAppointmnet(int i, String ss) throws InterruptedException {
+
+		// kpid = PatientCreation.createPat();
+
 		System.out.println("BOOKING FUNCTION CALLED WITH :" + i);
 
 		sleep(2000);
@@ -213,6 +212,7 @@ public class Calendars extends Base {
 			}
 
 		}
+
 		sleep(3000);
 
 		try {
@@ -271,8 +271,8 @@ public class Calendars extends Base {
 					WebElement locateKpid = driver.findElement(By.xpath("(//span[text()='" + kpid + "'])[2]"));
 					if (locateKpid.isDisplayed()) {
 						visbility(driver, locateKpid, 40);
-						elementClickable(locateKpid);
-						click(locateKpid);
+						//elementClickable(locateKpid);
+						clickIntercept(locateKpid,30);
 						break;
 					}
 					System.out.println("not visble ");
@@ -287,19 +287,20 @@ public class Calendars extends Base {
 		WebElement ehr = driver.findElement(By.id("goEhrButton"));
 
 		visbility(driver, ehr, 60);
-		click(ehr);// .click();
+		clickIntercept(ehr,30);// .click();
 
 		sleep(3000);
 
 		while (true) {
 			try {
 				if (ss.equals("https://localhost:8443/health/#home")
-						|| ss.equals("https://www.75health.com/health/#home")) {
+						|| ss.equals("https://www.75health.com/health/#home")
+						|| s.equals("https://www.test.75health.com/health/#home")) {
 					driver.navigate().back();
 					driver.navigate().refresh();
 					break;
 				}
-				click(pom.getInstanceCalendar().clickCalendar);
+				clickIntercept(pom.getInstanceCalendar().clickCalendar,30);
 				driver.navigate().refresh();
 				break;
 			} catch (Exception e) {
@@ -367,14 +368,18 @@ public class Calendars extends Base {
 
 			if (b == false) {
 
-				if (currenturl.equals("https://www.75health.com/health/#home")) {
+				if (currenturl.equals("https://www.75health.com/health/#home")
+						|| currenturl.equals("https://localhost:8443/health/#home")
+						|| currenturl.equals("https://www.test.75health.com/health/#home")) {
 					WebElement nextsetdays = driver.findElement(By.xpath("(//div[@id='unii'])[2]/div[2]/button"));
 					visbility(driver, nextsetdays, 40);
 					WebDriverWait wait = new WebDriverWait(driver, 40);
 					wait.until(ExpectedConditions.elementToBeClickable(nextsetdays));
 					click(nextsetdays);
 					// System.out.println("");
-				} else if (currenturl.equals("https://www.75health.com/health/#calendar")) {
+				} else if (currenturl.equals("https://www.75health.com/health/#calendar")
+						|| currenturl.equals("https://localhost:8443/health/#calendar")
+						|| currenturl.equals("https://www.test.75health.com/health/#calendar")) {
 
 					WebElement nextsetdays = driver.findElement(By.xpath("(//div[@id='unii'])[1]/div[2]/button"));
 					visbility(driver, nextsetdays, 40);
@@ -397,7 +402,9 @@ public class Calendars extends Base {
 			try {
 				if (s.equals("https://localhost:8443/health/#home") || s.equals("https://www.75health.com/health/#home")
 						|| s.equals("https://www.75health.com/health/#calendar")
-						|| s.equals("https://localhost:8443/health/#calendar")) {
+						|| s.equals("https://localhost:8443/health/#calendar")
+						|| s.equals("https://www.test.75health.com/health/#home")
+						|| s.equals("https://www.test.75health.com/health/#calendar")) {
 
 					if (count > 1) {
 						count = count - 1;
@@ -443,31 +450,32 @@ public class Calendars extends Base {
 
 	public void $dayDrop(String s) throws InterruptedException {
 		while (true) {
-
+			System.out.println("Day drop");
 			try {
-				if (s.equals("https://localhost:8443/health/#home")
-						|| s.equals("https://www.75health.com/health/#home")) {
+				if (s.equals("https://localhost:8443/health/#home") || s.equals("https://www.75health.com/health/#home")
+						|| s.equals("https://www.test.75health.com/health/#home")) {
 					this.s = s;
 
 					WebElement clbtn = driver.findElement(By.xpath("(//button[@id='calendar-day-month'])[2]"));
 					cnt = 2;
 					System.out.println("HOME Appointment");
 					if (clbtn.isDisplayed()) {
-						click(clbtn);
+						clickIntercept(clbtn, 30);
 					}
 				} else if (s.equals("https://localhost:8443/health/#calendar")
-						|| s.equals("https://www.75health.com/health/#calendar")) {
+						|| s.equals("https://www.75health.com/health/#calendar")
+						|| s.equals("https://www.test.75health.com/health/#calendar")) {
 					this.s = s;
 					System.out.println("Calendar appointmnet");
 					WebElement clbtn = driver.findElement(By.xpath("(//button[@id='calendar-day-month'])[1]"));
 					cnt = 1;
 					if (clbtn.isDisplayed()) {
-						click(clbtn);
+						clickIntercept(clbtn, 30);
 					}
 				}
 				break;
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 		}
 

@@ -3,17 +3,12 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="org.LitePlan3d.EditCardDetails">
+      <class name="org.patientLogin.PatientInfo">
         <methods>
-          <include name="goToMarketPlaceAndGiveValidCvCAndCancel"/>
-          <include name="giveValid3dCardAndFailIt"/>
-          <include name="verifytheCardWithInavlid3d_basic"/>
           <include name="openConnection"/>
-          <include name="giveValid3dCardAndCancelit"/>
-          <include name="verifyDeclinedCard"/>
-          <include name="verifyWithInvalidCvC"/>
+          <include name="Settings"/>
         </methods>
-      </class> <!-- org.LitePlan3d.EditCardDetails -->
+      </class> <!-- org.patientLogin.PatientInfo -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
