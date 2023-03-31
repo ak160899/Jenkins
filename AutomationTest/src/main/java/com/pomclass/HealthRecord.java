@@ -158,6 +158,12 @@ public class HealthRecord {
 	@FindBy(xpath = "//i[@onclick='ehr.ehrShowPrintOptions();']//following::span[3]//following::ul[1]/li")
 	public List<WebElement> ehrEllipsesList;
 	
+	@FindBy(xpath = "(//div[@id='ehr-search']/div[2]//following::input[1])[1]")
+	public WebElement removePrevious;
+	
+	@FindBy(xpath = "//div[@id='vvid']//following::ul[2]/li/a/table/tbody/tr/td[2]")
+	public List<WebElement> healthRecordSerachPatientByDropdown;
+	
 	
 	public HealthRecord(WebDriver driver) {
 		this.driver = driver;

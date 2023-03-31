@@ -43,6 +43,8 @@ public class Vaccine {
 
 	@FindBy(xpath = "(//span[@title='Click to add this vaccine'])[2]")
 	public WebElement addThisVaccine;
+	
+	
 	@FindBy(xpath = "(//span[text()='Past Taken Vaccine'])[1]//parent::div/span[1]")
 	public WebElement cancelPastTaken;
 
@@ -63,6 +65,9 @@ public class Vaccine {
 
 	@FindBy(xpath = "(//span[@title='Add this vaccine'])[1]//following::div[1]/div[2]")
 	public WebElement editFavorite;
+	
+	@FindBy(xpath = "//div[text()='vacine favorite']")
+	public List<WebElement> editFavoriteBasic;
 
 	@FindBy(xpath = "//input[@id='vaccine-cvx']//following::span[3]")
 	public WebElement removeFavoriteIcd;

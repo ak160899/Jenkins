@@ -1,4 +1,4 @@
-package runner;
+package org.SmokeTesting;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class TestRunner {
 		// subscriptionValidation.Lite_Basic_premium55_premium79.class });
 		// test.setTestClasses(new Class[] {
 		// subscriptionValidation.SelctyourPlan_Premiumplus.class });
-		test.setTestClasses(new Class[] { runner.Local_Host.class });
+		test.setTestClasses(new Class[] { org.SmokeTesting.Local_Host.class });
 
 		/*
 		 * List suite = Lists.newArrayList();

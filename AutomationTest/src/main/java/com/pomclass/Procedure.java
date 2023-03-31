@@ -67,6 +67,9 @@ public class Procedure {
 	@FindBy(xpath = "(//span[@title='Add this procedure'])[1]//following::div[1]/div[2]")
 	public WebElement editFavorite;
 	
+	@FindBy(xpath = "//div[text()='procedure favorite']")
+	public List<WebElement> editFavoriteBasic;
+	
 	@FindBy(xpath = "//span[text()='134287002']//following::span[1]")
 	public WebElement removeFavoriteCode;
 	

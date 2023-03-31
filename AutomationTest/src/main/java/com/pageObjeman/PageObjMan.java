@@ -11,6 +11,7 @@ import com.pomclass.Basic;
 import com.pomclass.Billing;
 import com.pomclass.Calendar;
 import com.pomclass.CardDetails;
+import com.pomclass.Ehr_FollowUp;
 import com.pomclass.FamilyHealth;
 import com.pomclass.Forms;
 import com.pomclass.Goals;
@@ -79,6 +80,8 @@ public class PageObjMan {
 	private AttachFile attach;
 	private Inpatient in;
 
+	private Ehr_FollowUp followup;
+
 	public PageObjMan(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -89,6 +92,14 @@ public class PageObjMan {
 			return vital;
 		}
 		return vital;
+	}
+
+	public Ehr_FollowUp getInstanceFollowUp() {
+		if (followup == null) {
+			followup = new Ehr_FollowUp(driver);
+			return followup;
+		}
+		return followup;
 	}
 
 	public Inpatient getInstanceInpatient() {

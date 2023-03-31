@@ -1,73 +1,2090 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="8" passed="8">
+<testng-results skipped="0" failed="1" ignored="0" total="57" passed="56">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="1099404" started-at="2023-03-23T14:07:38Z" finished-at="2023-03-23T14:25:58Z">
+  <suite name="Suite" duration-ms="807027" started-at="2023-03-31T13:19:53Z" finished-at="2023-03-31T13:33:20Z">
     <groups>
-      <group name="calendar">
-        <method signature="Local_Host.calendar()[pri:3, instance:runner.Local_Host@59d016c9]" name="calendar" class="runner.Local_Host"/>
-      </group> <!-- calendar -->
-      <group name="settings">
-        <method signature="Local_Host.Settings()[pri:7, instance:runner.Local_Host@59d016c9]" name="Settings" class="runner.Local_Host"/>
-      </group> <!-- settings -->
-      <group name="teledoctor">
-        <method signature="Local_Host.TeleDoctor()[pri:5, instance:runner.Local_Host@59d016c9]" name="TeleDoctor" class="runner.Local_Host"/>
-      </group> <!-- teledoctor -->
-      <group name="patient">
-        <method signature="Local_Host.PatientModule()[pri:1, instance:runner.Local_Host@59d016c9]" name="PatientModule" class="runner.Local_Host"/>
-      </group> <!-- patient -->
-      <group name="healthrec">
-        <method signature="Local_Host.HealthRec()[pri:2, instance:runner.Local_Host@59d016c9]" name="HealthRec" class="runner.Local_Host"/>
-      </group> <!-- healthrec -->
-      <group name="message">
-        <method signature="Local_Host.Message()[pri:6, instance:runner.Local_Host@59d016c9]" name="Message" class="runner.Local_Host"/>
-      </group> <!-- message -->
-      <group name="billing">
-        <method signature="Local_Host.BillingModule()[pri:4, instance:runner.Local_Host@59d016c9]" name="BillingModule" class="runner.Local_Host"/>
-      </group> <!-- billing -->
-      <group name="home">
-        <method signature="Local_Host.HomeModule()[pri:0, instance:runner.Local_Host@59d016c9]" name="HomeModule" class="runner.Local_Host"/>
-      </group> <!-- home -->
     </groups>
-    <test name="Test" duration-ms="1099404" started-at="2023-03-23T14:07:38Z" finished-at="2023-03-23T14:25:58Z">
-      <class name="runner.Local_Host">
-        <test-method status="PASS" signature="openConnection()[pri:0, instance:runner.Local_Host@59d016c9]" name="openConnection" is-config="true" duration-ms="25615" started-at="2023-03-23T19:37:13Z" finished-at="2023-03-23T19:37:38Z">
+    <test name="Home_module_Testcase" duration-ms="31627" started-at="2023-03-31T13:19:53Z" finished-at="2023-03-31T13:20:24Z">
+      <class name="org.PageModules.Home_Module">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:org.PageModules.Home_Module@4883b407]" name="getTheTestName" is-config="true" duration-ms="26" started-at="2023-03-31T18:49:53Z" finished-at="2023-03-31T18:49:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@2562e38d]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.Home_Module@4883b407]" name="verifyTheName" is-config="true" duration-ms="16" started-at="2023-03-31T18:49:53Z" finished-at="2023-03-31T18:49:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void org.PageModules.Home_Module.patientCreation()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="patientCreation()[pri:0, instance:org.PageModules.Home_Module@4883b407]" name="patientCreation" duration-ms="8154" started-at="2023-03-31T18:49:53Z" finished-at="2023-03-31T18:50:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- patientCreation -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.Home_Module@4883b407]" name="checkStatus" is-config="true" duration-ms="1" started-at="2023-03-31T18:50:01Z" finished-at="2023-03-31T18:50:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=patientCreation status=SUCCESS method=Home_Module.patientCreation()[pri:0, instance:org.PageModules.Home_Module@4883b407] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.Home_Module@4883b407]" name="verifyTheName" is-config="true" duration-ms="1" started-at="2023-03-31T18:50:01Z" finished-at="2023-03-31T18:50:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void org.PageModules.Home_Module.bookAppointment()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="bookAppointment()[pri:1, instance:org.PageModules.Home_Module@4883b407]" name="bookAppointment" duration-ms="23400" started-at="2023-03-31T18:50:01Z" finished-at="2023-03-31T18:50:24Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- bookAppointment -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.Home_Module@4883b407]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:50:24Z" finished-at="2023-03-31T18:50:24Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=bookAppointment status=SUCCESS method=Home_Module.bookAppointment()[pri:1, instance:org.PageModules.Home_Module@4883b407] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- org.PageModules.Home_Module -->
+    </test> <!-- Home_module_Testcase -->
+    <test name="Patient_Module_TestCase" duration-ms="26410" started-at="2023-03-31T13:20:24Z" finished-at="2023-03-31T13:20:51Z">
+      <class name="org.PageModules.Patient_Module">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:org.PageModules.Patient_Module@589838eb]" name="getTheTestName" is-config="true" duration-ms="3" started-at="2023-03-31T18:50:24Z" finished-at="2023-03-31T18:50:24Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@77b16c58]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.Patient_Module@589838eb]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:50:24Z" finished-at="2023-03-31T18:50:24Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void org.PageModules.Patient_Module.patientCreation()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="FAIL" signature="patientCreation()[pri:1, instance:org.PageModules.Patient_Module@589838eb]" name="patientCreation" duration-ms="2747" started-at="2023-03-31T18:50:24Z" finished-at="2023-03-31T18:50:27Z">
+          <exception class="org.openqa.selenium.ElementClickInterceptedException">
+            <message>
+              <![CDATA[element click intercepted: Element <button id="gender_dropdown" class="dropdown-toggle settings-heading settings-buttonColor settings-button" style="width:100%;" data-toggle="dropdown" aria-expanded="false">...</button> is not clickable at point (650, 297). Other element would receive the click: <div id="--working--" class="center-cont" style="width: 100%; height: 100vh; position: fixed; left: 0px; top: 0px; z-index: 1030; background-color: rgba(239, 239, 239, 0.5); overflow: hidden !important; display: flex;">...</div>
+  (Session info: chrome=111.0.5563.147)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'LAPTOP-Q33L4MJO', ip: '192.168.29.33', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_331'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:56449}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 03f033f6a3f4f67731e4f20b027d6447]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element <button id="gender_dropdown" class="dropdown-toggle settings-heading settings-buttonColor settings-button" style="width:100%;" data-toggle="dropdown" aria-expanded="false">...</button> is not clickable at point (650, 297). Other element would receive the click: <div id="--working--" class="center-cont" style="width: 100%; height: 100vh; position: fixed; left: 0px; top: 0px; z-index: 1030; background-color: rgba(239, 239, 239, 0.5); overflow: hidden !important; display: flex;">...</div>
+  (Session info: chrome=111.0.5563.147)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'LAPTOP-Q33L4MJO', ip: '192.168.29.33', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_331'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:56449}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 03f033f6a3f4f67731e4f20b027d6447
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:285)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:84)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at com.sun.proxy.$Proxy14.click(Unknown Source)
+	at org.base.Base.click(Base.java:83)
+	at org.PageModules.Patient_Module.patientCreation(Patient_Module.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.ElementClickInterceptedException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- patientCreation -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.Patient_Module@589838eb]" name="checkStatus" is-config="true" duration-ms="173" started-at="2023-03-31T18:50:27Z" finished-at="2023-03-31T18:50:27Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=patientCreation status=FAILURE method=Patient_Module.patientCreation()[pri:1, instance:org.PageModules.Patient_Module@589838eb] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.Patient_Module@589838eb]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:50:27Z" finished-at="2023-03-31T18:50:27Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void org.PageModules.Patient_Module.verifyPatientSaerchAndClick()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="verifyPatientSaerchAndClick()[pri:2, instance:org.PageModules.Patient_Module@589838eb]" name="verifyPatientSaerchAndClick" duration-ms="2189" started-at="2023-03-31T18:50:27Z" finished-at="2023-03-31T18:50:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyPatientSaerchAndClick -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.Patient_Module@589838eb]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:50:29Z" finished-at="2023-03-31T18:50:29Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyPatientSaerchAndClick status=SUCCESS method=Patient_Module.verifyPatientSaerchAndClick()[pri:2, instance:org.PageModules.Patient_Module@589838eb] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.Patient_Module@589838eb]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:50:29Z" finished-at="2023-03-31T18:50:29Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void org.PageModules.Patient_Module.alternateContact()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="alternateContact()[pri:3, instance:org.PageModules.Patient_Module@589838eb]" name="alternateContact" duration-ms="7384" started-at="2023-03-31T18:50:29Z" finished-at="2023-03-31T18:50:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- alternateContact -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.Patient_Module@589838eb]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:50:37Z" finished-at="2023-03-31T18:50:37Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=alternateContact status=SUCCESS method=Patient_Module.alternateContact()[pri:3, instance:org.PageModules.Patient_Module@589838eb] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="contactInfo()[pri:3, instance:org.PageModules.Patient_Module@589838eb]" name="contactInfo" duration-ms="8054" started-at="2023-03-31T18:50:37Z" finished-at="2023-03-31T18:50:45Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- contactInfo -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.Patient_Module@589838eb]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:50:37Z" finished-at="2023-03-31T18:50:37Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void org.PageModules.Patient_Module.contactInfo()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.Patient_Module@589838eb]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:50:45Z" finished-at="2023-03-31T18:50:45Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=contactInfo status=SUCCESS method=Patient_Module.contactInfo()[pri:3, instance:org.PageModules.Patient_Module@589838eb] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="patientInfo()[pri:4, instance:org.PageModules.Patient_Module@589838eb]" name="patientInfo" duration-ms="1156" started-at="2023-03-31T18:50:45Z" finished-at="2023-03-31T18:50:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- patientInfo -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.Patient_Module@589838eb]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:50:45Z" finished-at="2023-03-31T18:50:45Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void org.PageModules.Patient_Module.patientInfo()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.Patient_Module@589838eb]" name="verifyTheName" is-config="true" duration-ms="1" started-at="2023-03-31T18:50:46Z" finished-at="2023-03-31T18:50:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void org.PageModules.Patient_Module.verifyFilterSearchAndCcdImport()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.Patient_Module@589838eb]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:50:46Z" finished-at="2023-03-31T18:50:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=patientInfo status=SUCCESS method=Patient_Module.patientInfo()[pri:4, instance:org.PageModules.Patient_Module@589838eb] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="verifyFilterSearchAndCcdImport()[pri:5, instance:org.PageModules.Patient_Module@589838eb]" name="verifyFilterSearchAndCcdImport" duration-ms="4686" started-at="2023-03-31T18:50:46Z" finished-at="2023-03-31T18:50:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyFilterSearchAndCcdImport -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.Patient_Module@589838eb]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:50:51Z" finished-at="2023-03-31T18:50:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyFilterSearchAndCcdImport status=SUCCESS method=Patient_Module.verifyFilterSearchAndCcdImport()[pri:5, instance:org.PageModules.Patient_Module@589838eb] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- org.PageModules.Patient_Module -->
+    </test> <!-- Patient_Module_TestCase -->
+    <test name="Health_Record_ui" duration-ms="23555" started-at="2023-03-31T13:20:51Z" finished-at="2023-03-31T13:21:14Z">
+      <class name="com.healthRec.Tc_000_HealthRecordUi">
+        <test-method status="PASS" signature="tc_001_verifyTheHaelthRecordCount()[pri:1, instance:com.healthRec.Tc_000_HealthRecordUi@73ad2d6]" name="tc_001_verifyTheHaelthRecordCount" duration-ms="11162" started-at="2023-03-31T18:50:51Z" finished-at="2023-03-31T18:51:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_001_verifyTheHaelthRecordCount -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_000_HealthRecordUi@73ad2d6]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:50:51Z" finished-at="2023-03-31T18:50:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_000_HealthRecordUi.tc_001_verifyTheHaelthRecordCount()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_000_HealthRecordUi@73ad2d6]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:50:51Z" finished-at="2023-03-31T18:50:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@d4c3f7d]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_000_HealthRecordUi@73ad2d6]" name="checkStatus" is-config="true" duration-ms="1" started-at="2023-03-31T18:51:02Z" finished-at="2023-03-31T18:51:02Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_001_verifyTheHaelthRecordCount status=SUCCESS method=Tc_000_HealthRecordUi.tc_001_verifyTheHaelthRecordCount()[pri:1, instance:com.healthRec.Tc_000_HealthRecordUi@73ad2d6] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_000_HealthRecordUi@73ad2d6]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:02Z" finished-at="2023-03-31T18:51:02Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_000_HealthRecordUi.verifyAndShowTheHidedOptions()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="verifyAndShowTheHidedOptions()[pri:2, instance:com.healthRec.Tc_000_HealthRecordUi@73ad2d6]" name="verifyAndShowTheHidedOptions" duration-ms="12391" started-at="2023-03-31T18:51:02Z" finished-at="2023-03-31T18:51:14Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyAndShowTheHidedOptions -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_000_HealthRecordUi@73ad2d6]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:14Z" finished-at="2023-03-31T18:51:14Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyAndShowTheHidedOptions status=SUCCESS method=Tc_000_HealthRecordUi.verifyAndShowTheHidedOptions()[pri:2, instance:com.healthRec.Tc_000_HealthRecordUi@73ad2d6] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_000_HealthRecordUi -->
+    </test> <!-- Health_Record_ui -->
+    <test name="Vitals" duration-ms="3399" started-at="2023-03-31T13:21:14Z" finished-at="2023-03-31T13:21:18Z">
+      <class name="com.healthRec.Tc_001_Vitals">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_001_Vitals@31a5c39e]" name="getTheTestName" is-config="true" duration-ms="2" started-at="2023-03-31T18:51:14Z" finished-at="2023-03-31T18:51:14Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@71e34120]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="tc_002_addVitals_Edit_Save()[pri:0, instance:com.healthRec.Tc_001_Vitals@31a5c39e]" name="tc_002_addVitals_Edit_Save" duration-ms="3391" started-at="2023-03-31T18:51:14Z" finished-at="2023-03-31T18:51:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_002_addVitals_Edit_Save -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_001_Vitals@31a5c39e]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:14Z" finished-at="2023-03-31T18:51:14Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_001_Vitals.tc_002_addVitals_Edit_Save() throws java.lang.InterruptedException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_001_Vitals@31a5c39e]" name="checkStatus" is-config="true" duration-ms="5" started-at="2023-03-31T18:51:18Z" finished-at="2023-03-31T18:51:18Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_002_addVitals_Edit_Save status=SUCCESS method=Tc_001_Vitals.tc_002_addVitals_Edit_Save()[pri:0, instance:com.healthRec.Tc_001_Vitals@31a5c39e] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_001_Vitals -->
+    </test> <!-- Vitals -->
+    <test name="Allergy" duration-ms="7357" started-at="2023-03-31T13:21:18Z" finished-at="2023-03-31T13:21:25Z">
+      <class name="com.healthRec.Tc_002_Allergy">
+        <test-method status="PASS" signature="tc_003_addAllergy_Edit_Save()[pri:0, instance:com.healthRec.Tc_002_Allergy@59494225]" name="tc_003_addAllergy_Edit_Save" duration-ms="7357" started-at="2023-03-31T18:51:18Z" finished-at="2023-03-31T18:51:25Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_003_addAllergy_Edit_Save -->
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_002_Allergy@59494225]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:18Z" finished-at="2023-03-31T18:51:18Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@580a4873]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_002_Allergy@59494225]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:18Z" finished-at="2023-03-31T18:51:18Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_002_Allergy.tc_003_addAllergy_Edit_Save() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_002_Allergy@59494225]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:25Z" finished-at="2023-03-31T18:51:25Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_003_addAllergy_Edit_Save status=SUCCESS method=Tc_002_Allergy.tc_003_addAllergy_Edit_Save()[pri:0, instance:com.healthRec.Tc_002_Allergy@59494225] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_002_Allergy -->
+    </test> <!-- Allergy -->
+    <test name="SocailHistory" duration-ms="2617" started-at="2023-03-31T13:21:25Z" finished-at="2023-03-31T13:21:28Z">
+      <class name="com.healthRec.Tc_003_SocialHistory">
+        <test-method status="PASS" signature="tc_004_addSocialHistory_Edit_Save()[pri:0, instance:com.healthRec.Tc_003_SocialHistory@ff5b51f]" name="tc_004_addSocialHistory_Edit_Save" duration-ms="2616" started-at="2023-03-31T18:51:25Z" finished-at="2023-03-31T18:51:28Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_004_addSocialHistory_Edit_Save -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_003_SocialHistory@ff5b51f]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:25Z" finished-at="2023-03-31T18:51:25Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_003_SocialHistory.tc_004_addSocialHistory_Edit_Save() throws java.lang.InterruptedException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_003_SocialHistory@ff5b51f]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:25Z" finished-at="2023-03-31T18:51:25Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@e9f436e]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_003_SocialHistory@ff5b51f]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:28Z" finished-at="2023-03-31T18:51:28Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_004_addSocialHistory_Edit_Save status=SUCCESS method=Tc_003_SocialHistory.tc_004_addSocialHistory_Edit_Save()[pri:0, instance:com.healthRec.Tc_003_SocialHistory@ff5b51f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_003_SocialHistory -->
+    </test> <!-- SocailHistory -->
+    <test name="FamilyHealth" duration-ms="5876" started-at="2023-03-31T13:21:28Z" finished-at="2023-03-31T13:21:34Z">
+      <class name="com.healthRec.Tc_004_FamilyHealth">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_004_FamilyHealth@29ca901e]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:28Z" finished-at="2023-03-31T18:51:28Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@62442217]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="tc_005_addFamilyHealth_Edit_Save()[pri:0, instance:com.healthRec.Tc_004_FamilyHealth@29ca901e]" name="tc_005_addFamilyHealth_Edit_Save" duration-ms="5874" started-at="2023-03-31T18:51:28Z" finished-at="2023-03-31T18:51:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_005_addFamilyHealth_Edit_Save -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_004_FamilyHealth@29ca901e]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:28Z" finished-at="2023-03-31T18:51:28Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_004_FamilyHealth.tc_005_addFamilyHealth_Edit_Save()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_004_FamilyHealth@29ca901e]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:34Z" finished-at="2023-03-31T18:51:34Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_005_addFamilyHealth_Edit_Save status=SUCCESS method=Tc_004_FamilyHealth.tc_005_addFamilyHealth_Edit_Save()[pri:0, instance:com.healthRec.Tc_004_FamilyHealth@29ca901e] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_004_FamilyHealth -->
+    </test> <!-- FamilyHealth -->
+    <test name="Alert" duration-ms="2804" started-at="2023-03-31T13:21:34Z" finished-at="2023-03-31T13:21:36Z">
+      <class name="com.healthRec.Tc_005_Alert">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_005_Alert@64bfbc86]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:34Z" finished-at="2023-03-31T18:51:34Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@9c5853e]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_005_Alert@64bfbc86]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:34Z" finished-at="2023-03-31T18:51:34Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_005_Alert.tc_006_addAlertEditAndSave() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="tc_006_addAlertEditAndSave()[pri:0, instance:com.healthRec.Tc_005_Alert@64bfbc86]" name="tc_006_addAlertEditAndSave" duration-ms="2778" started-at="2023-03-31T18:51:34Z" finished-at="2023-03-31T18:51:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_006_addAlertEditAndSave -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_005_Alert@64bfbc86]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:36Z" finished-at="2023-03-31T18:51:36Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_006_addAlertEditAndSave status=SUCCESS method=Tc_005_Alert.tc_006_addAlertEditAndSave()[pri:0, instance:com.healthRec.Tc_005_Alert@64bfbc86] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_005_Alert -->
+    </test> <!-- Alert -->
+    <test name="VisitReason" duration-ms="4823" started-at="2023-03-31T13:21:36Z" finished-at="2023-03-31T13:21:41Z">
+      <class name="com.healthRec.Tc_006_VisitReason">
+        <test-method status="PASS" signature="tc_007_addVisitReason_Edit_Save()[pri:0, instance:com.healthRec.Tc_006_VisitReason@617faa95]" name="tc_007_addVisitReason_Edit_Save" duration-ms="4822" started-at="2023-03-31T18:51:36Z" finished-at="2023-03-31T18:51:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_007_addVisitReason_Edit_Save -->
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_006_VisitReason@617faa95]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:36Z" finished-at="2023-03-31T18:51:36Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@3861da5]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_006_VisitReason@617faa95]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:36Z" finished-at="2023-03-31T18:51:36Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_006_VisitReason.tc_007_addVisitReason_Edit_Save() throws java.lang.InterruptedException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_006_VisitReason@617faa95]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:41Z" finished-at="2023-03-31T18:51:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_007_addVisitReason_Edit_Save status=SUCCESS method=Tc_006_VisitReason.tc_007_addVisitReason_Edit_Save()[pri:0, instance:com.healthRec.Tc_006_VisitReason@617faa95] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_006_VisitReason -->
+    </test> <!-- VisitReason -->
+    <test name="Vaccine" duration-ms="2853" started-at="2023-03-31T13:21:41Z" finished-at="2023-03-31T13:21:44Z">
+      <class name="com.healthRec.Tc_007_Vaccine">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_007_Vaccine@71318ec4]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:41Z" finished-at="2023-03-31T18:51:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@77f6aa88]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_007_Vaccine@71318ec4]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:41Z" finished-at="2023-03-31T18:51:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_007_Vaccine.tc_008_addVaccine_Edit_Save() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="tc_008_addVaccine_Edit_Save()[pri:0, instance:com.healthRec.Tc_007_Vaccine@71318ec4]" name="tc_008_addVaccine_Edit_Save" duration-ms="2853" started-at="2023-03-31T18:51:41Z" finished-at="2023-03-31T18:51:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_008_addVaccine_Edit_Save -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_007_Vaccine@71318ec4]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:44Z" finished-at="2023-03-31T18:51:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_008_addVaccine_Edit_Save status=SUCCESS method=Tc_007_Vaccine.tc_008_addVaccine_Edit_Save()[pri:0, instance:com.healthRec.Tc_007_Vaccine@71318ec4] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_007_Vaccine -->
+    </test> <!-- Vaccine -->
+    <test name="ImplantableDevice" duration-ms="5077" started-at="2023-03-31T13:21:44Z" finished-at="2023-03-31T13:21:49Z">
+      <class name="com.healthRec.Tc_008_ImplantableDevice">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_008_ImplantableDevice@78c03f1f]" name="getTheTestName" is-config="true" duration-ms="1" started-at="2023-03-31T18:51:44Z" finished-at="2023-03-31T18:51:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@34e17afb]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_008_ImplantableDevice@78c03f1f]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:44Z" finished-at="2023-03-31T18:51:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_008_ImplantableDevice.tc_009_addSaveAndEditImplantableDevice() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="tc_009_addSaveAndEditImplantableDevice()[pri:0, instance:com.healthRec.Tc_008_ImplantableDevice@78c03f1f]" name="tc_009_addSaveAndEditImplantableDevice" duration-ms="5070" started-at="2023-03-31T18:51:44Z" finished-at="2023-03-31T18:51:49Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_009_addSaveAndEditImplantableDevice -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_008_ImplantableDevice@78c03f1f]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:49Z" finished-at="2023-03-31T18:51:49Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_009_addSaveAndEditImplantableDevice status=SUCCESS method=Tc_008_ImplantableDevice.tc_009_addSaveAndEditImplantableDevice()[pri:0, instance:com.healthRec.Tc_008_ImplantableDevice@78c03f1f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_008_ImplantableDevice -->
+    </test> <!-- ImplantableDevice -->
+    <test name="Amendent" duration-ms="3375" started-at="2023-03-31T13:21:49Z" finished-at="2023-03-31T13:21:53Z">
+      <class name="com.healthRec.Tc_009_Amendment">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_009_Amendment@56235b8e]" name="getTheTestName" is-config="true" duration-ms="1" started-at="2023-03-31T18:51:49Z" finished-at="2023-03-31T18:51:49Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@1128f52c]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_009_Amendment@56235b8e]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:49Z" finished-at="2023-03-31T18:51:49Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_009_Amendment.tc_010_addAmendent_Edit_Save() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="tc_010_addAmendent_Edit_Save()[pri:0, instance:com.healthRec.Tc_009_Amendment@56235b8e]" name="tc_010_addAmendent_Edit_Save" duration-ms="3371" started-at="2023-03-31T18:51:49Z" finished-at="2023-03-31T18:51:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_010_addAmendent_Edit_Save -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_009_Amendment@56235b8e]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:53Z" finished-at="2023-03-31T18:51:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_010_addAmendent_Edit_Save status=SUCCESS method=Tc_009_Amendment.tc_010_addAmendent_Edit_Save()[pri:0, instance:com.healthRec.Tc_009_Amendment@56235b8e] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_009_Amendment -->
+    </test> <!-- Amendent -->
+    <test name="problems" duration-ms="12031" started-at="2023-03-31T13:21:53Z" finished-at="2023-03-31T13:22:05Z">
+      <class name="com.healthRec.Tc_010Problems">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_010Problems@3108bc]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:53Z" finished-at="2023-03-31T18:51:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@2270b999]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="addproblems_Edit_Save()[pri:0, instance:com.healthRec.Tc_010Problems@3108bc]" name="addproblems_Edit_Save" duration-ms="12029" started-at="2023-03-31T18:51:53Z" finished-at="2023-03-31T18:52:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addproblems_Edit_Save -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_010Problems@3108bc]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:51:53Z" finished-at="2023-03-31T18:51:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_010Problems.addproblems_Edit_Save() throws java.lang.InterruptedException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_010Problems@3108bc]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:05Z" finished-at="2023-03-31T18:52:05Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addproblems_Edit_Save status=SUCCESS method=Tc_010Problems.addproblems_Edit_Save()[pri:0, instance:com.healthRec.Tc_010Problems@3108bc] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_010Problems -->
+    </test> <!-- problems -->
+    <test name="Symptoms" duration-ms="3532" started-at="2023-03-31T13:22:05Z" finished-at="2023-03-31T13:22:08Z">
+      <class name="com.healthRec.Tc_011_Symptoms">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_011_Symptoms@3e9b1010]" name="getTheTestName" is-config="true" duration-ms="1" started-at="2023-03-31T18:52:05Z" finished-at="2023-03-31T18:52:05Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@6090e5b5]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_011_Symptoms@3e9b1010]" name="verifyTheName" is-config="true" duration-ms="1" started-at="2023-03-31T18:52:05Z" finished-at="2023-03-31T18:52:05Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_011_Symptoms.addSymptoms_Edit_Save() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="addSymptoms_Edit_Save()[pri:0, instance:com.healthRec.Tc_011_Symptoms@3e9b1010]" name="addSymptoms_Edit_Save" duration-ms="3529" started-at="2023-03-31T18:52:05Z" finished-at="2023-03-31T18:52:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addSymptoms_Edit_Save -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_011_Symptoms@3e9b1010]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:08Z" finished-at="2023-03-31T18:52:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addSymptoms_Edit_Save status=SUCCESS method=Tc_011_Symptoms.addSymptoms_Edit_Save()[pri:0, instance:com.healthRec.Tc_011_Symptoms@3e9b1010] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_011_Symptoms -->
+    </test> <!-- Symptoms -->
+    <test name="proceudre" duration-ms="6642" started-at="2023-03-31T13:22:08Z" finished-at="2023-03-31T13:22:15Z">
+      <class name="com.healthRec.Tc_012_Procedure">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_012_Procedure@5a8e6209]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:08Z" finished-at="2023-03-31T18:52:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@5f196dfe]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_012_Procedure@5a8e6209]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:08Z" finished-at="2023-03-31T18:52:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_012_Procedure.addProcedure_Edit_Save() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="addProcedure_Edit_Save()[pri:0, instance:com.healthRec.Tc_012_Procedure@5a8e6209]" name="addProcedure_Edit_Save" duration-ms="6631" started-at="2023-03-31T18:52:08Z" finished-at="2023-03-31T18:52:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addProcedure_Edit_Save -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_012_Procedure@5a8e6209]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:15Z" finished-at="2023-03-31T18:52:15Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addProcedure_Edit_Save status=SUCCESS method=Tc_012_Procedure.addProcedure_Edit_Save()[pri:0, instance:com.healthRec.Tc_012_Procedure@5a8e6209] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_012_Procedure -->
+    </test> <!-- proceudre -->
+    <test name="Goals" duration-ms="3841" started-at="2023-03-31T13:22:15Z" finished-at="2023-03-31T13:22:19Z">
+      <class name="com.healthRec.Tc_013_Goals">
+        <test-method status="PASS" signature="addGoals_Edit_Save()[pri:0, instance:com.healthRec.Tc_013_Goals@6325a3ee]" name="addGoals_Edit_Save" duration-ms="3839" started-at="2023-03-31T18:52:15Z" finished-at="2023-03-31T18:52:19Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addGoals_Edit_Save -->
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_013_Goals@6325a3ee]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:15Z" finished-at="2023-03-31T18:52:15Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@94e72a4]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_013_Goals@6325a3ee]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:15Z" finished-at="2023-03-31T18:52:15Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_013_Goals.addGoals_Edit_Save() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_013_Goals@6325a3ee]" name="checkStatus" is-config="true" duration-ms="1" started-at="2023-03-31T18:52:19Z" finished-at="2023-03-31T18:52:19Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addGoals_Edit_Save status=SUCCESS method=Tc_013_Goals.addGoals_Edit_Save()[pri:0, instance:com.healthRec.Tc_013_Goals@6325a3ee] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_013_Goals -->
+    </test> <!-- Goals -->
+    <test name="AdvanceDirectives" duration-ms="3109" started-at="2023-03-31T13:22:19Z" finished-at="2023-03-31T13:22:22Z">
+      <class name="com.healthRec.Tc_014_AdvanceDirectives">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_014_AdvanceDirectives@887af79]" name="getTheTestName" is-config="true" duration-ms="4" started-at="2023-03-31T18:52:19Z" finished-at="2023-03-31T18:52:19Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@2ed5ae65]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="addAdvnceDiretivesAdd_EditAndSave()[pri:0, instance:com.healthRec.Tc_014_AdvanceDirectives@887af79]" name="addAdvnceDiretivesAdd_EditAndSave" duration-ms="3101" started-at="2023-03-31T18:52:19Z" finished-at="2023-03-31T18:52:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addAdvnceDiretivesAdd_EditAndSave -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_014_AdvanceDirectives@887af79]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:19Z" finished-at="2023-03-31T18:52:19Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_014_AdvanceDirectives.addAdvnceDiretivesAdd_EditAndSave() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_014_AdvanceDirectives@887af79]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:22Z" finished-at="2023-03-31T18:52:22Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addAdvnceDiretivesAdd_EditAndSave status=SUCCESS method=Tc_014_AdvanceDirectives.addAdvnceDiretivesAdd_EditAndSave()[pri:0, instance:com.healthRec.Tc_014_AdvanceDirectives@887af79] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_014_AdvanceDirectives -->
+    </test> <!-- AdvanceDirectives -->
+    <test name="Status" duration-ms="4659" started-at="2023-03-31T13:22:22Z" finished-at="2023-03-31T13:22:26Z">
+      <class name="com.healthRec.Tc_015_Status">
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_015_Status@5ae63ade]" name="verifyTheName" is-config="true" duration-ms="3" started-at="2023-03-31T18:52:22Z" finished-at="2023-03-31T18:52:22Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_015_Status.addStatus_Edit_Save() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_015_Status@5ae63ade]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:22Z" finished-at="2023-03-31T18:52:22Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@490f4b47]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="addStatus_Edit_Save()[pri:0, instance:com.healthRec.Tc_015_Status@5ae63ade]" name="addStatus_Edit_Save" duration-ms="4655" started-at="2023-03-31T18:52:22Z" finished-at="2023-03-31T18:52:26Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addStatus_Edit_Save -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_015_Status@5ae63ade]" name="checkStatus" is-config="true" duration-ms="1" started-at="2023-03-31T18:52:26Z" finished-at="2023-03-31T18:52:26Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addStatus_Edit_Save status=SUCCESS method=Tc_015_Status.addStatus_Edit_Save()[pri:0, instance:com.healthRec.Tc_015_Status@5ae63ade] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_015_Status -->
+    </test> <!-- Status -->
+    <test name="TestOrder" duration-ms="5649" started-at="2023-03-31T13:22:26Z" finished-at="2023-03-31T13:22:32Z">
+      <class name="com.healthRec.Tc_016_TestOrder">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_016_TestOrder@1f36e637]" name="getTheTestName" is-config="true" duration-ms="2" started-at="2023-03-31T18:52:26Z" finished-at="2023-03-31T18:52:26Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@5dedb905]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_016_TestOrder@1f36e637]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:26Z" finished-at="2023-03-31T18:52:26Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_016_TestOrder.$addTestOrder() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="$addTestOrder()[pri:0, instance:com.healthRec.Tc_016_TestOrder@1f36e637]" name="$addTestOrder" duration-ms="5647" started-at="2023-03-31T18:52:26Z" finished-at="2023-03-31T18:52:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- $addTestOrder -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_016_TestOrder@1f36e637]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:32Z" finished-at="2023-03-31T18:52:32Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=$addTestOrder status=SUCCESS method=Tc_016_TestOrder.$addTestOrder()[pri:0, instance:com.healthRec.Tc_016_TestOrder@1f36e637] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_016_TestOrder -->
+    </test> <!-- TestOrder -->
+    <test name="Medication" duration-ms="19554" started-at="2023-03-31T13:22:32Z" finished-at="2023-03-31T13:22:52Z">
+      <class name="com.healthRec.Tc_017_Medication">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_017_Medication@3cef309d]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:32Z" finished-at="2023-03-31T18:52:32Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@27cc3b4e]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="addMedication_Edit_Save()[pri:0, instance:com.healthRec.Tc_017_Medication@3cef309d]" name="addMedication_Edit_Save" duration-ms="19549" started-at="2023-03-31T18:52:32Z" finished-at="2023-03-31T18:52:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addMedication_Edit_Save -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_017_Medication@3cef309d]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:32Z" finished-at="2023-03-31T18:52:32Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_017_Medication.addMedication_Edit_Save() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_017_Medication@3cef309d]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:52Z" finished-at="2023-03-31T18:52:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addMedication_Edit_Save status=SUCCESS method=Tc_017_Medication.addMedication_Edit_Save()[pri:0, instance:com.healthRec.Tc_017_Medication@3cef309d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_017_Medication -->
+    </test> <!-- Medication -->
+    <test name="Notes" duration-ms="4772" started-at="2023-03-31T13:22:52Z" finished-at="2023-03-31T13:22:56Z">
+      <class name="com.healthRec.Tc_018_Notes">
+        <test-method status="PASS" signature="addNotes_Edit_Save()[pri:0, instance:com.healthRec.Tc_018_Notes@79be0360]" name="addNotes_Edit_Save" duration-ms="4772" started-at="2023-03-31T18:52:52Z" finished-at="2023-03-31T18:52:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addNotes_Edit_Save -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_018_Notes@79be0360]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:52Z" finished-at="2023-03-31T18:52:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_018_Notes.addNotes_Edit_Save() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_018_Notes@79be0360]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:52Z" finished-at="2023-03-31T18:52:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@24690f54]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_018_Notes@79be0360]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:56Z" finished-at="2023-03-31T18:52:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addNotes_Edit_Save status=SUCCESS method=Tc_018_Notes.addNotes_Edit_Save()[pri:0, instance:com.healthRec.Tc_018_Notes@79be0360] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_018_Notes -->
+    </test> <!-- Notes -->
+    <test name="PhysicalExamination" duration-ms="4029" started-at="2023-03-31T13:22:56Z" finished-at="2023-03-31T13:23:00Z">
+      <class name="com.healthRec.Tc_019_PhysicalExamination">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_019_PhysicalExamination@72b6cbcc]" name="getTheTestName" is-config="true" duration-ms="1" started-at="2023-03-31T18:52:56Z" finished-at="2023-03-31T18:52:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@178f3ded]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_019_PhysicalExamination@72b6cbcc]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:52:56Z" finished-at="2023-03-31T18:52:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_019_PhysicalExamination.addPhysicalExamination_Edit_Save() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="addPhysicalExamination_Edit_Save()[pri:0, instance:com.healthRec.Tc_019_PhysicalExamination@72b6cbcc]" name="addPhysicalExamination_Edit_Save" duration-ms="4026" started-at="2023-03-31T18:52:56Z" finished-at="2023-03-31T18:53:00Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addPhysicalExamination_Edit_Save -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_019_PhysicalExamination@72b6cbcc]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:53:00Z" finished-at="2023-03-31T18:53:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addPhysicalExamination_Edit_Save status=SUCCESS method=Tc_019_PhysicalExamination.addPhysicalExamination_Edit_Save()[pri:0, instance:com.healthRec.Tc_019_PhysicalExamination@72b6cbcc] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_019_PhysicalExamination -->
+    </test> <!-- PhysicalExamination -->
+    <test name="Forms" duration-ms="40427" started-at="2023-03-31T13:23:01Z" finished-at="2023-03-31T13:23:41Z">
+      <class name="com.healthRec.Tc_020_Forms">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_020_Forms@5a8806ef]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:53:01Z" finished-at="2023-03-31T18:53:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@279a8b88]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_020_Forms@5a8806ef]" name="verifyTheName" is-config="true" duration-ms="1" started-at="2023-03-31T18:53:01Z" finished-at="2023-03-31T18:53:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_020_Forms.$addForm() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="$addForm()[pri:0, instance:com.healthRec.Tc_020_Forms@5a8806ef]" name="$addForm" duration-ms="40422" started-at="2023-03-31T18:53:01Z" finished-at="2023-03-31T18:53:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- $addForm -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_020_Forms@5a8806ef]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:53:41Z" finished-at="2023-03-31T18:53:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=$addForm status=SUCCESS method=Tc_020_Forms.$addForm()[pri:0, instance:com.healthRec.Tc_020_Forms@5a8806ef] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_020_Forms -->
+    </test> <!-- Forms -->
+    <test name="AttachFile" duration-ms="2980" started-at="2023-03-31T13:23:41Z" finished-at="2023-03-31T13:23:44Z">
+      <class name="com.healthRec.Tc_021_AttachFile">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_021_AttachFile@1e6d1014]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:53:41Z" finished-at="2023-03-31T18:53:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@614ad27e]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_021_AttachFile@1e6d1014]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:53:41Z" finished-at="2023-03-31T18:53:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_021_AttachFile.attachFileAdd_SaveAndEdit() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="attachFileAdd_SaveAndEdit()[pri:0, instance:com.healthRec.Tc_021_AttachFile@1e6d1014]" name="attachFileAdd_SaveAndEdit" duration-ms="2978" started-at="2023-03-31T18:53:41Z" finished-at="2023-03-31T18:53:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- attachFileAdd_SaveAndEdit -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_021_AttachFile@1e6d1014]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:53:44Z" finished-at="2023-03-31T18:53:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=attachFileAdd_SaveAndEdit status=SUCCESS method=Tc_021_AttachFile.attachFileAdd_SaveAndEdit()[pri:0, instance:com.healthRec.Tc_021_AttachFile@1e6d1014] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_021_AttachFile -->
+    </test> <!-- AttachFile -->
+    <test name="Inpatinet" duration-ms="5812" started-at="2023-03-31T13:23:44Z" finished-at="2023-03-31T13:23:50Z">
+      <class name="com.healthRec.Tc_022_Inpatient">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_022_Inpatient@3fd7a715]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:53:44Z" finished-at="2023-03-31T18:53:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@db572ac]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_022_Inpatient@3fd7a715]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:53:44Z" finished-at="2023-03-31T18:53:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_022_Inpatient.addInpatient_Edit_Save() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="addInpatient_Edit_Save()[pri:0, instance:com.healthRec.Tc_022_Inpatient@3fd7a715]" name="addInpatient_Edit_Save" duration-ms="5811" started-at="2023-03-31T18:53:44Z" finished-at="2023-03-31T18:53:50Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addInpatient_Edit_Save -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_022_Inpatient@3fd7a715]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:53:50Z" finished-at="2023-03-31T18:53:50Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addInpatient_Edit_Save status=SUCCESS method=Tc_022_Inpatient.addInpatient_Edit_Save()[pri:0, instance:com.healthRec.Tc_022_Inpatient@3fd7a715] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_022_Inpatient -->
+    </test> <!-- Inpatinet -->
+    <test name="GenerateBillFromEhr" duration-ms="9981" started-at="2023-03-31T13:23:50Z" finished-at="2023-03-31T13:24:00Z">
+      <class name="com.healthRec.Tc_023_GenerateBillFromEhr">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_023_GenerateBillFromEhr@4e7dc304]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:53:50Z" finished-at="2023-03-31T18:53:50Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@63bb46a2]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_023_GenerateBillFromEhr@4e7dc304]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:53:50Z" finished-at="2023-03-31T18:53:50Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_023_GenerateBillFromEhr.verifyTheGenerteBill()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="verifyTheGenerteBill()[pri:0, instance:com.healthRec.Tc_023_GenerateBillFromEhr@4e7dc304]" name="verifyTheGenerteBill" duration-ms="9973" started-at="2023-03-31T18:53:50Z" finished-at="2023-03-31T18:54:00Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheGenerteBill -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_023_GenerateBillFromEhr@4e7dc304]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:54:00Z" finished-at="2023-03-31T18:54:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyTheGenerteBill status=SUCCESS method=Tc_023_GenerateBillFromEhr.verifyTheGenerteBill()[pri:0, instance:com.healthRec.Tc_023_GenerateBillFromEhr@4e7dc304] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_023_GenerateBillFromEhr -->
+    </test> <!-- GenerateBillFromEhr -->
+    <test name="PastCuredAndCompleted" duration-ms="32913" started-at="2023-03-31T13:24:00Z" finished-at="2023-03-31T13:24:33Z">
+      <class name="com.healthRec.Tc_024_GetPastCured_Complted">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:54:00Z" finished-at="2023-03-31T18:54:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@108e4796]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:54:00Z" finished-at="2023-03-31T18:54:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_024_GetPastCured_Complted.pastVaccine()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="pastVaccine()[pri:1, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="pastVaccine" duration-ms="7795" started-at="2023-03-31T18:54:00Z" finished-at="2023-03-31T18:54:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- pastVaccine -->
+        <test-method status="PASS" signature="pastSymptoms()[pri:2, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="pastSymptoms" duration-ms="6184" started-at="2023-03-31T18:54:08Z" finished-at="2023-03-31T18:54:14Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- pastSymptoms -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:54:08Z" finished-at="2023-03-31T18:54:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_024_GetPastCured_Complted.pastSymptoms()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:54:08Z" finished-at="2023-03-31T18:54:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=pastVaccine status=SUCCESS method=Tc_024_GetPastCured_Complted.pastVaccine()[pri:1, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:54:14Z" finished-at="2023-03-31T18:54:14Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_024_GetPastCured_Complted.pastCuredProcedure()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:54:14Z" finished-at="2023-03-31T18:54:14Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=pastSymptoms status=SUCCESS method=Tc_024_GetPastCured_Complted.pastSymptoms()[pri:2, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="pastCuredProcedure()[pri:3, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="pastCuredProcedure" duration-ms="3654" started-at="2023-03-31T18:54:14Z" finished-at="2023-03-31T18:54:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- pastCuredProcedure -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="checkStatus" is-config="true" duration-ms="2" started-at="2023-03-31T18:54:17Z" finished-at="2023-03-31T18:54:17Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=pastCuredProcedure status=SUCCESS method=Tc_024_GetPastCured_Complted.pastCuredProcedure()[pri:3, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="pastGoals()[pri:4, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="pastGoals" duration-ms="5011" started-at="2023-03-31T18:54:17Z" finished-at="2023-03-31T18:54:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- pastGoals -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:54:17Z" finished-at="2023-03-31T18:54:17Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_024_GetPastCured_Complted.pastGoals()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:54:22Z" finished-at="2023-03-31T18:54:22Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=pastGoals status=SUCCESS method=Tc_024_GetPastCured_Complted.pastGoals()[pri:4, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="pastMedication()[pri:5, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="pastMedication" duration-ms="10258" started-at="2023-03-31T18:54:22Z" finished-at="2023-03-31T18:54:33Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- pastMedication -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:54:22Z" finished-at="2023-03-31T18:54:22Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_024_GetPastCured_Complted.pastMedication()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:54:33Z" finished-at="2023-03-31T18:54:33Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=pastMedication status=SUCCESS method=Tc_024_GetPastCured_Complted.pastMedication()[pri:5, instance:com.healthRec.Tc_024_GetPastCured_Complted@5a1c0542] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_024_GetPastCured_Complted -->
+    </test> <!-- PastCuredAndCompleted -->
+    <test name="SaltScenarios" duration-ms="53436" started-at="2023-03-31T13:24:33Z" finished-at="2023-03-31T13:25:26Z">
+      <class name="com.healthRec.Tc_026_saltScenarios">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_026_saltScenarios@4d95d2a2]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:54:33Z" finished-at="2023-03-31T18:54:33Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@27e0aedb]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_026_saltScenarios@4d95d2a2]" name="verifyTheName" is-config="true" duration-ms="1" started-at="2023-03-31T18:54:33Z" finished-at="2023-03-31T18:54:33Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_026_saltScenarios.saltScenarios()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="saltScenarios()[pri:0, instance:com.healthRec.Tc_026_saltScenarios@4d95d2a2]" name="saltScenarios" duration-ms="53425" started-at="2023-03-31T18:54:33Z" finished-at="2023-03-31T18:55:26Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- saltScenarios -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_026_saltScenarios@4d95d2a2]" name="checkStatus" is-config="true" duration-ms="8" started-at="2023-03-31T18:55:26Z" finished-at="2023-03-31T18:55:26Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=saltScenarios status=SUCCESS method=Tc_026_saltScenarios.saltScenarios()[pri:0, instance:com.healthRec.Tc_026_saltScenarios@4d95d2a2] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_026_saltScenarios -->
+    </test> <!-- SaltScenarios -->
+    <test name="FAvoriteKpop2Scenario" duration-ms="103033" started-at="2023-03-31T13:25:26Z" finished-at="2023-03-31T13:27:09Z">
+      <class name="com.healthRec.Tc_025_FavoriteKpopScenarios">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:55:26Z" finished-at="2023-03-31T18:55:26Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@1669899]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:55:26Z" finished-at="2023-03-31T18:55:26Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteVisitReason()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="favoriteVisitReason()[pri:1, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="favoriteVisitReason" duration-ms="5748" started-at="2023-03-31T18:55:26Z" finished-at="2023-03-31T18:55:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- favoriteVisitReason -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:55:32Z" finished-at="2023-03-31T18:55:32Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=favoriteVisitReason status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteVisitReason()[pri:1, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="favoriteVaccine()[pri:2, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="favoriteVaccine" duration-ms="10133" started-at="2023-03-31T18:55:32Z" finished-at="2023-03-31T18:55:42Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- favoriteVaccine -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:55:32Z" finished-at="2023-03-31T18:55:32Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteVaccine()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:55:42Z" finished-at="2023-03-31T18:55:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=favoriteVaccine status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteVaccine()[pri:2, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:55:42Z" finished-at="2023-03-31T18:55:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteSympytoms()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="favoriteSympytoms()[pri:3, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="favoriteSympytoms" duration-ms="8789" started-at="2023-03-31T18:55:42Z" finished-at="2023-03-31T18:55:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- favoriteSympytoms -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="checkStatus" is-config="true" duration-ms="5" started-at="2023-03-31T18:55:51Z" finished-at="2023-03-31T18:55:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=favoriteSympytoms status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteSympytoms()[pri:3, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="verifyTheName" is-config="true" duration-ms="1" started-at="2023-03-31T18:55:51Z" finished-at="2023-03-31T18:55:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteProcedure()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="favoriteProcedure()[pri:4, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="favoriteProcedure" duration-ms="10956" started-at="2023-03-31T18:55:51Z" finished-at="2023-03-31T18:56:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- favoriteProcedure -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:56:02Z" finished-at="2023-03-31T18:56:02Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteGoals()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:56:02Z" finished-at="2023-03-31T18:56:02Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=favoriteProcedure status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteProcedure()[pri:4, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="favoriteGoals()[pri:5, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="favoriteGoals" duration-ms="6194" started-at="2023-03-31T18:56:02Z" finished-at="2023-03-31T18:56:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- favoriteGoals -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:56:08Z" finished-at="2023-03-31T18:56:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteStatus()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="favoriteStatus()[pri:6, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="favoriteStatus" duration-ms="7784" started-at="2023-03-31T18:56:08Z" finished-at="2023-03-31T18:56:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- favoriteStatus -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:56:08Z" finished-at="2023-03-31T18:56:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=favoriteGoals status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteGoals()[pri:5, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="checkStatus" is-config="true" duration-ms="1" started-at="2023-03-31T18:56:16Z" finished-at="2023-03-31T18:56:16Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=favoriteStatus status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteStatus()[pri:6, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:56:16Z" finished-at="2023-03-31T18:56:16Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteProblems()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="favoriteProblems()[pri:7, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="favoriteProblems" duration-ms="25577" started-at="2023-03-31T18:56:16Z" finished-at="2023-03-31T18:56:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- favoriteProblems -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:56:41Z" finished-at="2023-03-31T18:56:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=favoriteProblems status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteProblems()[pri:7, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="verifyTheName" is-config="true" duration-ms="3" started-at="2023-03-31T18:56:41Z" finished-at="2023-03-31T18:56:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteAdvaceDirectives()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="favoriteAdvaceDirectives()[pri:8, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="favoriteAdvaceDirectives" duration-ms="9921" started-at="2023-03-31T18:56:41Z" finished-at="2023-03-31T18:56:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- favoriteAdvaceDirectives -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:56:51Z" finished-at="2023-03-31T18:56:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=favoriteAdvaceDirectives status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteAdvaceDirectives()[pri:8, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:56:51Z" finished-at="2023-03-31T18:56:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteNotes()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="favoriteNotes()[pri:9, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="favoriteNotes" duration-ms="4722" started-at="2023-03-31T18:56:51Z" finished-at="2023-03-31T18:56:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- favoriteNotes -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:56:56Z" finished-at="2023-03-31T18:56:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoritePhusicalExamination()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:56:56Z" finished-at="2023-03-31T18:56:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=favoriteNotes status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteNotes()[pri:9, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="favoritePhusicalExamination()[pri:10, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="favoritePhusicalExamination" duration-ms="13186" started-at="2023-03-31T18:56:56Z" finished-at="2023-03-31T18:57:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- favoritePhusicalExamination -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:57:09Z" finished-at="2023-03-31T18:57:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=favoritePhusicalExamination status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoritePhusicalExamination()[pri:10, instance:com.healthRec.Tc_025_FavoriteKpopScenarios@17579e0f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_025_FavoriteKpopScenarios -->
+    </test> <!-- FAvoriteKpop2Scenario -->
+    <test name="FollowUpCreate" duration-ms="11633" started-at="2023-03-31T13:27:09Z" finished-at="2023-03-31T13:27:21Z">
+      <class name="com.healthRec.Tc_026_FollowUpEhr">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:com.healthRec.Tc_026_FollowUpEhr@646d64ab]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:57:09Z" finished-at="2023-03-31T18:57:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@38515041]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:com.healthRec.Tc_026_FollowUpEhr@646d64ab]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:57:09Z" finished-at="2023-03-31T18:57:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void com.healthRec.Tc_026_FollowUpEhr.$createFollowup() throws java.lang.Throwable]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="$createFollowup()[pri:0, instance:com.healthRec.Tc_026_FollowUpEhr@646d64ab]" name="$createFollowup" duration-ms="11632" started-at="2023-03-31T18:57:09Z" finished-at="2023-03-31T18:57:21Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- $createFollowup -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:com.healthRec.Tc_026_FollowUpEhr@646d64ab]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:57:21Z" finished-at="2023-03-31T18:57:21Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=$createFollowup status=SUCCESS method=Tc_026_FollowUpEhr.$createFollowup()[pri:0, instance:com.healthRec.Tc_026_FollowUpEhr@646d64ab] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- com.healthRec.Tc_026_FollowUpEhr -->
+    </test> <!-- FollowUpCreate -->
+    <test name="Calendar_Testcases" duration-ms="47628" started-at="2023-03-31T13:27:21Z" finished-at="2023-03-31T13:28:09Z">
+      <class name="org.PageModules.Calendar_Test">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:org.PageModules.Calendar_Test@4493d195]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:57:21Z" finished-at="2023-03-31T18:57:21Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@5a01122a]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.Calendar_Test@4493d195]" name="verifyTheName" is-config="true" duration-ms="1" started-at="2023-03-31T18:57:21Z" finished-at="2023-03-31T18:57:21Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void org.PageModules.Calendar_Test.navigateToCalendar()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="navigateToCalendar()[pri:1, instance:org.PageModules.Calendar_Test@4493d195]" name="navigateToCalendar" duration-ms="23320" started-at="2023-03-31T18:57:21Z" finished-at="2023-03-31T18:57:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- navigateToCalendar -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.Calendar_Test@4493d195]" name="checkStatus" is-config="true" duration-ms="1" started-at="2023-03-31T18:57:44Z" finished-at="2023-03-31T18:57:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=navigateToCalendar status=SUCCESS method=Calendar_Test.navigateToCalendar()[pri:1, instance:org.PageModules.Calendar_Test@4493d195] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="bookAppointment()[pri:2, instance:org.PageModules.Calendar_Test@4493d195]" name="bookAppointment" duration-ms="24294" started-at="2023-03-31T18:57:44Z" finished-at="2023-03-31T18:58:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- bookAppointment -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.Calendar_Test@4493d195]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:57:44Z" finished-at="2023-03-31T18:57:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void org.PageModules.Calendar_Test.bookAppointment()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.Calendar_Test@4493d195]" name="checkStatus" is-config="true" duration-ms="8" started-at="2023-03-31T18:58:08Z" finished-at="2023-03-31T18:58:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=bookAppointment status=SUCCESS method=Calendar_Test.bookAppointment()[pri:2, instance:org.PageModules.Calendar_Test@4493d195] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- org.PageModules.Calendar_Test -->
+    </test> <!-- Calendar_Testcases -->
+    <test name="Billing_TesTcase" duration-ms="52481" started-at="2023-03-31T13:28:09Z" finished-at="2023-03-31T13:29:01Z">
+      <class name="org.PageModules.BillingModule">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:org.PageModules.BillingModule@34cd072c]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:58:09Z" finished-at="2023-03-31T18:58:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@78b5e9c7]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.BillingModule@34cd072c]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:58:09Z" finished-at="2023-03-31T18:58:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void org.PageModules.BillingModule.BillingModue()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="BillingModue()[pri:0, instance:org.PageModules.BillingModule@34cd072c]" name="BillingModue" duration-ms="52470" started-at="2023-03-31T18:58:09Z" finished-at="2023-03-31T18:59:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- BillingModue -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.BillingModule@34cd072c]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:59:01Z" finished-at="2023-03-31T18:59:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=BillingModue status=SUCCESS method=BillingModule.BillingModue()[pri:0, instance:org.PageModules.BillingModule@34cd072c] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- org.PageModules.BillingModule -->
+    </test> <!-- Billing_TesTcase -->
+    <test name="TeleDoctor_TestCases" duration-ms="23291" started-at="2023-03-31T13:29:02Z" finished-at="2023-03-31T13:29:25Z">
+      <class name="org.PageModules.TeleDoctor">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:org.PageModules.TeleDoctor@33c7e1bb]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:59:02Z" finished-at="2023-03-31T18:59:02Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@4da20418]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="createNewPatient()[pri:1, instance:org.PageModules.TeleDoctor@33c7e1bb]" name="createNewPatient" duration-ms="11896" started-at="2023-03-31T18:59:02Z" finished-at="2023-03-31T18:59:14Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNewPatient -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.TeleDoctor@33c7e1bb]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:59:02Z" finished-at="2023-03-31T18:59:02Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void org.PageModules.TeleDoctor.createNewPatient()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.TeleDoctor@33c7e1bb]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:59:14Z" finished-at="2023-03-31T18:59:14Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=createNewPatient status=SUCCESS method=TeleDoctor.createNewPatient()[pri:1, instance:org.PageModules.TeleDoctor@33c7e1bb] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.TeleDoctor@33c7e1bb]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:59:14Z" finished-at="2023-03-31T18:59:14Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void org.PageModules.TeleDoctor.callPatient()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="callPatient()[pri:2, instance:org.PageModules.TeleDoctor@33c7e1bb]" name="callPatient" duration-ms="11392" started-at="2023-03-31T18:59:14Z" finished-at="2023-03-31T18:59:25Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- callPatient -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.TeleDoctor@33c7e1bb]" name="checkStatus" is-config="true" duration-ms="2" started-at="2023-03-31T18:59:25Z" finished-at="2023-03-31T18:59:25Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=callPatient status=SUCCESS method=TeleDoctor.callPatient()[pri:2, instance:org.PageModules.TeleDoctor@33c7e1bb] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- org.PageModules.TeleDoctor -->
+    </test> <!-- TeleDoctor_TestCases -->
+    <test name="Message_TestCases" duration-ms="18771" started-at="2023-03-31T13:29:25Z" finished-at="2023-03-31T13:29:44Z">
+      <class name="org.PageModules.Message">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:org.PageModules.Message@bd8db5a]" name="getTheTestName" is-config="true" duration-ms="2" started-at="2023-03-31T18:59:25Z" finished-at="2023-03-31T18:59:25Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@7fc386b5]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="messageModule()[pri:0, instance:org.PageModules.Message@bd8db5a]" name="messageModule" duration-ms="18769" started-at="2023-03-31T18:59:25Z" finished-at="2023-03-31T18:59:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- messageModule -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.Message@bd8db5a]" name="verifyTheName" is-config="true" duration-ms="0" started-at="2023-03-31T18:59:25Z" finished-at="2023-03-31T18:59:25Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void org.PageModules.Message.messageModule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.Message@bd8db5a]" name="checkStatus" is-config="true" duration-ms="0" started-at="2023-03-31T18:59:44Z" finished-at="2023-03-31T18:59:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=messageModule status=SUCCESS method=Message.messageModule()[pri:0, instance:org.PageModules.Message@bd8db5a] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkStatus -->
+      </class> <!-- org.PageModules.Message -->
+    </test> <!-- Message_TestCases -->
+    <test name="Setting_TestCases" duration-ms="215565" started-at="2023-03-31T13:29:44Z" finished-at="2023-03-31T13:33:20Z">
+      <class name="org.PageModules.Settings">
+        <test-method status="PASS" signature="openConnection()[pri:0, instance:org.PageModules.Settings@7d70d1b1]" name="openConnection" is-config="true" duration-ms="33350" started-at="2023-03-31T18:49:19Z" finished-at="2023-03-31T18:49:53Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openConnection -->
-        <test-method status="PASS" signature="HomeModule()[pri:0, instance:runner.Local_Host@59d016c9]" name="HomeModule" duration-ms="62701" started-at="2023-03-23T19:37:39Z" finished-at="2023-03-23T19:38:41Z">
+        <test-method status="PASS" signature="getTheTestName(org.testng.ITestContext)[pri:0, instance:org.PageModules.Settings@7d70d1b1]" name="getTheTestName" is-config="true" duration-ms="0" started-at="2023-03-31T18:59:44Z" finished-at="2023-03-31T18:59:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@2d814b25]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- HomeModule -->
-        <test-method status="PASS" signature="PatientModule()[pri:1, instance:runner.Local_Host@59d016c9]" name="PatientModule" duration-ms="27273" started-at="2023-03-23T19:38:41Z" finished-at="2023-03-23T19:39:08Z">
+        </test-method> <!-- getTheTestName -->
+        <test-method status="PASS" signature="verifyTheName(java.lang.reflect.Method)[pri:0, instance:org.PageModules.Settings@7d70d1b1]" name="verifyTheName" is-config="true" duration-ms="1" started-at="2023-03-31T18:59:44Z" finished-at="2023-03-31T18:59:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public static void org.PageModules.Settings.settingsModule()]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- PatientModule -->
-        <test-method status="PASS" signature="HealthRec()[pri:2, instance:runner.Local_Host@59d016c9]" name="HealthRec" duration-ms="456749" started-at="2023-03-23T19:39:08Z" finished-at="2023-03-23T19:46:45Z">
+        </test-method> <!-- verifyTheName -->
+        <test-method status="PASS" signature="settingsModule()[pri:0, instance:org.PageModules.Settings@7d70d1b1]" name="settingsModule" duration-ms="215558" started-at="2023-03-31T18:59:44Z" finished-at="2023-03-31T19:03:20Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- HealthRec -->
-        <test-method status="PASS" signature="calendar()[pri:3, instance:runner.Local_Host@59d016c9]" name="calendar" duration-ms="64085" started-at="2023-03-23T19:46:45Z" finished-at="2023-03-23T19:47:49Z">
+        </test-method> <!-- settingsModule -->
+        <test-method status="PASS" signature="checkStatus(org.testng.ITestResult)[pri:0, instance:org.PageModules.Settings@7d70d1b1]" name="checkStatus" is-config="true" duration-ms="6" started-at="2023-03-31T19:03:20Z" finished-at="2023-03-31T19:03:20Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=settingsModule status=SUCCESS method=Settings.settingsModule()[pri:0, instance:org.PageModules.Settings@7d70d1b1] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- calendar -->
-        <test-method status="PASS" signature="BillingModule()[pri:4, instance:runner.Local_Host@59d016c9]" name="BillingModule" duration-ms="62761" started-at="2023-03-23T19:47:49Z" finished-at="2023-03-23T19:48:52Z">
+        </test-method> <!-- checkStatus -->
+        <test-method status="PASS" signature="tear_Down()[pri:0, instance:org.PageModules.Settings@7d70d1b1]" name="tear_Down" is-config="true" duration-ms="6289" started-at="2023-03-31T19:03:20Z" finished-at="2023-03-31T19:03:26Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- BillingModule -->
-        <test-method status="PASS" signature="TeleDoctor()[pri:5, instance:runner.Local_Host@59d016c9]" name="TeleDoctor" duration-ms="21047" started-at="2023-03-23T19:48:52Z" finished-at="2023-03-23T19:49:13Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TeleDoctor -->
-        <test-method status="PASS" signature="Message()[pri:6, instance:runner.Local_Host@59d016c9]" name="Message" duration-ms="35387" started-at="2023-03-23T19:49:13Z" finished-at="2023-03-23T19:49:49Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- Message -->
-        <test-method status="PASS" signature="Settings()[pri:7, instance:runner.Local_Host@59d016c9]" name="Settings" duration-ms="369366" started-at="2023-03-23T19:49:49Z" finished-at="2023-03-23T19:55:58Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- Settings -->
-      </class> <!-- runner.Local_Host -->
-    </test> <!-- Test -->
+        </test-method> <!-- tear_Down -->
+      </class> <!-- org.PageModules.Settings -->
+    </test> <!-- Setting_TestCases -->
   </suite> <!-- Suite -->
 </testng-results>

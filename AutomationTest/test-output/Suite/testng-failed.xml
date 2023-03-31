@@ -1,34 +1,256 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
-  <test name="Test(failed)">
-    <groups>
-      <run>
-        <include name="before"/>
-        <include name="home"/>
-        <include name="patient"/>
-        <include name="healthrec"/>
-        <include name="calendar"/>
-        <include name="billing"/>
-        <include name="teledoctor"/>
-        <include name="message"/>
-        <include name="settings"/>
-      </run>
-    </groups>
+<suite name="Failed suite [Suite]">
+  <test name="Patient_Module_TestCase(failed)">
     <classes>
-      <class name="runner.Local_Host">
+      <class name="com.healthRec.Tc_023_GenerateBillFromEhr">
         <methods>
-          <include name="calendar"/>
-          <include name="PatientModule"/>
-          <include name="HomeModule"/>
-          <include name="HealthRec"/>
-          <include name="BillingModule"/>
-          <include name="Message"/>
-          <include name="openConnection"/>
-          <include name="Settings"/>
-          <include name="TeleDoctor"/>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
         </methods>
-      </class> <!-- runner.Local_Host -->
+      </class> <!-- com.healthRec.Tc_023_GenerateBillFromEhr -->
+      <class name="org.PageModules.Patient_Module">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+          <include name="patientCreation"/>
+        </methods>
+      </class> <!-- org.PageModules.Patient_Module -->
+      <class name="com.healthRec.Tc_009_Amendment">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_009_Amendment -->
+      <class name="com.healthRec.Tc_021_AttachFile">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_021_AttachFile -->
+      <class name="com.healthRec.Tc_026_saltScenarios">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_026_saltScenarios -->
+      <class name="com.healthRec.Tc_017_Medication">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_017_Medication -->
+      <class name="com.healthRec.Tc_001_Vitals">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_001_Vitals -->
+      <class name="com.healthRec.Tc_026_FollowUpEhr">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_026_FollowUpEhr -->
+      <class name="com.healthRec.Tc_005_Alert">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_005_Alert -->
+      <class name="com.healthRec.Tc_010Problems">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_010Problems -->
+      <class name="com.healthRec.Tc_024_GetPastCured_Complted">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_024_GetPastCured_Complted -->
+      <class name="com.healthRec.Tc_002_Allergy">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_002_Allergy -->
+      <class name="org.PageModules.TeleDoctor">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- org.PageModules.TeleDoctor -->
+      <class name="com.healthRec.Tc_015_Status">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_015_Status -->
+      <class name="com.healthRec.Tc_003_SocialHistory">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_003_SocialHistory -->
+      <class name="org.PageModules.Home_Module">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- org.PageModules.Home_Module -->
+      <class name="com.healthRec.Tc_004_FamilyHealth">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_004_FamilyHealth -->
+      <class name="com.healthRec.Tc_007_Vaccine">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_007_Vaccine -->
+      <class name="org.PageModules.BillingModule">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- org.PageModules.BillingModule -->
+      <class name="org.PageModules.Settings">
+        <methods>
+          <include name="openConnection"/>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+          <include name="tear_Down"/>
+        </methods>
+      </class> <!-- org.PageModules.Settings -->
+      <class name="com.healthRec.Tc_012_Procedure">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_012_Procedure -->
+      <class name="com.healthRec.Tc_000_HealthRecordUi">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_000_HealthRecordUi -->
+      <class name="org.PageModules.Calendar_Test">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- org.PageModules.Calendar_Test -->
+      <class name="com.healthRec.Tc_016_TestOrder">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_016_TestOrder -->
+      <class name="com.healthRec.Tc_020_Forms">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_020_Forms -->
+      <class name="com.healthRec.Tc_014_AdvanceDirectives">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_014_AdvanceDirectives -->
+      <class name="org.PageModules.Message">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- org.PageModules.Message -->
+      <class name="com.healthRec.Tc_008_ImplantableDevice">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_008_ImplantableDevice -->
+      <class name="com.healthRec.Tc_018_Notes">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_018_Notes -->
+      <class name="com.healthRec.Tc_006_VisitReason">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_006_VisitReason -->
+      <class name="com.healthRec.Tc_011_Symptoms">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_011_Symptoms -->
+      <class name="com.healthRec.Tc_022_Inpatient">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_022_Inpatient -->
+      <class name="com.healthRec.Tc_019_PhysicalExamination">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_019_PhysicalExamination -->
+      <class name="com.healthRec.Tc_013_Goals">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_013_Goals -->
+      <class name="com.healthRec.Tc_025_FavoriteKpopScenarios">
+        <methods>
+          <include name="checkStatus"/>
+          <include name="getTheTestName"/>
+          <include name="verifyTheName"/>
+        </methods>
+      </class> <!-- com.healthRec.Tc_025_FavoriteKpopScenarios -->
     </classes>
-  </test> <!-- Test(failed) -->
+  </test> <!-- Patient_Module_TestCase(failed) -->
 </suite> <!-- Failed suite [Suite] -->

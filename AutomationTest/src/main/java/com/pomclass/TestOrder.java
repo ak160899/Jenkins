@@ -33,6 +33,12 @@ public class TestOrder {
 	public WebElement save;
 	@FindBy(xpath = "//div[@id='Test_OrderKpop2']/div[2]/div[2]/div[1]//following::div[3]/button//following::ul[1]/li")
 	public List<WebElement> saveMore;
+	
+	
+	
+	
+	
+	
 
 	public TestOrder(WebDriver driver) {
 		this.driver=driver;

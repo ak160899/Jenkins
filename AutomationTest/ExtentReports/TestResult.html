@@ -1,0 +1,3420 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title></title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@d6562a79075e061305ccfdb82f01e5e195e2d307/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report standard">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary"></span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Mar 31, 2023 06:49:26 PM</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('exception-view')">
+<a id="nav-exception" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bug"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('category-view')">
+<a id="nav-category" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-tag"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('device-view')">
+<a id="nav-device" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-tablet"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('author-view')">
+<a id="nav-author" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-user"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<a class="dropdown-item" status="fail" href="#"><span>Fail</span><span class="status danger"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a>
+<ul id="author-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" href="#">AKASH</a>
+</ul>
+</li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tag"></i></a>
+<ul id="tag-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" href="#">SMOKETESTING</a>
+</ul>
+</li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tablet"></i></a>
+<ul id="device-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" href="#">WINDOWS</a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Home_module_Testcase</p>
+            <p class="text-sm">
+              <span>6:49:53 PM</span> / <span>00:00:31:619</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Home_module_Testcase</h5>
+<span class='badge badge-success'>03.31.2023 6:49:53 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:50:24 PM</span>
+<span class='badge badge-default'>00:00:31:619</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:49:53 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>patientCreation</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:49:53 PM</td>
+        <td>
+          NEW PATIENT CREATION BUTTON CLICKED
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:49:53 PM</td>
+        <td>
+          FIRST NAME ENTERED
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:49:53 PM</td>
+        <td>
+          LAST NAME ENTERED
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:49:54 PM</td>
+        <td>
+          GENDER CLICKED
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:49:54 PM</td>
+        <td>
+          GENDER CHOOSED:
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:49:54 PM</td>
+        <td>
+          EMAIL ENTERED
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:49:57 PM</td>
+        <td>
+          COUNTRY CODE CHOOSED: 
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:49:57 PM</td>
+        <td>
+          PHONE NUMBER ENTERED
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:49:58 PM</td>
+        <td>
+          CREATE PATIENT CLICKED
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:50:01 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:50:01 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>bookAppointment</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:50:24 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="2"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Patient_Module_TestCase</p>
+            <p class="text-sm">
+              <span>6:50:24 PM</span> / <span>00:00:26:410</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">Patient_Module_TestCase</h5>
+<span class='badge badge-success'>03.31.2023 6:50:24 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:50:51 PM</span>
+<span class='badge badge-default'>00:00:26:410</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div>    <div class="row mb-3"><div class="col-md-3">
+<img data-featherlight='E:\AutomationTest 15022023(localrepo)\AutomationTest\.\Screenshots\patientCreation.png' src="E:\AutomationTest 15022023(localrepo)\AutomationTest\.\Screenshots\patientCreation.png">
+    
+    </div></div>
+<div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:50:24 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>patientCreation</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>6:50:27 PM</td>
+        <td>
+          <span class='badge white-text red'>Test Failed</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>6:50:27 PM</td>
+        <td>
+          <textarea readonly class="code-block">org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element <button id="gender_dropdown" class="dropdown-toggle settings-heading settings-buttonColor settings-button" style="width:100%;" data-toggle="dropdown" aria-expanded="false">...</button> is not clickable at point (650, 297). Other element would receive the click: <div id="--working--" class="center-cont" style="width: 100%; height: 100vh; position: fixed; left: 0px; top: 0px; z-index: 1030; background-color: rgba(239, 239, 239, 0.5); overflow: hidden !important; display: flex;">...</div>
+  (Session info: chrome=111.0.5563.147)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'LAPTOP-Q33L4MJO', ip: '192.168.29.33', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_331'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:56449}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 03f033f6a3f4f67731e4f20b027d6447
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:285)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:84)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at com.sun.proxy.$Proxy14.click(Unknown Source)
+	at org.base.Base.click(Base.java:83)
+	at org.PageModules.Patient_Module.patientCreation(Patient_Module.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</textarea>
+          
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:50:27 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>verifyPatientSaerchAndClick</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:50:29 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:50:29 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>alternateContact</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:50:37 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:50:37 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>contactInfo</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:50:45 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:50:45 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>patientInfo</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:50:46 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:50:46 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>verifyFilterSearchAndCcdImport</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:50:51 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="3"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Health_Record_ui</p>
+            <p class="text-sm">
+              <span>6:50:51 PM</span> / <span>00:00:23:555</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Health_Record_ui</h5>
+<span class='badge badge-success'>03.31.2023 6:50:51 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:51:14 PM</span>
+<span class='badge badge-default'>00:00:23:555</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:50:51 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>tc_001_verifyTheHaelthRecordCount</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:51:02 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:51:02 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>verifyAndShowTheHidedOptions</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:51:14 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="4"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Vitals</p>
+            <p class="text-sm">
+              <span>6:51:14 PM</span> / <span>00:00:03:397</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Vitals</h5>
+<span class='badge badge-success'>03.31.2023 6:51:14 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:51:18 PM</span>
+<span class='badge badge-default'>00:00:03:397</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:51:14 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>tc_002_addVitals_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:51:18 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="5"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Allergy</p>
+            <p class="text-sm">
+              <span>6:51:18 PM</span> / <span>00:00:07:357</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Allergy</h5>
+<span class='badge badge-success'>03.31.2023 6:51:18 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:51:25 PM</span>
+<span class='badge badge-default'>00:00:07:357</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:51:18 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>tc_003_addAllergy_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:51:25 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="6"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">SocailHistory</p>
+            <p class="text-sm">
+              <span>6:51:25 PM</span> / <span>00:00:02:617</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">SocailHistory</h5>
+<span class='badge badge-success'>03.31.2023 6:51:25 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:51:28 PM</span>
+<span class='badge badge-default'>00:00:02:617</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:51:25 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>tc_004_addSocialHistory_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:51:28 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="7"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">FamilyHealth</p>
+            <p class="text-sm">
+              <span>6:51:28 PM</span> / <span>00:00:05:876</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">FamilyHealth</h5>
+<span class='badge badge-success'>03.31.2023 6:51:28 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:51:34 PM</span>
+<span class='badge badge-default'>00:00:05:876</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=7</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:51:28 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>tc_005_addFamilyHealth_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:51:34 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="8"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Alert</p>
+            <p class="text-sm">
+              <span>6:51:34 PM</span> / <span>00:00:02:803</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Alert</h5>
+<span class='badge badge-success'>03.31.2023 6:51:34 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:51:36 PM</span>
+<span class='badge badge-default'>00:00:02:803</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=8</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:51:34 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>tc_006_addAlertEditAndSave</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:51:36 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="9"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">VisitReason</p>
+            <p class="text-sm">
+              <span>6:51:36 PM</span> / <span>00:00:04:823</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">VisitReason</h5>
+<span class='badge badge-success'>03.31.2023 6:51:36 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:51:41 PM</span>
+<span class='badge badge-default'>00:00:04:823</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=9</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:51:36 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>tc_007_addVisitReason_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:51:41 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="10"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Vaccine</p>
+            <p class="text-sm">
+              <span>6:51:41 PM</span> / <span>00:00:02:853</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Vaccine</h5>
+<span class='badge badge-success'>03.31.2023 6:51:41 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:51:44 PM</span>
+<span class='badge badge-default'>00:00:02:853</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=10</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:51:41 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>tc_008_addVaccine_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:51:44 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="11"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">ImplantableDevice</p>
+            <p class="text-sm">
+              <span>6:51:44 PM</span> / <span>00:00:05:072</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">ImplantableDevice</h5>
+<span class='badge badge-success'>03.31.2023 6:51:44 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:51:49 PM</span>
+<span class='badge badge-default'>00:00:05:072</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=11</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:51:44 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>tc_009_addSaveAndEditImplantableDevice</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:51:49 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="12"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Amendent</p>
+            <p class="text-sm">
+              <span>6:51:49 PM</span> / <span>00:00:03:374</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Amendent</h5>
+<span class='badge badge-success'>03.31.2023 6:51:49 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:51:53 PM</span>
+<span class='badge badge-default'>00:00:03:374</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=12</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:51:49 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>tc_010_addAmendent_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:51:53 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="13"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">problems</p>
+            <p class="text-sm">
+              <span>6:51:53 PM</span> / <span>00:00:12:031</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">problems</h5>
+<span class='badge badge-success'>03.31.2023 6:51:53 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:52:05 PM</span>
+<span class='badge badge-default'>00:00:12:031</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=13</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:51:53 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>addproblems_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:52:05 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="14"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Symptoms</p>
+            <p class="text-sm">
+              <span>6:52:05 PM</span> / <span>00:00:03:530</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Symptoms</h5>
+<span class='badge badge-success'>03.31.2023 6:52:05 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:52:08 PM</span>
+<span class='badge badge-default'>00:00:03:530</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=14</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:52:05 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>addSymptoms_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:52:08 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="15"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">proceudre</p>
+            <p class="text-sm">
+              <span>6:52:08 PM</span> / <span>00:00:06:642</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">proceudre</h5>
+<span class='badge badge-success'>03.31.2023 6:52:08 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:52:15 PM</span>
+<span class='badge badge-default'>00:00:06:642</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=15</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:52:08 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>addProcedure_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:52:15 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="16"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Goals</p>
+            <p class="text-sm">
+              <span>6:52:15 PM</span> / <span>00:00:03:841</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Goals</h5>
+<span class='badge badge-success'>03.31.2023 6:52:15 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:52:19 PM</span>
+<span class='badge badge-default'>00:00:03:841</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=16</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:52:15 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>addGoals_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:52:19 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="17"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">AdvanceDirectives</p>
+            <p class="text-sm">
+              <span>6:52:19 PM</span> / <span>00:00:03:105</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">AdvanceDirectives</h5>
+<span class='badge badge-success'>03.31.2023 6:52:19 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:52:22 PM</span>
+<span class='badge badge-default'>00:00:03:105</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=17</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:52:19 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>addAdvnceDiretivesAdd_EditAndSave</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:52:22 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="18"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Status</p>
+            <p class="text-sm">
+              <span>6:52:22 PM</span> / <span>00:00:04:659</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Status</h5>
+<span class='badge badge-success'>03.31.2023 6:52:22 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:52:26 PM</span>
+<span class='badge badge-default'>00:00:04:659</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=18</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:52:22 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>addStatus_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:52:26 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="19"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">TestOrder</p>
+            <p class="text-sm">
+              <span>6:52:26 PM</span> / <span>00:00:05:649</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">TestOrder</h5>
+<span class='badge badge-success'>03.31.2023 6:52:26 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:52:32 PM</span>
+<span class='badge badge-default'>00:00:05:649</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=19</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:52:26 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>$addTestOrder</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:52:32 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="20"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Medication</p>
+            <p class="text-sm">
+              <span>6:52:32 PM</span> / <span>00:00:19:554</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Medication</h5>
+<span class='badge badge-success'>03.31.2023 6:52:32 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:52:52 PM</span>
+<span class='badge badge-default'>00:00:19:554</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=20</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:52:32 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>addMedication_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:52:52 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="21"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Notes</p>
+            <p class="text-sm">
+              <span>6:52:52 PM</span> / <span>00:00:04:772</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Notes</h5>
+<span class='badge badge-success'>03.31.2023 6:52:52 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:52:56 PM</span>
+<span class='badge badge-default'>00:00:04:772</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=21</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:52:52 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>addNotes_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:52:56 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="22"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">PhysicalExamination</p>
+            <p class="text-sm">
+              <span>6:52:56 PM</span> / <span>00:00:04:028</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PhysicalExamination</h5>
+<span class='badge badge-success'>03.31.2023 6:52:56 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:53:00 PM</span>
+<span class='badge badge-default'>00:00:04:028</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=22</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:52:56 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>addPhysicalExamination_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:53:00 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="23"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Forms</p>
+            <p class="text-sm">
+              <span>6:53:01 PM</span> / <span>00:00:40:427</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Forms</h5>
+<span class='badge badge-success'>03.31.2023 6:53:01 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:53:41 PM</span>
+<span class='badge badge-default'>00:00:40:427</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=23</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:53:01 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>$addForm</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:53:41 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="24"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">AttachFile</p>
+            <p class="text-sm">
+              <span>6:53:41 PM</span> / <span>00:00:02:980</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">AttachFile</h5>
+<span class='badge badge-success'>03.31.2023 6:53:41 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:53:44 PM</span>
+<span class='badge badge-default'>00:00:02:980</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=24</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:53:41 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>attachFileAdd_SaveAndEdit</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:53:44 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="25"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Inpatinet</p>
+            <p class="text-sm">
+              <span>6:53:44 PM</span> / <span>00:00:05:812</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Inpatinet</h5>
+<span class='badge badge-success'>03.31.2023 6:53:44 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:53:50 PM</span>
+<span class='badge badge-default'>00:00:05:812</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=25</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:53:44 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>addInpatient_Edit_Save</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:53:50 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="26"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">GenerateBillFromEhr</p>
+            <p class="text-sm">
+              <span>6:53:50 PM</span> / <span>00:00:09:981</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">GenerateBillFromEhr</h5>
+<span class='badge badge-success'>03.31.2023 6:53:50 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:54:00 PM</span>
+<span class='badge badge-default'>00:00:09:981</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=26</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:53:50 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>verifyTheGenerteBill</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:54:00 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="27"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">PastCuredAndCompleted</p>
+            <p class="text-sm">
+              <span>6:54:00 PM</span> / <span>00:00:32:913</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PastCuredAndCompleted</h5>
+<span class='badge badge-success'>03.31.2023 6:54:00 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:54:33 PM</span>
+<span class='badge badge-default'>00:00:32:913</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=27</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:54:00 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>pastVaccine</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:54:08 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:54:08 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>pastSymptoms</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:54:14 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:54:14 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>pastCuredProcedure</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:54:17 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:54:17 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>pastGoals</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:54:22 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:54:22 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>pastMedication</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:54:33 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="28"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">SaltScenarios</p>
+            <p class="text-sm">
+              <span>6:54:33 PM</span> / <span>00:00:53:436</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">SaltScenarios</h5>
+<span class='badge badge-success'>03.31.2023 6:54:33 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:55:26 PM</span>
+<span class='badge badge-default'>00:00:53:436</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=28</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:54:33 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>saltScenarios</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:55:26 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="29"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">FAvoriteKpop2Scenario</p>
+            <p class="text-sm">
+              <span>6:55:26 PM</span> / <span>00:01:43:033</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">FAvoriteKpop2Scenario</h5>
+<span class='badge badge-success'>03.31.2023 6:55:26 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:57:09 PM</span>
+<span class='badge badge-default'>00:01:43:033</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=29</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:55:26 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>favoriteVisitReason</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:55:32 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:55:32 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>favoriteVaccine</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:55:42 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:55:42 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>favoriteSympytoms</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:55:51 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:55:51 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>favoriteProcedure</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:56:02 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:56:02 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>favoriteGoals</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:56:08 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:56:08 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>favoriteStatus</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:56:16 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:56:16 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>favoriteProblems</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:56:41 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:56:41 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>favoriteAdvaceDirectives</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:56:51 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:56:51 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>favoriteNotes</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:56:56 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:56:56 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>favoritePhusicalExamination</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:57:09 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="30"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">FollowUpCreate</p>
+            <p class="text-sm">
+              <span>6:57:09 PM</span> / <span>00:00:11:633</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">FollowUpCreate</h5>
+<span class='badge badge-success'>03.31.2023 6:57:09 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:57:21 PM</span>
+<span class='badge badge-default'>00:00:11:633</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=30</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:57:09 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>$createFollowup</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:57:21 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="31"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Calendar_Testcases</p>
+            <p class="text-sm">
+              <span>6:57:21 PM</span> / <span>00:00:47:627</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Calendar_Testcases</h5>
+<span class='badge badge-success'>03.31.2023 6:57:21 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:58:09 PM</span>
+<span class='badge badge-default'>00:00:47:627</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=31</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:57:21 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>navigateToCalendar</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:57:44 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:57:44 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>bookAppointment</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:58:09 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="32"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Billing_TesTcase</p>
+            <p class="text-sm">
+              <span>6:58:09 PM</span> / <span>00:00:52:479</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Billing_TesTcase</h5>
+<span class='badge badge-success'>03.31.2023 6:58:09 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:59:01 PM</span>
+<span class='badge badge-default'>00:00:52:479</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=32</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:58:09 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>BillingModue</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:59:01 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="33"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">TeleDoctor_TestCases</p>
+            <p class="text-sm">
+              <span>6:59:02 PM</span> / <span>00:00:23:289</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">TeleDoctor_TestCases</h5>
+<span class='badge badge-success'>03.31.2023 6:59:02 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:59:25 PM</span>
+<span class='badge badge-default'>00:00:23:289</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=33</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:59:02 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>createNewPatient</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:59:14 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:59:14 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>callPatient</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:59:25 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="34"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Message_TestCases</p>
+            <p class="text-sm">
+              <span>6:59:25 PM</span> / <span>00:00:18:769</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Message_TestCases</h5>
+<span class='badge badge-success'>03.31.2023 6:59:25 PM</span>
+<span class='badge badge-danger'>03.31.2023 6:59:44 PM</span>
+<span class='badge badge-default'>00:00:18:769</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=34</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:59:25 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>messageModule</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:59:44 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="35"
+          author="AKASH"
+          tag="SMOKETESTING"
+          device="WINDOWS">
+          <div class="test-detail">
+            <p class="name">Setting_TestCases</p>
+            <p class="text-sm">
+              <span>6:59:44 PM</span> / <span>00:03:35:564</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Setting_TestCases</h5>
+<span class='badge badge-success'>03.31.2023 6:59:44 PM</span>
+<span class='badge badge-danger'>03.31.2023 7:03:20 PM</span>
+<span class='badge badge-default'>00:03:35:564</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=35</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+<div class="m-t-15"><span class="badge badge-pill badge-default">AKASH</span>
+<span class="badge badge-pill badge-default">SMOKETESTING</span>
+<span class="badge badge-pill badge-default">WINDOWS</span></div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:59:44 PM</td>
+        <td>
+          <span class='badge white-text grey'><b>settingsModule</b></span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>7:03:20 PM</td>
+        <td>
+          <b>TEST PASSED</B>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="test-wrapper row view exception-view attributes-view">
+<div class="test-list">
+<div class="test-list-tools">
+<ul class="tools pull-left"><li><a href=""><span class="font-size-14">Exception</span></a></li></ul>
+<ul class="tools text-right"><li><a href="#"><span class="badge badge-primary">1</span></a></li></ul>
+</div>
+<div class="test-list-wrapper scrollable">
+<ul class="test-list-item">
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log badge-danger'>1</span>
+</span>
+<p class="name">org.openqa.selenium.ElementClickInterceptedException</p>
+<p class="duration text-sm">1 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>org.openqa.selenium.ElementClickInterceptedException</h4>
+<span status="fail" class='badge log badge-danger'>1 failed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>18:50:24 PM</td>
+<td>
+<a href="#" class="linked" test-id='2' id='2'>Patient_Module_TestCase</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="test-content scrollable">
+<div class="test-content-detail">
+<div class="detail-body"></div>
+</div>
+</div>
+</div><div class="test-wrapper row view category-view attributes-view">
+<div class="test-list">
+<div class="test-list-tools">
+<ul class="tools pull-left"><li><a href=""><span class="font-size-14">Category</span></a></li></ul>
+<ul class="tools text-right"><li><a href="#"><span class="badge badge-primary">1</span></a></li></ul>
+</div>
+<div class="test-list-wrapper scrollable">
+<ul class="test-list-item">
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>34</span>
+<span class='badge log badge-danger'>1</span>
+</span>
+<p class="name">SMOKETESTING</p>
+<p class="duration text-sm">35 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>SMOKETESTING</h4>
+<span status="pass" class='badge log pass-bg'>34 passed</span>
+<span status="fail" class='badge log badge-danger'>1 failed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:49:53 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='1'>Home_module_Testcase</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>18:50:24 PM</td>
+<td>
+<a href="#" class="linked" test-id='2' id='2'>Patient_Module_TestCase</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:50:51 PM</td>
+<td>
+<a href="#" class="linked" test-id='3' id='3'>Health_Record_ui</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:14 PM</td>
+<td>
+<a href="#" class="linked" test-id='4' id='4'>Vitals</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:18 PM</td>
+<td>
+<a href="#" class="linked" test-id='5' id='5'>Allergy</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:25 PM</td>
+<td>
+<a href="#" class="linked" test-id='6' id='6'>SocailHistory</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:28 PM</td>
+<td>
+<a href="#" class="linked" test-id='7' id='7'>FamilyHealth</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:34 PM</td>
+<td>
+<a href="#" class="linked" test-id='8' id='8'>Alert</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:36 PM</td>
+<td>
+<a href="#" class="linked" test-id='9' id='9'>VisitReason</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:41 PM</td>
+<td>
+<a href="#" class="linked" test-id='10' id='10'>Vaccine</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:44 PM</td>
+<td>
+<a href="#" class="linked" test-id='11' id='11'>ImplantableDevice</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:49 PM</td>
+<td>
+<a href="#" class="linked" test-id='12' id='12'>Amendent</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:53 PM</td>
+<td>
+<a href="#" class="linked" test-id='13' id='13'>problems</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:05 PM</td>
+<td>
+<a href="#" class="linked" test-id='14' id='14'>Symptoms</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:08 PM</td>
+<td>
+<a href="#" class="linked" test-id='15' id='15'>proceudre</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:15 PM</td>
+<td>
+<a href="#" class="linked" test-id='16' id='16'>Goals</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:19 PM</td>
+<td>
+<a href="#" class="linked" test-id='17' id='17'>AdvanceDirectives</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:22 PM</td>
+<td>
+<a href="#" class="linked" test-id='18' id='18'>Status</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:26 PM</td>
+<td>
+<a href="#" class="linked" test-id='19' id='19'>TestOrder</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:32 PM</td>
+<td>
+<a href="#" class="linked" test-id='20' id='20'>Medication</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:52 PM</td>
+<td>
+<a href="#" class="linked" test-id='21' id='21'>Notes</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:56 PM</td>
+<td>
+<a href="#" class="linked" test-id='22' id='22'>PhysicalExamination</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:53:01 PM</td>
+<td>
+<a href="#" class="linked" test-id='23' id='23'>Forms</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:53:41 PM</td>
+<td>
+<a href="#" class="linked" test-id='24' id='24'>AttachFile</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:53:44 PM</td>
+<td>
+<a href="#" class="linked" test-id='25' id='25'>Inpatinet</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:53:50 PM</td>
+<td>
+<a href="#" class="linked" test-id='26' id='26'>GenerateBillFromEhr</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:54:00 PM</td>
+<td>
+<a href="#" class="linked" test-id='27' id='27'>PastCuredAndCompleted</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:54:33 PM</td>
+<td>
+<a href="#" class="linked" test-id='28' id='28'>SaltScenarios</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:55:26 PM</td>
+<td>
+<a href="#" class="linked" test-id='29' id='29'>FAvoriteKpop2Scenario</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:57:09 PM</td>
+<td>
+<a href="#" class="linked" test-id='30' id='30'>FollowUpCreate</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:57:21 PM</td>
+<td>
+<a href="#" class="linked" test-id='31' id='31'>Calendar_Testcases</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:58:09 PM</td>
+<td>
+<a href="#" class="linked" test-id='32' id='32'>Billing_TesTcase</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:59:02 PM</td>
+<td>
+<a href="#" class="linked" test-id='33' id='33'>TeleDoctor_TestCases</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:59:25 PM</td>
+<td>
+<a href="#" class="linked" test-id='34' id='34'>Message_TestCases</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:59:44 PM</td>
+<td>
+<a href="#" class="linked" test-id='35' id='35'>Setting_TestCases</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="test-content scrollable">
+<div class="test-content-detail">
+<div class="detail-body"></div>
+</div>
+</div>
+</div><div class="test-wrapper row view device-view attributes-view">
+<div class="test-list">
+<div class="test-list-tools">
+<ul class="tools pull-left"><li><a href=""><span class="font-size-14">Device</span></a></li></ul>
+<ul class="tools text-right"><li><a href="#"><span class="badge badge-primary">1</span></a></li></ul>
+</div>
+<div class="test-list-wrapper scrollable">
+<ul class="test-list-item">
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>34</span>
+<span class='badge log badge-danger'>1</span>
+</span>
+<p class="name">WINDOWS</p>
+<p class="duration text-sm">35 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>WINDOWS</h4>
+<span status="pass" class='badge log pass-bg'>34 passed</span>
+<span status="fail" class='badge log badge-danger'>1 failed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:49:53 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='1'>Home_module_Testcase</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>18:50:24 PM</td>
+<td>
+<a href="#" class="linked" test-id='2' id='2'>Patient_Module_TestCase</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:50:51 PM</td>
+<td>
+<a href="#" class="linked" test-id='3' id='3'>Health_Record_ui</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:14 PM</td>
+<td>
+<a href="#" class="linked" test-id='4' id='4'>Vitals</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:18 PM</td>
+<td>
+<a href="#" class="linked" test-id='5' id='5'>Allergy</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:25 PM</td>
+<td>
+<a href="#" class="linked" test-id='6' id='6'>SocailHistory</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:28 PM</td>
+<td>
+<a href="#" class="linked" test-id='7' id='7'>FamilyHealth</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:34 PM</td>
+<td>
+<a href="#" class="linked" test-id='8' id='8'>Alert</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:36 PM</td>
+<td>
+<a href="#" class="linked" test-id='9' id='9'>VisitReason</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:41 PM</td>
+<td>
+<a href="#" class="linked" test-id='10' id='10'>Vaccine</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:44 PM</td>
+<td>
+<a href="#" class="linked" test-id='11' id='11'>ImplantableDevice</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:49 PM</td>
+<td>
+<a href="#" class="linked" test-id='12' id='12'>Amendent</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:53 PM</td>
+<td>
+<a href="#" class="linked" test-id='13' id='13'>problems</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:05 PM</td>
+<td>
+<a href="#" class="linked" test-id='14' id='14'>Symptoms</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:08 PM</td>
+<td>
+<a href="#" class="linked" test-id='15' id='15'>proceudre</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:15 PM</td>
+<td>
+<a href="#" class="linked" test-id='16' id='16'>Goals</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:19 PM</td>
+<td>
+<a href="#" class="linked" test-id='17' id='17'>AdvanceDirectives</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:22 PM</td>
+<td>
+<a href="#" class="linked" test-id='18' id='18'>Status</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:26 PM</td>
+<td>
+<a href="#" class="linked" test-id='19' id='19'>TestOrder</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:32 PM</td>
+<td>
+<a href="#" class="linked" test-id='20' id='20'>Medication</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:52 PM</td>
+<td>
+<a href="#" class="linked" test-id='21' id='21'>Notes</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:56 PM</td>
+<td>
+<a href="#" class="linked" test-id='22' id='22'>PhysicalExamination</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:53:01 PM</td>
+<td>
+<a href="#" class="linked" test-id='23' id='23'>Forms</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:53:41 PM</td>
+<td>
+<a href="#" class="linked" test-id='24' id='24'>AttachFile</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:53:44 PM</td>
+<td>
+<a href="#" class="linked" test-id='25' id='25'>Inpatinet</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:53:50 PM</td>
+<td>
+<a href="#" class="linked" test-id='26' id='26'>GenerateBillFromEhr</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:54:00 PM</td>
+<td>
+<a href="#" class="linked" test-id='27' id='27'>PastCuredAndCompleted</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:54:33 PM</td>
+<td>
+<a href="#" class="linked" test-id='28' id='28'>SaltScenarios</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:55:26 PM</td>
+<td>
+<a href="#" class="linked" test-id='29' id='29'>FAvoriteKpop2Scenario</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:57:09 PM</td>
+<td>
+<a href="#" class="linked" test-id='30' id='30'>FollowUpCreate</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:57:21 PM</td>
+<td>
+<a href="#" class="linked" test-id='31' id='31'>Calendar_Testcases</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:58:09 PM</td>
+<td>
+<a href="#" class="linked" test-id='32' id='32'>Billing_TesTcase</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:59:02 PM</td>
+<td>
+<a href="#" class="linked" test-id='33' id='33'>TeleDoctor_TestCases</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:59:25 PM</td>
+<td>
+<a href="#" class="linked" test-id='34' id='34'>Message_TestCases</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:59:44 PM</td>
+<td>
+<a href="#" class="linked" test-id='35' id='35'>Setting_TestCases</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="test-content scrollable">
+<div class="test-content-detail">
+<div class="detail-body"></div>
+</div>
+</div>
+</div><div class="test-wrapper row view author-view attributes-view">
+<div class="test-list">
+<div class="test-list-tools">
+<ul class="tools pull-left"><li><a href=""><span class="font-size-14">Author</span></a></li></ul>
+<ul class="tools text-right"><li><a href="#"><span class="badge badge-primary">1</span></a></li></ul>
+</div>
+<div class="test-list-wrapper scrollable">
+<ul class="test-list-item">
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log pass-bg'>34</span>
+<span class='badge log badge-danger'>1</span>
+</span>
+<p class="name">AKASH</p>
+<p class="duration text-sm">35 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>AKASH</h4>
+<span status="pass" class='badge log pass-bg'>34 passed</span>
+<span status="fail" class='badge log badge-danger'>1 failed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:49:53 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='1'>Home_module_Testcase</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>18:50:24 PM</td>
+<td>
+<a href="#" class="linked" test-id='2' id='2'>Patient_Module_TestCase</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:50:51 PM</td>
+<td>
+<a href="#" class="linked" test-id='3' id='3'>Health_Record_ui</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:14 PM</td>
+<td>
+<a href="#" class="linked" test-id='4' id='4'>Vitals</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:18 PM</td>
+<td>
+<a href="#" class="linked" test-id='5' id='5'>Allergy</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:25 PM</td>
+<td>
+<a href="#" class="linked" test-id='6' id='6'>SocailHistory</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:28 PM</td>
+<td>
+<a href="#" class="linked" test-id='7' id='7'>FamilyHealth</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:34 PM</td>
+<td>
+<a href="#" class="linked" test-id='8' id='8'>Alert</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:36 PM</td>
+<td>
+<a href="#" class="linked" test-id='9' id='9'>VisitReason</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:41 PM</td>
+<td>
+<a href="#" class="linked" test-id='10' id='10'>Vaccine</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:44 PM</td>
+<td>
+<a href="#" class="linked" test-id='11' id='11'>ImplantableDevice</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:49 PM</td>
+<td>
+<a href="#" class="linked" test-id='12' id='12'>Amendent</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:51:53 PM</td>
+<td>
+<a href="#" class="linked" test-id='13' id='13'>problems</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:05 PM</td>
+<td>
+<a href="#" class="linked" test-id='14' id='14'>Symptoms</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:08 PM</td>
+<td>
+<a href="#" class="linked" test-id='15' id='15'>proceudre</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:15 PM</td>
+<td>
+<a href="#" class="linked" test-id='16' id='16'>Goals</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:19 PM</td>
+<td>
+<a href="#" class="linked" test-id='17' id='17'>AdvanceDirectives</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:22 PM</td>
+<td>
+<a href="#" class="linked" test-id='18' id='18'>Status</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:26 PM</td>
+<td>
+<a href="#" class="linked" test-id='19' id='19'>TestOrder</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:32 PM</td>
+<td>
+<a href="#" class="linked" test-id='20' id='20'>Medication</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:52 PM</td>
+<td>
+<a href="#" class="linked" test-id='21' id='21'>Notes</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:52:56 PM</td>
+<td>
+<a href="#" class="linked" test-id='22' id='22'>PhysicalExamination</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:53:01 PM</td>
+<td>
+<a href="#" class="linked" test-id='23' id='23'>Forms</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:53:41 PM</td>
+<td>
+<a href="#" class="linked" test-id='24' id='24'>AttachFile</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:53:44 PM</td>
+<td>
+<a href="#" class="linked" test-id='25' id='25'>Inpatinet</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:53:50 PM</td>
+<td>
+<a href="#" class="linked" test-id='26' id='26'>GenerateBillFromEhr</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:54:00 PM</td>
+<td>
+<a href="#" class="linked" test-id='27' id='27'>PastCuredAndCompleted</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:54:33 PM</td>
+<td>
+<a href="#" class="linked" test-id='28' id='28'>SaltScenarios</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:55:26 PM</td>
+<td>
+<a href="#" class="linked" test-id='29' id='29'>FAvoriteKpop2Scenario</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:57:09 PM</td>
+<td>
+<a href="#" class="linked" test-id='30' id='30'>FollowUpCreate</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:57:21 PM</td>
+<td>
+<a href="#" class="linked" test-id='31' id='31'>Calendar_Testcases</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:58:09 PM</td>
+<td>
+<a href="#" class="linked" test-id='32' id='32'>Billing_TesTcase</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:59:02 PM</td>
+<td>
+<a href="#" class="linked" test-id='33' id='33'>TeleDoctor_TestCases</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:59:25 PM</td>
+<td>
+<a href="#" class="linked" test-id='34' id='34'>Message_TestCases</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="pass">
+<td><span class="badge log pass-bg">Pass</span></td>
+<td>18:59:44 PM</td>
+<td>
+<a href="#" class="linked" test-id='35' id='35'>Setting_TestCases</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="test-content scrollable">
+<div class="test-content-detail">
+<div class="detail-body"></div>
+</div>
+</div>
+</div><div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Mar 31, 2023 06:49:26 PM</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Mar 31, 2023 07:03:20 PM</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>34</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>1</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='97%'>
+<b>34</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='2%'><b>1</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='45%'><b>56</b> events passed</small></div>
+<div>
+<small data-tooltip='1%'><b>2</b> events failed,
+<b data-tooltip='%'>66</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"Home_module_Testcase":31.619,"Patient_Module_TestCase":26.41,"Health_Record_ui":23.555,"Vitals":3.397,"Allergy":7.357,"SocailHistory":2.617,"FamilyHealth":5.876,"Alert":2.803,"VisitReason":4.823,"Vaccine":2.853,"ImplantableDevice":5.072,"Amendent":3.374,"problems":12.031,"Symptoms":3.53,"proceudre":6.642,"Goals":3.841,"AdvanceDirectives":3.105,"Status":4.659,"TestOrder":5.649,"Medication":19.554,"Notes":4.772,"PhysicalExamination":4.028,"Forms":40.427,"AttachFile":2.98,"Inpatinet":5.812,"GenerateBillFromEhr":9.981,"PastCuredAndCompleted":32.913,"SaltScenarios":53.436,"FAvoriteKpop2Scenario":103.033,"FollowUpCreate":11.633,"Calendar_Testcases":47.627,"Billing_TesTcase":52.479,"TeleDoctor_TestCases":23.289,"Message_TestCases":18.769,"Setting_TestCases":215.564
+};
+</script>
+<div class="row">
+<div class="col-lg-6 col-md-12 author-container">
+<div class="card">
+<div class="card-header"><p>Author</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Others</th><th>Passed %</th></tr></thead>
+<tbody>
+<tr>
+<td>AKASH</td>
+<td>34</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>97.143%</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="col-lg-6 col-md-12 category-container">
+<div class="card">
+<div class="card-header"><p>Tags</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Others</th><th>Passed %</th></tr></thead><tbody>
+<tr>
+<td>SMOKETESTING</td>
+<td>34</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>97.143%</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="col-lg-6 col-md-12 device-container">
+<div class="card">
+<div class="card-header"><p>Device</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Others</th><th>Passed %</th></tr></thead>
+<tbody>
+<tr>
+<td>WINDOWS</td>
+<td>34</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>97.143%</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="col-lg-6 col-md-12 sysenv-container">
+<div class="card">
+<div class="card-header"><p>System/Environment</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+<tbody>
+<tr>
+<td>OS</td>
+<td>Windows 11</td>
+</tr>
+<tr>
+<td>Java version</td>
+<td>1.8.0_331</td>
+</tr>
+<tr>
+<td>Browser</td>
+<td>chrome111.0.5563.147</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 34,
+failParent: 1,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 56,
+failEvents: 2,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 66
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@d6562a79075e061305ccfdb82f01e5e195e2d307/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>

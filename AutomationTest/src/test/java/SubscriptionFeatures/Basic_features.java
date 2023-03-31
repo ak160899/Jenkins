@@ -112,23 +112,18 @@ public class Basic_features extends LaunchBrowser {
 		driver.navigate().to("https://localhost:8443/health/#list_ehr");
 
 		try {
-			WebElement remv = driver.findElement(By.xpath("(//div[@id='ehr-search']/div[2]//following::input[1])[1]"));
-			visbility(driver, remv, 60);
 
-			elementClickable(remv);
-			click(remv);
+			visbility(driver, pom.getInstanceHealthRec().removePrevious, 60);
+
+			clickIntercept(pom.getInstanceHealthRec().removePrevious, 30);
 
 		} catch (ElementClickInterceptedException e) {
-			System.out.println("exception in ehr");
-			WebElement remv = driver.findElement(By.xpath("(//div[@id='ehr-search']/div[2]//following::input[1])[1]"));
-			visbility(driver, remv, 60);
+			visbility(driver, pom.getInstanceHealthRec().removePrevious, 60);
 
-			clickIntercept(remv, 30);
+			clickIntercept(pom.getInstanceHealthRec().removePrevious, 30);
 		}
 
-		List<WebElement> wwe = driver
-				.findElements(By.xpath("//div[@id='vvid']//following::ul[2]/li/a/table/tbody/tr/td[2]"));
-		for (WebElement web : wwe) {
+		for (WebElement web : pom.getInstanceHealthRec().healthRecordSerachPatientByDropdown) {
 
 			if (web.getText().trim().equals(kpid)) {
 
@@ -147,12 +142,6 @@ public class Basic_features extends LaunchBrowser {
 		clickIntercept(r7, 30);
 
 		clickIntercept(pom.getInstanceHealthRec().ehrEllipses, 30);
-		/*
-		 * } catch (Exception e) { visbility(driver,
-		 * pom.getInstanceHealthRec().ehrEllipses, 60); clickble(driver,
-		 * pom.getInstanceHealthRec().ehrEllipses, 60); actions("click",
-		 * pom.getInstanceHealthRec().ehrEllipses); }
-		 */
 
 		for (WebElement web : pom.getInstanceHealthRec().ehrEllipsesList) {
 			if (web.getText().trim().equals("Reset Setting")) {
@@ -246,12 +235,16 @@ public class Basic_features extends LaunchBrowser {
 		sleep(2000);
 
 		// Attach file..
-
-		WebElement attachfileAddBtn = driver.findElement(By.xpath("//div[contains(@title,'Add Attach File')]"));
-		actions("move to element", attachfileAddBtn);
-		visbility(driver, attachfileAddBtn, 60);
-
-		clickIntercept(attachfileAddBtn, 30);
+		while (true) {
+			if (pom.getInstanceAttachFile().addIcon.isDisplayed()) {
+				visbility(driver, pom.getInstanceAttachFile().addIcon, 30);
+				clickIntercept(pom.getInstanceAttachFile().addIcon, 30);
+				break;
+			} else if (!pom.getInstanceAttachFile().addIcon.isDisplayed()) {
+				actions("move to element", pom.getInstanceAttachFile().addIcon);
+				sleep(2000);
+			}
+		}
 
 		WebElement attdropdown = driver.findElement(By.xpath("//div[@id='Attach_FileKpop2']/div[2]/div[1]/select"));
 		dropDown("index", attdropdown, "3");
@@ -272,30 +265,25 @@ public class Basic_features extends LaunchBrowser {
 		// icd codes search ehr..
 
 		// problems
+
 		while (true) {
 
-			try {
-				WebElement a3 = driver.findElement(By.xpath("//div[contains(@title,'Add Problems')]"));
-				actions("move to element", a3);
-				visbility(driver, a3, 60);
-				javascriptclick(a3);
-				WebElement ct = ww.until(ExpectedConditions.presenceOfElementLocated(
-						By.xpath("//div[@id='ProblemsKpop2']/div[2]/div/div[1]/div[2]/input")));
-				visbility(driver, ct, 60);
-				sendkeys(ct, "10299");
-				for (int i = 1; i <= 5; i++) {
-					sleep(1000);
-				}
-				WebElement $canceliconprblm = driver
-						.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::span[3])[1]"));
-				visbility(driver, $canceliconprblm, 60);
-				javascriptclick($canceliconprblm);
+			if (pom.getInstanceProblems().addIcon.isDisplayed()) {
+				visbility(driver, pom.getInstanceProblems().addIcon, 30);
+				clickIntercept(pom.getInstanceProblems().addIcon, 30);
 				break;
-
-			} catch (Exception e) {
-				// TODO: handle exception
+			} else if (!pom.getInstanceProblems().addIcon.isDisplayed()) {
+				actions("move to element", pom.getInstanceProblems().addIcon);
 			}
 		}
+
+		visbility(driver, pom.getInstanceProblems().icd, 30);
+		sendkeys(pom.getInstanceProblems().icd, "Test");
+
+		WebElement $canceliconprblm = driver
+				.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::span[3])[1]"));
+		visbility(driver, $canceliconprblm, 60);
+		clickIntercept($canceliconprblm, 30);
 
 		// symptoms
 

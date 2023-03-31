@@ -1,5 +1,7 @@
 package com.pomclass;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +25,10 @@ public class Basic {
 
 	@FindBy(id = "upgrade_btn")
 	public WebElement upgradeDetails;
+	
+	
+	@FindBy(xpath = "//button[@onclick='Health.upgradeEnterpriseNow()']")
+	public List<WebElement> upgradeButtonEnterpriseUi;
 	
 	
 	@FindBy(id="editPlanBtn")

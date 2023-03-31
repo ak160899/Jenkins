@@ -48,9 +48,15 @@ public class Problems {
 
 	@FindBy(xpath = "//td[text()='Malignant neoplasm of testis']//following::div[1]")
 	public WebElement removeFavoriteCode;
+	
+	@FindBy(css = "div#remove")
+	public List<WebElement> removeFavoriteBaisc;
 
-	@FindBy(xpath = "(//span[text()='Malignant neoplasm of testis'])[1]//parent::div//parent::div[1]//parent::div[1]/div[1]/span[1]")
-	public WebElement addThisFavorite;
+	@FindBy(xpath = "//span[@id='select']")
+	///(//span[text()='Malignant neoplasm of testis'])[1]//parent::div//parent::div[1]//parent::div[1]/div[1]/span[1]
+	public List<WebElement> addThisFavorite;
+	
+	
 	
 	@FindBy(xpath = "(//div[@id='ProblemsFavKpop2']/div[1]//following::span[1])[1]")
 	public WebElement closeFavorite;

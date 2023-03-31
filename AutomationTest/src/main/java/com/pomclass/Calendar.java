@@ -19,7 +19,7 @@ public class Calendar {
 
 	@FindBy(xpath = "(//button[@id='create-patient'])[2]")
 	public WebElement newPatientCreation;
-	
+
 	@FindBy(id = "first-name")
 	public WebElement firstName;
 
@@ -89,6 +89,21 @@ public class Calendar {
 
 	@FindBy(xpath = "(//div[@class='col-xs-12 scheduled row-2 hover'])[1]")
 	public WebElement clickonBookedAppointment;
+
+	@FindBy(css = "div.checkslot")
+	public List<WebElement> numberOfTimeSlotDisplayed;
+
+	@FindBy(css = "div#appointmentStatus")
+	public List<WebElement> statusType;
+	
+	@FindBy(css = "button#calendar-day-month")
+	public List<WebElement> dayDrops;
+	
+	@FindBy(css = "ul#calendarul li a")
+	public List<WebElement> dayDropsCooseDay;
+	
+	@FindBy(css = ".msg.alert.alert-info")
+	public List<WebElement> checkUserStatus;
 
 	public Calendar(WebDriver driver) {
 

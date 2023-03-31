@@ -3,12 +3,16 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="org.patientLogin.PatientInfo">
+      <class name="org.PageModules.TeleDoctor">
         <methods>
           <include name="openConnection"/>
-          <include name="Settings"/>
+          <include name="getTheTestName"/>
+          <include name="checkStatus"/>
+          <include name="verifyTheName"/>
+          <include name="createNewPatient"/>
+          <include name="tear_Down"/>
         </methods>
-      </class> <!-- org.patientLogin.PatientInfo -->
+      </class> <!-- org.PageModules.TeleDoctor -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -1,7 +1,6 @@
 package com.pomclass;
 
 import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -310,7 +309,7 @@ public class Settings {
 
 	@FindBy(xpath = "(//span[text()='Favorite Message'])[1]//following::div[1]/span")
 	public WebElement setFavoritesMessageClose;
-	//
+	//symtoms
 
 	@FindBy(xpath = "(//div[@id='SymptomsFavKpop2']//following::span[5])[1]")
 	public WebElement setFavoritesSymptomsAddIcon;
@@ -326,6 +325,9 @@ public class Settings {
 
 	@FindBy(xpath = "(//div[text()='R76.1: Abnormal reaction to tuberculin test'])[1]")
 	public WebElement setFavoritesSymptomsedit;
+	
+	@FindBy(xpath = "//div[text()='Symptoms']")
+	public List<WebElement> settingsFavoriteSymptomBasicEdit;
 
 	@FindBy(xpath = "(//div[@id='SymptomsKpop2']//following::span[2])[1]")
 	public WebElement setFavoriteSymtomsDelete;
@@ -350,6 +352,9 @@ public class Settings {
 
 	@FindBy(xpath = "(//div[@id='ProblemsKpop2']//following::span[2])[1]")
 	public WebElement setFavoriteProblemsDelete;
+	
+	@FindBy(xpath = "//div[text()='test']")
+	public List<WebElement> editBasicProblem;
 
 	@FindBy(xpath = "(//div[@id='ProblemsFavKpop2']//following::span[1])[1]")
 	public WebElement setFavoriteProblemsClose;

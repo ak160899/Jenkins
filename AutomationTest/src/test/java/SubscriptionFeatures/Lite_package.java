@@ -21,56 +21,32 @@ import com.calendar.Calendars;
 import com.data.ConfigManager;
 import com.pageObjeman.PageObjMan;
 
-public class Lite_package extends Base {
-
-	public WebDriver driver;
-	PageObjMan pom;
-	static JavascriptExecutor j;
-	WebDriverWait ww;
-	String kpid;
-	Calendars cal;
-	String ur;
-	String currenurl;
-
-	@BeforeClass
-	private void LaunchBrwoser() throws Exception {
-
-		Map<String, Object> getConnection = LaunchBrowser.openConnection();
-
-		pom = (PageObjMan) getConnection.get("pom");
-		j = (JavascriptExecutor) getConnection.get("j");
-		ww = (WebDriverWait) getConnection.get("ww");
-		cal = (Calendars) getConnection.get("cal");
-		ur = (String) getConnection.get("url");
-		driver = (WebDriver) getConnection.get("driver");
-
-		WebElement upgradelater = driver.findElement(By.xpath("(//div[@id='AlertMessage']//following::button[1])[1]"));
-		visbility(driver, upgradelater, 40);
-		elementClickable(upgradelater);
-		click(upgradelater);
-	}
+public class Lite_package extends LaunchBrowser {
 
 	@Test(priority = 1)
 	private void home() throws InterruptedException {
 
 		try {
 
-			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 40);
+			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 50);
 
 			elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
-			click(pom.getInstanceHomeModule().$patientCreationButton);
-
+			clickIntercept(pom.getInstanceHomeModule().$patientCreationButton, 30);
+			log.info("patient create button clicked");
 		} catch (ElementClickInterceptedException e) {
 
-			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 40);
+			visbility(driver, pom.getInstanceHomeModule().$patientCreationButton, 50);
 			elementClickable(pom.getInstanceHomeModule().$patientCreationButton);
-			click(pom.getInstanceHomeModule().$patientCreationButton);
+			clickIntercept(pom.getInstanceHomeModule().$patientCreationButton, 30);
+			log.info("patient create button clicked");
 		}
 
 		sendkeys(pom.getInstanceNewPatient().firstName, "sam");
+		log.info("first name entered");
 		sendkeys(pom.getInstanceNewPatient().lastname, "n");
-		click(pom.getInstanceNewPatient().clickGenderIcon);
-
+		log.info("last name entered");
+		clickIntercept(pom.getInstanceNewPatient().clickGenderIcon, 30);
+		log.info("gender clicked");
 		List<WebElement> genders = driver.findElements(By.xpath("(//ul[@id='genderDropdown'])[1]/li"));
 
 		for (WebElement opt : genders) {
@@ -78,63 +54,41 @@ public class Lite_package extends Base {
 			if (opt.getText().equals("Male")) {
 
 				driver.findElement(By.xpath("(//ul[@id='genderDropdown'])[1]/li")).click();
+				log.info("gender Choosed");
 
 			}
 			break;
 		}
 
-		driver.findElement(By.id("userloginId")).sendKeys("abcdefg@gmail.com");
-		WebElement countryFlagButon = driver.findElement(By.xpath("//div[@class='selected-flag']"));
-		visbility(driver, countryFlagButon, 50);
-		elementClickable(countryFlagButon);
-		click(countryFlagButon);
+		// String character = RandomStringUtils.randomAlphabetic(12);
 
-		List<WebElement> flagchoose = driver
-				.findElements(By.xpath("//div[@class='selected-flag']//following::ul[1]/li/span[2]"));
-		for (WebElement flagcode : flagchoose) {
-			if (flagcode.getText().trim().equals("+91")) {
+		visbility(driver, pom.getInstanceHomeModule().emailId, 40);
+		sendkeys(pom.getInstanceHomeModule().emailId, generateRandom("letter"));
+		log.info("email id entered");
+		visbility(driver, pom.getInstanceHomeModule().selectFlagPhoneNumField, 50);
+		elementClickable(pom.getInstanceHomeModule().selectFlagPhoneNumField);
+		clickIntercept(pom.getInstanceHomeModule().selectFlagPhoneNumField, 30);
 
-				elementClickable(flagcode);
-				click(flagcode);
+		for (WebElement flag : pom.getInstanceHomeModule().chooseCountrycodeFlag) {
+			if (flag.getText().trim().equals("+91")) {
+				clickIntercept(flag, 30);
 				break;
 			}
-
 		}
 
-		driver.findElement(By.id("Phone")).sendKeys("9551824155");
+		visbility(driver, pom.getInstanceHomeModule().phoneNumberField, 40);
+		sendkeys(pom.getInstanceHomeModule().phoneNumberField, "95518" + generateRandom("number"));
+		log.info("phone number entered");
 		// Acc gets Created..
-		click(pom.getInstanceNewPatient().CreatePatient);
-
-		try {
-			WebElement patientinfoeditButton = driver
-					.findElement(By.xpath("(//span[@class='profile-info'])[3]//following::span[1]"));
-			visbility(driver, patientinfoeditButton, 50);
-			elementClickable(patientinfoeditButton);
-			click(patientinfoeditButton);
-		} catch (ElementClickInterceptedException e) {
-			WebElement patientinfoeditButton = driver
-					.findElement(By.xpath("(//span[@class='profile-info'])[3]//following::span[1]"));
-			visbility(driver, patientinfoeditButton, 50);
-			elementClickable(patientinfoeditButton);
-			click(patientinfoeditButton);
-		}
-		WebElement emailField = driver.findElement(By.xpath("(//input[@id='userLoginId'])[3]"));
-		visbility(driver, emailField, 50);
-		clear(emailField);
-
-		WebElement phonefield = driver.findElement(By.xpath("(//input[@id='phone'])[3]"));
-		visbility(driver, phonefield, 50);
-		clear(phonefield);
-
-		elementClickable(pom.getInstanceNewPatient().savePatientinfo);
-		click(pom.getInstanceNewPatient().savePatientinfo);
+		clickIntercept(pom.getInstanceNewPatient().CreatePatient, 30);
+		log.info("patient created ");
 
 		while (true) {
 			try {
 				WebElement $patietcreateid$ = driver.findElement(By.xpath("//td[@id='val-kpid']"));
 				if ($patietcreateid$.isDisplayed()) {
 					kpid = $patietcreateid$.getText();
-					System.out.println("HOME PATIENT" + kpid);
+					log.info(kpid);
 
 					break;
 				}
@@ -142,7 +96,6 @@ public class Lite_package extends Base {
 				System.out.println(e);
 			}
 		}
-
 		sleep(4000);
 
 		driver.navigate().to("https://localhost:8443/health/#home");
@@ -188,8 +141,8 @@ public class Lite_package extends Base {
 						// represent the row change and time..
 						By.xpath("(//div[@id='date-data'][" + i + "]/div[2]/div[" + b + "]/div[1]/div[1]/div[1])"));
 
-				String tr = tp.getText();
-				System.out.println(tr);
+				//String tr = tp.getText();
+				//System.out.println(tr);
 				boolean trp = tp.isDisplayed();
 				String rrs = tp.getAttribute("id");
 
@@ -201,7 +154,7 @@ public class Lite_package extends Base {
 
 					cond = true;
 					visbility(driver, tp, 60);
-					javascriptclick(tp);
+					clickIntercept(tp, 30);
 
 					WebElement qrs = driver.findElement(By.xpath("(//input[@id='AppointmentPatientName'])[" + a + "]"));
 					visbility(driver, qrs, 60);
@@ -218,13 +171,11 @@ public class Lite_package extends Base {
 				implicitWait(30, TimeUnit.SECONDS);
 				List<WebElement> choosepatient = driver.findElements(By.xpath(
 						"//div[@id='AppointmentMessage']/div[2]//following::ul[6]/li/a/table[1]/tbody/tr/td[2]"));
-				//// ul[@id='ui-id-2']/li/a/table/tbody/tr/td[2]
-
-				// (//td[text()='" + kpid + "'])[2]//parent::td
+				
 				for (WebElement web : choosepatient) {
 					if (web.getText().trim().equals(kpid)) {
 						visbility(driver, web, 60);
-						web.click();
+						clickIntercept(web, 30);
 						break;
 					}
 
@@ -235,21 +186,21 @@ public class Lite_package extends Base {
 							.findElement(By.xpath("(//button[@id='admissionVal_dropdown'])[" + a + "]"));
 					System.out.println($selectappType);
 					visbility(driver, $selectappType, 40);
-					elementClickable($selectappType);
-					click($selectappType);
+					
+					clickIntercept($selectappType,30);
 				} catch (Exception e) {
 					WebElement $selectappType = driver
 							.findElement(By.xpath("(//button[@id='admissionVal_dropdown'])[" + a + "]"));
 					System.out.println($selectappType);
 					visbility(driver, $selectappType, 40);
-					elementClickable($selectappType);
-					click($selectappType);
+					
+					clickIntercept($selectappType,30);
 				}
 				List<WebElement> $TypeDropdown = driver
 						.findElements(By.xpath("(//button[@id='admissionVal_dropdown'])//following::ul[1]/li/a"));
 				for (WebElement Element : $TypeDropdown) {
 					if (Element.getText().equals("Emergency") && Element.isDisplayed()) {
-						click(Element);
+						clickIntercept(Element,30);
 						break;
 					}
 
@@ -259,19 +210,18 @@ public class Lite_package extends Base {
 
 				visbility(driver, pom.getInstanceSetting().dismiss, 40);
 				elementClickable(pom.getInstanceSetting().dismiss);
-				click(pom.getInstanceSetting().dismiss);
+				clickIntercept(pom.getInstanceSetting().dismiss,30);
 
 				WebElement qt = driver.findElement(By.xpath("(//textarea[@id='description'])[" + a + "]"));
 				visbility(driver, qt, 60);
 				qt.sendKeys("no worries...");
 				WebElement utt = driver.findElement(By.xpath("(//button[@id='statusId_dropdown'])[" + a + "]"));
-				clickble(driver, utt, 60);
-				j.executeScript("arguments[0].click();", utt);
+				clickIntercept(utt, 30);
 
 				List<WebElement> lop = driver.findElements(By.xpath("(//ul[@id='statusIdDropdown'])[" + a + "]/li"));
 				for (WebElement w : lop) {
 					if (w.getText().trim().equals("In Progress")) {
-						w.click();
+						clickIntercept(w,30);
 						break;
 					}
 
@@ -279,22 +229,21 @@ public class Lite_package extends Base {
 
 				WebElement vcv = driver.findElement(By.xpath("(//button[@id='accept-btn'])[1]"));
 				visbility(driver, vcv, 60);
-				clickble(driver, vcv, 60);
-				j.executeScript("arguments[0].click();", vcv);
+				clickIntercept(vcv, 30);
 
 				WebElement pip = driver.findElement(By.xpath("//span[text()='" + hkpid + "']"));
 				visbility(driver, pip, 60);
-				j.executeScript("arguments[0].click();", pip);
+				clickIntercept(pip, 30);
 
 				sleep(2000);
 				WebElement wtw = driver.findElement(By.xpath("(//span[@id='del-btn'])[" + i + "]"));
 				clickble(driver, wtw, 60);
-				j.executeScript("arguments[0].click();", wtw);
+				clickIntercept(wtw, 30);
 
 				WebElement delapp = driver
 						.findElement(By.xpath("//div[@id='AppointmentCreateMessage']/div[2]/div[2]/button[2]"));
 				clickble(driver, delapp, 60);
-				javascriptclick(delapp);
+				clickIntercept(delapp, 30);
 
 				break;
 			}
@@ -408,31 +357,25 @@ public class Lite_package extends Base {
 		driver.navigate().to("https://localhost:8443/health/#list_ehr");
 
 		try {
-			WebElement remv = driver.findElement(By.xpath("(//div[@id='ehr-search']/div[2]//following::input[1])[1]"));
-			visbility(driver, remv, 60);
 
-			elementClickable(remv);
-			click(remv);
+			visbility(driver, pom.getInstanceHealthRec().removePrevious, 60);
+
+			clickIntercept(pom.getInstanceHealthRec().removePrevious, 30);
 
 		} catch (ElementClickInterceptedException e) {
-			System.out.println("exception in ehr");
-			WebElement remv = driver.findElement(By.xpath("(//div[@id='ehr-search']/div[2]//following::input[1])[1]"));
-			visbility(driver, remv, 60);
+			visbility(driver, pom.getInstanceHealthRec().removePrevious, 60);
 
-			elementClickable(remv);
-			click(remv);
+			clickIntercept(pom.getInstanceHealthRec().removePrevious, 30);
 		}
 
-		List<WebElement> wwe = driver
-				.findElements(By.xpath("//div[@id='vvid']//following::ul[2]/li/a/table/tbody/tr/td[2]"));
-		for (WebElement web : wwe) {
+		for (WebElement web : pom.getInstanceHealthRec().healthRecordSerachPatientByDropdown) {
 
 			if (web.getText().trim().equals(kpid)) {
 
 				visbility(driver, web, 60);
 				elementClickable(web);
 
-				click(web);
+				clickIntercept(web, 30);
 				break;
 			}
 
@@ -441,25 +384,18 @@ public class Lite_package extends Base {
 
 		WebElement r7 = driver.findElement(By.id("newMedicalRecordButton"));
 		elementClickable(r7);
-		click(r7);
+		clickIntercept(r7, 30);
 
-		WebElement elipse = driver.findElement(By.xpath("(//span[@id='list_patient_needHelp'])[1]/span"));
-		visbility(driver, elipse, 60);
-		clickble(driver, elipse, 60);
-		click(elipse);
+		clickIntercept(pom.getInstanceHealthRec().ehrEllipses, 30);
 
-		List<WebElement> hh = driver
-				.findElements(By.xpath("(//span[@id='list_patient_needHelp'])[1]/span//following::ul[1]/li"));
-		for (WebElement web : hh) {
+		for (WebElement web : pom.getInstanceHealthRec().ehrEllipsesList) {
 			if (web.getText().trim().equals("Reset Setting")) {
 				visbility(driver, web, 60);
-				elementClickable(web);
-				click(web);
+				clickIntercept(web, 30);
 				break;
 			}
 
 		}
-
 		sleep(3000);
 		List<WebElement> rowfor = driver.findElements(By.xpath("(//div[@id='cols'])[2]/div"));
 
@@ -528,15 +464,15 @@ public class Lite_package extends Base {
 		actions("move to element", formaddbtn);
 		visbility(driver, formaddbtn, 60);
 		elementClickable(formaddbtn);
-		click(formaddbtn);
+		clickIntercept(formaddbtn,30);
 
 		WebElement clickupgradebtninfrm = driver.findElement(By.xpath("(//button[contains(@title,'Upgrade')])[3]"));
 		elementClickable(clickupgradebtninfrm);
-		click(clickupgradebtninfrm);
+		clickIntercept(clickupgradebtninfrm,30);
 
 		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
 		elementClickable(pom.getInstanceSetting().$editplan$);
-		click(pom.getInstanceSetting().$editplan$);
+		clickIntercept(pom.getInstanceSetting().$editplan$, 30);
 		sleep(2000);
 		for (int i = 1; i <= 2; i++) {
 			try {
@@ -555,21 +491,25 @@ public class Lite_package extends Base {
 
 		// Attach file..
 
-		WebElement attachfileAddBtn = driver.findElement(By.xpath("//div[contains(@title,'Add Attach File')]"));
-		actions("move to element", attachfileAddBtn);
-		visbility(driver, attachfileAddBtn, 60);
-		elementClickable(attachfileAddBtn);
-		click(attachfileAddBtn);
-
+		while (true) {
+			if (pom.getInstanceAttachFile().addIcon.isDisplayed()) {
+				visbility(driver, pom.getInstanceAttachFile().addIcon, 30);
+				clickIntercept(pom.getInstanceAttachFile().addIcon, 30);
+				break;
+			} else if (!pom.getInstanceAttachFile().addIcon.isDisplayed()) {
+				actions("move to element", pom.getInstanceAttachFile().addIcon);
+				sleep(2000);
+			}
+		}
 		WebElement attdropdown = driver.findElement(By.xpath("//div[@id='Attach_FileKpop2']/div[2]/div[1]/select"));
 		dropDown("index", attdropdown, "3");
 		WebElement clickupgradebtninattach = driver.findElement(By.xpath("(//button[contains(@title,'Upgrade')])[3]"));
 		elementClickable(clickupgradebtninattach);
-		click(clickupgradebtninattach);
+		clickIntercept(clickupgradebtninattach, 30);
 
 		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
 		elementClickable(pom.getInstanceSetting().$editplan$);
-		click(pom.getInstanceSetting().$editplan$);
+		clickIntercept(pom.getInstanceSetting().$editplan$, 30);
 
 		for (int i = 1; i <= 2; i++) {
 			try {
@@ -588,28 +528,22 @@ public class Lite_package extends Base {
 		// problems
 		while (true) {
 
-			try {
-				WebElement a3 = driver.findElement(By.xpath("//div[contains(@title,'Add Problems')]"));
-				actions("move to element", a3);
-				visbility(driver, a3, 60);
-				javascriptclick(a3);
-				WebElement ct = ww.until(ExpectedConditions.presenceOfElementLocated(
-						By.xpath("//div[@id='ProblemsKpop2']/div[2]/div/div[1]/div[2]/input")));
-				visbility(driver, ct, 60);
-				sendkeys(ct, "10299");
-				for (int i = 1; i <= 5; i++) {
-					sleep(1000);
-				}
-				WebElement $canceliconprblm = driver
-						.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::span[3])[1]"));
-				visbility(driver, $canceliconprblm, 60);
-				javascriptclick($canceliconprblm);
+			if (pom.getInstanceProblems().addIcon.isDisplayed()) {
+				visbility(driver, pom.getInstanceProblems().addIcon, 30);
+				clickIntercept(pom.getInstanceProblems().addIcon, 30);
 				break;
-
-			} catch (Exception e) {
-				// TODO: handle exception
+			} else if (!pom.getInstanceProblems().addIcon.isDisplayed()) {
+				actions("move to element", pom.getInstanceProblems().addIcon);
 			}
 		}
+
+		visbility(driver, pom.getInstanceProblems().icd, 30);
+		sendkeys(pom.getInstanceProblems().icd, "Test");
+
+		WebElement $canceliconprblm = driver
+				.findElement(By.xpath("(//div[@id='ProblemsKpop2']//following::span[3])[1]"));
+		visbility(driver, $canceliconprblm, 60);
+		clickIntercept($canceliconprblm, 30);
 
 		// symptoms
 
@@ -653,7 +587,7 @@ public class Lite_package extends Base {
 				WebElement b2 = driver.findElement(By.xpath("//select[@id='codeType']"));
 				visbility(driver, b2, 60);
 
-				click(b2);
+				clickIntercept(b2, 30);
 				dropDown("text", b2, "SNOMED CT");
 				WebElement ers = ww.until(ExpectedConditions.presenceOfElementLocated(
 						By.xpath("//div[@id='ProcedureKpop2']/div[2]/div[1]/div[1]/div[2]/input")));
@@ -670,7 +604,7 @@ public class Lite_package extends Base {
 				javascriptclick($Procedurecrsicon);
 				break;
 			} catch (Exception e) {
-
+				e.printStackTrace();
 			}
 
 		}
@@ -686,7 +620,7 @@ public class Lite_package extends Base {
 				javascriptclick(c5);
 				WebElement c6 = driver.findElement(By.xpath("(//select[@id='statusType'])[1]"));
 				visbility(driver, c6, 60);
-				click(c6);
+				clickIntercept(c6, 30);
 				dropDown("text", c6, "Cognitive status");
 				WebElement cc7 = driver.findElement(
 						By.xpath("//div[@id='StatusKpop2']/div[2]/div[1]/select[1]//following::div[1]/div[2]/input"));
@@ -727,7 +661,7 @@ public class Lite_package extends Base {
 				javascriptclick($MedcrsIcon$);
 				break;
 			} catch (Exception e) {
-
+				e.printStackTrace();
 			}
 		}
 
@@ -737,7 +671,7 @@ public class Lite_package extends Base {
 		WebElement edity = driver.findElement(By.xpath("(//button[@id='accept-btn'])[1]"));
 		visbility(driver, edity, 60);
 		elementClickable(edity);
-		click(edity);
+		clickIntercept(edity, 30);
 
 		// follow up custom option checking...
 
@@ -779,21 +713,17 @@ public class Lite_package extends Base {
 			List<WebElement> rqq = driver
 					.findElements(By.xpath("(//div[@id='formAppointment'])[2]/div/div[2]/div[2]/div[2]/div"));
 
-			// System.out.println("total number of displayed time in the list:" +
-			// rqq.size());
 			for (int jj = 1; jj <= rqq.size(); jj++) {
 
 				WebElement checkcn = driver
 						.findElement(By.xpath("(//div[@id='date-data'])[1]/div[2]/div[" + jj + "]/div/div[1]"));
-				// System.out.println(checkcn.getText());
 
 				WebElement sm = driver
 						.findElement(By.xpath("(//div[@id='date-data'])[1]/div[2]/div[" + jj + "]/div/div[2]/span[3]"));
-				// System.out.println(sm.getText().isEmpty());
 
 				if (checkcn.isDisplayed() && sm.getText().isEmpty()) {
 					b = true;
-					checkcn.click();
+					clickIntercept(checkcn, 30);
 					sleep(3000);
 					break;
 
@@ -804,7 +734,7 @@ public class Lite_package extends Base {
 				WebElement $foloupBtn = driver
 						.findElement(By.xpath("(//button[@id='followupAdmissionVal_dropdown'])[1]"));
 				visbility(driver, $foloupBtn, 40);
-				click($foloupBtn);
+				clickIntercept($foloupBtn, 30);
 
 				List<WebElement> folloupAppointmentDropDown = driver.findElements(
 						By.xpath("(//button[@id='followupAdmissionVal_dropdown'])[1]//following::ul[1]/li/a/span[2]"));
@@ -812,7 +742,7 @@ public class Lite_package extends Base {
 					if (chooseType.getText().trim().equals("Emergency")) {
 						visbility(driver, chooseType, 40);
 						elementClickable(chooseType);
-						click(chooseType);
+						clickIntercept(chooseType, 30);
 						break;
 					}
 				}
@@ -823,7 +753,7 @@ public class Lite_package extends Base {
 
 		visbility(driver, pom.getInstanceSetting().subscribe, 40);
 		elementClickable(pom.getInstanceSetting().subscribe);
-		click(pom.getInstanceSetting().subscribe);
+		clickIntercept(pom.getInstanceSetting().subscribe, 30);
 
 		for (int i = 1; i <= 2; i++) {
 			try {
@@ -845,11 +775,10 @@ public class Lite_package extends Base {
 	private void calendar_module() throws Exception {
 
 		cal.caledarModule();
-		currenurl = driver.getCurrentUrl();
+		$current = driver.getCurrentUrl();
 
 		List<WebElement> totalnumberrowdy = driver.findElements(By.xpath("//div[@id='date-data']"));
 		int totalr = totalnumberrowdy.size();
-		// System.out.println("found you>>>" + totalr);
 
 		boolean cond = false;
 
@@ -869,9 +798,7 @@ public class Lite_package extends Base {
 
 						By.xpath("(//div[@id='date-data'][" + i + "]/div[2]/div[" + b + "]/div[1]/div[1]/div[1])"));
 
-				// String tr = tp.getText();
-				// boolean trp = tp.isDisplayed();
-
+				
 				// the kpid ..
 				WebElement kp = driver.findElement(
 						By.xpath("(//div[@id='date-data'])[" + i + "]/div[2]/div[" + b + "]/div/div[2]/span[2]"));
@@ -902,13 +829,11 @@ public class Lite_package extends Base {
 				implicitWait(30, TimeUnit.SECONDS);
 				List<WebElement> choosepatient = driver.findElements(By.xpath(
 						"//div[@id='AppointmentMessage']/div[2]//following::ul[6]/li/a/table[1]/tbody/tr/td[2]"));
-				//// ul[@id='ui-id-2']/li/a/table/tbody/tr/td[2]
 
-				// (//td[text()='" + kpid + "'])[2]//parent::td
 				for (WebElement web : choosepatient) {
 					if (web.getText().trim().equals(kpid)) {
 						visbility(driver, web, 60);
-						web.click();
+						clickIntercept(web, 30);
 						break;
 					}
 
@@ -919,16 +844,16 @@ public class Lite_package extends Base {
 					WebElement $selectappType = driver
 							.findElement(By.xpath("(//button[@id='admissionVal_dropdown'])[" + count + "]"));
 					visbility(driver, $selectappType, 40);
-					click($selectappType);
+					clickIntercept($selectappType, 30);
 				} catch (Exception e) {
-					// TODO: handle exception
+					e.printStackTrace();
 				}
 				sleep(3000);
 				List<WebElement> $TypeDropdown = driver
 						.findElements(By.xpath("(//button[@id='admissionVal_dropdown'])//following::ul[1]/li/a"));
 				for (WebElement Element : $TypeDropdown) {
 					if (Element.getText().equals("Emergency") && Element.isDisplayed()) {
-						click(Element);
+						clickIntercept(Element, 30);
 						break;
 					}
 
@@ -940,7 +865,7 @@ public class Lite_package extends Base {
 								.findElement(By.xpath("//span[text()='Premium Subscription']//following::button[1]"));
 
 						if ($dismiss.isDisplayed()) {
-							click($dismiss);
+							clickIntercept($dismiss, 30);
 							break;
 						}
 					} catch (Exception e) {
@@ -953,14 +878,14 @@ public class Lite_package extends Base {
 				qt.sendKeys("no worries...");
 				WebElement utt = driver.findElement(By.xpath("(//button[@id='statusId_dropdown'])[" + count + "]"));
 				visbility(driver, utt, 60);
-				javascriptclick(utt);
+				clickIntercept(utt, 30);
 
 				List<WebElement> lop = driver
 						.findElements(By.xpath("(//ul[@id='statusIdDropdown'])[" + count + "]/li"));
 				for (WebElement w : lop) {
 					if (w.getText().trim().equals("In Progress")) {
 						visbility(driver, w, 60);
-						w.click();
+						clickIntercept(w, 30);
 						break;
 					}
 
@@ -970,13 +895,13 @@ public class Lite_package extends Base {
 				visbility(driver, vcv, 60);
 				ScriptExecutor(vcv);
 
-				javascriptclick(vcv);
+				clickIntercept(vcv, 30);
 
 				sleep(1000);
 
 				WebElement ez = driver.findElement(By.xpath("//span[text()='" + kpid + "']"));
 				visbility(driver, ez, 60);
-				javascriptclick(ez);
+				clickIntercept(ez, 30);
 
 				sleep(2000);
 				// goto ehr..
@@ -984,23 +909,20 @@ public class Lite_package extends Base {
 
 				visbility(driver, ehr, 60);
 				elementClickable(ehr);
-				click(ehr);// .click();
+				clickIntercept(ehr, 30);
 
 				sleep(3000);
-				/*
-				 * driver.navigate().back(); driver.navigate().refresh();
-				 */
 
 				try {
 					visbility(driver, pom.getInstanceCalendar().clickCalendar, 40);
 					elementClickable(pom.getInstanceCalendar().clickCalendar);
-					click(pom.getInstanceCalendar().clickCalendar);
+					clickIntercept(pom.getInstanceCalendar().clickCalendar,30);
 					driver.navigate().refresh();
 
 				} catch (ElementClickInterceptedException e) {
 					visbility(driver, pom.getInstanceCalendar().clickCalendar, 40);
 					elementClickable(pom.getInstanceCalendar().clickCalendar);
-					click(pom.getInstanceCalendar().clickCalendar);
+					clickIntercept(pom.getInstanceCalendar().clickCalendar,30);
 					driver.navigate().refresh();
 				}
 
@@ -1014,20 +936,20 @@ public class Lite_package extends Base {
 	@Test(priority = 5)
 	private void billing_module() throws InterruptedException {
 		visbility(driver, pom.getInstanceBilling().clickBill, 60);
-		ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceBilling().clickBill));
-		click(pom.getInstanceBilling().clickBill);
+
+		clickIntercept(pom.getInstanceBilling().clickBill, 30);
 
 		driver.navigate().refresh();
 		implicitWait(50, TimeUnit.SECONDS);
 		sleep(3000);
-		while (true) {
-			try {
-				visbility(driver, pom.getInstanceBilling().clickCreateNewBill, 60);
-				click(pom.getInstanceBilling().clickCreateNewBill);
-				break;
-			} catch (Exception e) {
 
-			}
+		try {
+			visbility(driver, pom.getInstanceBilling().clickCreateNewBill, 60);
+			clickIntercept(pom.getInstanceBilling().clickCreateNewBill, 30);
+
+		} catch (Exception e) {
+			visbility(driver, pom.getInstanceBilling().clickCreateNewBill, 60);
+			clickIntercept(pom.getInstanceBilling().clickCreateNewBill, 30);
 		}
 
 		try {
@@ -1050,8 +972,7 @@ public class Lite_package extends Base {
 		sendkeys(pom.getInstanceBilling().addQuantity, "2");
 
 		visbility(driver, pom.getInstanceBilling().saveItem, 60);
-		ww.until(ExpectedConditions.elementToBeClickable(pom.getInstanceBilling().saveItem));
-		click(pom.getInstanceBilling().saveItem);
+		clickIntercept(pom.getInstanceBilling().saveItem, 30);
 		sleep(3000);
 	}
 
@@ -1149,11 +1070,11 @@ public class Lite_package extends Base {
 			}
 		}
 
-		if (ur.equals("https://www.75health.com/login.jsp")) {
+		if (url.equals("https://www.75health.com/login.jsp")) {
 			driver.navigate().to("https://www.75health.com/health/#call_history");
-		} else if (ur.equals("")) {
+		} else if (url.equals("")) {
 
-		} else if (ur.equals("")) {
+		} else if (url.equals("")) {
 
 		}
 
@@ -1206,99 +1127,67 @@ public class Lite_package extends Base {
 
 	@Test(priority = 7)
 	private void settings_Module() throws InterruptedException, IOException {
+		visbility(driver, pom.getInstanceSetting().clickSettings, 40);
+		clickIntercept(pom.getInstanceSetting().clickSettings, 30);
 
-		while (true) {
-
-			if (driver.getCurrentUrl().equals("https://localhost:8443/health/#setting")) {
-				break;
-			} else if (!driver.getCurrentUrl().equals("https://localhost:8443/health/#setting")) {
-				driver.navigate().to("https://localhost:8443/health/#setting");
-				break;
-			}
-
-		}
-
-		// manageYour account...
-
-		while (true) {
-			try {
-				WebElement $manageaccount$ = driver.findElement(By.xpath("//button[text()='Manage your Account']"));
-				visbility(driver, $manageaccount$, 60);
-				click($manageaccount$);
-				break;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
+		visbility(driver, pom.getInstanceSetting().manageYorAccount, 40);
+		clickIntercept(pom.getInstanceSetting().manageYorAccount, 30);
 		sleep(3000);
-		WebElement Basicinfo = driver.findElement(By.xpath("(//span[@title='Edit'])[2]"));
-		visbility(driver, Basicinfo, 60);
-		javascriptclick(Basicinfo);
+		clickIntercept(pom.getInstanceSetting().basicInfoEditIcon, 30);
 
-		WebElement set1 = driver.findElement(By.id("hospitalName"));
-		visbility(driver, set1, 60);
-		clear(set1);// .clear();
-		sleep(2000);
-		WebElement set2 = driver.findElement(By.id("hospitalName"));
-		visbility(driver, set2, 60);
-		sendkeys(set2, "75health organisation");// .sendKeys("75health organisation");
-		sleep(3000);
-		WebElement set3 = driver.findElement(By.xpath("//button[@title='Administrator Title']"));// .click();
-		visbility(driver, set3, 60);
-		click(set3);
-		sleep(3000);
-		List<WebElement> titledrp = driver
-				.findElements(By.xpath("//button[@title='Administrator Title']//following::ul[1]/li"));
-		for (WebElement choose : titledrp) {
+		visbility(driver, pom.getInstanceSetting().hosipitalName, 40);
+		clear(pom.getInstanceSetting().hosipitalName);
+		sendkeys(pom.getInstanceSetting().hosipitalName, "75health organisation");
+		clickIntercept(pom.getInstanceSetting().basicInfoTitle, 30);
+
+		for (WebElement choose : pom.getInstanceSetting().basicInfoTitleDropdown) {
 			if (choose.getText().trim().equals("Dr")) {
-				visbility(driver, set3, 60);
-				choose.click();
+
+				visbility(driver, choose, 60);
+				clickIntercept(choose, 30);
+
 				break;
 			}
 
 		}
-		WebElement Firstnname = driver.findElement(By.id("firstName"));
-		visbility(driver, Firstnname, 60);
-		Firstnname.clear();
+	
 
-		Firstnname.sendKeys("Automation Acc");
+	visbility(driver, pom.getInstanceSetting().firstName, 40);
+	clear(pom.getInstanceSetting().firstName);
+	sendkeys(pom.getInstanceSetting().firstName, "Automation Acc");
 
-		WebElement lastname = driver.findElement(By.id("lastName"));
-		visbility(driver, lastname, 60);
-		lastname.clear();
-		lastname.sendKeys("Account");
+	visbility(driver, pom.getInstanceSetting().lastName, 40);
+	clear(pom.getInstanceSetting().lastName);
+	sendkeys(pom.getInstanceSetting().lastName, "Automation Acc");
 		sleep(3000);
-		WebElement hospitalActive = driver.findElement(By.xpath("//button[@id='hospitalActiveId']"));
-		visbility(driver, hospitalActive, 60);
-		j.executeScript("arguments[0].click();", hospitalActive);
-		sleep(2000);
-		List<WebElement> Adminstatus = driver.findElements(By.xpath("(//ul[@id='advBillType_Dropdown'])[2]/li"));
-		for (WebElement Ch1 : Adminstatus) {
-			if (Ch1.getText().trim().equals("ACTIVE")) {
-				Ch1.click();
+		clickIntercept(pom.getInstanceSetting().basicInfoAdminstatus, 30);
+
+		for (WebElement status : pom.getInstanceSetting().basicInfoAdminstatusDropdown) {
+			if (status.getText().trim().equals("ACTIVE")) {
+				visbility(driver, status, 40);
+				clickIntercept(status, 30);
+
 				break;
 			}
 
 		}
-		sleep(2000);
 
-		WebElement em = driver.findElement(By.xpath("(//button[@id='smsP'])[1]"));
-		visbility(driver, em, 60);
-		j.executeScript("arguments[0].click();", em);
+		sleep(2000);
+		clickIntercept(pom.getInstanceSetting().basicInfoSmsNotication, 30);
 
 		visbility(driver, pom.getInstanceSetting().subscribe, 50);
 		elementClickable(pom.getInstanceSetting().subscribe);
-		click(pom.getInstanceSetting().subscribe);
+		clickIntercept(pom.getInstanceSetting().subscribe,30);
 
 		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
 		elementClickable(pom.getInstanceSetting().$editplan$);
-		click(pom.getInstanceSetting().$editplan$);
+		clickIntercept(pom.getInstanceSetting().$editplan$,30);
 
 		for (int i = 1; i <= 2; i++) {
 			try {
 				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
 				elementClickable(pom.getInstanceSetting().$Carosel$);
-				// click(pom.getInstanceSetting().$Carosel$);
+				
 				System.out.println("carosel clicked");
 				actions("click", pom.getInstanceSetting().$Carosel$);
 				sleep(2500);
@@ -1326,31 +1215,25 @@ public class Lite_package extends Base {
 
 		// cds
 
-		while (true) {
-			try {
 
-				WebElement cdsclick = driver.findElement(By.xpath("//button[contains(text(),'Clinical Decision')]"));
-				visbility(driver, cdsclick, 60);
-				click(cdsclick);
+		visbility(driver, pom.getInstanceSetting().cdsClick, 30);
 
-				WebElement newcds = driver.findElement(By.xpath("//span[contains(text(),'New Clinical')]"));
-				visbility(driver, newcds, 60);
-				click(newcds);
+		clickIntercept(pom.getInstanceSetting().cdsClick, 30);
 
-				WebElement scrolltill = driver.findElement(By.xpath("//input[@id='weight_from']"));
-				ScriptExecutor(scrolltill);
-				sleep(2000);
-				visbility(driver, scrolltill, 60);
-				WebElement s9 = driver.findElement(By.xpath("(//input[@id='problem_icd_10'])[2]"));
-				visbility(driver, s9, 60);
-				sendkeys(s9, "test");
-				sleep(5000);
-				break;
-			} catch (Exception e) {
+		visbility(driver, pom.getInstanceSetting().addnewCds, 30);
+		clickIntercept(pom.getInstanceSetting().addnewCds, 30);
 
-			}
+		sendkeys(pom.getInstanceSetting().enterCds, "Akash");
 
-		}
+		sleep(2000);
+		WebElement scrolltill = driver.findElement(By.xpath("//input[@id='weight_from']"));
+		ScriptExecutor(scrolltill);
+
+		sleep(2000);
+		visbility(driver, pom.getInstanceSetting().cdsIcd, 30);
+		sendkeys(pom.getInstanceSetting().cdsIcd, "test");
+		sleep(4500);
+		
 		driver.navigate().to("https://localhost:8443/health/#setting");
 
 		// setforms
@@ -1359,21 +1242,21 @@ public class Lite_package extends Base {
 
 		visbility(driver, f1, 60);
 		elementClickable(f1);
-		click(f1);
+		clickIntercept(f1,30);
 
 		visbility(driver, pom.getInstanceSetting().subscribe, 40);
 		elementClickable(pom.getInstanceSetting().subscribe);
-		click(pom.getInstanceSetting().subscribe);
+		clickIntercept(pom.getInstanceSetting().subscribe,30);
 		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
 		elementClickable(pom.getInstanceSetting().$editplan$);
-		click(pom.getInstanceSetting().$editplan$);
+		clickIntercept(pom.getInstanceSetting().$editplan$,30);
 		System.out.println("ENTER CAROSEL");
 
 		for (int i = 1; i <= 3; i++) {
 			try {
 				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
 				elementClickable(pom.getInstanceSetting().$Carosel$);
-				// click(pom.getInstanceSetting().$Carosel$);
+			
 				System.out.println("carosel clicked");
 				actions("click", pom.getInstanceSetting().$Carosel$);
 				sleep(2500);
@@ -1396,21 +1279,21 @@ public class Lite_package extends Base {
 		WebElement $mrktplace$ = driver.findElement(By.xpath("//button[text()='Market Place']"));
 		visbility(driver, $mrktplace$, 60);
 		elementClickable($mrktplace$);
-		click($mrktplace$);
+		clickIntercept($mrktplace$,30);
 
 		visbility(driver, pom.getInstanceSetting().$eirsystembutton$, 40);
 		elementClickable(pom.getInstanceSetting().$eirsystembutton$);
-		click(pom.getInstanceSetting().$eirsystembutton$);
+		clickIntercept(pom.getInstanceSetting().$eirsystembutton$,30);
 
 		visbility(driver, pom.getInstanceSetting().subscribe, 40);
 		elementClickable(pom.getInstanceSetting().subscribe);
-		click(pom.getInstanceSetting().subscribe);
+		clickIntercept(pom.getInstanceSetting().subscribe,30);
 
 		for (int i = 1; i <= 3; i++) {
 			try {
 				visbility(driver, pom.getInstanceSetting().$Carosel$, 60);
 				elementClickable(pom.getInstanceSetting().$Carosel$);
-				// click(pom.getInstanceSetting().$Carosel$);
+				
 				System.out.println("carosel clicked");
 				actions("click", pom.getInstanceSetting().$Carosel$);
 				sleep(2500);
@@ -1430,7 +1313,7 @@ public class Lite_package extends Base {
 		System.out.println("exit market place");
 
 		ScriptExecutor($mrktplace$);
-		// notification
+		
 		try {
 
 			WebElement $$edit$$notify$$message$$ = driver
@@ -1476,21 +1359,21 @@ public class Lite_package extends Base {
 			// ScriptExecutor(auditReport);
 			visbility(driver, auditReport, 60);
 			elementClickable(auditReport);
-			click(auditReport);
+			clickIntercept(auditReport,30);
 		} catch (Exception e) {
 			WebElement auditReport = driver.findElement(By.xpath("//button[@onclick='setting.audit()']"));
 			// ScriptExecutor(auditReport);
 			visbility(driver, auditReport, 60);
 			elementClickable(auditReport);
-			click(auditReport);
+			clickIntercept(auditReport,30);
 		}
 		visbility(driver, pom.getInstanceSetting().subscribe, 50);
 		elementClickable(pom.getInstanceSetting().subscribe);
-		click(pom.getInstanceSetting().subscribe);
+		clickIntercept(pom.getInstanceSetting().subscribe,30);
 
 		visbility(driver, pom.getInstanceSetting().$editplan$, 60);
 		elementClickable(pom.getInstanceSetting().$editplan$);
-		click(pom.getInstanceSetting().$editplan$);
+		clickIntercept(pom.getInstanceSetting().$editplan$,30);
 
 		for (int i = 1; i <= 2; i++) {
 			try {

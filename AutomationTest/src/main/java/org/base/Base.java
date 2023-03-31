@@ -6,9 +6,12 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -35,6 +38,8 @@ public class Base {
 	public static WebDriver wd;
 	public String value;
 	static WebDriverWait wait;
+
+	public static String screenshotSubFolderName;
 
 	public static WebDriver setUp(String name) {
 
@@ -203,12 +208,30 @@ public class Base {
 	}
 
 	// take screenshot method...
-	public static void takeSnap() throws IOException {
+	public static String Screenshot( String Filename) {
+
+		/*
+		 * if(screenshotSubFolderName==null) {
+		 * 
+		 * LocalDateTime dateObj=LocalDateTime.now(); DateTimeFormatter
+		 * format=DateTimeFormatter.of }
+		 */
 
 		TakesScreenshot ts = (TakesScreenshot) wd;
-		File start = ts.getScreenshotAs(OutputType.FILE);
-		File end = new File(System.getProperty("user.dir") + "\\screenShots\\failureTest.png");
-		FileHandler.copy(start, end);
+		File sourceFile = ts.getScreenshotAs(OutputType.FILE);
+		File destFile = new File("./Screenshots/" + Filename+".png");
+		String path = destFile.getAbsolutePath();
+		System.out.println(destFile);
+		try {
+			FileUtils.copyFile(sourceFile, destFile);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+			System.out.println(e);
+		}
+
+		System.out.println("screen shot captured");
+		return path;
 	}
 
 	// alerts

@@ -157,7 +157,7 @@ public class Select_Your_plan extends LaunchBrowser {
 
 	}
 
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1)
 	private void home_VerifyAppointmentBookPaymentUi() {
 
 		sleep(4000);
@@ -244,7 +244,7 @@ public class Select_Your_plan extends LaunchBrowser {
 		sleep(2500);
 	}
 
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2)
 	private void patient_Module$() {
 		clickIntercept(pom.getInstanceNewPatient().$patienmod, 1000);
 
@@ -262,7 +262,7 @@ public class Select_Your_plan extends LaunchBrowser {
 
 	}
 
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3)
 	private void e_h_r() throws InterruptedException {
 
 		clickIntercept(pom.getInstanceHealthRec().clickHealthRec, 30);
@@ -282,7 +282,7 @@ public class Select_Your_plan extends LaunchBrowser {
 
 	}
 
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4)
 	private void calendar$$$() throws InterruptedException {
 
 		driver.navigate().to("https://localhost:8443/health/#calendar");
@@ -373,7 +373,7 @@ public class Select_Your_plan extends LaunchBrowser {
 
 	}
 
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5)
 	private void billing_$() {
 
 		visbility(driver, pom.getInstanceBilling().clickBill, 60);
@@ -433,7 +433,7 @@ public class Select_Your_plan extends LaunchBrowser {
 
 	}
 
-	@Test(priority = 7, enabled = false)
+	@Test(priority = 7)
 	private void message() {
 
 		clickIntercept(pom.getInstanceMessage().clickMessage, 30);

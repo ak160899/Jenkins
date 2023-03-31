@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Suite">
+
+	<test thread-count="1" name="Home_module_Testcase">
+		<classes>
+			<class name="org.PageModules.Home_Module"></class>
+		</classes>
+	</test>
+
+	<test name="Patient_Module_TestCase">
+
+		<classes>
+			<class name="org.PageModules.Patient_Module"></class>
+			
+
+		</classes>
+
+	</test>
+
+	//ehr
+
+	<test name="Health_Record_ui">
+
+	<classes>
+
+		<class name="com.healthRec.Tc_000_HealthRecordUi"></class>
+	</classes>
+
+</test>
+	<test name="Vitals">
+		<classes>
+			<class name="com.healthRec.Tc_001_Vitals"></class>
+		</classes>
+	</test>
+	<test name="Allergy">
+		<classes>
+			<class name="com.healthRec.Tc_002_Allergy"></class>
+		</classes>
+	</test>
+	<test name="SocailHistory">
+		<classes>
+			<class name="com.healthRec.Tc_003_SocialHistory"></class>
+		</classes>
+	</test>
+	<test name="FamilyHealth">
+		<classes>
+			<class name="com.healthRec.Tc_004_FamilyHealth"></class>
+		</classes>
+	</test>
+	<test name="Alert">
+		<classes>
+			<class name="com.healthRec.Tc_005_Alert"></class>
+		</classes>
+	</test>
+	<test name="VisitReason">
+		<classes>
+			<class name="com.healthRec.Tc_006_VisitReason"></class>
+		</classes>
+	</test>
+	<test name="Vaccine">
+		<classes>
+			<class name="com.healthRec.Tc_007_Vaccine"></class>
+		</classes>
+	</test>
+	<test name="ImplantableDevice">
+		<classes>
+
+			<class name="com.healthRec.Tc_008_ImplantableDevice"></class>
+		</classes>
+	</test>
+	<test name="Amendent">
+		<classes>
+			<class name="com.healthRec.Tc_009_Amendment"></class>
+		</classes>
+	</test>
+
+	<test name="problems">
+		<classes>
+			<class name="com.healthRec.Tc_010Problems"></class>
+		</classes>
+	</test>
+
+	<test name="Symptoms">
+		<classes>
+			<class name="com.healthRec.Tc_011_Symptoms"></class>
+		</classes>
+	</test>
+	<test name="proceudre">
+		<classes>
+			<class name="com.healthRec.Tc_012_Procedure"></class>
+		</classes>
+	</test>
+	<test name="Goals">
+		<classes>
+			<class name="com.healthRec.Tc_013_Goals"></class>
+		</classes>
+	</test>
+	<test name="AdvanceDirectives">
+		<classes>
+			<class name="com.healthRec.Tc_014_AdvanceDirectives"></class>
+		</classes>
+	</test>
+	<test name="Status">
+		<classes>
+			<class name="com.healthRec.Tc_015_Status"></class>
+		</classes>
+	</test>
+	<test name="TestOrder">
+		<classes>
+			<class name="com.healthRec.Tc_016_TestOrder"></class>
+		</classes>
+	</test>
+	<test name="Medication">
+		<classes>
+			<class name="com.healthRec.Tc_017_Medication"></class>
+		</classes>
+	</test>
+	<test name="Notes">
+		<classes>
+			<class name="com.healthRec.Tc_018_Notes"></class>
+		</classes>
+	</test>
+	<test name="PhysicalExamination">
+		<classes>
+			<class name="com.healthRec.Tc_019_PhysicalExamination"></class>
+		</classes>
+	</test>
+	<test name="Forms">
+		<classes>
+			<class name="com.healthRec.Tc_020_Forms"></class>
+		</classes>
+	</test>
+	<test name="AttachFile">
+		<classes>
+			<class name="com.healthRec.Tc_021_AttachFile"></class>
+		</classes>
+	</test>
+	<test name="Inpatinet">
+		<classes>
+			<class name="com.healthRec.Tc_022_Inpatient"></class>
+		</classes>
+	</test>
+	<test name="GenerateBillFromEhr">
+		<classes>
+			<class name="com.healthRec.Tc_023_GenerateBillFromEhr"></class>
+		</classes>
+	</test>
+
+
+	<test name="PastCuredAndCompleted">
+		<classes>
+			<class name="com.healthRec.Tc_024_GetPastCured_Complted"></class>
+		</classes>
+	</test>
+	
+	<test name="SaltScenarios">
+		<classes>
+			<class name="com.healthRec.Tc_026_saltScenarios"></class>
+		</classes>
+	</test>
+	
+
+	<test name="FAvoriteKpop2Scenario">
+		<classes>
+			<class name="com.healthRec.Tc_025_FavoriteKpopScenarios"></class>
+		</classes>
+	</test>
+	<test name="FollowUpCreate">
+		<classes>
+			<class name="com.healthRec.Tc_026_FollowUpEhr"></class>
+		</classes>
+	</test>
+
+	//end ehr over here...
+
+
+	<test name="Calendar_Testcases">
+		<classes>
+
+			<class name="org.PageModules.Calendar_Test"></class>
+		</classes>
+	</test>
+
+
+
+	<test name="Billing_TesTcase">
+		<classes>
+
+			<class name="org.PageModules.BillingModule"></class>
+		</classes>
+	</test>
+
+
+
+
+	<test name="TeleDoctor_TestCases">
+
+		<classes>
+
+			<class name="org.PageModules.TeleDoctor"></class>
+		</classes>
+	</test>
+
+
+
+
+
+	<test name="Message_TestCases">
+
+		<classes>
+
+			<class name="org.PageModules.Message"></class>
+		</classes>
+
+	</test>
+
+
+
+	<test name="Setting_TestCases">
+		<classes>
+
+			<class name="org.PageModules.Settings"></class>
+		</classes>
+	</test>
+
+
+
+
+</suite> 

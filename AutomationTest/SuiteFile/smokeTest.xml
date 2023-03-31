@@ -12,14 +12,14 @@
 			<run>
 				<include name="before"></include>
 				<include name="home"></include>
-				<include name="patient"></include>
+				<!-- <include name="patient"></include>
 				<include name="healthrec"></include>
 				<include name="calendar"></include>
 				<include name="billing"></include>
 				<include name="teledoctor"></include>
 				<include name="message"></include>
 
-				<include name="settings"></include>
+				<include name="settings"></include> -->
 			</run>
 
 
@@ -27,7 +27,7 @@
 		</groups>
 
 		<classes>
-			<class name="runner.Local_Host" />
+			<class name="org.SmokeTesting.Local_Host" />
 		</classes>
 
 	</test> <!-- Test -->

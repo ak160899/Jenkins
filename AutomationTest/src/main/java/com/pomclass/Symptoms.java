@@ -29,8 +29,14 @@ public class Symptoms {
 	@FindBy(xpath = "(//div[text()='R76.1: Abnormal reaction to tuberculin test'])[1]")
 	public WebElement curePast;
 
+	@FindBy(xpath = "//div[text()='covid']")
+	public List<WebElement> curePastBasic;
+
 	@FindBy(xpath = "(//div[text()='R76.1: Abnormal reaction to tuberculin test'])[1]//following::div[10]//following::div[1]/span[1]")
 	public WebElement yesCure;
+
+	@FindBy(css = "span#yes-btn")
+	public List<WebElement> yesCureBasic;
 
 	@FindBy(xpath = "//div[contains(@title,'Add Symptoms')]//following::div[1]")
 	public WebElement ellipses;
@@ -61,21 +67,22 @@ public class Symptoms {
 
 	@FindBy(id = "accept-btn")
 	public WebElement favoriteSave;
-	
+
 	@FindBy(xpath = "(//div[text()='R76.1: Abnormal reaction to tuberculin test'])[2]")
 	public WebElement editFavorite;
 	
+	@FindBy(xpath = "//div[text()='symptoms favorite']")
+	public List<WebElement> editFavoriteBasic;
+
 	@FindBy(xpath = "//span[text()='R76.1']//following::span[1]")
 	public WebElement removeFavoriteIcd;
-	
-	
+
 	@FindBy(xpath = "(//span[contains(@title,'Add this symptom')])[1]")
 	public WebElement addThisFavorite;
-	
-	
+
 	@FindBy(xpath = "//div[@id='SymptomsFavKpop2']/div[1]/div[1]//following::span[1]")
 	public WebElement closeFavorite;
-	
+
 	public Symptoms(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);

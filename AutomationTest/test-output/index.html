@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -38,7 +38,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" class="navigator-link" panel-name="suite-Suite">
-              <span class="suite-name border-passed">Suite</span>
+              <span class="suite-name border-failed">Suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -49,17 +49,17 @@
               <ul>
                 <li>
                   <a href="#" class="navigator-link " panel-name="test-xml-Suite">
-                    <span>E:\AutomationTest 15022023(localrepo)\AutomationTest\SuiteFile\smokeTest.xml</span>
+                    <span>E:\AutomationTest 15022023(localrepo)\AutomationTest\SmokeTesting.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
                   <a href="#" class="navigator-link " panel-name="testlist-Suite">
-                    <span class="test-stats">1 test</span>
+                    <span class="test-stats">35 tests</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
                   <a href="#" class="navigator-link " panel-name="group-Suite">
-                    <span>8 groups</span>
+                    <span>0 groups</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -91,7 +91,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">8 methods,   8 passed</span>
+                    <span class="method-stats">57 methods, 1 failed,   56 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Suite" class="hide-methods failed suite-Suite"> (hide)</a> <!-- hide-methods failed suite-Suite -->
+                      <a href="#" panel-name="suite-Suite" class="show-methods failed suite-Suite"> (show)</a> <!-- show-methods failed suite-Suite -->
+                    </span>
+                    <div class="method-list-content failed suite-Suite">
+                      <span>
+                        <img width="3%" src="failed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.Patient_Module" hash-for-method="patientCreation">patientCreation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Suite -->
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -102,42 +116,282 @@
                     <div class="method-list-content passed suite-Suite">
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="runner.Local_Host" hash-for-method="BillingModule">BillingModule</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_020_Forms" hash-for-method="$addForm">$addForm</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="runner.Local_Host" hash-for-method="HealthRec">HealthRec</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_016_TestOrder" hash-for-method="$addTestOrder">$addTestOrder</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="runner.Local_Host" hash-for-method="HomeModule">HomeModule</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_026_FollowUpEhr" hash-for-method="$createFollowup">$createFollowup</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="runner.Local_Host" hash-for-method="Message">Message</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.BillingModule" hash-for-method="BillingModue">BillingModue</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="runner.Local_Host" hash-for-method="PatientModule">PatientModule</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_014_AdvanceDirectives" hash-for-method="addAdvnceDiretivesAdd_EditAndSave">addAdvnceDiretivesAdd_EditAndSave</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="runner.Local_Host" hash-for-method="Settings">Settings</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_013_Goals" hash-for-method="addGoals_Edit_Save">addGoals_Edit_Save</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="runner.Local_Host" hash-for-method="TeleDoctor">TeleDoctor</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_022_Inpatient" hash-for-method="addInpatient_Edit_Save">addInpatient_Edit_Save</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="runner.Local_Host" hash-for-method="calendar">calendar</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_017_Medication" hash-for-method="addMedication_Edit_Save">addMedication_Edit_Save</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_018_Notes" hash-for-method="addNotes_Edit_Save">addNotes_Edit_Save</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_019_PhysicalExamination" hash-for-method="addPhysicalExamination_Edit_Save">addPhysicalExamination_Edit_Save</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_012_Procedure" hash-for-method="addProcedure_Edit_Save">addProcedure_Edit_Save</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_015_Status" hash-for-method="addStatus_Edit_Save">addStatus_Edit_Save</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_011_Symptoms" hash-for-method="addSymptoms_Edit_Save">addSymptoms_Edit_Save</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_010Problems" hash-for-method="addproblems_Edit_Save">addproblems_Edit_Save</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.Patient_Module" hash-for-method="alternateContact">alternateContact</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_021_AttachFile" hash-for-method="attachFileAdd_SaveAndEdit">attachFileAdd_SaveAndEdit</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.Home_Module" hash-for-method="bookAppointment">bookAppointment</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.Calendar_Test" hash-for-method="bookAppointment">bookAppointment</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.TeleDoctor" hash-for-method="callPatient">callPatient</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.Patient_Module" hash-for-method="contactInfo">contactInfo</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.TeleDoctor" hash-for-method="createNewPatient">createNewPatient</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_025_FavoriteKpopScenarios" hash-for-method="favoriteAdvaceDirectives">favoriteAdvaceDirectives</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_025_FavoriteKpopScenarios" hash-for-method="favoriteGoals">favoriteGoals</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_025_FavoriteKpopScenarios" hash-for-method="favoriteNotes">favoriteNotes</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_025_FavoriteKpopScenarios" hash-for-method="favoritePhusicalExamination">favoritePhusicalExamination</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_025_FavoriteKpopScenarios" hash-for-method="favoriteProblems">favoriteProblems</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_025_FavoriteKpopScenarios" hash-for-method="favoriteProcedure">favoriteProcedure</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_025_FavoriteKpopScenarios" hash-for-method="favoriteStatus">favoriteStatus</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_025_FavoriteKpopScenarios" hash-for-method="favoriteSympytoms">favoriteSympytoms</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_025_FavoriteKpopScenarios" hash-for-method="favoriteVaccine">favoriteVaccine</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_025_FavoriteKpopScenarios" hash-for-method="favoriteVisitReason">favoriteVisitReason</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.Message" hash-for-method="messageModule">messageModule</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.Calendar_Test" hash-for-method="navigateToCalendar">navigateToCalendar</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_024_GetPastCured_Complted" hash-for-method="pastCuredProcedure">pastCuredProcedure</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_024_GetPastCured_Complted" hash-for-method="pastGoals">pastGoals</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_024_GetPastCured_Complted" hash-for-method="pastMedication">pastMedication</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_024_GetPastCured_Complted" hash-for-method="pastSymptoms">pastSymptoms</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_024_GetPastCured_Complted" hash-for-method="pastVaccine">pastVaccine</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.Home_Module" hash-for-method="patientCreation">patientCreation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.Patient_Module" hash-for-method="patientInfo">patientInfo</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_026_saltScenarios" hash-for-method="saltScenarios">saltScenarios</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.Settings" hash-for-method="settingsModule">settingsModule</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_000_HealthRecordUi" hash-for-method="tc_001_verifyTheHaelthRecordCount">tc_001_verifyTheHaelthRecordCount</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_001_Vitals" hash-for-method="tc_002_addVitals_Edit_Save">tc_002_addVitals_Edit_Save</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_002_Allergy" hash-for-method="tc_003_addAllergy_Edit_Save">tc_003_addAllergy_Edit_Save</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_003_SocialHistory" hash-for-method="tc_004_addSocialHistory_Edit_Save">tc_004_addSocialHistory_Edit_Save</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_004_FamilyHealth" hash-for-method="tc_005_addFamilyHealth_Edit_Save">tc_005_addFamilyHealth_Edit_Save</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_005_Alert" hash-for-method="tc_006_addAlertEditAndSave">tc_006_addAlertEditAndSave</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_006_VisitReason" hash-for-method="tc_007_addVisitReason_Edit_Save">tc_007_addVisitReason_Edit_Save</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_007_Vaccine" hash-for-method="tc_008_addVaccine_Edit_Save">tc_008_addVaccine_Edit_Save</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_008_ImplantableDevice" hash-for-method="tc_009_addSaveAndEditImplantableDevice">tc_009_addSaveAndEditImplantableDevice</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_009_Amendment" hash-for-method="tc_010_addAmendent_Edit_Save">tc_010_addAmendent_Edit_Save</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_000_HealthRecordUi" hash-for-method="verifyAndShowTheHidedOptions">verifyAndShowTheHidedOptions</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.Patient_Module" hash-for-method="verifyFilterSearchAndCcdImport">verifyFilterSearchAndCcdImport</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.PageModules.Patient_Module" hash-for-method="verifyPatientSaerchAndClick">verifyPatientSaerchAndClick</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.healthRec.Tc_023_GenerateBillFromEhr" hash-for-method="verifyTheGenerteBill">verifyTheGenerteBill</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -152,66 +406,710 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Suite" class="panel Suite">
-          <div class="suite-Suite-class-passed">
+          <div class="suite-Suite-class-failed">
             <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
-              <span class="class-name">runner.Local_Host</span>
+              <img src="failed.png"/>
+              <span class="class-name">org.PageModules.Patient_Module</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="BillingModule">
-                  </a> <!-- BillingModule -->
-                  <span class="method-name">BillingModule</span>
+                  <a name="patientCreation">
+                  </a> <!-- patientCreation -->
+                  <span class="method-name">patientCreation</span>
+                  <div class="stack-trace">org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element &lt;button id=&quot;gender_dropdown&quot; class=&quot;dropdown-toggle settings-heading settings-buttonColor settings-button&quot; style=&quot;width:100%;&quot; data-toggle=&quot;dropdown&quot; aria-expanded=&quot;false&quot;&gt;...&lt;/button&gt; is not clickable at point (650, 297). Other element would receive the click: &lt;div id=&quot;--working--&quot; class=&quot;center-cont&quot; style=&quot;width: 100%; height: 100vh; position: fixed; left: 0px; top: 0px; z-index: 1030; background-color: rgba(239, 239, 239, 0.5); overflow: hidden !important; display: flex;&quot;&gt;...&lt;/div&gt;
+  (Session info: chrome=111.0.5563.147)
+Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
+System info: host: &apos;LAPTOP-Q33L4MJO&apos;, ip: &apos;192.168.29.33&apos;, os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_331&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 111.0.5563.147, chrome: {chromedriverVersion: 111.0.5563.64 (c710e93d5b63..., userDataDir: C:\Users\keert\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:56449}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 03f033f6a3f4f67731e4f20b027d6447
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:285)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:84)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at com.sun.proxy.$Proxy14.click(Unknown Source)
+	at org.base.Base.click(Base.java:83)
+	at org.PageModules.Patient_Module.patientCreation(Patient_Module.java:31)
+... Removed 33 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-failed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_023_GenerateBillFromEhr</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyTheGenerteBill">
+                  </a> <!-- verifyTheGenerteBill -->
+                  <span class="method-name">verifyTheGenerteBill</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">org.PageModules.Patient_Module</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="alternateContact">
+                  </a> <!-- alternateContact -->
+                  <span class="method-name">alternateContact</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="HealthRec">
-                  </a> <!-- HealthRec -->
-                  <span class="method-name">HealthRec</span>
+                  <a name="contactInfo">
+                  </a> <!-- contactInfo -->
+                  <span class="method-name">contactInfo</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="HomeModule">
-                  </a> <!-- HomeModule -->
-                  <span class="method-name">HomeModule</span>
+                  <a name="patientInfo">
+                  </a> <!-- patientInfo -->
+                  <span class="method-name">patientInfo</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="Message">
-                  </a> <!-- Message -->
-                  <span class="method-name">Message</span>
+                  <a name="verifyFilterSearchAndCcdImport">
+                  </a> <!-- verifyFilterSearchAndCcdImport -->
+                  <span class="method-name">verifyFilterSearchAndCcdImport</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="PatientModule">
-                  </a> <!-- PatientModule -->
-                  <span class="method-name">PatientModule</span>
+                  <a name="verifyPatientSaerchAndClick">
+                  </a> <!-- verifyPatientSaerchAndClick -->
+                  <span class="method-name">verifyPatientSaerchAndClick</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_009_Amendment</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_010_addAmendent_Edit_Save">
+                  </a> <!-- tc_010_addAmendent_Edit_Save -->
+                  <span class="method-name">tc_010_addAmendent_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_021_AttachFile</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="attachFileAdd_SaveAndEdit">
+                  </a> <!-- attachFileAdd_SaveAndEdit -->
+                  <span class="method-name">attachFileAdd_SaveAndEdit</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_017_Medication</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="addMedication_Edit_Save">
+                  </a> <!-- addMedication_Edit_Save -->
+                  <span class="method-name">addMedication_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_026_saltScenarios</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="saltScenarios">
+                  </a> <!-- saltScenarios -->
+                  <span class="method-name">saltScenarios</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_001_Vitals</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_002_addVitals_Edit_Save">
+                  </a> <!-- tc_002_addVitals_Edit_Save -->
+                  <span class="method-name">tc_002_addVitals_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_026_FollowUpEhr</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="$createFollowup">
+                  </a> <!-- $createFollowup -->
+                  <span class="method-name">$createFollowup</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_005_Alert</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_006_addAlertEditAndSave">
+                  </a> <!-- tc_006_addAlertEditAndSave -->
+                  <span class="method-name">tc_006_addAlertEditAndSave</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_010Problems</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="addproblems_Edit_Save">
+                  </a> <!-- addproblems_Edit_Save -->
+                  <span class="method-name">addproblems_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_024_GetPastCured_Complted</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="pastCuredProcedure">
+                  </a> <!-- pastCuredProcedure -->
+                  <span class="method-name">pastCuredProcedure</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="Settings">
-                  </a> <!-- Settings -->
-                  <span class="method-name">Settings</span>
+                  <a name="pastGoals">
+                  </a> <!-- pastGoals -->
+                  <span class="method-name">pastGoals</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="TeleDoctor">
-                  </a> <!-- TeleDoctor -->
-                  <span class="method-name">TeleDoctor</span>
+                  <a name="pastMedication">
+                  </a> <!-- pastMedication -->
+                  <span class="method-name">pastMedication</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="calendar">
-                  </a> <!-- calendar -->
-                  <span class="method-name">calendar</span>
+                  <a name="pastSymptoms">
+                  </a> <!-- pastSymptoms -->
+                  <span class="method-name">pastSymptoms</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="pastVaccine">
+                  </a> <!-- pastVaccine -->
+                  <span class="method-name">pastVaccine</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_002_Allergy</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_003_addAllergy_Edit_Save">
+                  </a> <!-- tc_003_addAllergy_Edit_Save -->
+                  <span class="method-name">tc_003_addAllergy_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">org.PageModules.TeleDoctor</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="callPatient">
+                  </a> <!-- callPatient -->
+                  <span class="method-name">callPatient</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="createNewPatient">
+                  </a> <!-- createNewPatient -->
+                  <span class="method-name">createNewPatient</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_003_SocialHistory</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_004_addSocialHistory_Edit_Save">
+                  </a> <!-- tc_004_addSocialHistory_Edit_Save -->
+                  <span class="method-name">tc_004_addSocialHistory_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_015_Status</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="addStatus_Edit_Save">
+                  </a> <!-- addStatus_Edit_Save -->
+                  <span class="method-name">addStatus_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">org.PageModules.Home_Module</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="bookAppointment">
+                  </a> <!-- bookAppointment -->
+                  <span class="method-name">bookAppointment</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="patientCreation">
+                  </a> <!-- patientCreation -->
+                  <span class="method-name">patientCreation</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_004_FamilyHealth</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_005_addFamilyHealth_Edit_Save">
+                  </a> <!-- tc_005_addFamilyHealth_Edit_Save -->
+                  <span class="method-name">tc_005_addFamilyHealth_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_007_Vaccine</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_008_addVaccine_Edit_Save">
+                  </a> <!-- tc_008_addVaccine_Edit_Save -->
+                  <span class="method-name">tc_008_addVaccine_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">org.PageModules.BillingModule</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="BillingModue">
+                  </a> <!-- BillingModue -->
+                  <span class="method-name">BillingModue</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_012_Procedure</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="addProcedure_Edit_Save">
+                  </a> <!-- addProcedure_Edit_Save -->
+                  <span class="method-name">addProcedure_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">org.PageModules.Settings</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="settingsModule">
+                  </a> <!-- settingsModule -->
+                  <span class="method-name">settingsModule</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_000_HealthRecordUi</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_001_verifyTheHaelthRecordCount">
+                  </a> <!-- tc_001_verifyTheHaelthRecordCount -->
+                  <span class="method-name">tc_001_verifyTheHaelthRecordCount</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="verifyAndShowTheHidedOptions">
+                  </a> <!-- verifyAndShowTheHidedOptions -->
+                  <span class="method-name">verifyAndShowTheHidedOptions</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_016_TestOrder</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="$addTestOrder">
+                  </a> <!-- $addTestOrder -->
+                  <span class="method-name">$addTestOrder</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_020_Forms</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="$addForm">
+                  </a> <!-- $addForm -->
+                  <span class="method-name">$addForm</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">org.PageModules.Calendar_Test</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="bookAppointment">
+                  </a> <!-- bookAppointment -->
+                  <span class="method-name">bookAppointment</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="navigateToCalendar">
+                  </a> <!-- navigateToCalendar -->
+                  <span class="method-name">navigateToCalendar</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_014_AdvanceDirectives</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="addAdvnceDiretivesAdd_EditAndSave">
+                  </a> <!-- addAdvnceDiretivesAdd_EditAndSave -->
+                  <span class="method-name">addAdvnceDiretivesAdd_EditAndSave</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">org.PageModules.Message</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="messageModule">
+                  </a> <!-- messageModule -->
+                  <span class="method-name">messageModule</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_008_ImplantableDevice</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_009_addSaveAndEditImplantableDevice">
+                  </a> <!-- tc_009_addSaveAndEditImplantableDevice -->
+                  <span class="method-name">tc_009_addSaveAndEditImplantableDevice</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_018_Notes</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="addNotes_Edit_Save">
+                  </a> <!-- addNotes_Edit_Save -->
+                  <span class="method-name">addNotes_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_006_VisitReason</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_007_addVisitReason_Edit_Save">
+                  </a> <!-- tc_007_addVisitReason_Edit_Save -->
+                  <span class="method-name">tc_007_addVisitReason_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_011_Symptoms</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="addSymptoms_Edit_Save">
+                  </a> <!-- addSymptoms_Edit_Save -->
+                  <span class="method-name">addSymptoms_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_022_Inpatient</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="addInpatient_Edit_Save">
+                  </a> <!-- addInpatient_Edit_Save -->
+                  <span class="method-name">addInpatient_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_013_Goals</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="addGoals_Edit_Save">
+                  </a> <!-- addGoals_Edit_Save -->
+                  <span class="method-name">addGoals_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_019_PhysicalExamination</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="addPhysicalExamination_Edit_Save">
+                  </a> <!-- addPhysicalExamination_Edit_Save -->
+                  <span class="method-name">addPhysicalExamination_Edit_Save</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.healthRec.Tc_025_FavoriteKpopScenarios</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="favoriteAdvaceDirectives">
+                  </a> <!-- favoriteAdvaceDirectives -->
+                  <span class="method-name">favoriteAdvaceDirectives</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="favoriteGoals">
+                  </a> <!-- favoriteGoals -->
+                  <span class="method-name">favoriteGoals</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="favoriteNotes">
+                  </a> <!-- favoriteNotes -->
+                  <span class="method-name">favoriteNotes</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="favoritePhusicalExamination">
+                  </a> <!-- favoritePhusicalExamination -->
+                  <span class="method-name">favoritePhusicalExamination</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="favoriteProblems">
+                  </a> <!-- favoriteProblems -->
+                  <span class="method-name">favoriteProblems</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="favoriteProcedure">
+                  </a> <!-- favoriteProcedure -->
+                  <span class="method-name">favoriteProcedure</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="favoriteStatus">
+                  </a> <!-- favoriteStatus -->
+                  <span class="method-name">favoriteStatus</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="favoriteSympytoms">
+                  </a> <!-- favoriteSympytoms -->
+                  <span class="method-name">favoriteSympytoms</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="favoriteVaccine">
+                  </a> <!-- favoriteVaccine -->
+                  <span class="method-name">favoriteVaccine</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="favoriteVisitReason">
+                  </a> <!-- favoriteVisitReason -->
+                  <span class="method-name">favoriteVisitReason</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -219,31 +1117,188 @@
         </div> <!-- panel Suite -->
         <div panel-name="test-xml-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">E:\AutomationTest 15022023(localrepo)\AutomationTest\SuiteFile\smokeTest.xml</span>
+            <span class="header-content">E:\AutomationTest 15022023(localrepo)\AutomationTest\SmokeTesting.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
-&lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;Suite&quot;&gt;
-  &lt;test thread-count=&quot;1&quot; name=&quot;Test&quot;&gt;
-    &lt;groups&gt;
-      &lt;run&gt;
-        &lt;include name=&quot;before&quot;/&gt;
-        &lt;include name=&quot;home&quot;/&gt;
-        &lt;include name=&quot;patient&quot;/&gt;
-        &lt;include name=&quot;healthrec&quot;/&gt;
-        &lt;include name=&quot;calendar&quot;/&gt;
-        &lt;include name=&quot;billing&quot;/&gt;
-        &lt;include name=&quot;teledoctor&quot;/&gt;
-        &lt;include name=&quot;message&quot;/&gt;
-        &lt;include name=&quot;settings&quot;/&gt;
-      &lt;/run&gt;
-    &lt;/groups&gt;
+&lt;suite name=&quot;Suite&quot;&gt;
+  &lt;test thread-count=&quot;1&quot; name=&quot;Home_module_Testcase&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;runner.Local_Host&quot;/&gt;
+      &lt;class name=&quot;org.PageModules.Home_Module&quot;/&gt;
     &lt;/classes&gt;
-  &lt;/test&gt; &lt;!-- Test --&gt;
+  &lt;/test&gt; &lt;!-- Home_module_Testcase --&gt;
+  &lt;test name=&quot;Patient_Module_TestCase&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;org.PageModules.Patient_Module&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Patient_Module_TestCase --&gt;
+  &lt;test name=&quot;Health_Record_ui&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_000_HealthRecordUi&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Health_Record_ui --&gt;
+  &lt;test name=&quot;Vitals&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_001_Vitals&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Vitals --&gt;
+  &lt;test name=&quot;Allergy&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_002_Allergy&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Allergy --&gt;
+  &lt;test name=&quot;SocailHistory&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_003_SocialHistory&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- SocailHistory --&gt;
+  &lt;test name=&quot;FamilyHealth&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_004_FamilyHealth&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- FamilyHealth --&gt;
+  &lt;test name=&quot;Alert&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_005_Alert&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Alert --&gt;
+  &lt;test name=&quot;VisitReason&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_006_VisitReason&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- VisitReason --&gt;
+  &lt;test name=&quot;Vaccine&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_007_Vaccine&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Vaccine --&gt;
+  &lt;test name=&quot;ImplantableDevice&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_008_ImplantableDevice&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- ImplantableDevice --&gt;
+  &lt;test name=&quot;Amendent&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_009_Amendment&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Amendent --&gt;
+  &lt;test name=&quot;problems&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_010Problems&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- problems --&gt;
+  &lt;test name=&quot;Symptoms&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_011_Symptoms&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Symptoms --&gt;
+  &lt;test name=&quot;proceudre&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_012_Procedure&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- proceudre --&gt;
+  &lt;test name=&quot;Goals&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_013_Goals&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Goals --&gt;
+  &lt;test name=&quot;AdvanceDirectives&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_014_AdvanceDirectives&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- AdvanceDirectives --&gt;
+  &lt;test name=&quot;Status&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_015_Status&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Status --&gt;
+  &lt;test name=&quot;TestOrder&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_016_TestOrder&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- TestOrder --&gt;
+  &lt;test name=&quot;Medication&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_017_Medication&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Medication --&gt;
+  &lt;test name=&quot;Notes&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_018_Notes&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Notes --&gt;
+  &lt;test name=&quot;PhysicalExamination&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_019_PhysicalExamination&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- PhysicalExamination --&gt;
+  &lt;test name=&quot;Forms&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_020_Forms&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Forms --&gt;
+  &lt;test name=&quot;AttachFile&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_021_AttachFile&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- AttachFile --&gt;
+  &lt;test name=&quot;Inpatinet&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_022_Inpatient&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Inpatinet --&gt;
+  &lt;test name=&quot;GenerateBillFromEhr&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_023_GenerateBillFromEhr&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- GenerateBillFromEhr --&gt;
+  &lt;test name=&quot;PastCuredAndCompleted&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_024_GetPastCured_Complted&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- PastCuredAndCompleted --&gt;
+  &lt;test name=&quot;SaltScenarios&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_026_saltScenarios&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- SaltScenarios --&gt;
+  &lt;test name=&quot;FAvoriteKpop2Scenario&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_025_FavoriteKpopScenarios&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- FAvoriteKpop2Scenario --&gt;
+  &lt;test name=&quot;FollowUpCreate&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.healthRec.Tc_026_FollowUpEhr&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- FollowUpCreate --&gt;
+  &lt;test name=&quot;Calendar_Testcases&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;org.PageModules.Calendar_Test&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Calendar_Testcases --&gt;
+  &lt;test name=&quot;Billing_TesTcase&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;org.PageModules.BillingModule&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Billing_TesTcase --&gt;
+  &lt;test name=&quot;TeleDoctor_TestCases&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;org.PageModules.TeleDoctor&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- TeleDoctor_TestCases --&gt;
+  &lt;test name=&quot;Message_TestCases&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;org.PageModules.Message&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Message_TestCases --&gt;
+  &lt;test name=&quot;Setting_TestCases&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;org.PageModules.Settings&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Setting_TestCases --&gt;
 &lt;/suite&gt; &lt;!-- Suite --&gt;
             </pre>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -255,7 +1310,109 @@
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">Test (1 class)</span>
+                <span class="test-name">Home_module_Testcase (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Patient_Module_TestCase (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Health_Record_ui (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Vitals (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Allergy (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">SocailHistory (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">FamilyHealth (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Alert (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">VisitReason (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Vaccine (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">ImplantableDevice (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Amendent (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">problems (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Symptoms (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">proceudre (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Goals (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">AdvanceDirectives (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Status (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">TestOrder (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Medication (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Notes (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">PhysicalExamination (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Forms (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">AttachFile (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Inpatinet (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">GenerateBillFromEhr (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">PastCuredAndCompleted (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">SaltScenarios (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">FAvoriteKpop2Scenario (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">FollowUpCreate (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Calendar_Testcases (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Billing_TesTcase (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">TeleDoctor_TestCases (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Message_TestCases (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">Setting_TestCases (1 class)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -265,70 +1422,6 @@
             <span class="header-content">Groups for Suite</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
-            <div class="test-group">
-              <span class="test-group-name">billing</span>
-              <br/>
-              <div class="method-in-group">
-                <span class="method-in-group-name">BillingModule</span>
-                <br/>
-              </div> <!-- method-in-group -->
-            </div> <!-- test-group -->
-            <div class="test-group">
-              <span class="test-group-name">calendar</span>
-              <br/>
-              <div class="method-in-group">
-                <span class="method-in-group-name">calendar</span>
-                <br/>
-              </div> <!-- method-in-group -->
-            </div> <!-- test-group -->
-            <div class="test-group">
-              <span class="test-group-name">healthrec</span>
-              <br/>
-              <div class="method-in-group">
-                <span class="method-in-group-name">HealthRec</span>
-                <br/>
-              </div> <!-- method-in-group -->
-            </div> <!-- test-group -->
-            <div class="test-group">
-              <span class="test-group-name">home</span>
-              <br/>
-              <div class="method-in-group">
-                <span class="method-in-group-name">HomeModule</span>
-                <br/>
-              </div> <!-- method-in-group -->
-            </div> <!-- test-group -->
-            <div class="test-group">
-              <span class="test-group-name">message</span>
-              <br/>
-              <div class="method-in-group">
-                <span class="method-in-group-name">Message</span>
-                <br/>
-              </div> <!-- method-in-group -->
-            </div> <!-- test-group -->
-            <div class="test-group">
-              <span class="test-group-name">patient</span>
-              <br/>
-              <div class="method-in-group">
-                <span class="method-in-group-name">PatientModule</span>
-                <br/>
-              </div> <!-- method-in-group -->
-            </div> <!-- test-group -->
-            <div class="test-group">
-              <span class="test-group-name">settings</span>
-              <br/>
-              <div class="method-in-group">
-                <span class="method-in-group-name">Settings</span>
-                <br/>
-              </div> <!-- method-in-group -->
-            </div> <!-- test-group -->
-            <div class="test-group">
-              <span class="test-group-name">teledoctor</span>
-              <br/>
-              <div class="method-in-group">
-                <span class="method-in-group-name">TeleDoctor</span>
-                <br/>
-              </div> <!-- method-in-group -->
-            </div> <!-- test-group -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="times-Suite" class="panel">
@@ -345,44 +1438,240 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(8);
+data.addRows(57);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'HealthRec')
-data.setCell(0, 2, 'runner.Local_Host')
-data.setCell(0, 3, 456749);
+data.setCell(0, 1, 'settingsModule')
+data.setCell(0, 2, 'org.PageModules.Settings')
+data.setCell(0, 3, 215558);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'Settings')
-data.setCell(1, 2, 'runner.Local_Host')
-data.setCell(1, 3, 369366);
+data.setCell(1, 1, 'saltScenarios')
+data.setCell(1, 2, 'com.healthRec.Tc_026_saltScenarios')
+data.setCell(1, 3, 53425);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'calendar')
-data.setCell(2, 2, 'runner.Local_Host')
-data.setCell(2, 3, 64085);
+data.setCell(2, 1, 'BillingModue')
+data.setCell(2, 2, 'org.PageModules.BillingModule')
+data.setCell(2, 3, 52470);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'BillingModule')
-data.setCell(3, 2, 'runner.Local_Host')
-data.setCell(3, 3, 62761);
+data.setCell(3, 1, '$addForm')
+data.setCell(3, 2, 'com.healthRec.Tc_020_Forms')
+data.setCell(3, 3, 40422);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'HomeModule')
-data.setCell(4, 2, 'runner.Local_Host')
-data.setCell(4, 3, 62701);
+data.setCell(4, 1, 'favoriteProblems')
+data.setCell(4, 2, 'com.healthRec.Tc_025_FavoriteKpopScenarios')
+data.setCell(4, 3, 25577);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'Message')
-data.setCell(5, 2, 'runner.Local_Host')
-data.setCell(5, 3, 35387);
+data.setCell(5, 1, 'bookAppointment')
+data.setCell(5, 2, 'org.PageModules.Calendar_Test')
+data.setCell(5, 3, 24294);
 data.setCell(6, 0, 6)
-data.setCell(6, 1, 'PatientModule')
-data.setCell(6, 2, 'runner.Local_Host')
-data.setCell(6, 3, 27273);
+data.setCell(6, 1, 'bookAppointment')
+data.setCell(6, 2, 'org.PageModules.Home_Module')
+data.setCell(6, 3, 23400);
 data.setCell(7, 0, 7)
-data.setCell(7, 1, 'TeleDoctor')
-data.setCell(7, 2, 'runner.Local_Host')
-data.setCell(7, 3, 21047);
+data.setCell(7, 1, 'navigateToCalendar')
+data.setCell(7, 2, 'org.PageModules.Calendar_Test')
+data.setCell(7, 3, 23320);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'addMedication_Edit_Save')
+data.setCell(8, 2, 'com.healthRec.Tc_017_Medication')
+data.setCell(8, 3, 19549);
+data.setCell(9, 0, 9)
+data.setCell(9, 1, 'messageModule')
+data.setCell(9, 2, 'org.PageModules.Message')
+data.setCell(9, 3, 18769);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'favoritePhusicalExamination')
+data.setCell(10, 2, 'com.healthRec.Tc_025_FavoriteKpopScenarios')
+data.setCell(10, 3, 13186);
+data.setCell(11, 0, 11)
+data.setCell(11, 1, 'verifyAndShowTheHidedOptions')
+data.setCell(11, 2, 'com.healthRec.Tc_000_HealthRecordUi')
+data.setCell(11, 3, 12391);
+data.setCell(12, 0, 12)
+data.setCell(12, 1, 'addproblems_Edit_Save')
+data.setCell(12, 2, 'com.healthRec.Tc_010Problems')
+data.setCell(12, 3, 12029);
+data.setCell(13, 0, 13)
+data.setCell(13, 1, 'createNewPatient')
+data.setCell(13, 2, 'org.PageModules.TeleDoctor')
+data.setCell(13, 3, 11896);
+data.setCell(14, 0, 14)
+data.setCell(14, 1, '$createFollowup')
+data.setCell(14, 2, 'com.healthRec.Tc_026_FollowUpEhr')
+data.setCell(14, 3, 11632);
+data.setCell(15, 0, 15)
+data.setCell(15, 1, 'callPatient')
+data.setCell(15, 2, 'org.PageModules.TeleDoctor')
+data.setCell(15, 3, 11392);
+data.setCell(16, 0, 16)
+data.setCell(16, 1, 'tc_001_verifyTheHaelthRecordCount')
+data.setCell(16, 2, 'com.healthRec.Tc_000_HealthRecordUi')
+data.setCell(16, 3, 11162);
+data.setCell(17, 0, 17)
+data.setCell(17, 1, 'favoriteProcedure')
+data.setCell(17, 2, 'com.healthRec.Tc_025_FavoriteKpopScenarios')
+data.setCell(17, 3, 10956);
+data.setCell(18, 0, 18)
+data.setCell(18, 1, 'pastMedication')
+data.setCell(18, 2, 'com.healthRec.Tc_024_GetPastCured_Complted')
+data.setCell(18, 3, 10258);
+data.setCell(19, 0, 19)
+data.setCell(19, 1, 'favoriteVaccine')
+data.setCell(19, 2, 'com.healthRec.Tc_025_FavoriteKpopScenarios')
+data.setCell(19, 3, 10133);
+data.setCell(20, 0, 20)
+data.setCell(20, 1, 'verifyTheGenerteBill')
+data.setCell(20, 2, 'com.healthRec.Tc_023_GenerateBillFromEhr')
+data.setCell(20, 3, 9973);
+data.setCell(21, 0, 21)
+data.setCell(21, 1, 'favoriteAdvaceDirectives')
+data.setCell(21, 2, 'com.healthRec.Tc_025_FavoriteKpopScenarios')
+data.setCell(21, 3, 9921);
+data.setCell(22, 0, 22)
+data.setCell(22, 1, 'favoriteSympytoms')
+data.setCell(22, 2, 'com.healthRec.Tc_025_FavoriteKpopScenarios')
+data.setCell(22, 3, 8789);
+data.setCell(23, 0, 23)
+data.setCell(23, 1, 'patientCreation')
+data.setCell(23, 2, 'org.PageModules.Home_Module')
+data.setCell(23, 3, 8154);
+data.setCell(24, 0, 24)
+data.setCell(24, 1, 'contactInfo')
+data.setCell(24, 2, 'org.PageModules.Patient_Module')
+data.setCell(24, 3, 8054);
+data.setCell(25, 0, 25)
+data.setCell(25, 1, 'pastVaccine')
+data.setCell(25, 2, 'com.healthRec.Tc_024_GetPastCured_Complted')
+data.setCell(25, 3, 7795);
+data.setCell(26, 0, 26)
+data.setCell(26, 1, 'favoriteStatus')
+data.setCell(26, 2, 'com.healthRec.Tc_025_FavoriteKpopScenarios')
+data.setCell(26, 3, 7784);
+data.setCell(27, 0, 27)
+data.setCell(27, 1, 'alternateContact')
+data.setCell(27, 2, 'org.PageModules.Patient_Module')
+data.setCell(27, 3, 7384);
+data.setCell(28, 0, 28)
+data.setCell(28, 1, 'tc_003_addAllergy_Edit_Save')
+data.setCell(28, 2, 'com.healthRec.Tc_002_Allergy')
+data.setCell(28, 3, 7357);
+data.setCell(29, 0, 29)
+data.setCell(29, 1, 'addProcedure_Edit_Save')
+data.setCell(29, 2, 'com.healthRec.Tc_012_Procedure')
+data.setCell(29, 3, 6631);
+data.setCell(30, 0, 30)
+data.setCell(30, 1, 'favoriteGoals')
+data.setCell(30, 2, 'com.healthRec.Tc_025_FavoriteKpopScenarios')
+data.setCell(30, 3, 6194);
+data.setCell(31, 0, 31)
+data.setCell(31, 1, 'pastSymptoms')
+data.setCell(31, 2, 'com.healthRec.Tc_024_GetPastCured_Complted')
+data.setCell(31, 3, 6184);
+data.setCell(32, 0, 32)
+data.setCell(32, 1, 'tc_005_addFamilyHealth_Edit_Save')
+data.setCell(32, 2, 'com.healthRec.Tc_004_FamilyHealth')
+data.setCell(32, 3, 5874);
+data.setCell(33, 0, 33)
+data.setCell(33, 1, 'addInpatient_Edit_Save')
+data.setCell(33, 2, 'com.healthRec.Tc_022_Inpatient')
+data.setCell(33, 3, 5811);
+data.setCell(34, 0, 34)
+data.setCell(34, 1, 'favoriteVisitReason')
+data.setCell(34, 2, 'com.healthRec.Tc_025_FavoriteKpopScenarios')
+data.setCell(34, 3, 5748);
+data.setCell(35, 0, 35)
+data.setCell(35, 1, '$addTestOrder')
+data.setCell(35, 2, 'com.healthRec.Tc_016_TestOrder')
+data.setCell(35, 3, 5647);
+data.setCell(36, 0, 36)
+data.setCell(36, 1, 'tc_009_addSaveAndEditImplantableDevice')
+data.setCell(36, 2, 'com.healthRec.Tc_008_ImplantableDevice')
+data.setCell(36, 3, 5070);
+data.setCell(37, 0, 37)
+data.setCell(37, 1, 'pastGoals')
+data.setCell(37, 2, 'com.healthRec.Tc_024_GetPastCured_Complted')
+data.setCell(37, 3, 5011);
+data.setCell(38, 0, 38)
+data.setCell(38, 1, 'tc_007_addVisitReason_Edit_Save')
+data.setCell(38, 2, 'com.healthRec.Tc_006_VisitReason')
+data.setCell(38, 3, 4822);
+data.setCell(39, 0, 39)
+data.setCell(39, 1, 'addNotes_Edit_Save')
+data.setCell(39, 2, 'com.healthRec.Tc_018_Notes')
+data.setCell(39, 3, 4772);
+data.setCell(40, 0, 40)
+data.setCell(40, 1, 'favoriteNotes')
+data.setCell(40, 2, 'com.healthRec.Tc_025_FavoriteKpopScenarios')
+data.setCell(40, 3, 4722);
+data.setCell(41, 0, 41)
+data.setCell(41, 1, 'verifyFilterSearchAndCcdImport')
+data.setCell(41, 2, 'org.PageModules.Patient_Module')
+data.setCell(41, 3, 4686);
+data.setCell(42, 0, 42)
+data.setCell(42, 1, 'addStatus_Edit_Save')
+data.setCell(42, 2, 'com.healthRec.Tc_015_Status')
+data.setCell(42, 3, 4655);
+data.setCell(43, 0, 43)
+data.setCell(43, 1, 'addPhysicalExamination_Edit_Save')
+data.setCell(43, 2, 'com.healthRec.Tc_019_PhysicalExamination')
+data.setCell(43, 3, 4026);
+data.setCell(44, 0, 44)
+data.setCell(44, 1, 'addGoals_Edit_Save')
+data.setCell(44, 2, 'com.healthRec.Tc_013_Goals')
+data.setCell(44, 3, 3839);
+data.setCell(45, 0, 45)
+data.setCell(45, 1, 'pastCuredProcedure')
+data.setCell(45, 2, 'com.healthRec.Tc_024_GetPastCured_Complted')
+data.setCell(45, 3, 3654);
+data.setCell(46, 0, 46)
+data.setCell(46, 1, 'addSymptoms_Edit_Save')
+data.setCell(46, 2, 'com.healthRec.Tc_011_Symptoms')
+data.setCell(46, 3, 3529);
+data.setCell(47, 0, 47)
+data.setCell(47, 1, 'tc_002_addVitals_Edit_Save')
+data.setCell(47, 2, 'com.healthRec.Tc_001_Vitals')
+data.setCell(47, 3, 3391);
+data.setCell(48, 0, 48)
+data.setCell(48, 1, 'tc_010_addAmendent_Edit_Save')
+data.setCell(48, 2, 'com.healthRec.Tc_009_Amendment')
+data.setCell(48, 3, 3371);
+data.setCell(49, 0, 49)
+data.setCell(49, 1, 'addAdvnceDiretivesAdd_EditAndSave')
+data.setCell(49, 2, 'com.healthRec.Tc_014_AdvanceDirectives')
+data.setCell(49, 3, 3101);
+data.setCell(50, 0, 50)
+data.setCell(50, 1, 'attachFileAdd_SaveAndEdit')
+data.setCell(50, 2, 'com.healthRec.Tc_021_AttachFile')
+data.setCell(50, 3, 2978);
+data.setCell(51, 0, 51)
+data.setCell(51, 1, 'tc_008_addVaccine_Edit_Save')
+data.setCell(51, 2, 'com.healthRec.Tc_007_Vaccine')
+data.setCell(51, 3, 2853);
+data.setCell(52, 0, 52)
+data.setCell(52, 1, 'tc_006_addAlertEditAndSave')
+data.setCell(52, 2, 'com.healthRec.Tc_005_Alert')
+data.setCell(52, 3, 2778);
+data.setCell(53, 0, 53)
+data.setCell(53, 1, 'patientCreation')
+data.setCell(53, 2, 'org.PageModules.Patient_Module')
+data.setCell(53, 3, 2747);
+data.setCell(54, 0, 54)
+data.setCell(54, 1, 'tc_004_addSocialHistory_Edit_Save')
+data.setCell(54, 2, 'com.healthRec.Tc_003_SocialHistory')
+data.setCell(54, 3, 2616);
+data.setCell(55, 0, 55)
+data.setCell(55, 1, 'verifyPatientSaerchAndClick')
+data.setCell(55, 2, 'org.PageModules.Patient_Module')
+data.setCell(55, 3, 2189);
+data.setCell(56, 0, 56)
+data.setCell(56, 1, 'patientInfo')
+data.setCell(56, 2, 'org.PageModules.Patient_Module')
+data.setCell(56, 3, 1156);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 18 minutes</span>
+              <span class="suite-total-time">Total running time: 13 minutes</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -408,43 +1697,946 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">runner.Local_Host</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">org.PageModules.Settings</div> <!-- chronological-class-name -->
               <div class="configuration-suite before">
                 <span class="method-name">openConnection</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-suite before -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">org.PageModules.Home_Module</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@2562e38d)</span>
+                <span class="method-start">33350 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void org.PageModules.Home_Module.patientCreation())</span>
+                <span class="method-start">33401 ms</span>
+              </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">HomeModule</span>
-                <span class="method-start">25639 ms</span>
+                <span class="method-name">patientCreation</span>
+                <span class="method-start">33417 ms</span>
               </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=patientCreation status=SUCCESS method=Home_Module.patientCreation()[pri:0, instance...)</span>
+                <span class="method-start">41575 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void org.PageModules.Home_Module.bookAppointment())</span>
+                <span class="method-start">41576 ms</span>
+              </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">PatientModule</span>
-                <span class="method-start">88341 ms</span>
+                <span class="method-name">bookAppointment</span>
+                <span class="method-start">41577 ms</span>
               </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=bookAppointment status=SUCCESS method=Home_Module.bookAppointment()[pri:1, instance...)</span>
+                <span class="method-start">64977 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">org.PageModules.Patient_Module</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@77b16c58)</span>
+                <span class="method-start">64992 ms</span>
+              </div> <!-- configuration-test before -->
               <div class="test-method">
-                <span class="method-name">HealthRec</span>
-                <span class="method-start">115616 ms</span>
+                <img src="failed.png">
+                </img>
+                <span class="method-name">patientCreation</span>
+                <span class="method-start">64995 ms</span>
               </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void org.PageModules.Patient_Module.patientCreation())</span>
+                <span class="method-start">64995 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=patientCreation status=FAILURE method=Patient_Module.patientCreation()[pri:1, insta...)</span>
+                <span class="method-start">67750 ms</span>
+              </div> <!-- configuration-method after -->
               <div class="test-method">
-                <span class="method-name">calendar</span>
-                <span class="method-start">572365 ms</span>
+                <span class="method-name">verifyPatientSaerchAndClick</span>
+                <span class="method-start">67923 ms</span>
               </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void org.PageModules.Patient_Module.verifyPatientSaerchAndClick())</span>
+                <span class="method-start">67923 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=verifyPatientSaerchAndClick status=SUCCESS method=Patient_Module.verifyPatientSaerc...)</span>
+                <span class="method-start">70114 ms</span>
+              </div> <!-- configuration-method after -->
               <div class="test-method">
-                <span class="method-name">BillingModule</span>
-                <span class="method-start">636450 ms</span>
+                <span class="method-name">alternateContact</span>
+                <span class="method-start">70115 ms</span>
               </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void org.PageModules.Patient_Module.alternateContact())</span>
+                <span class="method-start">70115 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=alternateContact status=SUCCESS method=Patient_Module.alternateContact()[pri:3, ins...)</span>
+                <span class="method-start">77501 ms</span>
+              </div> <!-- configuration-method after -->
               <div class="test-method">
-                <span class="method-name">TeleDoctor</span>
-                <span class="method-start">699212 ms</span>
+                <span class="method-name">contactInfo</span>
+                <span class="method-start">77501 ms</span>
               </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void org.PageModules.Patient_Module.contactInfo())</span>
+                <span class="method-start">77501 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=contactInfo status=SUCCESS method=Patient_Module.contactInfo()[pri:3, instance:org....)</span>
+                <span class="method-start">85557 ms</span>
+              </div> <!-- configuration-method after -->
               <div class="test-method">
-                <span class="method-name">Message</span>
-                <span class="method-start">720259 ms</span>
+                <span class="method-name">patientInfo</span>
+                <span class="method-start">85557 ms</span>
               </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void org.PageModules.Patient_Module.patientInfo())</span>
+                <span class="method-start">85557 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=patientInfo status=SUCCESS method=Patient_Module.patientInfo()[pri:4, instance:org....)</span>
+                <span class="method-start">86715 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void org.PageModules.Patient_Module.verifyFilterSearchAndCcdImport())</span>
+                <span class="method-start">86715 ms</span>
+              </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">Settings</span>
-                <span class="method-start">755649 ms</span>
+                <span class="method-name">verifyFilterSearchAndCcdImport</span>
+                <span class="method-start">86716 ms</span>
               </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=verifyFilterSearchAndCcdImport status=SUCCESS method=Patient_Module.verifyFilterSea...)</span>
+                <span class="method-start">91402 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_000_HealthRecordUi</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@d4c3f7d)</span>
+                <span class="method-start">91435 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">tc_001_verifyTheHaelthRecordCount</span>
+                <span class="method-start">91435 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_000_HealthRecordUi.tc_001_verifyTheHaelthRecordCount())</span>
+                <span class="method-start">91435 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=tc_001_verifyTheHaelthRecordCount status=SUCCESS method=Tc_000_HealthRecordUi.tc_00...)</span>
+                <span class="method-start">102598 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">verifyAndShowTheHidedOptions</span>
+                <span class="method-start">102599 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_000_HealthRecordUi.verifyAndShowTheHidedOptions())</span>
+                <span class="method-start">102599 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=verifyAndShowTheHidedOptions status=SUCCESS method=Tc_000_HealthRecordUi.verifyAndS...)</span>
+                <span class="method-start">114990 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_001_Vitals</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@71e34120)</span>
+                <span class="method-start">114998 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">tc_002_addVitals_Edit_Save</span>
+                <span class="method-start">115001 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_001_Vitals.tc_002_addVitals_Edit_Save() throws java.lang.Interru...)</span>
+                <span class="method-start">115001 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=tc_002_addVitals_Edit_Save status=SUCCESS method=Tc_001_Vitals.tc_002_addVitals_Edi...)</span>
+                <span class="method-start">118392 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_002_Allergy</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@580a4873)</span>
+                <span class="method-start">118401 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">tc_003_addAllergy_Edit_Save</span>
+                <span class="method-start">118401 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_002_Allergy.tc_003_addAllergy_Edit_Save() throws java.lang.Excep...)</span>
+                <span class="method-start">118401 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=tc_003_addAllergy_Edit_Save status=SUCCESS method=Tc_002_Allergy.tc_003_addAllergy_...)</span>
+                <span class="method-start">125758 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_003_SocialHistory</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@e9f436e)</span>
+                <span class="method-start">125899 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">tc_004_addSocialHistory_Edit_Save</span>
+                <span class="method-start">125899 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_003_SocialHistory.tc_004_addSocialHistory_Edit_Save() throws jav...)</span>
+                <span class="method-start">125899 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=tc_004_addSocialHistory_Edit_Save status=SUCCESS method=Tc_003_SocialHistory.tc_004...)</span>
+                <span class="method-start">128516 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_004_FamilyHealth</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@62442217)</span>
+                <span class="method-start">128550 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">tc_005_addFamilyHealth_Edit_Save</span>
+                <span class="method-start">128552 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_004_FamilyHealth.tc_005_addFamilyHealth_Edit_Save())</span>
+                <span class="method-start">128552 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=tc_005_addFamilyHealth_Edit_Save status=SUCCESS method=Tc_004_FamilyHealth.tc_005_a...)</span>
+                <span class="method-start">134426 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_005_Alert</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@9c5853e)</span>
+                <span class="method-start">134436 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">tc_006_addAlertEditAndSave</span>
+                <span class="method-start">134436 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_005_Alert.tc_006_addAlertEditAndSave() throws java.lang.Exceptio...)</span>
+                <span class="method-start">134436 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=tc_006_addAlertEditAndSave status=SUCCESS method=Tc_005_Alert.tc_006_addAlertEditAn...)</span>
+                <span class="method-start">137239 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_006_VisitReason</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@3861da5)</span>
+                <span class="method-start">137250 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">tc_007_addVisitReason_Edit_Save</span>
+                <span class="method-start">137250 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_006_VisitReason.tc_007_addVisitReason_Edit_Save() throws java.la...)</span>
+                <span class="method-start">137250 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=tc_007_addVisitReason_Edit_Save status=SUCCESS method=Tc_006_VisitReason.tc_007_add...)</span>
+                <span class="method-start">142073 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_007_Vaccine</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@77f6aa88)</span>
+                <span class="method-start">142078 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">tc_008_addVaccine_Edit_Save</span>
+                <span class="method-start">142078 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_007_Vaccine.tc_008_addVaccine_Edit_Save() throws java.lang.Excep...)</span>
+                <span class="method-start">142078 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=tc_008_addVaccine_Edit_Save status=SUCCESS method=Tc_007_Vaccine.tc_008_addVaccine_...)</span>
+                <span class="method-start">144931 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_008_ImplantableDevice</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@34e17afb)</span>
+                <span class="method-start">144949 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">tc_009_addSaveAndEditImplantableDevice</span>
+                <span class="method-start">144951 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_008_ImplantableDevice.tc_009_addSaveAndEditImplantableDevice() t...)</span>
+                <span class="method-start">144951 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=tc_009_addSaveAndEditImplantableDevice status=SUCCESS method=Tc_008_ImplantableDevi...)</span>
+                <span class="method-start">150021 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_009_Amendment</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@1128f52c)</span>
+                <span class="method-start">150035 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">tc_010_addAmendent_Edit_Save</span>
+                <span class="method-start">150036 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_009_Amendment.tc_010_addAmendent_Edit_Save() throws java.lang.Th...)</span>
+                <span class="method-start">150036 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=tc_010_addAmendent_Edit_Save status=SUCCESS method=Tc_009_Amendment.tc_010_addAmend...)</span>
+                <span class="method-start">153409 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_010Problems</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@2270b999)</span>
+                <span class="method-start">153416 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">addproblems_Edit_Save</span>
+                <span class="method-start">153418 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_010Problems.addproblems_Edit_Save() throws java.lang.Interrupted...)</span>
+                <span class="method-start">153418 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=addproblems_Edit_Save status=SUCCESS method=Tc_010Problems.addproblems_Edit_Save()[...)</span>
+                <span class="method-start">165447 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_011_Symptoms</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@6090e5b5)</span>
+                <span class="method-start">165456 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_011_Symptoms.addSymptoms_Edit_Save() throws java.lang.Throwable)</span>
+                <span class="method-start">165457 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">addSymptoms_Edit_Save</span>
+                <span class="method-start">165458 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=addSymptoms_Edit_Save status=SUCCESS method=Tc_011_Symptoms.addSymptoms_Edit_Save()...)</span>
+                <span class="method-start">168987 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_012_Procedure</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@5f196dfe)</span>
+                <span class="method-start">168994 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">addProcedure_Edit_Save</span>
+                <span class="method-start">168998 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_012_Procedure.addProcedure_Edit_Save() throws java.lang.Throwabl...)</span>
+                <span class="method-start">168998 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=addProcedure_Edit_Save status=SUCCESS method=Tc_012_Procedure.addProcedure_Edit_Sav...)</span>
+                <span class="method-start">175636 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_013_Goals</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">addGoals_Edit_Save</span>
+                <span class="method-start">175642 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@94e72a4)</span>
+                <span class="method-start">175642 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_013_Goals.addGoals_Edit_Save() throws java.lang.Throwable)</span>
+                <span class="method-start">175642 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=addGoals_Edit_Save status=SUCCESS method=Tc_013_Goals.addGoals_Edit_Save()[pri:0, i...)</span>
+                <span class="method-start">179482 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_014_AdvanceDirectives</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@2ed5ae65)</span>
+                <span class="method-start">179486 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">addAdvnceDiretivesAdd_EditAndSave</span>
+                <span class="method-start">179490 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_014_AdvanceDirectives.addAdvnceDiretivesAdd_EditAndSave() throws...)</span>
+                <span class="method-start">179490 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=addAdvnceDiretivesAdd_EditAndSave status=SUCCESS method=Tc_014_AdvanceDirectives.ad...)</span>
+                <span class="method-start">182591 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_015_Status</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@490f4b47)</span>
+                <span class="method-start">182602 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_015_Status.addStatus_Edit_Save() throws java.lang.Throwable)</span>
+                <span class="method-start">182602 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">addStatus_Edit_Save</span>
+                <span class="method-start">182605 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=addStatus_Edit_Save status=SUCCESS method=Tc_015_Status.addStatus_Edit_Save()[pri:0...)</span>
+                <span class="method-start">187260 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_016_TestOrder</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@5dedb905)</span>
+                <span class="method-start">187268 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">$addTestOrder</span>
+                <span class="method-start">187270 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_016_TestOrder.$addTestOrder() throws java.lang.Throwable)</span>
+                <span class="method-start">187270 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=$addTestOrder status=SUCCESS method=Tc_016_TestOrder.$addTestOrder()[pri:0, instanc...)</span>
+                <span class="method-start">192917 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_017_Medication</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@27cc3b4e)</span>
+                <span class="method-start">192928 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">addMedication_Edit_Save</span>
+                <span class="method-start">192933 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_017_Medication.addMedication_Edit_Save() throws java.lang.Throwa...)</span>
+                <span class="method-start">192933 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=addMedication_Edit_Save status=SUCCESS method=Tc_017_Medication.addMedication_Edit_...)</span>
+                <span class="method-start">212482 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_018_Notes</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">addNotes_Edit_Save</span>
+                <span class="method-start">212486 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@24690f54)</span>
+                <span class="method-start">212486 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_018_Notes.addNotes_Edit_Save() throws java.lang.Throwable)</span>
+                <span class="method-start">212486 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=addNotes_Edit_Save status=SUCCESS method=Tc_018_Notes.addNotes_Edit_Save()[pri:0, i...)</span>
+                <span class="method-start">217258 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_019_PhysicalExamination</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@178f3ded)</span>
+                <span class="method-start">217266 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_019_PhysicalExamination.addPhysicalExamination_Edit_Save() throw...)</span>
+                <span class="method-start">217267 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">addPhysicalExamination_Edit_Save</span>
+                <span class="method-start">217268 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=addPhysicalExamination_Edit_Save status=SUCCESS method=Tc_019_PhysicalExamination.a...)</span>
+                <span class="method-start">221294 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_020_Forms</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@279a8b88)</span>
+                <span class="method-start">221299 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_020_Forms.$addForm() throws java.lang.Throwable)</span>
+                <span class="method-start">221303 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">$addForm</span>
+                <span class="method-start">221304 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=$addForm status=SUCCESS method=Tc_020_Forms.$addForm()[pri:0, instance:com.healthRe...)</span>
+                <span class="method-start">261726 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_021_AttachFile</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@614ad27e)</span>
+                <span class="method-start">261735 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">attachFileAdd_SaveAndEdit</span>
+                <span class="method-start">261737 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_021_AttachFile.attachFileAdd_SaveAndEdit() throws java.lang.Thro...)</span>
+                <span class="method-start">261737 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=attachFileAdd_SaveAndEdit status=SUCCESS method=Tc_021_AttachFile.attachFileAdd_Sav...)</span>
+                <span class="method-start">264715 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_022_Inpatient</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">addInpatient_Edit_Save</span>
+                <span class="method-start">264722 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@db572ac)</span>
+                <span class="method-start">264722 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_022_Inpatient.addInpatient_Edit_Save() throws java.lang.Throwabl...)</span>
+                <span class="method-start">264722 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=addInpatient_Edit_Save status=SUCCESS method=Tc_022_Inpatient.addInpatient_Edit_Sav...)</span>
+                <span class="method-start">270534 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_023_GenerateBillFromEhr</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@63bb46a2)</span>
+                <span class="method-start">270538 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">verifyTheGenerteBill</span>
+                <span class="method-start">270546 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_023_GenerateBillFromEhr.verifyTheGenerteBill())</span>
+                <span class="method-start">270546 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=verifyTheGenerteBill status=SUCCESS method=Tc_023_GenerateBillFromEhr.verifyTheGene...)</span>
+                <span class="method-start">280519 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_024_GetPastCured_Complted</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@108e4796)</span>
+                <span class="method-start">280547 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">pastVaccine</span>
+                <span class="method-start">280551 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_024_GetPastCured_Complted.pastVaccine())</span>
+                <span class="method-start">280551 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=pastVaccine status=SUCCESS method=Tc_024_GetPastCured_Complted.pastVaccine()[pri:1,...)</span>
+                <span class="method-start">288346 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">pastSymptoms</span>
+                <span class="method-start">288346 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_024_GetPastCured_Complted.pastSymptoms())</span>
+                <span class="method-start">288346 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=pastSymptoms status=SUCCESS method=Tc_024_GetPastCured_Complted.pastSymptoms()[pri:...)</span>
+                <span class="method-start">294534 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">pastCuredProcedure</span>
+                <span class="method-start">294534 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_024_GetPastCured_Complted.pastCuredProcedure())</span>
+                <span class="method-start">294534 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=pastCuredProcedure status=SUCCESS method=Tc_024_GetPastCured_Complted.pastCuredProc...)</span>
+                <span class="method-start">298188 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">pastGoals</span>
+                <span class="method-start">298191 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_024_GetPastCured_Complted.pastGoals())</span>
+                <span class="method-start">298191 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=pastGoals status=SUCCESS method=Tc_024_GetPastCured_Complted.pastGoals()[pri:4, ins...)</span>
+                <span class="method-start">303202 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">pastMedication</span>
+                <span class="method-start">303202 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_024_GetPastCured_Complted.pastMedication())</span>
+                <span class="method-start">303202 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=pastMedication status=SUCCESS method=Tc_024_GetPastCured_Complted.pastMedication()[...)</span>
+                <span class="method-start">313460 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_026_saltScenarios</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@27e0aedb)</span>
+                <span class="method-start">313493 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_026_saltScenarios.saltScenarios())</span>
+                <span class="method-start">313495 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">saltScenarios</span>
+                <span class="method-start">313496 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=saltScenarios status=SUCCESS method=Tc_026_saltScenarios.saltScenarios()[pri:0, ins...)</span>
+                <span class="method-start">366921 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_025_FavoriteKpopScenarios</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@1669899)</span>
+                <span class="method-start">366954 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">favoriteVisitReason</span>
+                <span class="method-start">366957 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteVisitReason())</span>
+                <span class="method-start">366957 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=favoriteVisitReason status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteVisi...)</span>
+                <span class="method-start">372706 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">favoriteVaccine</span>
+                <span class="method-start">372707 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteVaccine())</span>
+                <span class="method-start">372707 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=favoriteVaccine status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteVaccine(...)</span>
+                <span class="method-start">382841 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">favoriteSympytoms</span>
+                <span class="method-start">382842 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteSympytoms())</span>
+                <span class="method-start">382842 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=favoriteSympytoms status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteSympyt...)</span>
+                <span class="method-start">391631 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteProcedure())</span>
+                <span class="method-start">391636 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">favoriteProcedure</span>
+                <span class="method-start">391637 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=favoriteProcedure status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteProced...)</span>
+                <span class="method-start">402595 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">favoriteGoals</span>
+                <span class="method-start">402595 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteGoals())</span>
+                <span class="method-start">402595 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=favoriteGoals status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteGoals()[pr...)</span>
+                <span class="method-start">408789 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">favoriteStatus</span>
+                <span class="method-start">408789 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteStatus())</span>
+                <span class="method-start">408789 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=favoriteStatus status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteStatus()[...)</span>
+                <span class="method-start">416573 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">favoriteProblems</span>
+                <span class="method-start">416574 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteProblems())</span>
+                <span class="method-start">416574 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=favoriteProblems status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteProblem...)</span>
+                <span class="method-start">442151 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteAdvaceDirectives())</span>
+                <span class="method-start">442152 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">favoriteAdvaceDirectives</span>
+                <span class="method-start">442155 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=favoriteAdvaceDirectives status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favorit...)</span>
+                <span class="method-start">452076 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoriteNotes())</span>
+                <span class="method-start">452077 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">favoriteNotes</span>
+                <span class="method-start">452078 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=favoriteNotes status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favoriteNotes()[pr...)</span>
+                <span class="method-start">456800 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">favoritePhusicalExamination</span>
+                <span class="method-start">456800 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public void com.healthRec.Tc_025_FavoriteKpopScenarios.favoritePhusicalExamination())</span>
+                <span class="method-start">456800 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=favoritePhusicalExamination status=SUCCESS method=Tc_025_FavoriteKpopScenarios.favo...)</span>
+                <span class="method-start">469987 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.healthRec.Tc_026_FollowUpEhr</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">$createFollowup</span>
+                <span class="method-start">470027 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@38515041)</span>
+                <span class="method-start">470027 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void com.healthRec.Tc_026_FollowUpEhr.$createFollowup() throws java.lang.Throwable)</span>
+                <span class="method-start">470027 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=$createFollowup status=SUCCESS method=Tc_026_FollowUpEhr.$createFollowup()[pri:0, i...)</span>
+                <span class="method-start">481660 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">org.PageModules.Calendar_Test</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@5a01122a)</span>
+                <span class="method-start">481675 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void org.PageModules.Calendar_Test.navigateToCalendar())</span>
+                <span class="method-start">481677 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">navigateToCalendar</span>
+                <span class="method-start">481678 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=navigateToCalendar status=SUCCESS method=Calendar_Test.navigateToCalendar()[pri:1, ...)</span>
+                <span class="method-start">504999 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">bookAppointment</span>
+                <span class="method-start">505000 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void org.PageModules.Calendar_Test.bookAppointment())</span>
+                <span class="method-start">505000 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=bookAppointment status=SUCCESS method=Calendar_Test.bookAppointment()[pri:2, instan...)</span>
+                <span class="method-start">529294 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">org.PageModules.BillingModule</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@78b5e9c7)</span>
+                <span class="method-start">529361 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void org.PageModules.BillingModule.BillingModue())</span>
+                <span class="method-start">529369 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">BillingModue</span>
+                <span class="method-start">529370 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=BillingModue status=SUCCESS method=BillingModule.BillingModue()[pri:0, instance:org...)</span>
+                <span class="method-start">581840 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">org.PageModules.TeleDoctor</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@4da20418)</span>
+                <span class="method-start">582724 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">createNewPatient</span>
+                <span class="method-start">582725 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void org.PageModules.TeleDoctor.createNewPatient())</span>
+                <span class="method-start">582725 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">callPatient</span>
+                <span class="method-start">594621 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=createNewPatient status=SUCCESS method=TeleDoctor.createNewPatient()[pri:1, instanc...)</span>
+                <span class="method-start">594621 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void org.PageModules.TeleDoctor.callPatient())</span>
+                <span class="method-start">594621 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=callPatient status=SUCCESS method=TeleDoctor.callPatient()[pri:2, instance:org.Page...)</span>
+                <span class="method-start">606013 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">org.PageModules.Message</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@7fc386b5)</span>
+                <span class="method-start">606018 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="test-method">
+                <span class="method-name">messageModule</span>
+                <span class="method-start">606020 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void org.PageModules.Message.messageModule())</span>
+                <span class="method-start">606020 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=messageModule status=SUCCESS method=Message.messageModule()[pri:0, instance:org.Pag...)</span>
+                <span class="method-start">624789 ms</span>
+              </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">org.PageModules.Settings</div> <!-- chronological-class-name -->
+              <div class="configuration-test before">
+                <span class="method-name">getTheTestName(org.testng.TestRunner@2d814b25)</span>
+                <span class="method-start">624812 ms</span>
+              </div> <!-- configuration-test before -->
+              <div class="configuration-method before">
+                <span class="method-name">verifyTheName(public static void org.PageModules.Settings.settingsModule())</span>
+                <span class="method-start">624812 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">settingsModule</span>
+                <span class="method-start">624813 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">checkStatus([TestResult name=settingsModule status=SUCCESS method=Settings.settingsModule()[pri:0, instance:org....)</span>
+                <span class="method-start">840371 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-suite after">
+                <span class="method-name">tear_Down</span>
+                <span class="method-start">840550 ms</span>
+              </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->
