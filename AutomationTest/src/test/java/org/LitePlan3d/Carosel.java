@@ -21,7 +21,7 @@ public class Carosel extends LaunchBrowser {
 
 		visbility(driver, pom.getInstanceSetting().dismiss, 40);
 		click(pom.getInstanceSetting().dismiss);
-		log.info("clicked upgrade later in lite");
+		log.info("clicked upgrade later in lite package");
 
 		driver.navigate().to("https://localhost:8443/health/#allSubscriptionActiveUsers");
 		j.executeScript("window.scrollBy(0,-950)", "");
