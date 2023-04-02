@@ -55,6 +55,9 @@ test {
 
   // Discover and execute TestNG-based tests
   useTestNG(){
+  
+  suites 'SmokeTesting.xml'
+  
   useDefaultListeners=true
   outputDirectory=file("$projectDir/TestNGgReports")
   }

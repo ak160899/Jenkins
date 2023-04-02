@@ -29,33 +29,6 @@ public class Tc_016_TestOrder extends LaunchBrowser {
 
 		testOrderIcd();
 
-		/*
-		 * if (url.equals("https://localhost:8443/") |
-		 * url.equals("https://www.75health.com/login.jsp")) { try {
-		 * 
-		 * WebElement edit = driver.findElement(By.xpath("(//div[text()='test'])[1]"));
-		 * visbility(driver, edit, 30); elementClickable(edit); click(edit); } catch
-		 * (StaleElementReferenceException e) { WebElement edit =
-		 * driver.findElement(By.xpath("(//div[text()='test'])[1]")); try {
-		 * visbility(driver, edit, 30); elementClickable(edit); click(edit); } catch
-		 * (ElementClickInterceptedException h) { visbility(driver, edit, 30);
-		 * elementClickable(edit); click(edit); } }
-		 * 
-		 * }
-		 */ /*
-			 * else if (ur.equals("https://www.75health.com/login.jsp")) { try { WebElement
-			 * edit = driver.findElement(By.xpath("(//div[text()='test'])[2]"));
-			 * visbility(driver, edit, 30); elementClickable(edit); click(edit); } catch
-			 * (StaleElementReferenceException e) { WebElement edit =
-			 * driver.findElement(By.xpath("(//div[text()='test'])[2]")); try {
-			 * visbility(driver, edit, 30); elementClickable(edit); click(edit); } catch
-			 * (ElementClickInterceptedException t) {
-			 * 
-			 * visbility(driver, edit, 30); elementClickable(edit); click(edit); } }
-			 * 
-			 * }
-			 */
-
 		clickIntercept(pom.getInstanceTestOrder().more, 30);
 
 		for (WebElement w : pom.getInstanceTestOrder().moreDropdown) {
@@ -139,9 +112,9 @@ public class Tc_016_TestOrder extends LaunchBrowser {
 
 					}
 				} catch (StaleElementReferenceException e) {
-					
+
 					List<WebElement> test = driver.findElements(By.xpath("//div[text()='test']"));
-					
+
 					for (int i = 0; i < test.size(); i++) {
 						if (test.get(i).isDisplayed()) {
 							visbility(driver, test.get(i), 30);

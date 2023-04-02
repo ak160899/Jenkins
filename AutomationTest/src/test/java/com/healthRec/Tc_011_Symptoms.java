@@ -43,7 +43,7 @@ public class Tc_011_Symptoms extends LaunchBrowser {
 			for (WebElement web : pom.getInstanceSymptom().icdList) {
 				if (web.getText().trim().equals("R76.1: Abnormal reaction to tuberculin test")) {
 					visbility(driver, web, 60);
-					clickIntercept(web, 30);
+					javascriptclick(web);
 					break;
 				}
 
