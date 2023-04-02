@@ -102,12 +102,9 @@ public class SelectYourPlan extends LaunchBrowser {
 		}
 		System.out.println("Alert is shown");
 
-		try {
+	
 			sleep(3000);
-		} catch (InterruptedException e) {
-
-			e.printStackTrace();
-		}
+		
 		refresh();
 
 	}
@@ -143,12 +140,9 @@ public class SelectYourPlan extends LaunchBrowser {
 		}
 		System.out.println("Alert is shown");
 
-		try {
+		
 			sleep(3000);
-		} catch (InterruptedException e) {
-
-			e.printStackTrace();
-		}
+		
 		refresh();
 
 	}
@@ -205,12 +199,9 @@ public class SelectYourPlan extends LaunchBrowser {
 		}
 		System.out.println("Alert is shown");
 
-		try {
+		
 			sleep(3000);
-		} catch (InterruptedException e) {
-
-			e.printStackTrace();
-		}
+		
 		refresh();
 
 	}
@@ -266,12 +257,9 @@ public class SelectYourPlan extends LaunchBrowser {
 		}
 		System.out.println("Alert is shown");
 
-		try {
+		
 			sleep(3000);
-		} catch (InterruptedException e) {
-
-			e.printStackTrace();
-		}
+		
 		refresh();
 
 	}

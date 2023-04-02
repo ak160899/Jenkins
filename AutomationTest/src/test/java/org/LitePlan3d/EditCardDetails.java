@@ -35,12 +35,9 @@ public class EditCardDetails extends LaunchBrowser {
 			log.info("edit card clicked");
 		}
 
-		try {
+		
 			sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		WebElement updateButton = driver.findElement(By.xpath("(//button[@id='update-btn'])[1]"));
 		visbility(driver, updateButton, 40);
 		elementClickable(updateButton);
@@ -114,12 +111,9 @@ public class EditCardDetails extends LaunchBrowser {
 
 			driver.switchTo().frame(driver.findElement(By.xpath("//form[@id='form']//following::iframe")));
 		} catch (NoSuchElementException e) {
-			try {
+			
 				sleep(2500);
-			} catch (InterruptedException e1) {
-
-				e1.printStackTrace();
-			}
+			
 			driver.switchTo().frame(driver.findElement(By.xpath("//body[@id='body']/div[1]/iframe")));
 
 			driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='LightboxModalContent']/div/iframe")));
@@ -181,13 +175,9 @@ public class EditCardDetails extends LaunchBrowser {
 			log.info("edit card clicked");
 		}
 
-		try {
+		
 			sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		
 		driver.navigate().to("https://localhost:8443/health/#allSubscriptionActiveUsers");
 		sleep(3000);
 		driver.navigate().to("https://localhost:8443/health/#allPaymentServices");
@@ -240,12 +230,9 @@ public class EditCardDetails extends LaunchBrowser {
 
 			driver.switchTo().frame(driver.findElement(By.xpath("//form[@id='form']//following::iframe")));
 		} catch (NoSuchElementException e) {
-			try {
+			
 				sleep(2500);
-			} catch (InterruptedException e1) {
-
-				e1.printStackTrace();
-			}
+			
 			driver.switchTo().frame(driver.findElement(By.xpath("//body[@id='body']/div[1]/iframe")));
 
 			driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='LightboxModalContent']/div/iframe")));
@@ -321,22 +308,16 @@ public class EditCardDetails extends LaunchBrowser {
 		click(pom.getInstanceSetting().$marketplace);
 
 		log.info("market place clicked");
-		try {
+		
 			sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		visbility(driver, pom.getInstanceSetting().$eirsystembutton$, 40);
 		elementClickable(pom.getInstanceSetting().$eirsystembutton$);
 		click(pom.getInstanceSetting().$eirsystembutton$);
 		log.info("eir system clciked");
-		try {
+		
 			sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		visbility(driver, pom.getInstanceSelectYourPlan().dismis, 40);
 		elementClickable(pom.getInstanceSelectYourPlan().dismis);
 		click(pom.getInstanceSelectYourPlan().dismis);
@@ -373,12 +354,9 @@ public class EditCardDetails extends LaunchBrowser {
 
 			driver.switchTo().frame(driver.findElement(By.xpath("//form[@id='form']//following::iframe")));
 		} catch (NoSuchElementException e) {
-			try {
+			
 				sleep(2500);
-			} catch (InterruptedException e1) {
-
-				e1.printStackTrace();
-			}
+			
 			driver.switchTo().frame(driver.findElement(By.xpath("//body[@id='body']/div[1]/iframe")));
 
 			driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='LightboxModalContent']/div/iframe")));
@@ -392,12 +370,9 @@ public class EditCardDetails extends LaunchBrowser {
 		log.info("pass authentication clicked");
 
 		defaultcontent();
-		try {
+		
 			sleep(6000);
-		} catch (InterruptedException e) {
-
-			e.printStackTrace();
-		}
+		
 	}
 
 	@Test(priority = 11)
@@ -414,12 +389,9 @@ public class EditCardDetails extends LaunchBrowser {
 
 		driver.navigate().to("https://localhost:8443/health/#allSubscriptionActiveUsers");
 		j.executeScript("window.scrollBy(0,-950)", "");
-		try {
+		
 			sleep(2500);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 		try {
 			WebElement link = driver.findElement(By.xpath("(//span[@id='manage-sub-text'])[1]/a"));
 			visbility(driver, link, 40);
@@ -431,12 +403,9 @@ public class EditCardDetails extends LaunchBrowser {
 			elementClickable(link);
 			click(link);
 		}
-		try {
+		
 			sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 		j.executeScript("window.scrollBy(0,950)", "");
 
@@ -463,21 +432,15 @@ public class EditCardDetails extends LaunchBrowser {
 			Assert.assertEquals(alertMess, "Your card's security code is incomplete.");
 			log.info(alertMess);
 		}
-		try {
+		
 			sleep(2500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		visbility(driver, pom.getInstanceSelectYourPlan().accept, 40);
 		click(pom.getInstanceSelectYourPlan().accept);
 
-		try {
+		
 			sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		driver.navigate().refresh();
 	}
 
@@ -519,12 +482,9 @@ public class EditCardDetails extends LaunchBrowser {
 			Assert.assertEquals(alertMess, "Your card was declined.");
 			log.info(alertMess);
 		}
-		try {
+		
 			sleep(2500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		visbility(driver, pom.getInstanceSelectYourPlan().accept, 40);
 		click(pom.getInstanceSelectYourPlan().accept);
 

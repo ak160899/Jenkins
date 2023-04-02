@@ -116,12 +116,9 @@ public class Lite_end_yearly_premium79 extends Base {
 			}
 		}
 
-		try {
+		
 			sleep(2500);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 
 		WebElement $premiumyearlyToggle = driver.findElement(By.xpath("//span[@class='toggle-slider slider-round']"));
 		visbility(driver, $premiumyearlyToggle, 60);

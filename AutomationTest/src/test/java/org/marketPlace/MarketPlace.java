@@ -71,13 +71,8 @@ public class MarketPlace extends LaunchBrowser {
 		visbility(driver, pom.getInstanceMarketplace().doctorUserSerachField, 30);
 
 		sendkeys(pom.getInstanceMarketplace().doctorUserSerachField, "3090145");
-		try {
-			sleep(2500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		;
+
+		sleep(2500);
 
 		keypress();
 		keyenter();
@@ -99,12 +94,9 @@ public class MarketPlace extends LaunchBrowser {
 
 		visbility(driver, pom.getInstanceMarketplace().userCheckBox, 40);
 		click(pom.getInstanceMarketplace().userCheckBox);
-		try {
-			sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		sleep(5000);
+
 		click(pom.getInstanceMarketplace().saveUser);
 
 	}

@@ -24,12 +24,9 @@ public class Valid3dcard_cancel extends LaunchBrowser {
 
 			driver.switchTo().frame(driver.findElement(By.xpath("//form[@id='form']//following::iframe")));
 		} catch (NoSuchElementException e) {
-			try {
+			
 				sleep(2500);
-			} catch (InterruptedException e1) {
-
-				e1.printStackTrace();
-			}
+			
 			driver.switchTo().frame(driver.findElement(By.xpath("//body[@id='body']/div[1]/iframe")));
 
 			driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='LightboxModalContent']/div/iframe")));

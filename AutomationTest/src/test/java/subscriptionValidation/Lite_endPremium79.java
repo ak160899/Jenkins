@@ -116,12 +116,9 @@ public class Lite_endPremium79 extends Base {
 			}
 		}
 
-		try {
+		
 			sleep(2500);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 
 		sleep(5000);
 
