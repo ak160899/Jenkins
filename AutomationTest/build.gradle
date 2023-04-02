@@ -55,12 +55,7 @@ test {
   
   suites'SmokeTesting.xml'
   
-  useDefaultListeners=true
-  outputDirectory=file("$projectDir/TestNGgReports")
+
   }
 
-  // Discover and execute JUnit Platform-based tests
- // useJUnitPlatform()
- 
- reports.html.setDestination(file("$projectDir/html"))
   }
