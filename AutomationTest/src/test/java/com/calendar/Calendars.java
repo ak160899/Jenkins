@@ -104,7 +104,7 @@ public class Calendars extends Base {
 			System.out.println("COUTN SIZE IS :" + count);
 
 			if (cond == true) {
-				System.out.println("BOOKING APPOINTMENT SLOT");
+				System.out.println("BOOKING APPOINTMENT SLOTt");
 
 				if (count > 1) {
 					$bookAppointmnet(count, s);
