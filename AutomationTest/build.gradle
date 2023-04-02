@@ -50,13 +50,10 @@ implementation group: 'com.aventstack', name: 'extentreports', version: '5.0.9'
 }
 
 test {
-  // Discover and execute JUnit4-based tests
- // useJUnit()
-
-  // Discover and execute TestNG-based tests
+ 
   useTestNG(){
   
-  suites 'SmokeTesting.xml'
+  suites'SmokeTesting.xml'
   
   useDefaultListeners=true
   outputDirectory=file("$projectDir/TestNGgReports")
